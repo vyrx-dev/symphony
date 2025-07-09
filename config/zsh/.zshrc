@@ -95,7 +95,7 @@ alias pl='$aurhelper -Qs'
 alias pa='$aurhelper -Ss'
 alias pc='$aurhelper -Sc'
 alias po='$aurhelper -Qtdq | $aurhelper -Rns -'
-
+  
 # General
 alias c='clear'
 alias l='eza -lh --icons=auto'
@@ -103,7 +103,6 @@ alias ls='eza -1 --icons=auto'
 alias ll='eza -lha --icons=auto --sort=name --group-directories-first'
 alias ld='eza -lhD --icons=auto'
 alias lt='eza --icons=auto --tree'
-alias vc='code'
 alias fastfetch='fastfetch --logo none --color dark --structure "title:os:host:kernel:uptime:battery:cpu:memory:temp"'
 
 # Directory navigation
@@ -116,11 +115,13 @@ alias .5='cd ../../../../..'
 # File finding
 alias ff='find . -type f -name'
 alias fd='find . -type d -name'
+alias fdh='fd --hidden'
 
 # Custom aliases
 # [Personal shortcuts, adjust or replace with your own]
 alias zz='nvim'              # Open neovim
 alias vi='nvim'              # Alias for neovim
+alias vc='code'
 #alias vg='nvim-godot.sh'     # Open Godot script in neovim
 alias lgit='lazygit'         # Launch lazygit
 alias t='tree -L 1'          # Show directory tree (level 1)
@@ -129,6 +130,8 @@ alias open='dolphin'         # Open file manager
 alias cache='du -sh /var/cache/pacman/pkg .cache/yay'  # Check cache size
 alias z='yazi'               # Launch yazi file manager
 alias lg='lazygit'           # Launch lazygit (duplicate for consistency)
+alias x='exit' # exit the teminal
+alias zfile='nvim ~/.config/zsh/.zshrc'  # Zsh config file  or ~/.zshrc
 
 # Productivity aliases (inspired by Arch/Hyprland/Linux workflows)
 # [Useful commands for system and workflow efficiency]
