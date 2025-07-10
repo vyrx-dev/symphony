@@ -1,118 +1,145 @@
-🐚 Zsh Config Setup Guide (Arch Linux + Hyprland):-
+# **🐚 Zsh Config Guide (Arch Linux + Hyprland)**
 
-Hey there! This is my personal Zsh setup, crafted for a smooth and fun terminal experience on Arch Linux with Hyprland. 
+Hey there! This is my personal Zsh setup, tailored for a smooth and fun terminal experience on Arch Linux with Hyprland. It’s perfect for Git workflows, Arch tweaks, and a bit of personal flair—grab it, tweak it, and make it yours. Let’s dive in!
 
-⚙️ What’s in This Setup
+---
 
-🧠 Handy aliases for Git, npm, Arch package management, and more.
-🎨 Slick Powerlevel10k prompt to keep things pretty.
-🧩 Plugins like autosuggestions and syntax highlighting for efficiency.
-🎮 Optional goodies: Fastfetch system info + random Pokémon logos.
-📂 Support for a custom ~/.scripts folder for your tools.
+## **⚙️ What’s in This Setup**
 
+- 🧠 **Handy aliases** for Git, npm, Arch, and more.
+- 🎨 **Powerlevel10k prompt** for a polished look.
+- 🧩 **Plugins** like autosuggestions and syntax highlighting.
+- 🎮 **Optional flair**: Fastfetch + Pokémon logos.
+- 📂 **Custom scripts** support via `~/.scripts`.
 
-🛠️ Where to Put These Files
+---
 
-📁 Grab these from config/zsh/ in my dotfiles repo.
+## **🛠️ Where to Put These Files**
 
+> 📁 Find these in `config/zsh/` of my dotfiles repo.
 
+| **File**    | **Copy To**    | **Purpose**                              |
+|-------------|----------------|------------------------------------------|
+| `zshrc`     | `~/.zshrc`     | Runs every shell—sets aliases, plugins   |
+| `zprofile`  | `~/.zprofile`  | Login shell only—sets PATH, variables    |
 
-> 📁 Files are located inside `config/zsh/` of this dotfiles repo.
-
-| File                  | Copy To           | Purpose                                          |
-|-----------------------|-------------------|--------------------------------------------------|
-| `zshrc`               | `~/.zshrc`        | Main Zsh config – runs on every shell launch     |
-| `zprofile`            | `~/.zprofile`     | Login shell config – sets PATH and variables     |
-
-
+```bash
 cp ~/dotfiles/config/zsh/zshrc ~/.zshrc
 cp ~/dotfiles/config/zsh/zprofile ~/.zprofile
 chmod 644 ~/.zshrc ~/.zprofile
+```
 
+---
 
-📦 Prerequisites & Tools
-Let’s get the basics installed to make this sing:
-🔧 Zsh + Plugin Essentials
+## **📦 Prerequisites & Tools**
+
+Get these installed to make it work smoothly:
+
+### **🔧 Zsh + Plugin Essentials**
+```bash
 sudo pacman -S zsh git zsh-autosuggestions zsh-syntax-highlighting
+```
 
-🌟 Oh-My-Zsh (Plugin + Theme Manager)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh++)"
+### **🌟 Oh-My-Zsh (Plugin + Theme Manager)**
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
-🎨 Powerlevel10k (Prompt Theme)
+### **🎨 Powerlevel10k (Prompt Theme)**
+```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
 
-🛠️ CLI Tools (For Aliases & Visuals)
+### **🛠️ CLI Tools (For Aliases & Visuals)**
+```bash
 sudo pacman -S eza xclip tree reflector neofetch timeshift pacman-contrib
 yay -S pokemon-colorscripts fastfetch lazygit zoxide yazi
+```
 
+- **AUR Helper**: Use `yay` or `paru`. For `yay`:
+  ```bash
+  sudo pacman -S --needed base-devel git
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  ```
+  Or `paru`:
+  ```bash
+  sudo pacman -S --needed base-devel git
+  git clone https://aur.archlinux.org/paru.git
+  cd paru
+  makepkg -si
+  ```
+- **MongoDB (optional)**: `sudo pacman -S mongodb && sudo systemctl enable mongod` (useful for database work).
 
-AUR Helper: Use yay or paru. Install yay with:sudo pacman -S --needed base-devel git
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-
-Or paru:sudo pacman -S --needed base-devel git
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-
-
-MongoDB (for MERN): sudo pacman -S mongodb && sudo systemctl enable mongod
-
-📂 Optional Folder
+### **📂 Optional Folder**
+```bash
 mkdir -p ~/.scripts ~/cfg_backups
+```
 
+---
 
-🧪 After Setup: What You’ll See
-Fire up a new terminal, and you’ll get:
+## **🧪 After Setup: What You’ll See**
 
-A cute Pokémon logo (if pokemon-colorscripts is installed).
-System stats via fastfetch.
-A snappy Powerlevel10k prompt.
-Autosuggestions and colored syntax kicking in.
-Aliases ready to roll!
+Open a new terminal and enjoy:
+- A cute Pokémon logo (if `pokemon-colorscripts` is installed).
+- System stats with `fastfetch`.
+- A snappy **Powerlevel10k** prompt.
+- Autosuggestions and syntax coloring.
+- Ready-to-use aliases!
 
+---
 
-💡 Example Aliases to Try
+## **💡 Example Aliases to Try**
 
-update – Full system update.
-gs – Git status check.
-nd – Run npm run dev.
-pacclean – Clear old Pacman cache.
-paccleanall – Wipe all cached packages.
-pacckeep – Keep latest 3 package versions.
-z – Jump with yazi (if installed).
+- `update` – Full system update.
+- `gs` – Git status.
+- `nd` – Run `npm run dev`.
+- `pacclean` – Clear old Pacman cache.
+- `paccleanall` – Wipe all cached packages.
+- `pacckeep` – Keep latest 3 versions.
+- `z` – Launch `yazi` (if installed).
+- `vc` – Open VS Code.
+- `x` – Exit terminal.
+- `zfile` – Edit `.zshrc` in Neovim.
 
-All aliases live in .zshrc—no extra plugin clutter!
+All aliases are in `.zshrc`—no extra files needed!
 
-🧠 How This Works (Quick Rundown)
+---
 
-.zshrc: Fires up every terminal. Sets:
-$PATH, $EDITOR, $VISUAL.
-Aliases for npm, Git, Arch (e.g., paccache commands).
-Plugins and Powerlevel10k theme.
-Optional fastfetch + Pokémon splash.
-zoxide for directory hopping.
+## **🧠 How This Works**
 
+- **`.zshrc`**: Loads every terminal. Handles:
+  - `$PATH`, `$EDITOR`, `$VISUAL`.
+  - Aliases (e.g., `paccache`, `git`, `npm`).
+  - Plugins and **Powerlevel10k**.
+  - Optional `fastfetch` + Pokémon.
+  - `zoxide` for navigation.
+  - Note: `vg` (Godot script) is commented out.
+- **`.zprofile`**: Runs on login (e.g., Hyprland/TTY). Sets:
+  - `$PATH`, `$EDITOR`.
+  - Keeps it lightweight.
 
-.zprofile: Runs on login shells (e.g., Hyprland/TTY). Handles:
-Same $PATH, $EDITOR.
-Keeps things lean.
+Everything’s kept tidy in one place!
 
+---
 
+## **🧩 Optional Add-ons (Commented)**
 
-No separate alias files—everything’s in one spot!
+Peek at `.zshrc` for:
+- 🔒 **Keybinding Templates**: Bind scripts (e.g., `music.sh`)—uncomment to use.
+- 🛠️ **Scripts Folder**: Add your tools to `~/.scripts`.
 
-🧩 Optional Add-ons (Commented Inside)
-Check .zshrc for:
+---
 
-🔒 Keybinding Templates: Bind scripts (e.g., music.sh)—uncomment and tweak.
-🛠️ Scripts Folder: Drop your own tools in ~/.scripts.
+## **✅ Final Check**
 
+- Update `.zprofile` paths with your home dir (e.g., `/home/amitwt/`).
+- Test with `update`, `gs`, or `pacclean`.
 
-✅ Final Check
+You’re good to go! Let me know if you tweak it—I’d love to hear how it works for you. 😄
 
-Paths in .zprofile need your home dir (e.g., /home/amitwt/).
-Test with update, gs, or pacclean.
+---
 
+*Powered by a double k vibe—check [doublek.dev](https://doublek.dev) for more!*
