@@ -1,0 +1,14 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.coding.mini-surround",
+    "lazyvim.plugins.extras.editor.mini-files",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.typescript"
+  ],
+  "install_version": 8,
+  "news": {
+    "NEWS.md": "10960",
+    "doc/news.txt": "25127"
+  },
+  "version": 8
+}
