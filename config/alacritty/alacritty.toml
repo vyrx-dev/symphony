@@ -2,28 +2,35 @@ general.import = [
   "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
+[window]
+padding = { x = 5, y = 5 }
+# dynamic_padding = true
+
 [env]
 TERM = "xterm-256color"
 
 [font]
-size = 9.0
+size = 12.0
 
 [font.bold]
 # family = "MesloLGS Nerd Font Mono"
-family = "CaskaydiaCove Nerd Font"
+family = "JetBrainsMono Nerd Font Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "CaskaydiaCove Nerd Font"
+family = "JetBrainsMono Nerd Font Mono"
 # family = "MesloLGS Nerd Font Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "CaskaydiaCove Nerd Font"
+family = "JetBrainsMono Nerd Font Mono"
 # family = "MesloLGS Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
 # family = "MesloLGS Nerd Font Mono"
-family = "CaskaydiaCove Nerd Font"
+family = "JetBrainsMono Nerd Font Mono"
 style = "Regular"
+
+# previous "font CaskaydiaCove Nerd Font"
+
