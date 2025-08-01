@@ -30,16 +30,16 @@ keymap.set("n", "hp", ui.nav_next, opts) -- Harpoon next file
 keymap.set("n", "hn", ui.nav_prev, opts) -- Harpoon previous
 
 keymap.set("n", "<leader>1", function()
-	ui.nav_file(1)
+  ui.nav_file(1)
 end, opts)
 keymap.set("n", "<leader>2", function()
-	ui.nav_file(2)
+  ui.nav_file(2)
 end, opts)
 keymap.set("n", "<leader>3", function()
-	ui.nav_file(3)
+  ui.nav_file(3)
 end, opts)
 keymap.set("n", "<leader>4", function()
-	ui.nav_file(4)
+  ui.nav_file(4)
 end, opts)
 
 -- save, quit
@@ -86,13 +86,14 @@ keymap.set("x", "p", [["_dP]])
 
 -- Tab
 keymap.set("n", "te", ":tabedit")
-keymap.set("n", "tw", ":tabclose<Return>", opts)
+keymap.set("n", "tx", "<cmd>tabclose<CR>", opts)
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
+keymap.set("n", "sx", "<cmd>close<CR>", opts)
 
 -- Move window
 keymap.set("n", "sh", "<C-w>h")
@@ -110,7 +111,7 @@ keymap.set("n", "<leader><down>", ":resize -10<cr>")
 
 -- Go to next diagnostic
 keymap.set("n", "<C-j>", function()
-	vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.jump({ count = 1, float = true })
 end, opts)
 
 --[[Notes
