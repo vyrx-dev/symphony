@@ -3,8 +3,8 @@ general.import = [
 ]
 
 [window]
-padding = { x = 5, y = 5 }
-# dynamic_padding = true
+padding = { x = 0, y = 0 }
+  dynamic_padding = true
 
 [env]
 TERM = "xterm-256color"
