@@ -5,37 +5,29 @@ general.import = [
   # "~/.config/alacritty/Themes/gruvbox-dark.toml",
   # "~/.config/alacritty/Themes/kanagawa_wave.toml",
   "~/.config/alacritty/Themes/solarized_osaka.toml",
+  # "~/.config/omarchy/current/theme/alacritty.toml"
 ]
-
-[window]
-padding = { x = 0, y = 0 }
-dynamic_padding = true
 
 [env]
 TERM = "xterm-256color"
 
+[window]
+padding.x = 1
+padding.y = 1
+# dynamic_padding = true
+decorations = "None"
+opacity = 0.98
+
 [font]
-size = 12.0
+normal = { family = "JetBrains Mono" }
+bold = { family = "JetBrains Mono" }
+italic = { family = "JetBrains Mono" }
+size = 12
 
-[font.bold]
-# family = "MesloLGS Nerd Font Mono"
-family = "JetBrainsMono Nerd Font Mono"
-style = "Bold"
+# previous "font = CaskaydiaCove Nerd Font"
 
-[font.bold_italic]
-family = "JetBrainsMono Nerd Font Mono"
-# family = "MesloLGS Nerd Font Mono"
-style = "Bold Italic"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font Mono"
-# family = "MesloLGS Nerd Font Mono"
-style = "Italic"
-
-[font.normal]
-# family = "MesloLGS Nerd Font Mono"
-family = "JetBrainsMono Nerd Font Mono"
-style = "Regular"
-
-# previous "font CaskaydiaCove Nerd Font"
+[keyboard]
+bindings = [
+{ key = "F11", action = "ToggleFullscreen" }
+]
 
