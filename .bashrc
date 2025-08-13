@@ -43,6 +43,8 @@ alias mv='mv -i'
 # alias rm='trash -v'
 alias mkdir='mkdir -p'
 alias ping='ping -c 10'
+alias svi='sudo vi'
+alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
 
 # Directory navigation
 alias ..='cd ..'
