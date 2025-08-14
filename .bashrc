@@ -69,6 +69,7 @@ alias lg='lazygit'
 alias x='exit'
 alias h="history | grep "
 alias dot='cd ~/dotfiles/'
+alias kt='kitten themes'
 
 # Some useful aliases
 alias update='sudo pacman -Syu'
