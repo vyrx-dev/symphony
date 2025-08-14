@@ -21,12 +21,6 @@ This is my personal configuration for a productive and enjoyable Linux environme
 
 ![My Neovim Setup](images/neovim_setup.png)
 
-## What’s Next (TODO)
-
-- [ ] Add custom scripts automation
-- [ ] Add My own Custom theme to Omarchy extras
-- [ ] Customize Starship
-
 ## Installation Guide
 
 ### 1. Remove Old Configs (to avoid conflicts)
@@ -58,6 +52,12 @@ From inside the `dotfiles` folder:
 ```
 stow .
 ```
+
+## What’s Next (TODO)
+
+- [ ] Add automation
+- [ ] Obsidian purple colorscheme
+- [ ] Customize Starship
 
 <!-- ## What is Symlinking? -->
 <!---->
