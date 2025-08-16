@@ -44,18 +44,27 @@ return {
   -- },
 
   --filename
+  -- NOTE:
+  -- InclineNormal = Active filename bar
+  -- InclineNormalNC = Inactive filename bar
   {
     "b0o/incline.nvim",
-    dependencies = { "craftzdog/solarized-osaka.nvim" },
+    dependencies = { "catppuccin/nvim" },
+    -- dependencies = { "craftzdog/solarized-osaka.nvim" },
     event = "BufReadPre",
     priority = 1200,
     config = function()
-      local colors = require("solarized-osaka.colors").setup()
+      local colors = require("catppuccin.palettes").get_palette("mocha")
+      -- local colors = require("solarized-osaka.colors").setup()
       require("incline").setup({
         highlight = {
           groups = {
-            InclineNormal = { guibg = colors.magenta500, guifg = colors.base04 },
-            InclineNormalNC = { guifg = colors.violet500, guibg = colors.base03 },
+            -- solarized-osaka 👇
+            -- InclineNormal = { guibg = colors.magenta500, guifg = colors.base04 },
+            -- InclineNormalNC = { guifg = colors.violet500, guibg = colors.base03 },
+            -- catppuccin 👇
+            InclineNormal = { guibg = colors.mauve, guifg = colors.crust },
+            InclineNormalNC = { guifg = colors.overlay2, guibg = colors.surface0 },
           },
         },
         window = { margin = { vertical = 0, horizontal = 1 } },
@@ -67,7 +76,6 @@ return {
           if vim.bo[props.buf].modified then
             filename = "[+] " .. filename
           end
-
           local icon, color = require("nvim-web-devicons").get_icon_color(filename)
           return { { icon, guifg = color }, { " " }, { filename } }
         end,
