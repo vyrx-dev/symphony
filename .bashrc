@@ -110,3 +110,5 @@ mkdirg() {
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+
+export PATH=$PATH:/home/april/.spicetify
