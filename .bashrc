@@ -73,6 +73,7 @@ alias kt='kitten themes'
 
 # Some useful aliases
 alias update='sudo pacman -Syu'
+alias reset='faillock --reset --user april'
 
 # Automatically do an ls after each cd, z, or zoxide
 alias cleanup='sudo pacman -Rns $(pacman -Qdtq)'
