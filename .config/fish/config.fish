@@ -9,6 +9,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 alias snano='sudo nano'
 alias vim='nvim'
+alias n='nvim'
 
 # ┌─────────┐
 # │ Aliases │
@@ -95,6 +96,16 @@ alias gl='git pull'
 alias gco='git checkout'
 alias gb='git branch'
 alias gd='git diff'
+
+# yazi shell wrapper(change the current working directory when exiting Yazi)
+function y
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
+end
 
 zoxide init fish | source
 starship init fish | source
