@@ -1,0 +1,12 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "9cd2ac4"
+hash = "f54b45bdd33f607ddde47f0afad96142"
+
+[[flavor.deps]]
+use = "bennyyip/gruvbox-dark"
+rev = "e5e1aef"
+hash = "eb88137cf13a796225254344bf6def2c"
