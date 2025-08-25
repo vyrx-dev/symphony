@@ -1,4 +1,5 @@
-# add_newline = false
+add_newline = true
+command_timeout = 200
 
 # Multiline prompt - path and git on first line, command on second
 format = """$directory$git_branch$git_status$line_break$character"""
@@ -10,7 +11,6 @@ palette = "gruvbox_material"
 # # Move git info or rest of the prompt to the right
 # right_format = """$git_branch$git_status"""  #"""$all"""
 
-command_timeout = 1000
 
 [character]
 success_symbol = '[❯](bold yellow)'   #(bold green)
