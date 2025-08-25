@@ -58,7 +58,7 @@ switcher_only = true
 hidden = true
 
 [builtins.clipboard]
-hidden = true
+hidden = false
 
 [builtins.commands]
 hidden = true
