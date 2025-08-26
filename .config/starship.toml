@@ -1,16 +1,14 @@
 add_newline = true
 command_timeout = 200
-
-# Multiline prompt - path and git on first line, command on second
-format = """$directory$git_branch$git_status$line_break$character"""
 palette = "gruvbox_material"
-
-# # Minimal left prompt
-# format = """$directory$character"""
-# palette = "gruvbox_material"
-# # Move git info or rest of the prompt to the right
-# right_format = """$git_branch$git_status"""  #"""$all"""
-
+format = """\
+󰣇 \
+$directory\
+$git_branch$git_status\
+$line_break\
+$character\n
+"""
+continuation_prompt = '▶▶ '
 
 [character]
 success_symbol = '[❯](bold yellow)'   #(bold green)
@@ -28,10 +26,17 @@ truncate_to_repo = false
 '~/Testing-repo' = 'work-project'
 
 [git_branch]
-# symbol = ""
-style = "bold #7daea3"
+# symbol = "" # default symbol is ""
+style = "bold #7daea3" #9198a1
 format = '[$symbol$branch]($style) '
 
+
+[git_status]
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+format = '[[( $all_status$ahead_behind )](fg:#ea6962)]($style)'
+style = "bg:#394260"
 
 [line_break]
 disabled = false
