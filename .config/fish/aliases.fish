@@ -10,6 +10,8 @@ alias ls='eza -1 --icons=auto'
 alias ll='eza -lha --icons=auto --sort=name --group-directories-first'
 alias ld='eza -lhD --icons=auto'
 alias lt='eza --icons=auto --tree'
+alias ltt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
 alias bash='source ~/.bashrc'
 alias bfile='nvim ~/.bashrc'
 alias ffile='nvim ~/.config/fish/config.fish'
@@ -74,6 +76,7 @@ alias regfont="setfont default8x16"
 # Some useful aliases
 alias update='sudo pacman -Syu'
 alias pwreset='faillock --reset --user april'
+alias pg='ping -c 10 google.com'
 
 # Automatically do an ls after each cd, z, or zoxide
 alias cleanup='sudo pacman -Rns $(pacman -Qdtq)'
