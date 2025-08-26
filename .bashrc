@@ -26,7 +26,14 @@ alias ld='eza -lhD --icons=auto'
 alias lt='eza --icons=auto --tree'
 alias bash='source ~/.bashrc'
 alias bfile='nvim ~/.bashrc'
+alias ffile='nvim ~/.config/fish/config.fish'
+alias fish='source ~/.config/fish/config.fish'
 alias xx='tmux'
+
+# change your default USER shell
+alias tobash="chsh $USER -s /usr/bin/bash && echo 'Log out and log back in for change to take effect.'"
+alias tozsh="chsh $USER -s /usr/bin/zsh && echo 'Log out and log back in for change to take effect.'"
+alias tofish="chsh $USER -s /usr/bin/fish && echo 'Log out and log back in for change to take effect.'"
 
 #When was the Last update
 alias last-updated='grep -i "full system upgrade" /var/log/pacman.log | tail -n 1'
@@ -62,6 +69,7 @@ alias fdh='fd --hidden'
 alias f="find . | grep "
 
 #Life Easy
+alias cd='z'
 alias nd='npm run dev'
 alias open='nautilus'
 alias zz='yazi'
@@ -70,10 +78,16 @@ alias x='exit'
 alias h="history | grep "
 alias dot='cd ~/dotfiles/'
 alias kt='kitten themes'
+alias g='git'
+alias d='docker'
+
+# bigger font in tty and regular font in tty
+alias bigfont="setfont ter-131b"
+alias regfont="setfont default9x16"
 
 # Some useful aliases
 alias update='sudo pacman -Syu'
-alias reset='faillock --reset --user april'
+alias pwreset='faillock --reset --user april'
 
 # Automatically do an ls after each cd, z, or zoxide
 alias cleanup='sudo pacman -Rns $(pacman -Qdtq)'
@@ -94,6 +108,7 @@ alias gl='git pull'
 alias gco='git checkout'
 alias gb='git branch'
 alias gd='git diff'
+alias ghs='streaker theamit-969'
 
 # Create and go to the directory
 mkdirg() {
