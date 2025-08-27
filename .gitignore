@@ -1,6 +1,6 @@
 *.bak
 
-config/tmux/plugins
+.config/tmux/plugins
 
 # Fish local config
 .config/fish/fish_variables
