@@ -76,12 +76,23 @@ This way, you update configs in one place and your system will always use the la
   - [ ] tmux sessionzer scripts
   - [x] rmpc cache clear scripts
   - [x] dns setup scripts
+  - [ ] one click theme switcher for every Application
 
 ---
 
 - [ ] Customization 🎨
   - [x] rmpc gruvbox-material palletes
   - [ ] obsidian purple colorscheme
+    - [x] kitty
+    - [ ] btop
+    - [ ] walker
+    - [ ] alacritty
+    - [ ] hyprland (border)
+    - [ ] hyprlock
+    - [ ] mako
+    - [ ] walker
+    - [ ] waybar
+    - [x] wallpapers
   - [x] customize starship
   - [ ] catppuccin and kanagawa colors for starship
   - [x] customize fish shell
@@ -98,3 +109,5 @@ This way, you update configs in one place and your system will always use the la
   - [ ] add snippets (NVIM)
   - [ ] connect obsidan and nvim
   - [ ] Create a TODO plugin for neovim that adds tasks to the selected path and uses (.md).
+
+---
