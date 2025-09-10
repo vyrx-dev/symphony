@@ -14,3 +14,5 @@ fish_default_key_bindings
 fzf --fish | source # fzf keybinding
 zoxide init fish | source #better cd
 starship init fish | source #starthip prompt
+
+fish_add_path /home/vyrx/.spicetify

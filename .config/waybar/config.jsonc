@@ -57,8 +57,8 @@
     "on-click": "alacritty -e btop",
   },
   "clock": {
-    "format": "{:%A %H:%M}",
-    "format-alt": "{:%d %B W%V %Y}",
+    "format": "{:L%A %H:%M}",
+    "format-alt": "{:L%d %B W%V %Y}",
     "tooltip": false,
     "on-click-right": "omarchy-cmd-tzupdate",
   },
@@ -73,7 +73,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "nospacing": 1,
-    "on-click": "alacritty --class=Impala -e nmtui",
+    "on-click": "alacritty --class=Impala -e impala",
   },
   "battery": {
     "format": "{capacity}% {icon}",

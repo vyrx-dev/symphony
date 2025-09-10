@@ -4,3 +4,4 @@
 
 # Fish local config
 .config/fish/fish_variables
+.config/fish/install.log
