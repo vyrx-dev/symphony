@@ -110,20 +110,6 @@ alias gb='git branch'
 alias gd='git diff'
 alias ghs='streaker theamit-969'
 
-# Create and go to the directory
-mkdirg() {
-  mkdir -p "$1"
-  cd "$1"
-}
-
-# cd() {
-#   if [ -n "$1" ]; then
-#     builtin cd "$@" && ls
-#   else
-#     builtin cd ~ && ls
-#   fi
-# }
-
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 
