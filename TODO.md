@@ -12,16 +12,17 @@
 
 - [ ] Customization 🎨
   - [x] rmpc gruvbox-material palletes
-  - [ ] obsidian purple colorscheme
+  - [x] obsidian purple colorscheme
     - [x] kitty
-    - [ ] btop
-    - [ ] walker
+    - [x] btop
     - [x] alacritty
-    - [ ] hyprland (border)
-    - [ ] hyprlock
-    - [ ] mako
-    - [ ] walker
+    - [x] hyprland (border)
+    - [x] hyprlock
+    - [x] mako
+    - [x] walker
+    - [x] icons
     - [x] neovim
+    - [x] chromium
     - [x] waybar
     - [x] wallpapers
   - [x] customize starship
