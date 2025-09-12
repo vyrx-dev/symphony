@@ -4,7 +4,7 @@
   "position": "top",
   "spacing": 0,
   "height": 26,
-  "modules-left": ["custom/omarchy", "hyprland/workspaces"],
+  "modules-left": ["custom/omarchy", "hyprland/workspaces", "custom/playerctl"],
   "modules-center": ["clock", "custom/update"],
   "modules-right": [
     "group/tray-expander",
@@ -126,5 +126,18 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12,
+  },
+  "custom/playerctl": {
+    "format": "    <span>{}</span>",
+    "return-type": "json",
+    "max-length": 30,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click-middle": "playerctl play-pause",
+    "on-click": "playerctl previous",
+    "on-click-right": "playerctl next",
+    "format-icons": {
+      "Playing": "<span foreground='#62b389'>󰝚</span>",
+      "Paused": "<span foreground='#47423E'>󰝛</span>",
+    },
   },
 }
