@@ -4,17 +4,24 @@
   "position": "top",
   "spacing": 0,
   "height": 26,
+  // "margin-top": 5,
+  // "margin-left": 5,
+  // "margin-right": 5,
   "modules-left": [
     "custom/omarchy",
     "hyprland/workspaces",
     "custom/playerctl",
     "mpris"
   ],
-  "modules-center": ["clock", "custom/update"],
+  "modules-center": [
+    "clock",
+    "custom/update"
+  ],
   "modules-right": [
     "group/tray-expander",
-    "bluetooth",
+    "backlight",
     "network",
+    "bluetooth",
     "pulseaudio",
     "cpu",
     "battery"
@@ -55,7 +62,6 @@
     "tooltip-format": "Omarchy update available",
     "interval": 3600
   },
-
   "cpu": {
     "interval": 5,
     "format": "󰍛",
@@ -68,7 +74,13 @@
     "on-click-right": "omarchy-cmd-tzupdate"
   },
   "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
     "format": "{icon}",
     "format-wifi": "{icon}",
     "format-ethernet": "󰀂",
@@ -86,8 +98,30 @@
     "format-charging": "{icon}",
     "format-plugged": "",
     "format-icons": {
-      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
-      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+      "charging": [
+        "󰢜",
+        "󰂆",
+        "󰂇",
+        "󰂈",
+        "󰢝",
+        "󰂉",
+        "󰢞",
+        "󰂊",
+        "󰂋",
+        "󰂅"
+      ],
+      "default": [
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+      ]
     },
     "format-full": "󰂅",
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
@@ -97,6 +131,17 @@
       "warning": 20,
       "critical": 10
     }
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "",
+      ""
+    ],
+    "on-scroll-up": "brightnessctl set +10%",
+    "on-scroll-down": "brightnessctl set 10%-",
+    "interval": 2
   },
   "bluetooth": {
     "format": "",
@@ -113,7 +158,11 @@
     "scroll-step": 5,
     "format-muted": "󰝟",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     }
   },
   "group/tray-expander": {
@@ -122,7 +171,10 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "tray"]
+    "modules": [
+      "custom/expand-icon",
+      "tray"
+    ]
   },
   "custom/expand-icon": {
     "format": " ",
@@ -142,6 +194,6 @@
     "status-icons": {
       "paused": " ⏸"
     },
-    "max-length": 30
+    "max-length": 35
   }
 }
