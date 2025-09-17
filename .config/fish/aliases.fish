@@ -76,7 +76,7 @@ alias regfont="setfont default8x16"
 
 # Some useful aliases
 alias update='sudo pacman -Syu'
-alias pwreset='faillock --reset --user april'
+alias pwreset='faillock --reset --user vyrx'
 alias pg='ping -c 10 google.com'
 
 # Automatically do an ls after each cd, z, or zoxide
