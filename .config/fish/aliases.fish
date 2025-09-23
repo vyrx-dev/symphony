@@ -60,7 +60,7 @@ alias f="find . | grep "
 alias cd='z'
 alias nd='npm run dev'
 alias n='nvim'
-alias open='nautilus'
+alias open='nautilus .'
 alias zz='yazi'
 alias lg='lazygit'
 alias x='exit'
@@ -69,6 +69,7 @@ alias dot='cd ~/dotfiles/'
 alias kt='kitten themes'
 alias g='gemini'
 alias d='docker'
+alias rip="yt-dlp -x --audio-format=\"mp3\""
 
 # bigger font in tty and regular font in tty
 alias bigfont="setfont ter-132b"
