@@ -68,14 +68,14 @@ return {
     lazy = true,
     priority = 1000,
     opts = {
-      transparent = false,
+      transparent = true,
     },
   },
   -- Set the active theme
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox-material", -- Change the Themes
+      colorscheme = "vague", -- Change the Themes
     },
   },
 }
