@@ -7,6 +7,7 @@
   - [x] rmpc cache clear scripts
   - [x] dns setup scripts
   - [ ] one click theme switcher for every Application
+  - [x] Theme installer for omarchy
 
 ---
 
