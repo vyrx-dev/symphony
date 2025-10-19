@@ -8,7 +8,8 @@ configuration {
     hide-scrollbar: true;
     sidebar-mode: false;
     terminal: "kitty";
-    font: "JetBrainsMono Nerd Font 11";
+    // font: "JetBrainsMono Nerd Font 11";
+    font: "CaskaydiaCove Nerd Font Mono 12";
     // kb-row-up: "Up,Control+k";
     // kb-row-down: "Down,Control+j";
     // kb-accept-entry: "Return,KP_Enter";
