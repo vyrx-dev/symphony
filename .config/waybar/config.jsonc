@@ -85,7 +85,7 @@
         "today": "<span color='#ff6699'><b>{}</b></span>"
       }
     },
-    "on-click-right": "~/.local/share/omarchy/bin/omarchy-cmd-tzupdate"
+    "on-click-right": "~/.local/share/omarchy/bin/omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
   "network": {
     "format-icons": [
