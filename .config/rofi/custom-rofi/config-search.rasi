@@ -8,7 +8,7 @@ window {
 	width: 40%;
 	orientation: horizontal;
 	height: inherit;
-    y-offset: 10px;
+    y-offset: 50px;
     location: north;
     children: [ "entry", "message" ];
     border: 2px;

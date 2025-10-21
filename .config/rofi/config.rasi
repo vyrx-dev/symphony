@@ -10,13 +10,6 @@ configuration {
     terminal: "kitty";
     // font: "JetBrainsMono Nerd Font 11";
     font: "CaskaydiaCove Nerd Font Mono 12";
-    // kb-row-up: "Up,Control+k";
-    // kb-row-down: "Down,Control+j";
-    // kb-accept-entry: "Return,KP_Enter";
-    // kb-remove-to-eol: "";
-    // kb-mode-next: "Control+l";
-    // kb-mode-previous: "Control+h";
-    // kb-remove-char-back: "BackSpace";
 }
 
 * {
@@ -26,7 +19,6 @@ configuration {
     selected: #ffffff22;
     active: #ffffff11;
     urgent: #ff5555aa;
-    
     border-colour: #ffffff22;
     separatorcolor: transparent;
     background-color: transparent;
