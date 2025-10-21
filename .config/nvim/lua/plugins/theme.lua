@@ -1,0 +1,1 @@
+/home/vyrx/.config/omarchy/current/theme/neovim.lua

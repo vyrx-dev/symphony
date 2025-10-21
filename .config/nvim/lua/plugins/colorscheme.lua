@@ -83,11 +83,38 @@ return {
     priority = 1000,
     opts = {},
   },
-  -- Set the active theme
+
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "vague", -- Change the Themes
-    },
+    "ribru17/bamboo.nvim",
+    lazy = true,
+    priority = 1000,
   },
+  {
+    "sainnhe/everforest",
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    "tahayvr/matteblack.nvim",
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    "loctvl842/monokai-pro.nvim",
+    lazy = true,
+    priority = 1000,
+  },
+  {
+    "shaunsingh/nord.nvim",
+    lazy = true,
+    priority = 1000,
+  },
+
+  -- Set the active theme
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "vague", -- Change the Themes
+  --   },
+  -- },
 }
