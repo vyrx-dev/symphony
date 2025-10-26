@@ -16,3 +16,6 @@ zoxide init fish | source #better cd
 starship init fish | source #starthip prompt
 
 fish_add_path /home/vyrx/.spicetify
+
+# Created by `pipx` on 2025-10-25 19:31:32
+set PATH $PATH /home/vyrx/.local/bin
