@@ -1,11 +1,6 @@
 general.import = [
-  # "~/.config/alacritty/Themes/catppuccin_mocha.toml",
-  # "~/.config/alacritty/Themes/tokyo_night.toml",
-  # "~/.config/alacritty/Themes/tokyo_night_enhanced.toml",
-  # "~/.config/alacritty/Themes/gruvbox-dark.toml",
-  # "~/.config/alacritty/Themes/kanagawa_wave.toml",
   # "~/.config/alacritty/Themes/solarized_osaka.toml",
-  "~/.config/omarchy/current/theme/alacritty.toml"
+  "~/.cache/wal/colors-alacritty.toml"
 ]
 
 [env]

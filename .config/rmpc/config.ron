@@ -4,7 +4,7 @@
 (
     address: "127.0.0.1:6600",
     cache_dir: Some("/tmp/rmpc/cache"),
-    theme: "doublek_CT",
+    theme: "pywall16",
     password: None,
     enable_config_hot_reload: true,
     volume_step: 5,

@@ -20,12 +20,13 @@
   "modules-right": [
     "mpd",
     "group/tray-expander",
+    "cpu",
+    "memory",
+    "temperature",
     "network",
     "bluetooth",
     "backlight",
     "pulseaudio",
-    "cpu",
-    "memory",
     "battery"
   ],
   "custom/arch": {
@@ -83,19 +84,17 @@
   "backlight": {
     "device": "intel_backlight",
     "format": "{icon}", //{percent}%
+    "tooltip-format": "🌕 {percent}%",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "󰃜",
+      "󰃝",
+      "󰃞",
+      "󰃟",
       "󰃠"
     ],
     "scroll-step": 10,
-    "on-click": "~/.config/waybar/change-theme.sh"
+    "on-click": "~/.config/waybar/scripts/wall-picker.sh",
+    "on-click-right": "~/.config/waybar/scripts/pywall-theme.sh"
   },
   "cpu": {
     "interval": 2,
@@ -106,6 +105,13 @@
     "format": " {used:0.1f}gb",
     "interval": 2,
     "on-click": "kitty -e btop"
+  },
+  "temperature": {
+    "interval": 5,
+    "format": " {temperatureC}°C",
+    "tooltip-format": "CPU Temperature: {temperatureC}°C",
+    "critical-threshold": 80,
+    "on-click": "$TERMINAL -e btop",
   },
   "clock": {
     "format": "{:L%A %H:%M}",
@@ -190,7 +196,7 @@
     "format": "{icon}",
     "on-click": "kitty --class=Wiremix -e wiremix",
     "on-click-right": "pamixer -t",
-    "tooltip-format": "Playing at {volume}%",
+    "tooltip-format": "🎵 {volume}%",
     "scroll-step": 5,
     "format-muted": "",
     "format-icons": {
@@ -217,8 +223,8 @@
     "tooltip": false
   },
   "custom/screenrecording-indicator": {
-    "on-click": "omarchy-cmd-screenrecord",
-    "exec": "~/Scripts/indicator-record.sh",
+    "on-click": "record.sh",
+    "exec": "~/.config/waybar/scripts/indicator-record.sh",
     "signal": 8,
     "return-type": "json"
   },

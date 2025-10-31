@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Random wallpaper selector with smooth animations
+WALLPAPER_DIR="$HOME/Wallpapers/"
+
+# Get wallpaper files
+mapfile -t wallpapers < <(
+  find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | sort
+)
+
+# Validate wallpapers exist
+if [[ ${#wallpapers[@]} -eq 0 ]]; then
+  notify-send "Error" "No wallpapers found in $WALLPAPER_DIR"
+  exit 1
+fi
+
+# Start swww daemon if not running
+swww query &>/dev/null || swww-daemon --format xrgb &
+
+# Wait for daemon to initialize
+sleep 0.5
+
+# Select random wallpaper
+random_index=$((RANDOM % ${#wallpapers[@]}))
+selected_wallpaper="${wallpapers[$random_index]}"
+
+# Apply wallpaper with top-right corner grow animation
+swww img "$selected_wallpaper" \
+  --transition-type grow \
+  --transition-pos top-right \
+  --transition-fps 120 \
+  --transition-duration 1 \
+  --transition-bezier 0.25,0.1,0.25,1.0
+
+# Send notification with wallpaper preview
+notify-send -i "$selected_wallpaper" "Random Wallpaper" "$(basename "$selected_wallpaper")"
+
+# Fixed typo: illall -> killall
+killall -SIGUSR1 kitty
