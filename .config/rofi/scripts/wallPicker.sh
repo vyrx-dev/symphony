@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Wallpaper picker with pywal integration
+# Wallpaper picker for waybar - swww only (no pywal, no reloads)
 WALLPAPER_DIR="$HOME/Wallpapers/"
-SWWW_PARAMS="--transition-fps 60 --transition-type=random --transition-duration=1"
+SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 
 # Get focused monitor (fallback to HDMI-A-1)
 focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
@@ -13,7 +13,7 @@ mapfile -d '' wallpapers < <(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -
 
 # Check if wallpapers exist
 if [[ ${#wallpapers[@]} -eq 0 ]]; then
-  notify-send "error" "no wallpapers found in $wallpaper_dir"
+  notify-send "Error" "No wallpapers found in $WALLPAPER_DIR"
   exit 1
 fi
 
@@ -34,39 +34,14 @@ choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpap
 # Exit if nothing selected
 [[ -z "$choice" ]] && exit 0
 
-# Find selected wallpaper and apply theme
+# Find selected wallpaper and set it
 for wallpaper in "${wallpapers[@]}"; do
   if [[ "$(basename "$wallpaper")" == "$choice" ]]; then
     # Apply wallpaper with swww
-    swww img "$wallpaper" $SWWW_PARAMS #-o  "$focused_monitor"
-
-    # Apply pywal color scheme
-    # wal -i "$wallpaper"
-    matugen image "$wallpaper"
-
-    # Update pywal integrations
-    pywalfox update
-    pywal-spicetify text
-    killall -SIGUSR1 kitty
-
-    # Reload everything instantly
-    hyprctl reload 2>/dev/null
-    restart-app.sh waybar 2>/dev/null
-    restart-app.sh swayosd-server 2>/dev/null
-    makoctl reload 2>/dev/null
-    killall -SIGUSR1 kitty
-    # pkill -SIGUSR1 kitty 2>/dev/null
-    pkill -SIGUSR1 alacritty 2>/dev/null
-    pkill -SIGUSR2 btop 2>/dev/null
-    ghostty +reload-config 2>/dev/null
-    killall -SIGUSR2 ghostty
-
-    if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
-      touch ~/.config/alacritty/alacritty.toml
-    fi
+    swww img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
 
     # Send notification
-    notify-send -i "$wallpaper" "Theme Applied" "$(basename "$wallpaper")"
+    notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
 
     break
   fi

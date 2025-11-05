@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-selected=$(ls ~/scripts/ | rofi -dmenu -p "Run: ") && bash ~/scripts/$selected
+selected=$(ls ~/Scripts/ | rofi -dmenu -p "Run: ") && bash ~/Scripts/$selected

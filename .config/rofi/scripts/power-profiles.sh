@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Get list of available power profiles
+profile=$(powerprofilesctl list |
+  awk '/^\s*[* ]\s*[a-zA-Z0-9\-]+:$/ { gsub(/^[*[:space:]]+|:$/,""); print }' |
+  tac |
+  rofi -dmenu -p "Power Profile" -config "$HOME/.config/rofi/custom-rofi/config-power-profiles.rasi")
+
+# If user selected something, apply it
+[[ -n "$profile" ]] && powerprofilesctl set "$profile"
