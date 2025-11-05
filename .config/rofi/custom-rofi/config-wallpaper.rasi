@@ -1,73 +1,135 @@
-/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-/* Main Config (wallpaper) */
+/* ---- 💫 Premium Wallpaper Picker 💫 ---- */
+/* Enhanced config with modern aesthetics */
 
-@import "~/.config/rofi/config.rasi"  
+@import "~/.config/rofi/config.rasi"
 
-/* ---- Configuration ---- */ 
+/* ---- Configuration ---- */
 configuration {
   modi: "drun";
+  show-icons: true;
+  icon-theme: "Papirus-Dark";
 }
 
+/* ---- Window ---- */
 window {
-  width: 75%;
-  height: inherit;
+  width: 85%;
+  height: 90%;
+  border-radius: 16px;
+  background-color: #000000dd;
+  border: 2px;
+  border-color: #ffffff15;
 }
 
 /* ---- Mainbox ---- */
 mainbox {
-  children:
-    [ "inputbar", "listview"];
+  padding: 25px;
+  // spacing: 20px;
+  background-color: transparent;
+  children: [ "inputbar", "listview"];
+}
+
+/* ---- Inputbar ---- */
+inputbar {
+  enabled: true;
+  // spacing: 12px;
+  // padding: 16px 20px;
+  border-radius: 12px;
+  background-color: #ffffff08;
+  border: 1px;
+  border-color: #ffffff12;
+  children: [ "prompt", "entry" ];
+}
+
+prompt {
+  enabled: true;
+  background-color: transparent;
+  text-color: #ffffffee;
+  font: "CaskaydiaCove Nerd Font Mono Bold 13";
 }
 
 entry {
+  enabled: true;
   expand: true;
-  placeholder: "🎞️ Search / Choose Wallpaper";
-  horizontal-align: 0.5;
-  horizontal-align: 0.5;
+  placeholder: "🎨 Search wallpapers...";
+  placeholder-color: #ffffff55;
+  background-color: transparent;
+  text-color: #ffffffee;
+  cursor: text;
+  font: "CaskaydiaCove Nerd Font Mono 12";
 }
 
 /* ---- Listview ---- */
+
+// listview {
+//   columns: 2;
+//   lines: 7;
+//   fixed-height: false;
+//   scrollbar: true;
+//   spacing: 6px;
+//   cycle: true;
+// }
 listview {
-  columns: 8;
-  lines: 4;
-  spacing: 20px;
-  padding: 10px;
-  // columns: 6;
-  // lines: 2;
+  columns: 12;
+  lines: 5;
+  // spacing: 5px;
+  // padding: 12px;
   flow: horizontal;
   fixed-width: true;
   fixed-height: true;
   cycle: true;
+  scrollbar: false;
+  background-color: transparent;
 }
 
-/* ---- Element ---- */
+/* ---- Elements ---- */
 element {
   orientation: vertical;
-  padding: 0px;
-  spacing: 0px;
-  border-radius: 10px;
-  padding: 0px;
-  margin: 0px;
+  // padding: 8px;
+  // spacing: 8px;
+  border-radius: 14px;
+  background-color: #ffffff05;
+  border: 1px;
+  border-color: #ffffff08;
+  cursor: pointer;
 }
 
-element selected.normal {
-  // background-color: transparent;
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  padding: 0px;
-  margin: 0px;
+element normal {
+  background-color: #ffffff05;
+  border-color: #ffffff08;
 }
 
+element selected {
+  background-color: #ffffff18;
+  border-color: #ffffff35;
+  border: 2px;
+}
+
+element alternate {
+  background-color: transparent;
+}
+
+/* ---- Element Icon (Wallpaper Preview) ---- */
 element-icon {
-    text-color:                  inherit;
-    size:                        10%;
-    margin:                      0px;
-    cursor:                      inherit;
+  size: 12%;
+  border-radius: 10px;
+  margin: 0px;
+  cursor: inherit;
+  background-color: #00000033;
+  border: 1px;
+  border-color: #ffffff10;
 }
 
+/* ---- Element Text (Filename) ---- */
 element-text {
   vertical-align: 0.5;
   horizontal-align: 0.5;
-  padding: 6px;
-  margin: 6px;
+  padding: 8px 4px;
+  margin: 0px;
+  text-color: #ffffffdd;
+  font: "CaskaydiaCove Nerd Font Mono 10";
+}
+
+element selected element-text {
+  text-color: #ffffffff;
+  font: "CaskaydiaCove Nerd Font Mono Bold 10";
 }

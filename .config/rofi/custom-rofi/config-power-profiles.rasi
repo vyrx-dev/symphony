@@ -1,0 +1,27 @@
+@import "~/.config/rofi/config.rasi"
+
+/* Main config for power profiles list */
+
+/* ---- Window ---- */
+window{
+  width:13%;
+}
+
+/* ---- Mainbox ---- */
+mainbox{
+  children:
+    ["listview"];
+}
+
+/* ---- Listview ---- */
+listview{
+  lines:3;
+  spacing:1px;
+}
+
+/* ---- Element ---- */
+// element-text{
+//   horizontal-align:0.5;
+// }
+
+

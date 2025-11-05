@@ -1,5 +1,5 @@
 /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-/* Main Config - emoji */
+// /* Main Config - emoji */
 
 @import "~/.config/rofi/config.rasi" 
 
