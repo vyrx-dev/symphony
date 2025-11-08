@@ -1,0 +1,45 @@
+@import url("colors.css");
+
+* {
+  all: unset;
+}
+
+window {
+  background-color: @surface_dim;
+}
+
+button {
+  color: @on_surface_variant;
+  background-color: @surface_container;
+  border: 1px solid @outline_variant;
+  border-radius: 16px;
+  margin: 12px;
+  min-width: 140px;
+  min-height: 140px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 35%;
+}
+
+button:focus,
+button:hover {
+  background-color: @surface_container_highest;
+  border: 2px solid @primary;
+  color: @primary;
+}
+
+#lock {
+  background-image: image(url("icons/lock.png"));
+}
+
+#logout {
+  background-image: image(url("icons/logout.png"));
+}
+
+#shutdown {
+  background-image: image(url("icons/shutdown.png"));
+}
+
+#reboot {
+  background-image: image(url("icons/reboot.png"));
+}
