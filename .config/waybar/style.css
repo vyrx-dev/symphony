@@ -1,4 +1,4 @@
-/* @import "../omarchy/themes/aether/waybar.css"; */
+@import "./colors.css";
 
 * {
   background-color: transparent;
@@ -44,8 +44,8 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: @primary_container;
+  color: @on_primary_container;
   font-weight: 600;
 }
 
@@ -69,6 +69,7 @@ window#waybar {
 
 #tray,
 #cpu,
+#disk,
 #memory,
 #temperature,
 #battery,
@@ -96,6 +97,7 @@ window#waybar {
   padding: 0 3px;
 }
 
+#custom-notification,
 #idle_inhibitor {
   margin-left: 8.75px;
   font-size: 11px;
@@ -119,6 +121,15 @@ window#waybar {
 
 #custom-screenrecording-indicator.active {
   color: #a55555;
+}
+
+#custom-notification {
+  font-family: "NotoSansMono Nerd Font";
+  /* margin-right: 10px; */
+  margin-left: 5px;
+  /* font-size: 17px; */
+  padding: 0 2px;
+  font-weight: 600;
 }
 
 /* Tray drawer group styling */

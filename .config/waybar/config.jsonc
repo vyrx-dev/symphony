@@ -7,20 +7,20 @@
   // "width": 1268,
   // "margin": "2px 6px 0 4",
   "modules-left": [
-    // "custom/arch",
     "hyprland/workspaces",
-    "mpris"
+    "niri/workspaces"
   ],
   "modules-center": [
-    // "hyprland/window",
     "clock",
-    "idle_inhibitor",
     "custom/screenrecording-indicator"
+    // "custom/notification"
   ],
   "modules-right": [
-    "mpd",
+    // "mpd",
+    // "mpris",
     // "cpu",
     "memory",
+    "disk",
     // "temperature",
     "network",
     "bluetooth",
@@ -145,11 +145,11 @@
     "on-click": "kitty -e --class=impala impala"
   },
   "battery": {
-    "format": "{icon} {capacity}%",
+    "format": "{icon}",
     "format-discharging": "{icon} {capacity}%",
     "format-charging": "{icon}",
     "format-plugged": "",
-    "on-click": "~/Scripts/power.sh",
+    "on-click": "~/.config/rofi/scripts/power-profiles.sh",
     "format-icons": {
       "charging": [
         "󰢜",
@@ -256,8 +256,34 @@
     "tooltip-format-disconnected": "MPD (disconnected)",
     "on-click": "mpc toggle",
     "on-click-right": "mpc next",
-    "on-click-middle": "mpc prev",
+    "on-click-middle": "mpc prev"
     // "on-scroll-up": "mpc next",
     // "on-scroll-down": "mpc prev"
+  },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='9pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "disk": {
+    "interval": 30,
+    "format": "󱛟 {percentage_free}%",
+    "tooltip-format": "Used: {used}\nFree: {free}\nTotal: {total}",
+    "path": "/"
   }
 }
