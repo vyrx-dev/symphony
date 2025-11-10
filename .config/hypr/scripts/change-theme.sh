@@ -25,10 +25,21 @@ echo "$INDEX" >"$STATE_FILE"
 
 CURRENT_WALLPAPER="${WALLPAPERS[$INDEX]}"
 
-notify-send -i "$CURRENT_WALLPAPER" "Theme changed" "Wallpaper has been updated."
 swww img "$CURRENT_WALLPAPER" --transition-type=any --transition-fps 60 --transition-duration=1
 # SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 matugen image "$CURRENT_WALLPAPER"
 # wal -i "$CURRENT_WALLPAPER"
 pywalfox update
-pywal-spicetify text
+hyprctl reload 2>/dev/null
+restart-app.sh waybar 2>/dev/null
+restart-app.sh swayosd-server 2>/dev/null
+makoctl reload 2>/dev/null
+killall -SIGUSR1 kitty
+# pkill -SIGUSR1 kitty 2>/dev/null
+pkill -SIGUSR1 alacritty 2>/dev/null
+pkill -SIGUSR2 btop 2>/dev/null
+ghostty +reload-config 2>/dev/null
+killall -SIGUSR2 ghosttyify text
+restart-app swaync
+killall wlogout
+notify-send -i "$CURRENT_WALLPAPER" "Theme changed" "Wallpaper has been updated."

@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+
+# Unified recording script with region/window selection
+# Usage:
+#   ./ffm-record          - Drag to select region or right-click window (both audio)
+#   ./ffm-record -input   - System audio only
+#   ./ffm-record -output  - Mic only
+
+pidfile="/tmp/recpid"
+videos_dir="$HOME/Videos"
+
+# Parse audio mode
+audio_mode="both"
+[[ "$1" == "-input" ]] && audio_mode="system"
+[[ "$1" == "-output" ]] && audio_mode="mic"
+
+record() {
+  # Build audio source based on mode
+  case "$audio_mode" in
+  system)
+    audio_src="$(pactl get-default-sink).monitor"
+    ;;
+  mic)
+    audio_src="$(pactl get-default-source)"
+    pactl set-source-mute @DEFAULT_SOURCE@ 0
+    ;;
+  both)
+    audio_src="$(pactl get-default-sink).monitor|$(pactl get-default-source)"
+    pactl set-source-mute @DEFAULT_SOURCE@ 0
+    ;;
+  esac
+
+  # Get monitor scale for proper region calculation
+  scale=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .scale')
+
+  # Use slurp with -o flag to show all monitors as clickable regions
+  # Click on any monitor = record that monitor, Drag = custom region, ESC = cancel
+  if ! selection=$(slurp -o -f "%o"); then
+    notify-send -t 3000 -h string:bgcolor:#d08770 "Recording cancelled"
+    exit 1
+  fi
+
+  # Check if selection is a monitor name (clicked) or coordinates (dragged)
+  if [[ "$selection" =~ ^[A-Za-z0-9\-]+$ ]]; then
+    # Monitor name was returned - user clicked on a monitor
+    monitor_name="$selection"
+    record_type="monitor"
+  else
+    # Region coordinates were returned - user dragged a region
+    region="$selection"
+    record_type="region"
+  fi
+
+  # Start recording based on selection type
+  if [[ "$record_type" == "monitor" ]]; then
+    # Record monitor directly by name - simpler and may avoid padding issues
+    # Using 'content' frame mode for better frame pacing, 'full' color range
+    gpu-screen-recorder -w "$monitor_name" -f 60 -q ultra -fm content -bm vbr -cr full -a "$audio_src" -c mp4 -k h264 -o "$videos_dir/rec_$(date '+%Y%m%d_%H%M%S').mp4" &
+  else
+    # Parse and scale region coordinates for HiDPI displays
+    if [[ "$region" =~ ^([0-9]+),([0-9]+)[[:space:]]([0-9]+)x([0-9]+)$ ]]; then
+      x=$(awk "BEGIN {printf \"%.0f\", ${BASH_REMATCH[1]} * $scale}")
+      y=$(awk "BEGIN {printf \"%.0f\", ${BASH_REMATCH[2]} * $scale}")
+      w=$(awk "BEGIN {printf \"%.0f\", ${BASH_REMATCH[3]} * $scale}")
+      h=$(awk "BEGIN {printf \"%.0f\", ${BASH_REMATCH[4]} * $scale}")
+      scaled_region="${w}x${h}+${x}+${y}"
+    else
+      scaled_region="$region"
+    fi
+
+    # Record selected region with 'content' frame mode and full color range
+    gpu-screen-recorder -w region -region "$scaled_region" -f 60 -q ultra -fm content -bm vbr -cr full -a "$audio_src" -c mp4 -k h264 -o "$videos_dir/rec_$(date '+%Y%m%d_%H%M%S').mp4" &
+  fi
+  echo $! >"$pidfile"
+
+  echo "Rec •" >/tmp/recordingicon
+  pkill -RTMIN+3 dwmblocks 2>/dev/null || true
+
+  notify-send -t 3000 -h string:bgcolor:#a3be8c "Recording started ($audio_mode)"
+}
+
+end() {
+  if [[ -f "$pidfile" ]]; then
+    pid=$(cat "$pidfile")
+    if ps -p "$pid" >/dev/null 2>&1; then
+      kill -SIGINT "$pid" 2>/dev/null # SIGINT for clean save
+
+      # Wait max 5 seconds for clean exit
+      count=0
+      while ps -p "$pid" >/dev/null 2>&1 && [ $count -lt 50 ]; do
+        sleep 0.1
+        count=$((count + 1))
+      done
+
+      # Force kill if still running
+      if ps -p "$pid" >/dev/null 2>&1; then
+        kill -9 "$pid" 2>/dev/null
+        notify-send -t 3000 -h string:bgcolor:#bf616a "Recording stopped (forced)"
+      else
+        notify-send -t 3000 -h string:bgcolor:#bf616a "Recording saved to ~/Videos"
+      fi
+    else
+      notify-send -t 3000 -h string:bgcolor:#d08770 "No active recording found"
+    fi
+    rm -f "$pidfile"
+  else
+    notify-send -t 3000 -h string:bgcolor:#d08770 "No recording to stop"
+  fi
+
+  [[ "$audio_mode" != "system" ]] && pactl set-source-mute @DEFAULT_SOURCE@ 1
+
+  echo "" >/tmp/recordingicon
+  pkill -RTMIN+3 dwmblocks 2>/dev/null || true
+}
+
+# Check if already recording or if slurp is running
+if pgrep -f "gpu-screen-recorder" >/dev/null || pgrep -x slurp >/dev/null; then
+  if pgrep -x slurp >/dev/null; then
+    # Cancel selection
+    pkill -x slurp 2>/dev/null
+  else
+    # Stop recording
+    end
+  fi
+else
+  # Clean up stale pidfile and start new recording
+  rm -f "$pidfile"
+  record
+fi
