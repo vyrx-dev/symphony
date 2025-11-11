@@ -2,8 +2,11 @@
   
 <img src="assets/banner.jpg" alt="Symphony" width="100%" height="300" style="object-fit: cover; object-position: center;">
 
->*My minimal daily driver for productive work. Built for focus mode  zero distractions, just code. Vibe mode exists for those who want aesthetics too ;)*
-I don't spend hours ricing. This setup is inspired by musical harmonies.
+>*My daily driver setup — simple, calm and easy to work with.
+Minimal by default, but still has a bit of character.
+Animations, gaps, and extras can be toggled on/off, so you can choose between clean or pretty.*
+
+**Inspired by the way music balances silence and sound 🎼**
 
 </div>
 
