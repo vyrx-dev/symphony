@@ -71,6 +71,7 @@ alias rip="yt-dlp -x --audio-format=\"mp3\""
 alias mp='makepkg -si'
 alias chx='chmod +x'
 alias tmuxk='tmux kill-session'
+abbr -a nb 'nvim ~/.config/hypr/bindings.conf'
 
 # bigger font in tty and regular font in tty
 alias bigfont="setfont ter-132b"
@@ -95,6 +96,9 @@ alias folders='du -h --max-depth=1'
 alias gits='git status'
 alias ghs='streaker vyrx-dev'
 abbr -a ghp 'gh repo create --public $(basename "$PWD") --source=. --description="desc" --push'
+
+# Grub Update
+abbr -a update-grub 'sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # Snapper
 abbr -a slsr 'sudo snapper -c root list'

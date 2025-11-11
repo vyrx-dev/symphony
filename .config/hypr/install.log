@@ -1,8 +1,0 @@
-[01:02:28 2025-10-25] FETCHING Version 2.42.0
-[01:02:28 2025-10-25] DOWNLOADING https://github.com/spicetify/cli/releases/download/v2.42.0/spicetify-2.42.0-linux-amd64.tar.gz
-[01:02:31 2025-10-25] EXTRACTING /home/vyrx/.spicetify/spicetify.tar.gz
-[01:02:32 2025-10-25] SETTING EXECUTABLE PERMISSIONS TO /home/vyrx/.spicetify/spicetify
-[01:02:32 2025-10-25] REMOVING /home/vyrx/.spicetify/spicetify.tar.gz
-[01:02:32 2025-10-25] spicetify path already set in /home/vyrx/.config/fish/config.fish, continuing...
-[01:02:32 2025-10-25] spicetify v2.42.0 was installed successfully to /home/vyrx/.spicetify
-[01:02:32 2025-10-25] Run 'spicetify --help' to get started

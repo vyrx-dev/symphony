@@ -1,57 +1,74 @@
-add_newline = true
-command_timeout = 200
-palette = "gruvbox_material"
+add_newline = false
+command_timeout = 60
 format = """\
-󰣇 \
-$directory\
+$os \
+$directory \
 $git_branch$git_status\
 $line_break\
 $character\
 """
 
-# right_format ="""
-# $time
+# right_format = """\
+# $time\
 # """
 
-[character]
-success_symbol = '[❯](bold yellow)'   #(bold green)
-error_symbol = '[❯](bold red)'
-vicmd_symbol = '[❮](bold yellow)'     #"[N] >>>"
+palette = "colors"
+
+[palettes.colors]
+mustard = '#af8700' # example
+color1 = '#adc6ff'
+color2 = '#102f60'
+color3 = '#c4c6d0'
+color4 = '#1e1f25'
+color5 = '#102f60'
+color6 = '#111318'
+color7 = '#111318'
+color8 = '#adc6ff'
+color9 = '#debcdf'
 
 [directory]
-style = "bold #d4be98"
-format = "[$path]($style) "
+style = "fg:#adc6ff bold" # color1
+read_only = " 󰌾"
+read_only_style = "fg:#ea6962" # dark blue
 truncation_length = 0
 truncate_to_repo = false
-# home_symbol =   "
+format = "[$path]($style)[$read_only]($read_only_style)"
 
 [directory.substitutions]
 '~/100xCodes/Cohort-3-WebDev' = 'Learning'
 '~/Testing-repo' = 'work-project'
 
-[git_branch]
-# symbol = "" # default symbol is ""
-style = "bold #7daea3" #9198a1
-format = '[$symbol$branch]($style) '
+[character]
+success_symbol = '[❯](fg:#adc6ff bold)'
+error_symbol = '[❯](fg:#ffb4ab bold)'
+vicmd_symbol = '[❮](fg:#111318 bold)'
 
+[git_branch]
+style = "fg:#debcdf bold" # color9 (red)
+format = '[$symbol$branch]($style) '
 
 [git_status]
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
 format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
-style = "bg:#394260"
+# style = "bg:#394260"
 
-
-[time]
+[os]
+format = "[$symbol]($style)"
+style = "fg:#adc6ff bold" # color8
 disabled = false
-format = '[[ $time ](fg:#7CABA0 )]($style)'
-time_format = "%R"
+
+[os.symbols]
+Linux = "󰊠 "
+Arch = "󰣇"
+Ubuntu = "󰕈"
+
+# [time]
+# disabled = false
+# format = '[[ $time ](fg:#ea6962 )]($style)'
+# time_format = "%R"
 
 [line_break]
-disabled = false
-
-[palettes.gruvbox_material]
-yellow = "#d79921"
-red = "#ea6962"
+disabled = true
 

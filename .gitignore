@@ -1,4 +1,5 @@
 *.bak
+*colors.css
 
 .config/tmux/plugins
 

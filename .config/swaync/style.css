@@ -1,4 +1,291 @@
-/* @import '../../.cache/wal/colors-waybar.css'; */
 @import 'matugen/colors.css';
-@import 'themes/nova-dark/notifications.css';
-@import 'themes/nova-dark/central_control.css';
+
+:root {
+  /* Transparent backgrounds for blur */
+  --cc-bg: rgba(26, 17, 17, 0.6);
+  --noti-bg: 0, 0, 0;
+  --noti-bg-alpha: 0.7;
+  
+  /* Minimal borders */
+  --noti-border-color: @outline_variant;
+  --noti-bg-hover: rgba(56, 56, 56, 0.3);
+  --noti-bg-focus: rgba(68, 68, 68, 0.2);
+  --noti-close-bg: rgba(255, 255, 255, 0.1);
+  --noti-close-bg-hover: rgba(255, 255, 255, 0.2);
+  
+  /* Text colors - keep it simple */
+  --text-color: @on_surface;
+  --text-color-disabled: @outline;
+  
+  /* Sizes */
+  --notification-icon-size: 64px;
+  --border-radius: 12px;
+  
+  /* Typography */
+  --font-size-body: 15px;
+  --font-size-summary: 16px;
+  
+  /* Transitions */
+  --hover-transition: all 0.15s ease-in-out;
+}
+
+/* Base window - fully transparent */
+.notification-window,
+.blank-window {
+  background: transparent;
+}
+
+/* Control Center - blur background */
+.control-center {
+  background: var(--cc-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid @outline_variant;
+}
+
+/* Close button */
+.close-button {
+  background: var(--noti-close-bg);
+  color: var(--text-color);
+  border-radius: 100%;
+  border: none;
+  min-width: 24px;
+  min-height: 24px;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.close-button:hover {
+  background: var(--noti-close-bg-hover);
+  transition: var(--hover-transition);
+}
+
+/* Notification rows */
+.notification-row {
+  background: none;
+  outline: none;
+}
+
+.notification-row:focus {
+  background: var(--noti-bg-focus);
+}
+
+.notification-row .notification-background {
+  padding: 6px 12px;
+}
+
+.notification-row .notification-background .notification {
+  background: rgba(var(--noti-bg), var(--noti-bg-alpha));
+  border-radius: var(--border-radius);
+  border: 1px solid @outline_variant;
+  padding: 0;
+  transition: var(--hover-transition);
+}
+
+.notification-row .notification-background .notification:hover {
+  background: var(--noti-bg-hover);
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  padding: 4px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+}
+
+/* Notification content - minimal color usage */
+.notification .notification-content {
+  padding: 8px;
+}
+
+.notification .summary {
+  font-size: var(--font-size-summary);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.notification .body {
+  font-size: var(--font-size-body);
+  color: var(--text-color);
+}
+
+.notification .time {
+  font-size: 12px;
+  color: var(--text-color-disabled);
+}
+
+/* Notification images */
+.notification image {
+  object-fit: cover;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+/* Notification groups */
+.notification-group.collapsed .notification {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: @outline_variant;
+}
+
+.notification-group-headers {
+  background: transparent;
+  border-radius: var(--border-radius);
+  padding: 8px;
+  margin: 4px 8px;
+}
+
+/* MPRIS Widget - scaled down like before */
+.widget-mpris {
+  margin-bottom: 0px; 
+  margin-top: -3px;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.mpris {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  margin: 8px;
+  padding: 8px;
+  transform: scale(0.8);
+  transform-origin: top center;
+}
+
+.mpris-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mpris-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.mpris-artist {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mpris-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  gap: 10px;
+}
+
+.mpris-button {
+  font-size: 18px;
+  color: white;
+  opacity: 0.8;
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mpris-button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mpris,
+.mpris-player,
+.widget.mpris {
+  box-shadow: none;
+  border: none;
+  background-clip: padding-box;
+}
+
+/* Title widget */
+.widget-title {
+  margin-top: 0px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.widget-title > box {
+  background: transparent;
+  padding: 12px;
+}
+
+.widget-title > box > label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.widget-title > box > button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid @outline_variant;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--text-color);
+  transition: var(--hover-transition);
+}
+
+.widget-title > box > button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Buttons Grid - smaller like before */
+.widget-buttons-grid {
+  margin: 6px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.widget-buttons-grid button {
+  background: rgba(17, 17, 17, 0.8);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 18px;
+  color: var(--text-color);
+  transition: background 0.2s ease, transform 0.1s ease;
+  border: 1px solid @outline_variant;
+}
+
+.widget-buttons-grid button:hover {
+  transform: scale(1.1);
+  background: rgba(51, 51, 51, 0.8);
+}
+
+.widget-buttons-grid button:checked {
+  background: @primary_container;
+  color: @on_primary_container;
+  border-color: @primary;
+}
+
+/* Notifications widget */
+.widget-notifications {
+  margin-bottom: 0px;
+  margin-top: -15px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+/* Hide scrollbar */
+.control-center scrollbar {
+  background: transparent;
+  opacity: 0;
+}
+
+.control-center scrollbar slider {
+  background: transparent;
+  opacity: 0;
+}
+
+/* Empty notifications */
+.blank-window label {
+  color: var(--text-color-disabled);
+  font-size: 14px;
+}

@@ -1,0 +1,33 @@
+# config-file = ?"~/.cache/wal/ghostty.conf"
+config-file = ?"~/.config/ghostty/themes/Matugen"
+# theme = "Matugen"  
+
+theme = Matugen
+# Dynamic theme colors
+# config-file = ?"~/.config/omarchy/themes/aether/ghostty.conf"
+
+# Font
+font-family = "CaskaydiaCove Nerd Font Mono"
+font-style = Regular
+font-size = 13
+
+# Window
+window-theme = ghostty
+window-padding-x = 14
+window-padding-y = 14
+confirm-close-surface=false
+resize-overlay = never
+gtk-toolbar-style = flat
+
+# Cursor styling
+cursor-style = "block"
+cursor-style-blink = true
+
+# Cursor styling + SSH session terminfo
+# (all shell integration options must be passed together)
+shell-integration-features = no-cursor,ssh-env
+
+# Keyboard bindings
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+#   /home/vyrx/.config/ghostty/config

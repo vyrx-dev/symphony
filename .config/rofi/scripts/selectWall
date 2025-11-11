@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Wallpaper picker with pywal integration
+WALLPAPER_DIR="$HOME/Wallpapers/"
+SWWW_PARAMS="--transition-fps 60 --transition-type=random --transition-duration=1"
+
+# Get focused monitor (fallback to HDMI-A-1)
+focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
+focused_monitor="${focused_monitor:-HDMI-A-1}"
+
+# Get wallpaper files
+mapfile -d '' wallpapers < <(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
+
+# Check if wallpapers exist
+if [[ ${#wallpapers[@]} -eq 0 ]]; then
+  notify-send "error" "no wallpapers found in $wallpaper_dir"
+  exit 1
+fi
+
+# Build rofi menu with thumbnail icons
+menu() {
+  for wallpaper in "${wallpapers[@]}"; do
+    name=$(basename "$wallpaper")
+    printf "%s\x00icon\x1f%s\n" "$name" "$wallpaper"
+  done | sort
+}
+
+# Start swww daemon if needed
+swww query &>/dev/null || swww-daemon --format xrgb
+
+# Show menu and get selection
+choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
+
+# Exit if nothing selected
+[[ -z "$choice" ]] && exit 0
+
+# Find selected wallpaper and apply theme
+for wallpaper in "${wallpapers[@]}"; do
+  if [[ "$(basename "$wallpaper")" == "$choice" ]]; then
+    # Apply wallpaper with swww
+    swww img "$wallpaper" $SWWW_PARAMS #-o  "$focused_monitor"
+
+    # Apply pywal16 and matugen color scheme
+    matugen image "$wallpaper" -m dark #matugen
+    wal -i "$wallpaper"                #pywal16
+
+    # Update pywal integrations
+    pywalfox update
+    pywal-spicetify text
+
+    # Reload everything instantly
+    hyprctl reload 2>/dev/null
+    restart-app.sh waybar 2>/dev/null
+    restart-app.sh swayosd-server 2>/dev/null
+    makoctl reload 2>/dev/null
+    killall -SIGUSR1 swaync
+    killall -SIGUSR1 kitty
+    pkill -SIGUSR1 alacritty 2>/dev/null
+    pkill -SIGUSR2 btop 2>/dev/null
+    ghostty +reload-config 2>/dev/null
+    killall -SIGUSR2 ghostty
+
+    pgrep -x nautilus >/dev/null && (
+      pkill -x nautilus
+      nautilus &>/dev/null &
+    )
+
+    if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
+      touch ~/.config/alacritty/alacritty.toml
+    fi
+
+    # Send notification
+    notify-send -i "$wallpaper" "Theme Applied" "$(basename "$wallpaper")"
+
+    break
+  fi
+done

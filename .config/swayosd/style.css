@@ -1,28 +1,38 @@
-@import "../omarchy/themes/aether/swayosd.css";
-
 window {
-  border-radius: 3;
-  opacity: 0.97;
-  border: 2px solid @border-color;
-
-  background-color: @background-color;
+    padding: 10;
+    border-radius: 20px;
+    border: solid 1px #1e1e1e;
+    background: alpha(black, 0.60);
 }
 
-label {
-  font-family: 'CaskaydiaMono Nerd Font';
-  font-size: 13pt;
-
-  color: @label;
+#container {
+    margin: 20px;
 }
 
-image {
-  color: @image;
+image, label {
+    color: @theme_fg_color;
+}
+
+progressbar:disabled,
+image:disabled {
+    opacity: 0.5;
 }
 
 progressbar {
-  border-radius: 0;
+    min-height: 5px;
+    border-radius: 999px;
+    background: transparent;
+    border: none;
 }
-
+trough {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: alpha(@theme_fg_color, 0.5);
+}
 progress {
-  background-color: @progress;
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: @theme_fg_color;
 }

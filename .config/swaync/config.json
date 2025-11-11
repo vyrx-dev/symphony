@@ -1,33 +1,43 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
+  "ignore-gtk-theme": true,
   "positionX": "right",
   "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "layer-shell-cover-screen": true,
   "cssPriority": "user",
-  "control-center-width": 400,
-  "control-center-height": 1080,
-  "control-center-margin-top": 0,
+  "control-center-margin-top": 7,
   "control-center-margin-bottom": 0,
-  "control-center-margin-right": 0,
+  "control-center-margin-right": 7,
   "control-center-margin-left": 0,
-  "notification-window-width": 400,
-  "notification-icon-size": 32,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
   "notification-body-image-height": 100,
-  "notification-body-image-width": 150,
+  "notification-body-image-width": 500,
   "timeout": 10,
-  "timeout-low": 2,
-  "timeout-critical": 6,
+  "timeout-low": 5,
+  "timeout-critical": 0,
   "fit-to-screen": false,
-  "control-center-layer": "overlay",
+  "relative-timestamps": true,
+  "control-center-width": 350,
+  "control-center-height": 800,
+  "notification-window-width": 350,
   "keyboard-shortcuts": true,
+  "notification-grouping": true,
   "image-visibility": "when-available",
-  "transition-time": 50,
+  "transition-time": 200,
   "hide-on-clear": false,
-  "hide-on-action": false,
+  "hide-on-action": true,
+  "text-empty": "No Notifications",
   "script-fail-notify": true,
   "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
+    "screenshot-action-script": {
+      "exec": "bash ~/.config/scripts/swaync-shot.sh open",
+      "app-name": "Screenshot",
+      "urgency": "Normal",
+      "run-on": "action"
     }
   },
   "notification-visibility": {
@@ -39,16 +49,73 @@
   },
   "widgets": [
     "mpris",
-    "dnd",
-    "notifications"
+    "title",
+    "notifications",
+    "buttons-grid"
   ],
   "widget-config": {
+    "notifications": {
+      "vexpand": true
+    },
+    "inhibitors": {
+      "text": "Inhibitors",
+      "button-text": "Clear All",
+      "clear-all-button": true
+    },
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear All"
+    },
     "dnd": {
-      "text": "Snoozed notifications"
+      "text": "Do Not Disturb"
+    },
+    "label": {
+      "max-lines": 5,
+      "text": "Label Text"
     },
     "mpris": {
-      "image-size": 64,
-      "image-radius": 8
+      "blacklist": [],
+      "autohide": false,
+      "show-album-art": "always",
+      "loop-carousel": false
+    },
+    "buttons-grid": {
+      "buttons-per-row": 6,
+      "actions": [
+        {
+          "label": "",
+          "type": "button",
+          "command": "swaync-client --close-panel && sleep 0.7 && color=$(hyprpicker -a -f hex) && notify-send -a 'Hyprpicker' '🎨 Color copied!' $color"
+        },
+        {
+          "label": "",
+          "type": "button",
+          "command": "~/.config/hypr/scripts/screenshot"
+        },
+        {
+          "label": " ",
+          "type": "button",
+          "command": "swaync-client --close-panel && kitty --class wifibt -e env -u COLORTERM TERM=xterm-old nmtui"
+        },
+        {
+          "label": "",
+          "type": "button",
+          "command": "swaync-client --close-panel &&  blueberry"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "command": "bash $HOME/.config/swaync/caffeine.sh",
+          "update-command": "bash $HOME/.config/swaync/caffeine.sh status"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "command": "sh -c 'swaync-client --toggle-dnd'",
+          "update-command": "sh -c 'out=$(swaync-client -D 2>/dev/null); [[ $out == true || $(echo \"$out\" | jq -r .doNotDisturb 2>/dev/null) == true ]] && echo true || echo false'"
+        }
+      ]
     }
   }
 }

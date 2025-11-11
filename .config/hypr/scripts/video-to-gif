@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+
+# Convert video to optimized GIF with professional quality
+# Uses two-pass palette generation for best results
+# Usage:
+#   ./video-to-gif                    - Interactive mode with thumbnail preview
+#   ./video-to-gif ~/Videos/demo.mp4  - Convert specific video directly
+# Dependencies: ffmpeg, fd, rofi, notify-send
+
+videos_dir="$HOME/Videos"
+output_dir="$videos_dir/gifs"
+thumb_dir="/tmp/video-thumbs"
+
+# Default settings (optimized for GitHub/web sharing - 2025 standards)
+fps=30        # 30fps is smooth and widely supported (max 50fps before browsers throttle)
+width=1080    # 1080p for high-quality displays (720p fallback if file too large)
+colors=256    # GIF format max
+
+# Create directories if they don't exist
+mkdir -p "$output_dir" "$thumb_dir"
+
+# Function to generate thumbnail for a video
+generate_thumbnail() {
+  local video="$1"
+  local thumb_file="$thumb_dir/$(basename "${video%.*}").jpg"
+  
+  # Only generate if thumbnail doesn't exist
+  if [[ ! -f "$thumb_file" ]]; then
+    # Extract frame from 10% into video for better representation
+    ffmpeg -i "$video" -ss 00:00:01 -vf "thumbnail,scale=480:-1" -frames:v 1 "$thumb_file" &>/dev/null 2>&1
+  fi
+  
+  echo "$thumb_file"
+}
+
+# Check if video path was provided as argument
+if [[ -n "$1" ]]; then
+  # Direct mode - convert specified video
+  video_path="$1"
+  
+  # Expand tilde if present
+  video_path="${video_path/#\~/$HOME}"
+  
+  [[ ! -f "$video_path" ]] && {
+    notify-send -t 3000 -h string:bgcolor:#bf616a "Video file not found: $video_path"
+    exit 1
+  }
+  
+  video_file="$(basename "$video_path")"
+else
+  # Interactive mode - show rofi menu with thumbnails
+  mapfile -t video_paths < <(fd -e mp4 -e mkv -e webm -e avi -e mov . "$videos_dir" --max-depth 1 | sort -r)
+  
+  [[ ${#video_paths[@]} -eq 0 ]] && {
+    notify-send -t 3000 -h string:bgcolor:#d08770 "No videos found in ~/Videos"
+    exit 1
+  }
+  
+  # Generate thumbnails for all videos (in background for speed)
+  for video in "${video_paths[@]}"; do
+    generate_thumbnail "$video" &
+  done
+  wait
+  
+  # Build rofi menu with thumbnail icons
+  declare -a menu_items
+  for video in "${video_paths[@]}"; do
+    thumb=$(generate_thumbnail "$video")
+    filename=$(basename "$video")
+    menu_items+=("$filename\0icon\x1f$thumb")
+  done
+  
+  # Show rofi with custom theme and image preview support
+  selected=$(printf '%b\n' "${menu_items[@]}" | rofi -dmenu -i -p "Select video to convert" -show-icons -theme ~/.config/rofi/custom-rofi/config-video-gif.rasi)
+  
+  [[ -z "$selected" ]] && {
+    notify-send -t 3000 -h string:bgcolor:#d08770 "No video selected"
+    exit 1
+  }
+  
+  video_file="$selected"
+  video_path="$videos_dir/$video_file"
+  
+  [[ ! -f "$video_path" ]] && {
+    notify-send -t 3000 -h string:bgcolor:#bf616a "Video file not found"
+    exit 1
+  }
+fi
+
+# Generate output filename
+filename="${video_file%.*}"
+output_file="$output_dir/${filename}.gif"
+
+# Check if output already exists
+if [[ -f "$output_file" ]]; then
+  overwrite=$(echo -e "Yes\nNo" | rofi -dmenu -p "GIF exists. Overwrite?")
+  [[ "$overwrite" != "Yes" ]] && exit 0
+fi
+
+notify-send -t 3000 -h string:bgcolor:#5e81ac "Converting to GIF..." "This may take a moment"
+
+# Two-pass conversion for optimal quality
+# Pass 1: Generate optimal color palette from video
+palette="/tmp/palette_$$.png"
+ffmpeg -i "$video_path" -vf "fps=$fps,scale=$width:-1:flags=lanczos,palettegen=max_colors=$colors:stats_mode=diff" -y "$palette" &>/dev/null
+
+if [[ $? -ne 0 ]]; then
+  notify-send -t 3000 -h string:bgcolor:#bf616a "Failed to generate palette"
+  rm -f "$palette"
+  exit 1
+fi
+
+# Pass 2: Use palette to create optimized GIF
+ffmpeg -i "$video_path" -i "$palette" \
+  -lavfi "fps=$fps,scale=$width:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" \
+  -y "$output_file" &>/dev/null
+
+# Clean up palette file
+rm -f "$palette"
+
+if [[ $? -eq 0 ]] && [[ -f "$output_file" ]]; then
+  # Get file size in human readable format
+  size=$(du -h "$output_file" | cut -f1)
+  notify-send -t 5000 -h string:bgcolor:#a3be8c "GIF created successfully" "Size: $size\nSaved to: ~/Videos/gifs/"
+else
+  notify-send -t 3000 -h string:bgcolor:#bf616a "Failed to create GIF"
+  exit 1
+fi

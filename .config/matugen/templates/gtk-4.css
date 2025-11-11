@@ -1,0 +1,55 @@
+/*
+ * GTK4 Colors for Libadwaita
+ * Generated with Matugen
+ */
+
+/* Define colors BEFORE importing libadwaita */
+@define-color accent_bg_color {{colors.primary.dark.hex}};
+@define-color accent_fg_color {{colors.on_primary.dark.hex}};
+@define-color accent_color {{colors.primary.dark.hex}};
+@define-color destructive_bg_color {{colors.error.dark.hex}};
+@define-color destructive_fg_color {{colors.on_error.dark.hex}};
+@define-color destructive_color {{colors.error.dark.hex}};
+@define-color success_bg_color #26a269;
+@define-color success_fg_color #ffffff;
+@define-color success_color #2dcc87;
+@define-color warning_bg_color #e5a50a;
+@define-color warning_fg_color rgba(0, 0, 0, 0.8);
+@define-color warning_color #f8e45c;
+@define-color error_bg_color {{colors.error.dark.hex}};
+@define-color error_fg_color {{colors.on_error.dark.hex}};
+@define-color error_color {{colors.error.dark.hex}};
+@define-color window_bg_color {{colors.background.dark.hex}};
+@define-color window_fg_color {{colors.on_background.dark.hex}};
+@define-color view_bg_color {{colors.surface.dark.hex}};
+@define-color view_fg_color {{colors.on_surface.dark.hex}};
+@define-color headerbar_bg_color {{colors.surface_dim.dark.hex}};
+@define-color headerbar_fg_color {{colors.on_surface.dark.hex}};
+@define-color headerbar_border_color {{colors.on_surface.dark.hex}};
+@define-color headerbar_backdrop_color @window_bg_color;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.90);
+@define-color sidebar_bg_color {{colors.surface_dim.dark.hex}};
+@define-color sidebar_fg_color {{colors.on_surface.dark.hex}};
+@define-color sidebar_backdrop_color {{colors.surface.dark.hex}};
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.25);
+@define-color sidebar_border_color rgba(0, 0, 0, 0.36);
+@define-color secondary_sidebar_bg_color {{colors.surface.dark.hex}};
+@define-color secondary_sidebar_fg_color {{colors.on_surface.dark.hex}};
+@define-color secondary_sidebar_backdrop_color {{colors.background.dark.hex}};
+@define-color secondary_sidebar_shade_color rgba(0, 0, 0, 0.25);
+@define-color secondary_sidebar_border_color rgba(0, 0, 0, 0.36);
+@define-color card_bg_color rgba(255, 255, 255, 0.08);
+@define-color card_fg_color {{colors.on_surface.dark.hex}};
+@define-color card_shade_color rgba(0, 0, 0, 0.36);
+@define-color dialog_bg_color {{colors.surface_container.dark.hex}};
+@define-color dialog_fg_color {{colors.on_surface.dark.hex}};
+@define-color popover_bg_color {{colors.surface_container.dark.hex}};
+@define-color popover_fg_color {{colors.on_surface.dark.hex}};
+@define-color popover_shade_color rgba(0, 0, 0, 0.25);
+@define-color thumbnail_bg_color {{colors.surface_bright.dark.hex}};
+@define-color thumbnail_fg_color {{colors.on_surface.dark.hex}};
+@define-color shade_color rgba(0, 0, 0, 0.25);
+@define-color scrollbar_outline_color rgba(0, 0, 0, 0.95);
+
+@import url("file:///usr/share/themes/adw-gtk3-dark/gtk-4.0/libadwaita.css");

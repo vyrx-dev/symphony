@@ -1,0 +1,4 @@
+# Pywal template for Mako (Wayland notifications)
+background-color={color0}
+text-color={color7}
+border-color={color5}

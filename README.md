@@ -1,58 +1,279 @@
-# MyDotfile
+<div align="center">
 
-![My Homescreen](images/desktop_3.png)
+![Banner](Assests/banner.jpg)
 
-This is my personal configuration for a productive and enjoyable Linux environment. It's built around Hyprland on Arch Linux and includes tools I use daily. While I did take inspiration from various amazing dotfile setups shared by the community, these configs have been carefully tweaked by me to suit my own workflow and preferences.
+# Hyprland Dotfiles
+
+*A minimal, professional, and fully customizable Hyprland configuration*
+
+</div>
+
+## Showcase
+
+<div align="center">
+
+<https://github.com/vyrx-dev/dotfiles/assets/showcase.mp4>
+
+![Desktop Showcase](Assests/Desktop.png)
+
+</div>
+
+---
+
+## Features
+
+- **Matugen-powered theming** — Automated color scheme generation from wallpapers
+- **Modular configuration** — Clean, organized, and easy to customize
+- **Comprehensive tooling** — Waybar, Rofi, Swaync, Wlogout, Hyprlock, and more
+- **Neovim & Tmux** — Fully integrated development environment
+- **GNU Stow** — Simple and efficient dotfile management
+
+---
+
+## Components
+
+<details>
+<summary><b>Rofi Menus</b></summary>
+
+![Rofi](Assests/rofi.png)
+
+<https://github.com/vyrx-dev/dotfiles/assets/rofi.mp4>
+
+### Emoji Picker
+
+![Emoji Picker](Assests/emoji.png)
+
+### Clipboard Manager
+
+![Clipboard](Assests/clipboard.png)
+
+### Wallpaper Selector
+
+![Wallpaper Selector](Assests/wallpaper-selector.png)
+
+### Power Profile Manager
+
+![Power Profile](Assests/powerprofile.png)
+
+</details>
+
+<details>
+<summary><b>Matugen Theming</b></summary>
+
+<https://github.com/vyrx-dev/dotfiles/assets/matugen.mp4>
+
+</details>
+
+<details>
+<summary><b>Notification Center (Swaync)</b></summary>
+
+![Swaync 1](Assests/swaync-1.png)
+![Swaync 2](Assests/swaync-2.png)
+![Swaync 3](Assests/swaync-3.png)
+
+</details>
+
+<details>
+<summary><b>Neovim & Tmux</b></summary>
+
+![Neovim Dashboard](Assests/neovim_dashboard.png)
+![Neovim 1](Assests/Neovim-1.png)
+![Neovim 2](Assests/Neovim-2.png)
+
+</details>
+
+<details>
+<summary><b>Music (RMPC)</b></summary>
+
+![RMPC](Assests/rmpc.png)
+
+</details>
+
+<details>
+<summary><b>Wlogout</b></summary>
+
+![Wlogout](Assests/wlogout.png)
+
+</details>
+
+<details>
+<summary><b>Hyprlock</b></summary>
+
+![Hyprlock](Assests/hyprlock.png)
+
+</details>
+
+---
+
+## Installation
+
+### Prerequisites
+
+```bash
+# Core dependencies
+sudo pacman -S stow git base-devel
+
+# Hyprland & Wayland
+sudo pacman -S hyprland xdg-desktop-portal-hyprland
+
+# System utilities
+sudo pacman -S waybar rofi swaync swww hypridle hyprlock wlogout
+sudo pacman -S polkit-gnome cliphist wl-clipboard
+
+# Terminal & Shell
+sudo pacman -S kitty alacritty fish starship tmux
+
+# Development
+sudo pacman -S neovim lazygit btop yazi
+
+# Audio & Media
+sudo pacman -S pipewire wireplumber pavucontrol mpd mpc ncmpcpp
+
+# Theming
+sudo pacman -S matugen pywalfox
+
+# Additional tools
+sudo pacman -S fastfetch jq fd ripgrep fzf swayosd
+```
+
+### Clone & Install
+
+```bash
+# Clone the repository
+git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
+
+# Navigate to the directory
+cd ~/dotfiles
+
+# Create symlinks using GNU Stow
+stow .
+```
+
+### Post-Installation
+
+After running `stow .`, all configuration files will be symlinked to their appropriate locations in `~/.config/`.
+
+If you want to uninstall:
+
+```bash
+cd ~/dotfiles
+stow -D .
+```
+
+---
 
 ## Tools Included
 
-- **Hyprland** --- Wayland compositor I rely on for a smooth graphical experience
-- **Kitty** --- My favorite terminal emulator, powerful and flexible
-- **Alacritty** --- Another terminal I use; simple and fast, though it lacks image rendering
-- **Lazygit** --- Handy terminal UI for Git operations
-- **Neovim** --- The best text editor I’ve used, highly configurable
-- **Walker** --- Application launcher
-- **Waybar** --- Highly customizable status bar
-- **Tmux** --- Terminal multiplexer to manage multiple sessions efficiently
-- **Bash** --- The classic shell that still gets the job done (switched to fish)
-- **Starship** --- My shell prompt for a clean, informative terminal look
-- **fish** --- Modern and user-friendly interactive shell (even the default configuration is awesome)
-- **XCompose** — Is a feature that allows users to input special characters by pressing a designated key
+| Tool | Description |
+|------|-------------|
+| **Hyprland** | Dynamic tiling Wayland compositor |
+| **Waybar** | Highly customizable status bar |
+| **Rofi** | Application launcher and menu system |
+| **Swaync** | Notification daemon with control center |
+| **Kitty** | GPU-accelerated terminal emulator |
+| **Alacritty** | Fast, cross-platform terminal emulator |
+| **Neovim** | Hyperextensible Vim-based text editor |
+| **Tmux** | Terminal multiplexer |
+| **Fish** | Smart and user-friendly shell |
+| **Starship** | Minimal, fast, and customizable prompt |
+| **Lazygit** | Simple terminal UI for git commands |
+| **Matugen** | Material Design color scheme generator |
+| **RMPC** | Rusty Music Player Client for MPD |
 
-## Neovim & Tmux
+---
 
-![My Neovim Setup](images/neovim_setup_2.png)
+## Keyboard Shortcuts
 
-## Installation Guide
+### Applications
 
-### 1. Remove Old Configs (to avoid conflicts)
+| Keybind | Action |
+|---------|--------|
+| `Super + Return` | Terminal (Kitty) |
+| `Super + B` | Browser |
+| `Super + E` | File Manager (Nautilus) |
+| `Super + M` | Music (Spotify) |
+| `Super + D` | Discord |
+| `Super + O` | Obsidian |
+| `Super + C` | VS Code |
+
+### Rofi Menus
+
+| Keybind | Action |
+|---------|--------|
+| `Super + Space` | Application Launcher |
+| `Alt + ,` | Clipboard Manager |
+| `Alt + .` | Emoji Picker |
+| `Super + Ctrl + B` | Power Profiles |
+| `Super + Ctrl + Space` | Theme Selector (Matugen) |
+| `Super + Alt + Space` | Wallpaper Picker |
+
+### Window Management
+
+| Keybind | Action |
+|---------|--------|
+| `Super + Q` | Close Window |
+| `Super + K` | Kill Application |
+| `Super + Shift + O` | Pop Window (Float & Pin) |
+
+### System
+
+| Keybind | Action |
+|---------|--------|
+| `Super + L` | Lock Screen (Hyprlock) |
+| `Super + Escape` | Wlogout Menu |
+| `Super + N` | Notification Center |
+| `Alt + /` | System Monitor (btop) |
+
+### Screenshots & Recording
+
+| Keybind | Action |
+|---------|--------|
+| `Super + P` | Screenshot Region |
+| `Super + R` | Screen Record (System Audio) |
+| `Super + Alt + R` | Screen Record (System + Mic) |
+| `Super + Shift + P` | Color Picker |
+
+### Tmux Sessions
+
+| Keybind | Action |
+|---------|--------|
+| `Super + Shift + Return` | Attach Tmux Session |
+| `Super + Alt + Return` | New Tmux Session |
+
+*For complete keybindings, see [.config/hypr/bindings.conf](.config/hypr/bindings.conf)*
+
+---
+
+## Configuration Structure
 
 ```
-rm ~/.bashrc
-rm -r ~/.config/fish
-rm -r ~/.config/alacritty
-rm -r ~/.config/hypr
-rm -r ~/.config/kitty
-rm -r ~/.config/lazygit
-rm -r ~/.config/nvim
-rm -r ~/.config/tmux
-rm -r ~/.config/waybar
-rm -r ~/.config/walker
-rm ~/.config/starship.toml
+.config/
+├── hypr/           # Hyprland configuration
+├── waybar/         # Status bar
+├── rofi/           # Launchers and menus
+├── swaync/         # Notification center
+├── kitty/          # Terminal (Kitty)
+├── alacritty/      # Terminal (Alacritty)
+├── nvim/           # Neovim configuration
+├── tmux/           # Tmux configuration
+├── fish/           # Fish shell
+├── matugen/        # Theme generator
+└── starship.toml   # Shell prompt
 ```
 
-### 2. Clone the Repository
+---
 
-```
-git clone https://github.com/theamit-969/dotfiles.git
+## TODO
 
-cd dotfiles
-```
+- [ ] **Theme Switcher** — Implement dynamic theme switching interface
+- [ ] **Spicetify Pywal Integration** — Add Spotify theming support
 
-### 3. Create Symlinks
+---
 
-From inside the `dotfiles` folder:
+<div align="center">
 
-```
-stow .
-```
+**If you found this useful, consider giving it a ⭐**
+
+Made with ❤️ for the Hyprland community
+
+</div>

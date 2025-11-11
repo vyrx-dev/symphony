@@ -44,8 +44,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @primary_container;
-  color: @on_primary_container;
+  background: @surface_variant;
   font-weight: 600;
 }
 
@@ -67,7 +66,10 @@ window#waybar {
   margin-left: 5px;
 }
 
-#tray,
+#tray {
+    margin-right: 20px;
+}
+
 #cpu,
 #disk,
 #memory,
@@ -93,6 +95,7 @@ window#waybar {
 
 #clock {
   font-size: 13px;
+  margin-right: 3px;
   font-weight: 600;
   padding: 0 3px;
 }
