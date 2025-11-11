@@ -14,6 +14,10 @@
 
 https://github.com/user-attachments/assets/75f0924e-fc4d-40ef-89c8-8034a750f886
 
+https://github.com/user-attachments/assets/f5f809f3-c88d-4c13-8684-80d48e206f5e
+
+https://github.com/user-attachments/assets/595dcefc-3069-4c5c-808c-863f5ea0acae
+
 ![Desktop Showcase](assets/Desktop.png)
 
 </div>
