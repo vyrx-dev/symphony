@@ -9,6 +9,7 @@ directories=(
   "$HOME/Downloads"
   "$HOME/Documents/"
   "$HOME/Testing-repo/"
+  "$HOME/Projects/"
 )
 
 # Extra directories included as-is (no recursion)
