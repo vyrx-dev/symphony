@@ -1,0 +1,3 @@
+#!/bin/bash
+# Backward compatibility wrapper - redirects to symphony-theme
+exec "$HOME/dotfiles/theme-scripts/symphony-theme" "$@"

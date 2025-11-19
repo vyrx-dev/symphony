@@ -1,0 +1,161 @@
+#!/bin/bash
+
+# Symphony Theme Manager
+# Unified theme management system for your Linux desktop
+
+show_help() {
+    cat << 'HELP'
+Symphony Theme Manager
+
+Usage: symphony-theme <command> [options]
+
+Commands:
+  switch                 Switch themes using rofi menu
+  list                   Show all installed themes
+  remove <name>          Remove a theme
+  fix                    Fix broken symlinks
+  
+  generate-starship      Generate starship configs for all themes
+  generate-cava          Generate cava configs for all themes
+  generate-rmpc          Generate rmpc themes for all themes
+  generate-rofi          Generate rofi colors for all themes
+  generate-yazi          Generate yazi themes for all themes
+  generate-vesktop       Generate vesktop themes for all themes
+  generate-all           Run all generators
+  
+  cleanup                Clean up old migration files (one-time)
+  patch-wallpaper        Patch wallpaper scripts with mode checking
+  
+  help                   Show this help message
+
+Examples:
+  symphony-theme switch           # Open theme switcher
+  symphony-theme list             # Show all themes
+  symphony-theme remove zen       # Delete zen theme
+  symphony-theme fix              # Repair symlinks
+  symphony-theme generate-all     # Regenerate all configs
+
+Keybindings:
+  Theme Management:
+    SUPER+CTRL+SHIFT+SPACE        # Theme switcher (rofi menu)
+    symphony-theme list           # List all themes (terminal)
+  
+  Wallpaper Pickers:
+    SUPER+ALT+SPACE               # Wallpaper picker (all themes)
+    SUPER+CTRL+SPACE              # Matugen wallpaper + color generation
+    CTRL+ALT+SPACE                # Random matugen wallpaper (matugen only)
+  
+  Cycle Wallpapers:
+    SUPER+ALT+RIGHT               # Next wallpaper in current theme
+    SUPER+ALT+LEFT                # Previous wallpaper in current theme
+  
+  Manual:
+    swww img /path/to/image.jpg   # Set wallpaper directly
+
+Docs: ~/dotfiles/theme-scripts/README.md
+HELP
+}
+
+SCRIPT_DIR="$HOME/dotfiles/theme-scripts"
+THEMES_DIR="$HOME/dotfiles/themes"
+
+case "$1" in
+    switch)
+        "$SCRIPT_DIR/core/switch-theme.sh"
+        ;;
+    list)
+        echo "📦 Installed Themes:"
+        echo ""
+        CURRENT_THEME=$(cat ~/.current-theme 2>/dev/null || echo "")
+        for theme_dir in "$THEMES_DIR"/*; do
+            if [ -d "$theme_dir" ]; then
+                theme_name=$(basename "$theme_dir")
+                if [ "$theme_name" == "$CURRENT_THEME" ]; then
+                    echo "  → $theme_name (active)"
+                else
+                    echo "    $theme_name"
+                fi
+            fi
+        done
+        echo ""
+        ;;
+    remove)
+        THEME_NAME="$2"
+        if [ -z "$THEME_NAME" ]; then
+            echo "❌ Error: Theme name required"
+            echo "Usage: symphony-theme remove <name>"
+            echo "Example: symphony-theme remove zen"
+            exit 1
+        fi
+        
+        THEME_PATH="$THEMES_DIR/$THEME_NAME"
+        if [ ! -d "$THEME_PATH" ]; then
+            echo "❌ Theme '$THEME_NAME' not found"
+            echo "Run 'symphony-theme list' to see available themes"
+            exit 1
+        fi
+        
+        CURRENT_THEME=$(cat ~/.current-theme 2>/dev/null || echo "")
+        if [ "$THEME_NAME" == "$CURRENT_THEME" ]; then
+            echo "⚠️  Cannot remove active theme"
+            echo "Switch to another theme first:"
+            echo "  symphony-theme switch"
+            exit 1
+        fi
+        
+        echo "⚠️  Remove theme '$THEME_NAME'?"
+        echo "This will delete: $THEME_PATH"
+        read -p "Continue? (y/N): " confirm
+        if [ "$confirm" == "y" ] || [ "$confirm" == "Y" ]; then
+            rm -rf "$THEME_PATH"
+            echo "✅ Theme '$THEME_NAME' removed"
+        else
+            echo "❌ Cancelled"
+        fi
+        ;;
+    fix)
+        "$SCRIPT_DIR/core/fix-symlinks.sh"
+        ;;
+    generate-starship)
+        "$SCRIPT_DIR/generators/create-complete-starship.sh"
+        ;;
+    generate-cava)
+        "$SCRIPT_DIR/generators/create-cava-configs.sh"
+        ;;
+    generate-rmpc)
+        "$SCRIPT_DIR/generators/create-rmpc-themes.sh"
+        ;;
+    generate-rofi)
+        "$SCRIPT_DIR/generators/create-rofi-colors.sh"
+        ;;
+    generate-yazi)
+        "$SCRIPT_DIR/generators/create-yazi-themes.sh"
+        ;;
+    generate-vesktop)
+        "$SCRIPT_DIR/core/generate-vesktop-themes.sh"
+        ;;
+    generate-all)
+        echo "🔄 Regenerating all theme configs..."
+        "$SCRIPT_DIR/generators/create-complete-starship.sh"
+        "$SCRIPT_DIR/generators/create-cava-configs.sh"
+        "$SCRIPT_DIR/generators/create-rmpc-themes.sh"
+        "$SCRIPT_DIR/generators/create-rofi-colors.sh"
+        "$SCRIPT_DIR/generators/create-yazi-themes.sh"
+        "$SCRIPT_DIR/core/generate-vesktop-themes.sh"
+        echo "✅ All configs regenerated!"
+        ;;
+    cleanup)
+        "$SCRIPT_DIR/utils/cleanup-themes.sh"
+        ;;
+    patch-wallpaper)
+        "$SCRIPT_DIR/utils/patch-wallpaper-scripts.sh"
+        ;;
+    help|--help|-h|"")
+        show_help
+        ;;
+    *)
+        echo "❌ Unknown command: $1"
+        echo "Run 'symphony-theme help' for usage"
+        exit 1
+        ;;
+esac
