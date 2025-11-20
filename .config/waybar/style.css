@@ -2,7 +2,7 @@
 
 * {
   background-color: transparent;
-  color: @foreground;
+  color: @on_background;
   border: none;
   border-radius: 0;
   font-family: 'CaskaydiaMono Nerd Font Propo';
@@ -44,8 +44,10 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @surface_variant;
-  font-weight: 600;
+  background: @waybar_accent;
+  color: @waybar_accent_fg;
+  font-weight: 700;
+  border-radius: 0;
 }
 
 #workspaces button.empty {
@@ -53,7 +55,8 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
 }
 
 #mpd {
@@ -70,8 +73,12 @@ window#waybar {
     margin-right: 20px;
 }
 
+#disk{
+
+  padding: 0 2px;
+  font-weight: 600;
+}
 #cpu,
-#disk,
 #memory,
 #temperature,
 #battery,
@@ -97,7 +104,7 @@ window#waybar {
   font-size: 13px;
   margin-right: 3px;
   font-weight: 600;
-  padding: 0 3px;
+  /* padding: 0 3px; */
 }
 
 #custom-notification,

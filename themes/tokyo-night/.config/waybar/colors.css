@@ -3,6 +3,10 @@
  * Blue/purple cyberpunk aesthetic
  */
 
+    /* Custom waybar accent - btop title color for tokyo-night theme with subtle transparency */
+    @define-color waybar_accent rgba(125, 207, 255, 0.10);
+    @define-color waybar_accent_fg @on_background;
+
     @define-color background #16161e;
     @define-color foreground #c0caf5;
 

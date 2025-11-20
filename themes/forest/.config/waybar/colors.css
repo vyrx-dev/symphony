@@ -1,7 +1,11 @@
 /*
-* Css Colors
-* Generated with Matugen
-*/
+ * Css Colors
+ * Generated with Matugen
+ */
+
+    /* Custom waybar accent - btop title color for forest theme with subtle transparency */
+    @define-color waybar_accent rgba(224, 235, 122, 0.10);
+    @define-color waybar_accent_fg @on_background;
 
     @define-color background #121318;
 
