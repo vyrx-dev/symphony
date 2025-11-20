@@ -1,46 +1,79 @@
-## TODO ✅
+# Symphony 2.0 Release TODO
 
-- [ ] Scripts 📃
-  - [x] fprintd fix
-  - [ ] automate Installation process
-  - [x] tmux sessionzer scripts
-  - [x] rmpc cache clear scripts
-  - [x] dns setup scripts
-  - [ ] one click theme switcher for every Application
-  - [x] Theme installer for omarchy
+```
+  ____                      _                         ___    ___  
+ / ___| _   _ _ __ ___  ___| |__   ___  _ __  _   _  |__ \  / _ \ 
+ \___ \| | | | '_ ` _ \/ __| '_ \ / _ \| '_ \| | | |   ) || | | |
+  ___) | |_| | | | | | \__ \ | | | (_) | | | | |_| |  / / | |_| |
+ |____/ \__, |_| |_| |_|___/_| |_|\___/|_| |_|\__, | |_(_) \___/ 
+        |___/                                  |___/              
+```
 
----
-
-- [ ] Customization 🎨
-  - [x] rmpc gruvbox-material palletes
-  - [x] obsidian purple colorscheme
-    - [x] kitty
-    - [x] btop
-    - [x] alacritty
-    - [x] hyprland (border)
-    - [x] hyprlock
-    - [x] mako
-    - [x] walker
-    - [x] icons
-    - [x] neovim
-    - [x] chromium
-    - [x] waybar
-    - [x] wallpapers
-  - [x] customize starship
-  - [ ] catppuccin and kanagawa colors for starship
-  - [x] customize fish shell
-  - [x] customize fastfetch
+**Status**: 🚧 Under Development  
+**Previous Release**: [v1.0](https://github.com/vyrx-dev/dotfiles/releases/tag/1.0)
 
 ---
 
-- [ ] Extras 📌
-  - [ ] Visualy explained the config files location
-  - [ ] Add a README (with screenshots if needed) to each directory in the repo.
-  - [ ] Neovim cleanup
-  - [ ] RMPC walkthrough gif
-  - [ ] Make a single CLI to manage all the core script
-  - [ ] add snippets (NVIM)
-  - [ ] connect obsidan and nvim
-  - [ ] Create a TODO plugin for Neovim
+## 🎨 Theme Integration
+
+**Core Applications**
+- [ ] Spicetify
+- [ ] Rofi
+- [ ] RMPC
+- [ ] Yazi
+- [ ] Btop
+- [ ] Starship
+- [ ] GTK
+- [ ] SwayNC
+- [ ] Cava
+- [ ] Hypr borders
+- [x] Waybar
+
+**Terminals**
+- [ ] Kitty
+- [ ] Ghostty
+- [ ] Alacritty
+
+**Secondary**
+- [ ] Firefox
+- [ ] Vesktop
+- [ ] Obsidian
 
 ---
+
+## 🔧 Scripts & Tools
+
+- [ ] Theme switcher (fish aliases → abbr)
+- [ ] Media conversion scripts
+- [ ] Theme installer script
+- [ ] Full installation script
+- [ ] Optimize switching performance
+
+---
+
+## ✨ Features
+
+- [ ] Focus-vibe mode (Ghostty)
+- [ ] Focus-vibe mode (Alacritty)
+- [ ] Neovim cleanup
+- [ ] Neovim hot reload
+
+---
+
+## 🎯 Polish
+
+- [ ] Symphony branding (all files)
+- [ ] ASCII art headers
+- [ ] Better directory structure
+- [ ] Full cleanup pass
+
+---
+
+## 📚 Documentation
+
+- [ ] Main README
+- [ ] Themes & Scripts README
+
+---
+
+*Last updated: November 21, 2025 at 11:47 PM*
