@@ -3,9 +3,9 @@
  * https://github.com/vyrx-dev
  */
 
-@define-color accent_color #BB9AF7;
-@define-color accent_fg_color #05010C;
-@define-color accent_bg_color #BB9AF7;
+@define-color accent_color #8875a3;
+@define-color accent_fg_color #FFFFFF;
+@define-color accent_bg_color #8875a3;
 @define-color window_bg_color #05010C;
 @define-color window_fg_color #FFFFFF;
 @define-color headerbar_bg_color #0f0a16;
