@@ -1,3 +1,7 @@
+-- Symphony by vyrx
+-- Theme: Void
+-- https://github.com/vyrx-dev
+
 return {
 	{
 		"catppuccin/nvim",

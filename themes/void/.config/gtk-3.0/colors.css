@@ -1,21 +1,27 @@
-/*
- * GTK Colors - Void
+/* Symphony by vyrx
+ * Theme: Void
+ * https://github.com/vyrx-dev
  */
 
-@define-color accent_color #B49AE6;
+@define-color accent_color #BB9AF7;
 @define-color accent_fg_color #05010C;
-@define-color accent_bg_color #B49AE6;
+@define-color accent_bg_color #BB9AF7;
 @define-color window_bg_color #05010C;
 @define-color window_fg_color #FFFFFF;
-@define-color headerbar_bg_color #05010C;
+@define-color headerbar_bg_color #0f0a16;
 @define-color headerbar_fg_color #FFFFFF;
-@define-color popover_bg_color #05010C;
+@define-color headerbar_backdrop_color #05010C;
+@define-color popover_bg_color #0f0a16;
 @define-color popover_fg_color #FFFFFF;
 @define-color view_bg_color #05010C;
 @define-color view_fg_color #FFFFFF;
-@define-color card_bg_color #05010C;
+@define-color card_bg_color #0f0a16;
 @define-color card_fg_color #FFFFFF;
-@define-color sidebar_bg_color @window_bg_color;
-@define-color sidebar_fg_color @window_fg_color;
-@define-color sidebar_border_color @window_bg_color;
-@define-color sidebar_backdrop_color @window_bg_color;
+@define-color dialog_bg_color #0f0a16;
+@define-color dialog_fg_color #FFFFFF;
+@define-color sidebar_bg_color #0f0a16;
+@define-color sidebar_fg_color #FFFFFF;
+@define-color sidebar_border_color #382952;
+@define-color sidebar_backdrop_color #05010C;
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;

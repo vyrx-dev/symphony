@@ -17,9 +17,9 @@
 **Core Applications**
 
 - [ ] Spicetify
-- [ ] Rofi
+- [x] Rofi
 - [x] RMPC
-- [ ] Yazi
+- [x] Yazi
 - [x] Btop
 - [ ] Starship
 - [x] GTK
@@ -32,7 +32,7 @@
 
 - [x] Kitty
 - [x] Ghostty
-- [ ] Alacritty
+- [x] Alacritty
 
 **Secondary**
 
@@ -44,8 +44,8 @@
 
 ## 🔧 Scripts & Tools
 
-- [x] Theme switcher 
-- [ ] fish aliases → abbr
+- [x] Theme switcher
+- [x] fish aliases → abbr
 - [ ] Media conversion scripts
 - [ ] Theme installer script
 - [ ] Full installation script

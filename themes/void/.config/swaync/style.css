@@ -1,0 +1,348 @@
+/* Symphony by vyrx
+ * Theme: Void
+ * https://github.com/vyrx-dev
+ */
+
+:root {
+  /* Void theme - purple blur backgrounds */
+  --cc-bg: rgba(30, 25, 40, 0.75);
+  --noti-bg: rgba(45, 35, 55, 0.85);
+  --noti-bg-hover: rgba(55, 45, 65, 0.9);
+  --noti-bg-focus: rgba(65, 55, 75, 0.92);
+  --noti-bg-floating: rgba(40, 30, 50, 0.88);
+  
+  /* Purple borders */
+  --noti-border-color: rgba(180, 154, 230, 0.4);
+  --noti-border-hover: rgba(200, 174, 250, 0.55);
+  --noti-border-focus: rgba(220, 194, 255, 0.65);
+  
+  /* Purple accents */
+  --accent-color: rgba(180, 154, 230, 0.6);
+  --accent-hover: rgba(200, 174, 250, 0.7);
+  --accent-active: rgba(220, 194, 255, 0.8);
+  
+  /* Button states */
+  --button-bg: rgba(55, 45, 65, 0.75);
+  --button-hover: rgba(75, 65, 85, 0.8);
+  --button-active: rgba(95, 85, 105, 0.85);
+  --button-checked: rgba(85, 75, 95, 0.85);
+  
+  /* Close button */
+  --close-bg: rgba(255, 255, 255, 0.1);
+  --close-hover: rgba(255, 85, 85, 0.35);
+  
+  /* Text colors */
+  --text-primary: rgba(235, 225, 245, 0.96);
+  --text-secondary: rgba(205, 195, 215, 0.85);
+  --text-disabled: rgba(155, 145, 165, 0.7);
+  
+  /* Sizes */
+  --notification-icon-size: 64px;
+  --border-radius: 12px;
+  
+  /* Typography */
+  --font-size-body: 15px;
+  --font-size-summary: 16px;
+  
+  /* Transitions */
+  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s ease-out;
+}
+
+/* Base window - fully transparent */
+.notification-window,
+.blank-window {
+  background: transparent;
+}
+
+/* Control Center - blur background */
+.control-center {
+  background: var(--cc-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--noti-border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Floating notifications - slightly different style */
+.floating-notifications .notification {
+  background: var(--noti-bg-floating) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Close button */
+.close-button {
+  background: var(--close-bg);
+  color: var(--text-primary);
+  border-radius: 100%;
+  border: none;
+  min-width: 24px;
+  min-height: 24px;
+  margin-top: 8px;
+  margin-right: 8px;
+  transition: var(--transition-fast);
+}
+
+.close-button:hover {
+  background: var(--close-hover);
+  transform: scale(1.05);
+}
+
+/* Notification rows */
+.notification-row {
+  background: none;
+  outline: none;
+}
+
+.notification-row:focus {
+  background: var(--noti-bg-focus);
+  border-radius: var(--border-radius);
+}
+
+.notification-row .notification-background {
+  padding: 6px 12px;
+}
+
+.notification-row .notification-background .notification {
+  background: var(--noti-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--noti-border-color);
+  padding: 0;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.notification-row .notification-background .notification:hover {
+  background: var(--noti-bg-hover);
+  border-color: var(--noti-border-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  padding: 4px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  border-radius: var(--border-radius);
+}
+
+/* Notification content - minimal color usage */
+.notification .notification-content {
+  padding: 8px;
+}
+
+.notification .summary {
+  font-size: var(--font-size-summary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.notification .body {
+  font-size: var(--font-size-body);
+  color: var(--text-secondary);
+}
+
+.notification .time {
+  font-size: 12px;
+  color: var(--text-disabled);
+}
+
+/* Notification images */
+.notification image {
+  object-fit: cover;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+/* Notification groups */
+.notification-group.collapsed .notification {
+  background: var(--noti-bg);
+  border-color: var(--noti-border-color);
+}
+
+.notification-group-headers {
+  background: transparent;
+  border-radius: var(--border-radius);
+  padding: 8px;
+  margin: 4px 8px;
+}
+
+/* MPRIS Widget - scaled down like before */
+.widget-mpris {
+  margin-bottom: 0px; 
+  margin-top: -3px;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.mpris {
+  background: rgba(45, 35, 55, 0.72);
+  border-radius: 12px;
+  margin: 8px;
+  padding: 8px;
+  transform: scale(0.8);
+  transform-origin: top center;
+  border: 1px solid var(--noti-border-color);
+}
+
+.mpris-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mpris-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.mpris-artist {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.mpris-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  gap: 10px;
+}
+
+.mpris-button {
+  font-size: 18px;
+  color: var(--text-primary);
+  opacity: 0.85;
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.mpris-button:hover {
+  opacity: 1;
+  background: var(--button-hover);
+  transform: scale(1.05);
+}
+
+.mpris,
+.mpris-player,
+.widget.mpris {
+  box-shadow: none;
+  border: none;
+  background-clip: padding-box;
+}
+
+/* Title widget */
+.widget-title {
+  margin-top: 0px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.widget-title > box {
+  background: transparent;
+  padding: 12px;
+}
+
+.widget-title > box > label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.widget-title > box > button {
+  background: var(--button-bg);
+  border: 1px solid var(--noti-border-color);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+}
+
+.widget-title > box > button:hover {
+  background: var(--button-hover);
+  border-color: var(--noti-border-hover);
+  transform: scale(1.02);
+}
+
+.widget-title > box > button:active {
+  background: var(--button-active);
+  border-color: var(--noti-border-focus);
+  color: rgba(20, 20, 25, 0.95);
+}
+
+/* Buttons Grid - smaller like before */
+.widget-buttons-grid {
+  margin: 6px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.widget-buttons-grid button {
+  background: var(--button-bg);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 18px;
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+  border: 1px solid var(--noti-border-color);
+}
+
+.widget-buttons-grid button:hover {
+  transform: scale(1.08);
+  background: var(--button-hover);
+  border-color: var(--noti-border-hover);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.widget-buttons-grid button:checked {
+  background: var(--button-checked);
+  color: rgba(20, 20, 25, 0.95);
+  border-color: var(--noti-border-focus);
+  box-shadow: 0 0 12px rgba(180, 154, 230, 0.4);
+}
+
+.widget-buttons-grid button:checked:hover {
+  background: var(--button-active);
+  transform: scale(1.1);
+  box-shadow: 0 0 16px rgba(200, 174, 250, 0.5);
+}
+
+/* Notifications widget */
+.widget-notifications {
+  margin-bottom: 0px;
+  margin-top: -15px;
+  margin-left: -10px;
+  margin-right: -10px;
+  background: transparent;
+}
+
+.widget-notifications > box {
+  background: transparent;
+}
+
+/* Hide scrollbar */
+.control-center scrollbar {
+  background: transparent;
+  opacity: 0;
+}
+
+.control-center scrollbar slider {
+  background: transparent;
+  opacity: 0;
+}
+
+/* Empty notifications */
+.blank-window label {
+  color: var(--text-disabled);
+  font-size: 14px;
+}

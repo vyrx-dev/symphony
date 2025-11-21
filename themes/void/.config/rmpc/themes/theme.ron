@@ -1,3 +1,7 @@
+// Symphony by vyrx
+// Theme: Void
+// https://github.com/vyrx-dev
+
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
