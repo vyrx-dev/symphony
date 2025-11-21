@@ -1,0 +1,29 @@
+{
+  "comment": "Symphony by vyrx - Theme: Vague - https://github.com/vyrx-dev",
+  "checksum": "vague_pastel_low_contrast_theme",
+  "wallpaper": "/home/vyrx/dotfiles/themes/vague/wallpaper",
+  "alpha": "100",
+  "special": {
+    "background": "#121314",
+    "foreground": "#cdcdcd",
+    "cursor": "#aeaed1"
+  },
+  "colors": {
+    "color0": "#1a1b1c",
+    "color1": "#d8647e",
+    "color2": "#aeaed1",
+    "color3": "#f3be7c",
+    "color4": "#6e94b2",
+    "color5": "#bb9dbd",
+    "color6": "#aeaed1",
+    "color7": "#cdcdcd",
+    "color8": "#606079",
+    "color9": "#e08398",
+    "color10": "#bebeda",
+    "color11": "#f5cb96",
+    "color12": "#8ba9c1",
+    "color13": "#c9b1ca",
+    "color14": "#bebeda",
+    "color15": "#d7d7d7"
+  }
+}

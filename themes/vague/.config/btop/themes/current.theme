@@ -1,0 +1,82 @@
+# Symphony by vyrx
+# Theme: Vague
+# https://github.com/vyrx-dev
+
+# Main bg
+theme[main_bg]="#121314"
+
+# Main text color
+theme[main_fg]="#cdcdcd"
+
+# Title color for boxes
+theme[title]="#aeaed1"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#bb9dbd"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#252530"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#cdcdcd"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#606079"
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="#bb9dbd"
+
+# Cpu box outline color
+theme[cpu_box]="#aeaed1"
+
+# Memory/disks box outline color
+theme[mem_box]="#aeaed1"
+
+# Net up/down box outline color
+theme[net_box]="#aeaed1"
+
+# Processes box outline color
+theme[proc_box]="#aeaed1"
+
+# Box divider line and small boxes line color
+theme[div_line]="#252530"
+
+# Temperature graph colors (pink/red)
+theme[temp_start]="#d8647e"
+theme[temp_mid]="#e08398"
+theme[temp_end]="#d8647e"
+
+# CPU graph colors (blue)
+theme[cpu_start]="#6e94b2"
+theme[cpu_mid]="#8ba9c1"
+theme[cpu_end]="#bebeda"
+
+# Mem/Disk free meter (magenta/purple)
+theme[free_start]="#bb9dbd"
+theme[free_mid]="#c9b1ca"
+theme[free_end]="#bb9dbd"
+
+# Mem/Disk cached meter (cyan)
+theme[cached_start]="#aeaed1"
+theme[cached_mid]="#bebeda"
+theme[cached_end]="#aeaed1"
+
+# Mem/Disk available meter (green)
+theme[available_start]="#7fa563"
+theme[available_mid]="#99b782"
+theme[available_end]="#7fa563"
+
+# Mem/Disk used meter (yellow)
+theme[used_start]="#f3be7c"
+theme[used_mid]="#f5cb96"
+theme[used_end]="#f3be7c"
+
+# Download graph colors (cyan)
+theme[download_start]="#aeaed1"
+theme[download_mid]="#bebeda"
+theme[download_end]="#aeaed1"
+
+# Upload graph colors (magenta)
+theme[upload_start]="#bb9dbd"
+theme[upload_mid]="#c9b1ca"
+theme[upload_end]="#bb9dbd"

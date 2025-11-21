@@ -1,0 +1,13 @@
+# Symphony by vyrx
+# Theme: Vague
+# https://github.com/vyrx-dev
+
+[color]
+background = '#121314'
+gradient = 1
+gradient_count = 5
+gradient_color_1 = '#d8647e'
+gradient_color_2 = '#f3be7c'
+gradient_color_3 = '#7fa563'
+gradient_color_4 = '#6e94b2'
+gradient_color_5 = '#bb9dbd'
