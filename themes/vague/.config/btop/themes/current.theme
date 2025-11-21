@@ -1,0 +1,60 @@
+# Symphony by vyrx
+# Theme: Vague
+# https://github.com/vyrx-dev
+
+# Main UI Colors
+theme[main_bg]="#121314"
+theme[main_fg]="#cdcdcd"
+theme[title]="#aeaed1"
+theme[hi_fg]="#bb9dbd"
+
+# Selection & Inactive Text
+theme[selected_bg]="#252530"
+theme[selected_fg]="#cdcdcd"
+theme[inactive_fg]="#606079"
+
+# Box Outlines & Dividers
+theme[cpu_box]="#aeaed1"
+theme[mem_box]="#aeaed1"
+theme[net_box]="#aeaed1"
+theme[proc_box]="#aeaed1"
+theme[div_line]="#252530"
+
+# Process Misc
+theme[proc_misc]="#bb9dbd"
+
+# Temperature Gradient (pink/red)
+theme[temp_start]="#d8647e"
+theme[temp_mid]="#e08398"
+theme[temp_end]="#d8647e"
+
+# CPU Graph Gradient (blue)
+theme[cpu_start]="#6e94b2"
+theme[cpu_mid]="#8ba9c1"
+theme[cpu_end]="#bebeda"
+
+# Memory/Disk Meters Gradient (magenta/purple)
+theme[free_start]="#bb9dbd"
+theme[free_mid]="#c9b1ca"
+theme[free_end]="#bb9dbd"
+
+theme[cached_start]="#c9b1ca"
+theme[cached_mid]="#d7c7d8"
+theme[cached_end]="#c9b1ca"
+
+theme[available_start]="#aeaed1"
+theme[available_mid]="#bebeda"
+theme[available_end]="#aeaed1"
+
+theme[used_start]="#bb9dbd"
+theme[used_mid]="#c9b1ca"
+theme[used_end]="#bb9dbd"
+
+# Network Graphs Gradient (green/yellow mix)
+theme[download_start]="#7fa563"
+theme[download_mid]="#99b782"
+theme[download_end]="#f3be7c"
+
+theme[upload_start]="#f3be7c"
+theme[upload_mid]="#f5cb96"
+theme[upload_end]="#7fa563"
