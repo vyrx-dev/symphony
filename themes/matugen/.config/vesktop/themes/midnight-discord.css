@@ -1,3 +1,8 @@
+/* Symphony by vyrx
+ * Theme: Matugen (Dynamic)
+ * https://github.com/vyrx-dev
+ */
+
 /**
  * @name midnight
  * @description A dark, rounded discord theme.
@@ -8,7 +13,7 @@
  * @source https://github.com/refact0r/midnight-discord/blob/master/midnight.theme.css
  * @authorId 508863359777505290
  * @authorLink https://www.refact0r.dev
-*/
+ */
 
 /* IMPORTANT: make sure to enable dark mode in discord settings for the theme to apply properly!!! */
 
@@ -23,36 +28,36 @@
   --corner-text: 'Midnight';
 
   /* color of status indicators and window controls */
-  --online-indicator: #81d5ce; /* change to #23a55a for default green */
+  --online-indicator: #a2c9fd; /* change to #23a55a for default green */
   --dnd-indicator: #ffb4ab; /* change to #f13f43 for default red */
-  --idle-indicator: #b0c9e7; /* change to #f0b232 for default yellow */
-  --streaming-indicator: #b0ccc9; /* change to #593695 for default purple */
+  --idle-indicator: #d8bde4; /* change to #f0b232 for default yellow */
+  --streaming-indicator: #bbc7db; /* change to #593695 for default purple */
 
   /* accent colors */
-  --accent-1: #b0c9e7; /* links */
-  --accent-2: #81d5ce; /* general unread/mention elements, some icons when active */
-  --accent-3: #81d5ce; /* accent buttons */
-  --accent-4: #00504c; /* accent buttons when hovered */
-  --accent-5: #81d5ce; /* accent buttons when clicked */
-  --mention: #00504c; /* mentions & mention messages */
-  --mention-hover: #81d5ce; /* mentions & mention messages when hovered */
+  --accent-1: #d8bde4; /* links */
+  --accent-2: #a2c9fd; /* general unread/mention elements, some icons when active */
+  --accent-3: #a2c9fd; /* accent buttons */
+  --accent-4: #1c4875; /* accent buttons when hovered */
+  --accent-5: #a2c9fd; /* accent buttons when clicked */
+  --mention: #1c4875; /* mentions & mention messages */
+  --mention-hover: #a2c9fd; /* mentions & mention messages when hovered */
 
   /* text colors */
-  --text-0: #003734; /* text on colored elements */
-  --text-1: #dde4e2; /* other normally white text */
-  --text-2: #dde4e2; /* headings and important text */
-  --text-3: #dde4e2; /* normal text */
-  --text-4: #bec9c7; /* icon buttons and channels */
-  --text-5: #889391; /* muted channels/chats and timestamps */
+  --text-0: #00325a; /* text on colored elements */
+  --text-1: #e1e2e8; /* other normally white text */
+  --text-2: #e1e2e8; /* headings and important text */
+  --text-3: #e1e2e8; /* normal text */
+  --text-4: #c3c6cf; /* icon buttons and channels */
+  --text-5: #8d9199; /* muted channels/chats and timestamps */
 
   /* background and dark colors */
-  --bg-1: #0e1514; /* dark buttons when clicked */
-  --bg-2: #252b2a; /* dark buttons */
-  --bg-3: #1a2120; /* spacing, secondary elements */
-  --bg-4: #0e1514; /* main background color */
-  --hover: #252b2a; /* channels and buttons when hovered */
-  --active: #2f3635; /* channels and buttons when clicked or selected */
-  --message-hover: #252b2a; /* messages when hovered */
+  --bg-1: #111418; /* dark buttons when clicked */
+  --bg-2: #272a2f; /* dark buttons */
+  --bg-3: #1d2024; /* spacing, secondary elements */
+  --bg-4: #111418; /* main background color */
+  --hover: #272a2f; /* channels and buttons when hovered */
+  --active: #32353a; /* channels and buttons when clicked or selected */
+  --message-hover: #272a2f; /* messages when hovered */
 
   /* amount of spacing and padding */
   --spacing: 12px;
@@ -105,11 +110,11 @@
 /* Selected chat/friend text */
 .selected_f5eb4b,
 .selected_f6f816 .link_d8bfb3 {
-  color: var(--text-0) !important;
+  color: var(--bg-4) !important;
   background: var(--accent-3) !important;
 }
 
 .selected_f6f816 .link_d8bfb3 * {
-  color: var(--text-0) !important;
-  fill: var(--text-0) !important;
+  color: var(--bg-4) !important;
+  fill: var(--bg-4) !important;
 }

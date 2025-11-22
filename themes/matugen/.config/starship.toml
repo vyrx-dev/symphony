@@ -1,3 +1,7 @@
+# Symphony by vyrx
+# Theme: Matugen (Dynamic)
+# https://github.com/vyrx-dev
+
 add_newline = false
 command_timeout = 60
 format = """\
@@ -16,18 +20,18 @@ palette = "colors"
 
 [palettes.colors]
 mustard = '#af8700' # example
-color1 = '#81d5ce'
-color2 = '#003734'
-color3 = '#bec9c7'
-color4 = '#1a2120'
-color5 = '#003734'
-color6 = '#0e1514'
-color7 = '#0e1514'
-color8 = '#81d5ce'
-color9 = '#b0c9e7'
+color1 = '#a2c9fd'
+color2 = '#00325a'
+color3 = '#c3c6cf'
+color4 = '#1d2024'
+color5 = '#00325a'
+color6 = '#111418'
+color7 = '#111418'
+color8 = '#a2c9fd'
+color9 = '#d8bde4'
 
 [directory]
-style = "fg:#81d5ce bold" # color1
+style = "fg:#a2c9fd bold" # color1
 read_only = " 󰌾"
 read_only_style = "fg:#ea6962" # dark blue
 truncation_length = 0
@@ -39,12 +43,12 @@ format = "[$path]($style)[$read_only]($read_only_style)"
 '~/Testing-repo' = 'work-project'
 
 [character]
-success_symbol = '[❯](fg:#81d5ce bold)'
+success_symbol = '[❯](fg:#a2c9fd bold)'
 error_symbol = '[❯](fg:#ffb4ab bold)'
-vicmd_symbol = '[❮](fg:#0e1514 bold)'
+vicmd_symbol = '[❮](fg:#111418 bold)'
 
 [git_branch]
-style = "fg:#b0c9e7 bold" # color9 (red)
+style = "fg:#d8bde4 bold" # color9 (red)
 format = '[$symbol$branch]($style) '
 
 [git_status]
@@ -56,7 +60,7 @@ format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
 
 [os]
 format = "[$symbol]($style)"
-style = "fg:#81d5ce bold" # color8
+style = "fg:#a2c9fd bold" # color8
 disabled = false
 
 [os.symbols]

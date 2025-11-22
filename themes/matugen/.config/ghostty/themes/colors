@@ -1,25 +1,29 @@
-background = #0e1514
-foreground = #dde4e2
-cursor-color = #dde4e2
-cursor-text = #bec9c7
-selection-background = #b0ccc9
-selection-foreground = #1c3533
+# Symphony by vyrx
+# Theme: Matugen (Dynamic)
+# https://github.com/vyrx-dev
+
+background = #111418
+foreground = #e1e2e8
+cursor-color = #e1e2e8
+cursor-text = #c3c6cf
+selection-background = #bbc7db
+selection-foreground = #253141
 
 
 
-palette = 0=#0e1514
+palette = 0=#111418
 palette = 1=#ffb4ab
-palette = 2=#b0c9e7
-palette = 3=#b0ccc9
-palette = 4=#81d5ce
-palette = 5=#81d5ce
-palette = 6=#304962
-palette = 7=#dde4e2
-palette = 8=#0e1514
+palette = 2=#d8bde4
+palette = 3=#bbc7db
+palette = 4=#a2c9fd
+palette = 5=#a2c9fd
+palette = 6=#533f5f
+palette = 7=#e1e2e8
+palette = 8=#111418
 palette = 9=#93000a
-palette = 10=#cfe4ff
-palette = 11=#324b49
-palette = 12=#00504c
-palette = 13=#cce8e5
-palette = 14=#b0c9e7
-palette = 15=#bec9c7
+palette = 10=#f4daff
+palette = 11=#3c4858
+palette = 12=#1c4875
+palette = 13=#d7e3f8
+palette = 14=#d8bde4
+palette = 15=#c3c6cf

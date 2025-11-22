@@ -1,22 +1,29 @@
 {
-  "wallpaper": "/home/vyrx/Wallpapers/stairs.jpg",
-  "alpha": "100",
-  "colors": {
-    "color0": "#0e1514",
-    "color1": "",
-    "color2": "",
-    "color3": "",
-    "color4": "",
-    "color5": "",
-    "color6": "",
-    "color7": "",
-    "color8": "",
-    "color9": "",
-    "color10": "#81d5ce",
-    "color11": "",
-    "color12": "",
-    "color13": "#343a3a",
-    "color14": "",
-    "color15": "#dde4e2"
-  }
+    "checksum": "ea48466c0e9c84b20df70a16c95e9948",
+    "wallpaper": "/home/vyrx/Wallpapers/nord/a_logo_with_white_text.png",
+    "alpha": "100",
+
+    "special": {
+        "background": "#101826",
+        "foreground": "#c3c5c8",
+        "cursor": "#c3c5c8"
+    },
+    "colors": {
+        "color0": "#101826",
+        "color1": "#9EA76C",
+        "color2": "#346895",
+        "color3": "#717C8A",
+        "color4": "#6582A7",
+        "color5": "#9CA3A2",
+        "color6": "#D2C6A2",
+        "color7": "#c3c5c8",
+        "color8": "#5f6674",
+        "color9": "#9EA76C",
+        "color10": "#346895",
+        "color11": "#717C8A",
+        "color12": "#6582A7",
+        "color13": "#9CA3A2",
+        "color14": "#D2C6A2",
+        "color15": "#c3c5c8"
+    }
 }
