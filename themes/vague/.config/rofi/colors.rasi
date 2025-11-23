@@ -3,7 +3,7 @@
     primary: #aeaed1;
     primary-container: #6e94b2;
     on-primary: #252530;
-    on-primary-container: #d7d7d7;
+    on-primary-container: #cdcdcd;
     
     /* Secondary accent */
     secondary: #bb9dbd;
@@ -12,17 +12,17 @@
     on-secondary-container: #cdcdcd;
     
     /* Surface backgrounds (progressively lighter) */
-    surface: #252530;
-    surface-dim: #252530;
+    surface: #121314;
+    surface-dim: #121314;
     surface-bright: #606079;
-    surface-container-lowest: #252530;
-    surface-container-low: #252530;
+    surface-container-lowest: #121314;
+    surface-container-low: #121314;
     surface-container: #606079;
     surface-container-high: #606079;
     surface-container-highest: #606079;
     
     /* Text colors */
-    on-surface: #d7d7d7;
+    on-surface: #121314;
     on-surface-variant: #cdcdcd;
     
     /* Outline/border colors */
@@ -34,6 +34,6 @@
     on-error: #252530;
     
     /* Inverse colors */
-    inverse-surface: #cdcdcd;
+    inverse-surface: #121314;
     inverse-on-surface: #121314;
 }

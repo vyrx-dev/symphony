@@ -12,17 +12,17 @@
     on-secondary-container: #c0caf5;
     
     /* Surface backgrounds (progressively lighter) */
-    surface: #15161e;
-    surface-dim: #15161e;
+    surface: #1a1b26;
+    surface-dim: #1a1b26;
     surface-bright: #414868;
-    surface-container-lowest: #15161e;
-    surface-container-low: #15161e;
+    surface-container-lowest: #1a1b26;
+    surface-container-low: #1a1b26;
     surface-container: #414868;
     surface-container-high: #414868;
     surface-container-highest: #414868;
     
     /* Text colors */
-    on-surface: #c0caf5;
+    on-surface: #1a1b26;
     on-surface-variant: #a9b1d6;
     
     /* Outline/border colors */
@@ -34,6 +34,6 @@
     on-error: #15161e;
     
     /* Inverse colors */
-    inverse-surface: #c0caf5;
+    inverse-surface: #1a1b26;
     inverse-on-surface: #1a1b26;
 }

@@ -3,7 +3,7 @@
     primary: #a8a8ac;
     primary-container: #6c6c6e;
     on-primary: #1c1c1e;
-    on-primary-container: #f5f5f7;
+    on-primary-container: #e8e8ed;
     
     /* Secondary accent */
     secondary: #86868a;
@@ -12,17 +12,17 @@
     on-secondary-container: #e8e8ed;
     
     /* Surface backgrounds (progressively lighter) */
-    surface: #1c1c1e;
-    surface-dim: #1c1c1e;
+    surface: #0f0f0f;
+    surface-dim: #0f0f0f;
     surface-bright: #48484a;
-    surface-container-lowest: #1c1c1e;
-    surface-container-low: #1c1c1e;
+    surface-container-lowest: #0f0f0f;
+    surface-container-low: #0f0f0f;
     surface-container: #48484a;
     surface-container-high: #48484a;
     surface-container-highest: #48484a;
     
     /* Text colors */
-    on-surface: #f5f5f7;
+    on-surface: #0f0f0f;
     on-surface-variant: #d1d1d6;
     
     /* Outline/border colors */
@@ -34,6 +34,6 @@
     on-error: #1c1c1e;
     
     /* Inverse colors */
-    inverse-surface: #e8e8ed;
+    inverse-surface: #0f0f0f;
     inverse-on-surface: #0f0f0f;
 }

@@ -3,7 +3,7 @@
     primary: #E8C099;
     primary-container: #D9A56C;
     on-primary: #0d0509;
-    on-primary-container: #ffffff;
+    on-primary-container: #f0eaed;
     
     /* Secondary accent */
     secondary: #D1B399;
