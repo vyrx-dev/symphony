@@ -1,10 +1,10 @@
 /* Universal swaync - theme-independent, optimized for blur */
 :root {
-  --cc-bg: rgba(18, 18, 22, 0.70);
-  --noti-bg: rgba(28, 28, 32, 0.72);
-  --noti-bg-hover: rgba(38, 38, 44, 0.75);
-  --noti-bg-focus: rgba(48, 48, 54, 0.78);
-  --noti-bg-floating: rgba(22, 22, 26, 0.74);
+  --cc-bg: rgba(20, 20, 20, 0.70); /* rgba(18, 18, 22, 0.70) */
+  --noti-bg: rgba(28, 28, 28, 0.72); /* rgba(28, 28, 32, 0.72) */
+  --noti-bg-hover: rgba(38, 38, 38, 0.75); /* rgba(38, 38, 44, 0.75) */
+  --noti-bg-focus: rgba(48, 48, 48, 0.78); /* rgba(48, 48, 54, 0.78) */
+  --noti-bg-floating: rgba(22, 22, 22, 0.74); /* rgba(22, 22, 26, 0.74) */
   --noti-border-color: rgba(255, 255, 255, 0.10);
   --noti-border-hover: rgba(255, 255, 255, 0.15);
   --noti-border-focus: rgba(255, 255, 255, 0.20);
