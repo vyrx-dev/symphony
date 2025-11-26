@@ -22,7 +22,7 @@
 - [x] Btop
 - [x] Starship
 - [x] GTK
-- [ ] SwayNC
+- [x] SwayNC
 - [x] Cava
 - [x] Hypr borders
 - [x] Waybar
@@ -47,7 +47,7 @@
 - [x] Theme switcher
 - [x] fish aliases → abbr
 - [ ] Media conversion scripts
-- [ ] Theme installer script
+- [x] Theme installer script
 - [ ] Full installation script
 - [ ] Optimize switching performance
 
@@ -64,7 +64,7 @@
 
 ## 🎯 Polish
 
-- [ ] Symphony branding (all files)
+- [x] Symphony branding (all files)
 - [ ] ASCII art headers
 - [ ] Better directory structure
 - [ ] Full cleanup pass
@@ -74,7 +74,7 @@
 ## 📚 Documentation
 
 - [ ] Main README
-- [ ] Themes & Scripts README
+- [x] Themes & Scripts README
 - [ ] Symphony Website
 
 ---
