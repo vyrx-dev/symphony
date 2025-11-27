@@ -17,10 +17,43 @@ return{
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'jvgrootveld/telescope-zoxide' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
+ keys = {
+      {
+        ";c",
+        function()
+          require("telescope.builtin").colorscheme({ enable_preview = true })
+        end,
+        desc = "Colorscheme with Preview",
+      },
+
+      {
+        "<leader>fP",
+        function()
+          require("telescope.builtin").find_files({
+            cwd = require("lazy.core.config").options.root,
+          })
+        end,
+        desc = "Find Plugin File",
+      },
+
+    --   {
+    --     ";f",
+    --     function()
+    --       local builtin = require("telescope.builtin")
+    --       builtin.find_files({
+    --         no_ignore = false,
+    --        hidden = true,
+    --       })
+    --     end,
+    --     desc = "Lists files in your current working directory, respects .gitignore",
+    --   },
+    },
+
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
       -- it can fuzzy find! It's more than just a "file finder", it can search
@@ -92,7 +125,7 @@ return{
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
+         winblend = 10,
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })

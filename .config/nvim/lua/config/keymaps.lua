@@ -21,6 +21,7 @@ set("n", "<leader>ef", "<cmd>source %<CR>", { desc = "Execute the current file" 
 -- live-server
 set("n", "<leader>ps", ":LiveServerStart<CR>", { desc = "Start Live Server" })
 set("n", "<leader>pe", ":LiveServerStop<CR>", { desc = "Stop Live Server" })
+set("n", ";f", ":Oil<CR>", { desc = "oil explorer" })
 
 -- Center the screen after scrolling up/down with Ctrl-u/d
 set("n", "<C-u>", "<C-u>zz")
