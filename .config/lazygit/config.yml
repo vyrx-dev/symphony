@@ -1,24 +1,9 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
-# cyberdream theme for lazygit
+customCommands:
+  - key: "C"
+    command: "git cz commit"
+    description: "commit with commitizen"
+    context: "files"
+    loadingText: "opening commitizen commit tool"
+    output: terminal
 gui:
-  border: rounded
-  theme:
-    activeBorderColor:
-      - "#5ef1ff"
-      - bold
-    inactiveBorderColor:
-      - "#7b8496"
-    searchingActiveBorderColor:
-      - "#ff5ef1"
-    optionsTextColor:
-      - "#ffffff"
-    selectedLineBgColor:
-      - "#3c4048"
-    cherryPickedCommitBgColor:
-      - "#3c4048"
-    cherryPickedCommitFgColor:
-      - "#ff5ea0"
-    unstagedChangesColor:
-      - "#ffbd5e"
-    defaultFgColor:
-      - "#ffffff"
+  mouseEvents: false
