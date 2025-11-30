@@ -12,7 +12,7 @@ return {
     keys = { "<space>m" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
-      require("treesj").setup {}
+      require("treesj").setup { max_join_length = 200 }
     end,
   },
 
@@ -47,6 +47,23 @@ return {
     build = "make tiktoken",
     opts = {
       -- See Configuration section for options
+      mappings = {
+        reset = {
+          insert = "<C-c>",
+          normal = "<C-c>",
+        },
+      },
+      prompts = {
+        Tutor = {
+          prompt = "You are an AI coding instructor designed to assist and guide me as I learn to code. Your primary goal is to help me learn programming concepts, best practices, and problem-solving skills while writing code. Always assume I'm a beginner with limited programming knowledge.Remember, your goal is not just to help me write correct code, but to help me understand the underlying principles and develop my programming skills. Always strive to be clear, patient, and encouraging in your responses.",
+        },
+        Feedback = {
+          prompt = "Review the code and provide feedback. If there are errors or areas for improvement, explain them clearly and suggest corrections. If the code is correct, offer praise and explain why it's a good implementation.Structure your responses as follows: 1- Answer my question, 2- Code review and feedback, 3- Suggestions for further learning or practice",
+        },
+        FixBuffer = {
+          prompt = "Given these diagnostics in the file '$file' which is a '$language' file, please fix the issues: $diagnostics",
+        },
+      },
     },
     keys = {
       { "<leader>a", "<cmd>CopilotChat<CR>", mode = "n", desc = "Open Copilot Chat" },
@@ -58,7 +75,6 @@ return {
       { "<leader>tt", "<cmd>CopilotChatTests<CR>", mode = "v", desc = "Generate Tests" },
       { "<leader>tm", "<cmd>CopilotChatCommit<CR>", mode = "n", desc = "Generate Commit Message" },
       { "<leader>ts", "<cmd>CopilotChatCommit<CR>", mode = "v", desc = "Generate Commit for Selection" },
-      { "<leader>tc", "<cmd>CopilotChatSave<CR>", mode = "v", desc = "Save Chat history" },
     },
   },
 }
