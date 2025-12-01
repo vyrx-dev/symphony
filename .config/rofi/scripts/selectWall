@@ -3,10 +3,9 @@
 # Check if custom theme is active
 CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "matugen")
 if [[ "$CURRENT_THEME" != "matugen" ]]; then
-    notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\nUse switch-theme.sh to change themes"
-    exit 0
+	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Matugen to use this"
+	exit 0
 fi
-
 
 # Wallpaper picker with pywal integration
 WALLPAPER_DIR="$HOME/Wallpapers/"
@@ -21,16 +20,16 @@ mapfile -d '' wallpapers < <(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -
 
 # Check if wallpapers exist
 if [[ ${#wallpapers[@]} -eq 0 ]]; then
-  notify-send "error" "no wallpapers found in $wallpaper_dir"
-  exit 1
+	notify-send "error" "no wallpapers found in $wallpaper_dir"
+	exit 1
 fi
 
 # Build rofi menu with thumbnail icons
 menu() {
-  for wallpaper in "${wallpapers[@]}"; do
-    name=$(basename "$wallpaper")
-    printf "%s\x00icon\x1f%s\n" "$name" "$wallpaper"
-  done | sort
+	for wallpaper in "${wallpapers[@]}"; do
+		name=$(basename "$wallpaper")
+		printf "%s\x00icon\x1f%s\n" "$name" "$wallpaper"
+	done | sort
 }
 
 # Start swww daemon if needed
@@ -44,48 +43,48 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 
 # Find selected wallpaper and apply theme
 for wallpaper in "${wallpapers[@]}"; do
-  if [[ "$(basename "$wallpaper")" == "$choice" ]]; then
-    # Apply wallpaper with swww
-    swww img "$wallpaper" $SWWW_PARAMS #-o  "$focused_monitor"
+	if [[ "$(basename "$wallpaper")" == "$choice" ]]; then
+		# Apply wallpaper with swww
+		swww img "$wallpaper" $SWWW_PARAMS #-o  "$focused_monitor"
 
-    # Apply pywal16 and matugen color scheme
-    matugen image "$wallpaper" -m dark #matugen
-    wal -i "$wallpaper"                #pywal16
+		# Apply pywal16 and matugen color scheme
+		matugen image "$wallpaper" -m dark #matugen
+		wal -i "$wallpaper"                #pywal16
 
-    # Update Symphony integrations after matugen generates new colors
-    "$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
-    "$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
-    "$HOME/dotfiles/theme-scripts/core/fix-symlinks.sh"
+		# Update Symphony integrations after matugen generates new colors
+		"$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
+		"$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
+		"$HOME/dotfiles/theme-scripts/core/fix-symlinks.sh"
 
-    # Update Obsidian theme
-    bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
+		# Update Obsidian theme
+		bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
 
-    # Update pywal integrations
-    pywalfox update
-    pywal-spicetify text
+		# Update pywal integrations
+		pywalfox update
+		pywal-spicetify text
 
-    # Reload everything instantly
-    hyprctl reload
-    restart-app waybar
-    restart-app swayosd-server
-    killall -SIGUSR1 kitty
-    pkill -SIGUSR1 alacritty
-    pkill -SIGUSR2 btop
-    ghostty +reload-config
-    killall -SIGUSR2 ghostty
+		# Reload everything instantly
+		hyprctl reload
+		restart-app waybar
+		restart-app swayosd-server
+		killall -SIGUSR1 kitty
+		pkill -SIGUSR1 alacritty
+		pkill -SIGUSR2 btop
+		ghostty +reload-config
+		killall -SIGUSR2 ghostty
 
-    pgrep -x nautilus >/dev/null && (
-      pkill -x nautilus
-      nautilus &>/dev/null &
-    )
+		pgrep -x nautilus >/dev/null && (
+			pkill -x nautilus
+			nautilus &>/dev/null &
+		)
 
-    if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
-      touch ~/.config/alacritty/alacritty.toml
-    fi
+		if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
+			touch ~/.config/alacritty/alacritty.toml
+		fi
 
-    # Send notification
-    notify-send -i "$wallpaper" "Theme Applied" "$(basename "$wallpaper")"
+		# Send notification
+		notify-send -i "$wallpaper" "Theme Applied" "$(basename "$wallpaper")"
 
-    break
-  fi
+		break
+	fi
 done

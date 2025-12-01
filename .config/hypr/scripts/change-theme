@@ -3,10 +3,9 @@
 # Check if custom theme is active
 CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "matugen")
 if [[ "$CURRENT_THEME" != "matugen" ]]; then
-    notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\nUse switch-theme.sh to change themes"
-    exit 0
+	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Matugen to use this"
+	exit 0
 fi
-
 
 # Directory containing wallpapers
 WALLPAPER_DIR="$HOME/Wallpapers/"
@@ -17,16 +16,16 @@ mapfile -t WALLPAPERS < <(find "$WALLPAPER_DIR" -type f \( -iname '*.jpg' -o -in
 # Get number of wallpapers
 NUM_WALLPAPERS=${#WALLPAPERS[@]}
 if [ "$NUM_WALLPAPERS" -eq 0 ]; then
-  echo "No wallpapers found in $WALLPAPER_DIR"
-  exit 1
+	echo "No wallpapers found in $WALLPAPER_DIR"
+	exit 1
 fi
 
 if [ -f "$STATE_FILE" ]; then
-  INDEX=$(<"$STATE_FILE")
-  INDEX=$((RANDOM % NUM_WALLPAPERS))
-  # INDEX=$(((INDEX + 1) % NUM_WALLPAPERS)) #cycles through wallpapers in sequence
+	INDEX=$(<"$STATE_FILE")
+	INDEX=$((RANDOM % NUM_WALLPAPERS))
+	# INDEX=$(((INDEX + 1) % NUM_WALLPAPERS)) #cycles through wallpapers in sequence
 else
-  INDEX=0
+	INDEX=0
 fi
 
 echo "$INDEX" >"$STATE_FILE"
@@ -38,16 +37,16 @@ swww query &>/dev/null || swww-daemon --format xrgb
 
 # swww img "$CURRENT_WALLPAPER" --transition-type=right --transition-fps 60 --transition-duration=1
 swww img "$CURRENT_WALLPAPER" \
-  --transition-type center \
-  --transition-pos top-right \
-  --transition-fps 120 \
-  --transition-duration 1 \
-  --transition-bezier 0.25,0.1,0.25,1.0
+	--transition-type center \
+	--transition-pos top-right \
+	--transition-fps 120 \
+	--transition-duration 1 \
+	--transition-bezier 0.25,0.1,0.25,1.0
 
 # Update wallpaper symlink to track current wallpaper
 DISPLAYED_WALLPAPER=$(swww query | grep "currently displaying" | head -1 | sed 's/.*image: //')
 if [ -n "$DISPLAYED_WALLPAPER" ]; then
-  ln -sf "$DISPLAYED_WALLPAPER" "$HOME/dotfiles/themes/matugen/wallpaper"
+	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/dotfiles/themes/matugen/wallpaper"
 fi
 
 # SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
@@ -73,13 +72,13 @@ ghostty +reload-config
 killall -SIGUSR2 ghostty
 
 pgrep -x nautilus >/dev/null && (
-  pkill -x nautilus
-  nautilus &>/dev/null &
-  disown
+	pkill -x nautilus
+	nautilus &>/dev/null &
+	disown
 )
 
 if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
-  touch ~/.config/alacritty/alacritty.toml
+	touch ~/.config/alacritty/alacritty.toml
 fi
 
 notify-send -i "$CURRENT_WALLPAPER" "Theme changed" "Wallpaper has been updated."
