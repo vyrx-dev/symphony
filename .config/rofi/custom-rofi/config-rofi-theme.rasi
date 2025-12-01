@@ -27,7 +27,7 @@ custombox {
 /* ---- Entry input ---- */
 entry {
   expand: true;
-  placeholder: " ⬇️  Select Which Rofi Theme wanted to apply";
+  placeholder: "Search themes";
 }
 
 /* ---- Listview ---- */
@@ -36,7 +36,7 @@ listview {
   lines: 7;
   fixed-height: false;
   margin: 10px;
-  scrollbar: true;
+  scrollbar: false;
   spacing: 6px;
   cycle: true;
 }
@@ -55,7 +55,7 @@ element-text {
 /* ---- Message ---- */
 message {
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   background-color: inherit;
 }
 

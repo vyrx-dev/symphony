@@ -24,7 +24,7 @@ menu() {
 swww query &>/dev/null || swww-daemon --format xrgb
 
 # Show menu
-choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
+choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
 [[ -z "$choice" ]] && exit 0
 
 # Apply wallpaper

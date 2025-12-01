@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # relative path to mpd's music directory *must* be used. absolute path will not be read by mpd.
 
-file="$(mpc listall | rofi -dmenu -i -l 10 -config ~/.config/rofi/custom-rofi/config-rofi-Beats.rasi)" || exit 0
+file="$(mpc listall | rofi -dmenu -i -p "" -l 10 -config ~/.config/rofi/custom-rofi/config-rofi-Beats.rasi)" || exit 0
 
 if ! mpc status | grep -q playing; then
   notify-send "Playing $file" && mpc clear && mpc add "$file" && mpc play >/dev/null

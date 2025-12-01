@@ -99,7 +99,7 @@ pkill mpv && notify-send -u low -i "$iDIR/music.png" "Music stopped" || {
   fi
 
   # Prompt the user to choose between local and online music
-  user_choice=$(printf "Play from Online Stations\nPlay from Music Folder\nShuffle Play from Music Folder" | rofi -dmenu -config ~/.config/rofi/custom-rofi/config-rofi-Beats-menu.rasi -p "")
+  user_choice=$(printf "Play from Online Stations\nPlay from Music Folder\nShuffle Music Folder" | rofi -dmenu -config ~/.config/rofi/custom-rofi/config-rofi-Beats-menu.rasi -p "")
 
   case "$user_choice" in
   "Play from Music Folder")
@@ -108,7 +108,7 @@ pkill mpv && notify-send -u low -i "$iDIR/music.png" "Music stopped" || {
   "Play from Online Stations")
     play_online_music
     ;;
-  "Shuffle Play from Music Folder")
+  "Shuffle Music Folder")
     shuffle_local_music
     ;;
   *)

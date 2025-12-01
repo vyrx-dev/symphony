@@ -3,26 +3,17 @@
 
 @import "~/.config/rofi/config.rasi"  
 
-/* ---- Mainbox ---- */
-mainbox {
-  children:
-    [ "inputbar", "listview"];
-}
-
-/* ---- Entry ---- */ 
-entry {
-  expand: false;
-  width: 25%;
-  width: 25%;
-  placeholder: " 📻 Choose Music Source";
-  horizontal-align: 0.5;
-  horizontal-align: 0.5;
-}
-
 /* ---- Window ---- */
 window {
-  width: 28%;
+  width: 310px;
   height: inherit;
+  location: center;
+  anchor: center;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+  children: ["listview"];
 }
 
 /* ---- Listview ---- */
@@ -30,16 +21,22 @@ listview {
   fixed-columns: false;
   scrollbar: false;
   colums: 1;
-  lines: 4;
-  spacing: 6px;
+  lines: 3;
+  spacing: 8px;
   cycle: true;
 }
 
 /* ---- Element ---- */
-element-icon {
-  	size: 0%;
+element {
+  padding: 10px 15px;
+  border-radius: 6px;
 }
+
+element-icon {
+  size: 0%;
+}
+
 element-text {
-    horizontal-align: 0.5;
-    
+  horizontal-align: 0.0;
+  vertical-align: 0.5;
 }

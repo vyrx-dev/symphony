@@ -13,7 +13,7 @@ configuration {
 window {
   width: 70%;
   height: 90%;
-  border-radius: 16px;
+  border-radius: 6px;
   background-color: #000000dd;
   border: 2px;
   border-color: #ffffff15;
@@ -29,7 +29,7 @@ mainbox {
 /* ---- Inputbar ---- */
 inputbar {
   enabled: true;
-  border-radius: 12px;
+  border-radius: 6px;
   background-color: #ffffff08;
   border: 1px;
   border-color: #ffffff12;
@@ -69,7 +69,7 @@ listview {
 /* ---- Elements ---- */
 element {
   orientation: vertical;
-  border-radius: 14px;
+  border-radius: 6px;
   background-color: #ffffff05;
   border: 1px;
   border-color: #ffffff08;
@@ -94,7 +94,7 @@ element alternate {
 /* ---- Element Icon (Video Thumbnail) ---- */
 element-icon {
   size: 18%;
-  border-radius: 10px;
+  border-radius: 6px;
   margin: 8px;
   cursor: inherit;
   background-color: #00000033;

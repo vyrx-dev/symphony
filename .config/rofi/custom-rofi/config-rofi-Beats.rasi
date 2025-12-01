@@ -27,13 +27,15 @@ listview {
   fixed-height: false;
   margin: 10px;
   scrollbar: false;
-  spacing: 6px;
+  spacing: 8px;
   cycle: true;
 }
 
 /* ---- Elements ---- */
 element {
   orientation: horizontal;
+  padding: 10px 15px;
+  border-radius: 6px;
 }
 
 element-icon {
