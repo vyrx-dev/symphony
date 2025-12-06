@@ -1,30 +1,30 @@
 [config]
 
 [templates.hyprland]
-input_path = '/home/vyrx/.config/matugen/templates/hyprland-colors.conf'
+input_path = '$HOME/.config/matugen/templates/hyprland-colors.conf'
 # output_path = '~/.config/hypr/colors.conf'
 output_path = '~/dotfiles/themes/matugen/.config/hypr/colors.conf'
 post_hook = 'hyprctl reload'
 
 [templates.kitty]
-input_path = '/home/vyrx/.config/matugen/templates/kitty-colors.conf'
+input_path = '$HOME/.config/matugen/templates/kitty-colors.conf'
 # output_path = '~/.config/kitty/colors.conf'
 output_path = '~/dotfiles/themes/matugen/.config/kitty/colors.conf'
 post_hook = 'pkill -SIGUSR1 kitty'
 
 
 [templates.btop]
-input_path = '/home/vyrx/.config/matugen/templates/btop.theme'
+input_path = '$HOME/.config/matugen/templates/btop.theme'
 # output_path = '~/.config/btop/themes/matugen.theme'
 output_path = '~/dotfiles/themes/matugen/.config/btop/themes/current.theme'
 
 [templates.pywalfox]
-input_path = '/home/vyrx/.config/matugen/templates/pywalfox-colors.json'
+input_path = '$HOME/.config/matugen/templates/pywalfox-colors.json'
 output_path = '~/dotfiles/themes/matugen/.cache/wal/colors.json'
 post_hook = 'pywalfox update'
 
 [templates.yazi]
-input_path = '/home/vyrx/.config/matugen/templates/yazi-theme.toml'
+input_path = '$HOME/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/dotfiles/themes/matugen/.config/yazi/theme.toml'
 
 [templates.cava]
@@ -54,7 +54,7 @@ post_hook = 'pkill -SIGUSR2 waybar'
 [templates.starship]
 input_path = '~/.config/matugen/templates/starship-colors.toml'
 output_path = '~/dotfiles/themes/matugen/.config/starship.toml'
-post_hook = '/home/vyrx/dotfiles/theme-scripts/core/update-obsidian-theme.sh'
+post_hook = '$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh'
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'

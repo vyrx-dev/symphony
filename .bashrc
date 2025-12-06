@@ -92,7 +92,7 @@ alias regfont="setfont default8x16"
 
 # Some useful aliases
 alias update='sudo pacman -Syu'
-alias pwreset='faillock --reset --user vyrx'
+alias pwreset='faillock --reset --user $USER'
 alias pg='ping -c 10 google.com'
 
 # Automatically do an ls after each cd, z, or zoxide
@@ -107,9 +107,9 @@ alias folders='du -h --max-depth=1'
 
 # Git aliases
 alias gits='git status'
-alias ghs='streaker vyrx-dev'
+alias ghs='streaker $USER'
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 
-export PATH=$PATH:/home/april/.spicetify
+export PATH=$PATH:$HOME/.spicetify

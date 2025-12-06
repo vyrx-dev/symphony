@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
 
 # Directories to search recursively (includes one-level subdirs)
+# Customize these paths according to your needs
 directories=(
   "$HOME/dotfiles/.config"
-  "$HOME/100xCodes"
-  "$HOME/100xCodes/Cohort-3-WebDev"
-  "$HOME/100xCodes/Projects/"
   "$HOME/Downloads"
   "$HOME/Documents/"
-  "$HOME/Testing-repo/"
   "$HOME/Projects/"
 )
 
 # Extra directories included as-is (no recursion)
+# Add your custom directories here
 extra_directories=(
-  "$HOME/Documents/testing/omarchy/"
 )
 
 all_dirs=()
