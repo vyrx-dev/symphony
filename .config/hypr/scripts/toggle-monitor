@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DDCUTIL=/usr/bin/ddcutil
+
+state=$($DDCUTIL getvcp D6 | grep -o 'sl=0x[0-9A-Fa-f]*')
+
+if [ "$state" = "sl=0x01" ]; then
+  $DDCUTIL setvcp D6 05
+else
+  $DDCUTIL setvcp D6 01
+fi
