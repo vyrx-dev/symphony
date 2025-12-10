@@ -2,6 +2,9 @@ return {
   -- Text objects
   { "echasnovski/mini.ai", version = "*", opts = {} },
 
+  -- icons provider
+  { "echasnovski/mini.icons", opts = {} },
+
   -- auto pairs for brackets/quotes
   { "echasnovski/mini.pairs", opts = {} },
 
@@ -38,7 +41,7 @@ return {
 
   -- better file explorer than oil (facts 🙂)
   {
-    "nvim-mini/mini.files",
+    "echasnovski/mini.files",
     version = false,
     config = function()
       require("mini.files").setup()

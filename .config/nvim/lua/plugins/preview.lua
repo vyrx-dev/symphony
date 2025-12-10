@@ -35,4 +35,12 @@ return {
       },
     },
   },
+
+  -- Markdown render
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = "markdown",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" }, -- if you use standalone mini plugins
+    opts = {},
+  },
 }

@@ -36,19 +36,8 @@ set("n", "<leader>pe", ":LiveServerStop<CR>", { desc = "Stop Live Server" })
 -- file-explorer
 set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Nvim tree " })
 
--- harpoon
--- local mark = require("harpoon.mark")
--- local ui = require("harpoon.ui")
---
--- set("n", "<leader>ha", mark.add_file, opts) -- Harpoon add
--- set("n", "<leader>h", ui.toggle_quick_menu, opts) -- Harpoon menu
--- set("n", "hp", ui.nav_next, opts) -- Harpoon next file
--- set("n", "hn", ui.nav_prev, opts) -- Harpoon previous
---
--- set("n", "<leader>1", function() ui.nav_file(1) end, opts)
--- set("n", "<leader>2", function() ui.nav_file(2) end, opts)
--- set("n", "<leader>3", function() ui.nav_file(3) end, opts)
--- set("n", "<leader>4", function() ui.nav_file(4) end, opts)
+-- Code Snippets
+set("v", "cx", ":CodeSnapSave<CR>", { desc = "Save with CodeSnap", silent = true })
 
 -- Center the screen after scrolling up/down with Ctrl-u/d
 set("n", "<C-u>", "<C-u>zz")
@@ -114,17 +103,17 @@ set("n", "<S-Tab>", ":bprevious<cr>", opts)
 set("n", "<leader>bd", ":bdelete!<cr>", opts) --close buffer
 set("n", "<leader>bn", "<cmd> enew <cr>", opts) -- new buffer
 
--- Diagnostic
-set("n", "[d", function()
-  vim.diagnostic.jump { count = -1, float = true }
-end, { desc = "Go to previous diagnostic message" })
-
-set("n", "]d", function()
-  vim.diagnostic.jump { count = 1, float = true }
-end, { desc = "Go to next diagnostic message" })
-
-set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+-- Diagnostic -- handled by lspsaga now
+-- set("n", "[d", function()
+--   vim.diagnostic.jump { count = -1, float = true }
+-- end, { desc = "Go to previous diagnostic message" })
+--
+-- set("n", "]d", function()
+--   vim.diagnostic.jump { count = 1, float = true }
+-- end, { desc = "Go to next diagnostic message" })
+--
+-- set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+-- set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Format buffer manually
 set("n", "<leader>lf", function()
@@ -133,3 +122,6 @@ end, { desc = "Format current buffer" })
 
 -- Toggle autoformat on save
 set("n", "<leader>tf", ":ToggleAutoformat<CR>", { desc = "Toggle format on save" })
+
+-- Markdown render
+set("n", "<leader>pt", ":RenderMarkdown toggle<CR>", { desc = "Toggle Markdown Render" })

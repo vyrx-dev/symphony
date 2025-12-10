@@ -7,7 +7,13 @@ return {
     "tpope/vim-fugitive",
     event = "VeryLazy",
     config = function()
-      vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Open Fugitive Panel" })
+      vim.keymap.set("n", "<leader>gs", function()
+        if vim.bo.filetype == "fugitive" then
+          vim.cmd "q"
+        else
+          vim.cmd "Git"
+        end
+      end, { desc = "Toggle Fugitive Panel" })
     end,
   },
 
