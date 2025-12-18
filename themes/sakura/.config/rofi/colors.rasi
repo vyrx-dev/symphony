@@ -1,4 +1,10 @@
-/* Theme: Sakura */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Sakura
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #E8C099;

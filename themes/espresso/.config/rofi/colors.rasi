@@ -1,4 +1,10 @@
-/* Theme: Espresso */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Espresso
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (warm peach cream) */
     primary: #e8b89a;

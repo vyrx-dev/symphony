@@ -1,4 +1,10 @@
-/* Theme: Tokyo Night */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Tokyo Night
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color waybar_accent rgba(125, 207, 255, 0.20);
 @define-color waybar_accent_fg @on_background;
 @define-color on_background #c0caf5;

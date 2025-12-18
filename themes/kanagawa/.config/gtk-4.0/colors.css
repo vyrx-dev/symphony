@@ -1,4 +1,10 @@
-/* Theme: Kanagawa */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Kanagawa
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color background     #1F1F28;
 @define-color foreground     #DCD7BA;
 @define-color black          #16161D;

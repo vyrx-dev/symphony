@@ -1,4 +1,10 @@
-/* Theme: Void */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Void
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #A6B8FF;

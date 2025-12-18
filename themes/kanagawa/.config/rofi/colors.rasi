@@ -1,4 +1,10 @@
-/* Theme: Kanagawa */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Kanagawa
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (crystalBlue) */
     primary: #7E9CD8;

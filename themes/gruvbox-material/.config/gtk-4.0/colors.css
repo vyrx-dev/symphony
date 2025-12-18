@@ -1,4 +1,10 @@
-/* Theme: Gruvbox Material */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Gruvbox Material
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color background     #111313;
 @define-color foreground     #ddc7a1;
 @define-color black          #111313;

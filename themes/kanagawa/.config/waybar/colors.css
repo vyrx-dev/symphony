@@ -1,4 +1,10 @@
-/* Theme: Kanagawa */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Kanagawa
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color waybar_accent rgba(126, 156, 216, 0.20);
 @define-color waybar_accent_fg @on_background;
 @define-color on_background #DCD7BA;

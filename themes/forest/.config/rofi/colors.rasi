@@ -1,4 +1,10 @@
-/* Theme: Forest */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Forest
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #9ed8dd;

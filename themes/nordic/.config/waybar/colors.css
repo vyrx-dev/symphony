@@ -1,4 +1,10 @@
-/* Theme: Nordic */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Nordic
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color waybar_accent rgba(143, 188, 187, 0.20);
 @define-color waybar_accent_fg @on_background;
 @define-color on_background #d8dee9;

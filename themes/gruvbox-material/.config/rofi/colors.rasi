@@ -1,4 +1,10 @@
-/* Theme: Gruvbox Material */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Gruvbox Material
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #89b482;

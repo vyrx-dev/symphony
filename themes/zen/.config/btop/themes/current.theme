@@ -1,4 +1,7 @@
-# Theme: Zen
+## Symphony
+## Author: vyrx
+## Theme: Zen
+
 
 # Main background, empty for terminal default, need to be empty if you want transparent background
 theme[main_bg]="#0f0f0f"

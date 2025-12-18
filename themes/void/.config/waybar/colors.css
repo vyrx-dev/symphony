@@ -1,4 +1,10 @@
-/* Theme: Void */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Void
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color waybar_accent rgba(187, 154, 247, 0.25);
 @define-color waybar_accent_fg @on_background;
 @define-color on_background #f0dfd8;

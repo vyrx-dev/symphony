@@ -1,4 +1,10 @@
-/* Theme: Nordic */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Nordic
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color background     #2e3440;
 @define-color foreground     #d8dee9;
 @define-color black          #3b4252;

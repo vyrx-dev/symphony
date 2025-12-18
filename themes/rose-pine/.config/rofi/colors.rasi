@@ -1,4 +1,10 @@
-/* Theme: Rose Pine */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Rose Pine
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #ebbcba;

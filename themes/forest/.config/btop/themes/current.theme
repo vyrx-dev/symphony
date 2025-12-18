@@ -1,4 +1,7 @@
-# Theme: Forest
+## Symphony
+## Author: vyrx
+## Theme: Forest
+
 # Main background, empty for terminal default, need to be empty if you want transparent background
 theme[main_bg]="#020802"
 

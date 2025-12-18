@@ -1,4 +1,10 @@
-/* Theme: Nordic */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Nordic
+ * ════════════════════════════════════════════════════════
+ */
+
 * {
     /* Primary accent color (using cyan-teal as primary) */
     primary: #8fbcbb;

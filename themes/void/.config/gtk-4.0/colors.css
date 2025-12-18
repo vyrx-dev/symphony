@@ -1,4 +1,10 @@
-/* Theme: Void */
+/**
+ * ════════════════════════════════════════════════════════
+ *   Symphony by https://github.com/vyrx-dev
+ *   Theme: Void
+ * ════════════════════════════════════════════════════════
+ */
+
 @define-color background     #05010C;
 @define-color foreground     #FFFFFF;
 @define-color black          #05010C;
