@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Forest
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Forest */
 @define-color background     #020802;
 @define-color foreground     #fdfffd;
 @define-color black          #020802;

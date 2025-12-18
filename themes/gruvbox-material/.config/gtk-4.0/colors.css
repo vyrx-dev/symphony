@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Gruvbox-material
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Gruvbox Material */
 @define-color background     #111313;
 @define-color foreground     #ddc7a1;
 @define-color black          #111313;

@@ -1,3 +1,4 @@
+/* Theme: Void */
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #A6B8FF;

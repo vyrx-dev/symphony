@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Rose-pine
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Rose Pine */
 @define-color background     #191724;
 @define-color foreground     #e0def4;
 @define-color black          #191724;

@@ -1,6 +1,4 @@
-# Symphony by vyrx
 # Theme: Void
-# https://github.com/vyrx-dev
 
 [colors]
 
@@ -31,4 +29,3 @@ white = "#C3AAF0"
 [colors.cursor]
 text = "#C7CAC2"
 cursor = "#814DDE"
-

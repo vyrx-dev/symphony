@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Sakura
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Sakura */
 @define-color background     #0d0509;
 @define-color foreground     #f0eaed;
 @define-color black          #0d0509;

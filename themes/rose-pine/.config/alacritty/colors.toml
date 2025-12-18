@@ -1,9 +1,6 @@
-# Symphony by vyrx
 # Theme: Rose Pine
-# https://github.com/vyrx-dev
 
 # Colors section of "Alacritty - TOML configuration file format"
-# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd#colors
 
 [colors.primary]
 foreground = "#e0def4"
@@ -76,4 +73,3 @@ blue = "#9ccfd8"
 magenta = "#c4a7e7"
 cyan = "#ebbcba"
 white = "#e0def4"
-

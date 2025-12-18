@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Tokyo-night
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Tokyo Night */
 @define-color background     #1a1b26;
 @define-color foreground     #c0caf5;
 @define-color black          #1a1b26;

@@ -1,10 +1,4 @@
-/* Symphony by vyrx
- * Theme: Espresso
- * Cohesive warm espresso aesthetic
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors - cohesive warm palette */
+/* Theme: Espresso */
 @define-color background     #1a1513;
 @define-color foreground     #f0e4dc;
 @define-color black          #2e2520;
