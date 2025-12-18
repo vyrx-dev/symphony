@@ -1,0 +1,49 @@
+name: Feature request
+description: Suggest a small improvement or new idea
+title: "feature: <short summary>"
+labels: [enhancement]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea — keep it simple and clear.
+
+  - type: input
+    id: summary
+    attributes:
+      label: What do you want to add or improve?
+      placeholder: e.g. Compact mode for Waybar
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does this matter?
+      description: What's the problem this solves for you?
+      placeholder: e.g. The bar takes too much space on small screens.
+    validations:
+      required: true
+
+  - type: textarea
+    id: how
+    attributes:
+      label: How should it work (in your words)?
+      description: Short bullet points are perfect.
+      placeholder: |
+        - Toggle in config or command
+        - Smaller padding and font
+        - Hide workspace labels
+
+  - type: input
+    id: theme
+    attributes:
+      label: Theme (if relevant)
+      placeholder: e.g. nordic (or "any")
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Screenshots or links (optional)
+      placeholder: Drag images here or paste links

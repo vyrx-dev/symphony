@@ -1,0 +1,77 @@
+name: Bug report
+description: Something isn't working as expected
+title: "bug: <short summary>"
+labels: [bug]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug — simple and clear is best.
+
+  - type: input
+    id: summary
+    attributes:
+      label: What went wrong?
+      placeholder: e.g. Waybar colors didn't update after switching theme
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What did you do? (1-2-3)
+      placeholder: |
+        1. symphony switch zen
+        2. Waybar restarted
+        3. Colors stayed the same
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      placeholder: e.g. Waybar should use zen colors
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+      placeholder: e.g. Still using the previous theme colors
+    validations:
+      required: true
+
+  - type: input
+    id: theme
+    attributes:
+      label: Theme
+      placeholder: e.g. nordic (or "any")
+
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: Affected areas (check all that apply)
+      options:
+        - label: Terminal (kitty/ghostty/alacritty)
+        - label: Hyprland
+        - label: Waybar
+        - label: Rofi
+        - label: GTK (3/4)
+        - label: Swaync
+        - label: btop
+        - label: cava
+        - label: yazi
+        - label: rmpc
+        - label: vesktop
+        - label: Obsidian
+        - label: Neovim
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots (optional)
+      placeholder: Paste errors or drop images
