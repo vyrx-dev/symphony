@@ -1,0 +1,88 @@
+# Symphony
+# Author: vyrx
+# Theme: Kanagawa
+# Inspired by Kanagawa.nvim
+
+# Main bg
+theme[main_bg]="#1f1f28"
+
+# Main text color
+theme[main_fg]="#dcd7ba"
+
+# Title color for boxes - Kanagawa blue accent
+theme[title]="#7E9CD8"
+
+# Highlight color for keyboard shortcuts - Kanagawa blue
+theme[hi_fg]="#7E9CD8"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#2D4F67"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#DCD7BA"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#727169"
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="#7FB4CA"
+
+# Cpu box outline color - subtle
+theme[cpu_box]="#54546D"
+
+# Memory/disks box outline color
+theme[mem_box]="#54546D"
+
+# Net up/down box outline color
+theme[net_box]="#54546D"
+
+# Processes box outline color
+theme[proc_box]="#54546D"
+
+# Box divider line and small boxes line color
+theme[div_line]="#54546D"
+
+# Temperature graph colors - green to yellow to red
+theme[temp_start]="#98BB6C"
+theme[temp_mid]="#E6C384"
+theme[temp_end]="#C34043"
+
+# CPU graph colors - Kanagawa blues
+theme[cpu_start]="#7E9CD8"
+theme[cpu_mid]="#7FB4CA"
+theme[cpu_end]="#957FB8"
+
+# Mem/Disk free meter - greens
+theme[free_start]="#76946A"
+theme[free_mid]="#98BB6C"
+theme[free_end]="#98BB6C"
+
+# Mem/Disk cached meter - yellows/orange
+theme[cached_start]="#C0A36E"
+theme[cached_mid]="#E6C384"
+theme[cached_end]="#FFA066"
+
+# Mem/Disk available meter - blues
+theme[available_start]="#7E9CD8"
+theme[available_mid]="#7FB4CA"
+theme[available_end]="#7FB4CA"
+
+# Mem/Disk used meter - purples
+theme[used_start]="#957FB8"
+theme[used_mid]="#938AA9"
+theme[used_end]="#938AA9"
+
+# Download graph colors - cyans
+theme[download_start]="#6A9589"
+theme[download_mid]="#7AA89F"
+theme[download_end]="#7FB4CA"
+
+# Upload graph colors - warm
+theme[upload_start]="#C0A36E"
+theme[upload_mid]="#E6C384"
+theme[upload_end]="#FFA066"
+
+# Process box color gradient for threads, mem and cpu usage
+theme[process_start]="#98BB6C"
+theme[process_mid]="#E6C384"
+theme[process_end]="#C34043"

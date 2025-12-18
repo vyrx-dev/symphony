@@ -1,0 +1,34 @@
+# Symphony
+# Author: vyrx
+# Theme: Kanagawa
+
+[colors]
+[colors.primary]
+background = '#1F1F28'
+foreground = '#DCD7BA'
+
+# Normal colors
+[colors.normal]
+black = '#16161D'
+red = '#C34043'
+green = '#76946A'
+yellow = '#C0A36E'
+blue = '#7E9CD8'
+magenta = '#957FB8'
+cyan = '#6A9589'
+white = '#C8C093'
+
+# Bright colors
+[colors.bright]
+black = '#727169'
+red = '#E82424'
+green = '#98BB6C'
+yellow = '#E6C384'
+blue = '#7FB4CA'
+magenta = '#938AA9'
+cyan = '#7AA89F'
+white = '#DCD7BA'
+
+[colors.selection]
+background = '#2D4F67'
+foreground = '#C8C093'

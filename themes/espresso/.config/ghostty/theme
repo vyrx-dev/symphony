@@ -1,0 +1,36 @@
+# Symphony by vyrx
+# Theme: Espresso
+# https://github.com/vyrx-dev
+# Warm cohesive espresso palette
+
+# Background and foreground colors
+background = 1a1513
+foreground = f0e4dc
+
+# Cursor
+cursor-color = e8b89a
+cursor-text = 1a1513
+
+# Selection
+selection-background = e8b89a
+selection-foreground = 1a1513
+
+# Standard colors
+palette = 0=#2e2520
+palette = 1=#e8a090
+palette = 2=#c8b888
+palette = 3=#e8c8a0
+palette = 4=#c8a898
+palette = 5=#d8a8a0
+palette = 6=#b8b098
+palette = 7=#d8ccc0
+
+# Bright colors
+palette = 8=#5c534a
+palette = 9=#f0b8a8
+palette = 10=#d8c8a0
+palette = 11=#f0d8b8
+palette = 12=#d8b8a8
+palette = 13=#e8b8b0
+palette = 14=#c8c0a8
+palette = 15=#f0e4dc

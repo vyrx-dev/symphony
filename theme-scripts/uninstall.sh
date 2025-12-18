@@ -16,13 +16,13 @@ HAS_GUM=false
 command -v gum >/dev/null 2>&1 && HAS_GUM=true
 
 show_menu() {
-  echo ""
-  echo "Symphony Uninstaller"
-  echo ""
-  echo "1) Delete specific themes"
-  echo "2) Complete removal (nuke)"
-  echo "3) Cancel"
-  echo ""
+  echo "" >&2
+  echo "Symphony Uninstaller" >&2
+  echo "" >&2
+  echo "1) Delete specific themes" >&2
+  echo "2) Complete removal (nuke)" >&2
+  echo "3) Cancel" >&2
+  echo "" >&2
   read -p "Select: " choice
   echo "$choice"
 }
@@ -79,13 +79,13 @@ delete_themes() {
 # Complete removal
 nuke_everything() {
   echo ""
-  echo "⚠️  COMPLETE REMOVAL"
+  echo "COMPLETE REMOVAL"
   echo ""
   echo "This will remove:"
-  echo "  • All themes ($THEMES_DIR)"
-  echo "  • Symphony configs ($SYMPHONY_DIR)"
-  echo "  • Symphony command symlink"
-  echo "  • All config symlinks"
+  echo "  - All themes ($THEMES_DIR)"
+  echo "  - Symphony configs ($SYMPHONY_DIR)"
+  echo "  - Legacy theme file (~/.current-theme)"
+  echo "  - Pywal cache symlink"
   echo ""
   read -p "Type 'yes' to confirm: " confirm
   
@@ -97,42 +97,35 @@ nuke_everything() {
   echo ""
   echo "Removing..."
   
-  # Remove symlinks
-  rm -f "$HOME/.config/rofi/colors.rasi"
-  rm -f "$HOME/.config/starship.toml"
-  rm -f "$HOME/.config/hypr/theme/colors.conf"
-  rm -f "$HOME/.config/hypr/theme/overrides.conf"
-  rm -f "$HOME/.config/kitty/colors.conf"
-  rm -f "$HOME/.config/alacritty/colors.toml"
-  rm -f "$HOME/.config/yazi/theme.toml"
-  echo "✓ Config symlinks"
-  
-  # Remove symphony directory
+  # Remove symphony directory (contains current symlink and themes symlinks)
   rm -rf "$SYMPHONY_DIR"
-  echo "✓ Symphony config"
+  echo "Removed symphony config"
   
-  # Remove command
-  rm -f "$HOME/.local/bin/symphony-theme"
-  rm -f "$HOME/.local/bin/theme"
-  echo "✓ Commands"
+  # Remove legacy theme file
+  rm -f "$HOME/.current-theme"
+  echo "Removed legacy theme file"
+  
+  # Remove pywal symlink
+  rm -f "$HOME/.cache/wal/colors.json"
+  echo "Removed pywal symlink"
   
   # Remove themes
   rm -rf "$THEMES_DIR"
-  echo "✓ Themes"
+  echo "Removed themes"
   
   # Remove theme-scripts
   read -p "Remove theme-scripts directory? (yes/no): " remove_scripts
   if [[ "$remove_scripts" == "yes" ]]; then
     rm -rf "$HOME/dotfiles/theme-scripts"
-    echo "✓ Scripts"
+    echo "Removed scripts"
   fi
   
   echo ""
-  echo "✅ Complete removal done"
+  echo "Complete removal done"
   echo ""
   echo "Manual cleanup needed:"
-  echo "  • Remove hyprland keybinds"
-  echo "  • Reload shell: source ~/.zshrc"
+  echo "  - Remove PATH entry from shell rc file"
+  echo "  - Reload shell: source ~/.bashrc or ~/.zshrc"
 }
 
 # Main

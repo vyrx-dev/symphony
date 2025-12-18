@@ -1,0 +1,178 @@
+# Symphony by vyrx
+# Theme: Espresso
+# https://github.com/vyrx-dev
+# Cohesive warm espresso aesthetic - muted to match terminal
+
+# : Manager [[[
+
+[mgr]
+cwd = { fg = "#d8ccc0" }
+
+# Tab - subtle inverted style
+tab_active = { fg = "#1a1513", bg = "#c8a898", bold = true }
+tab_inactive = { fg = "#8a7968", bg = "#2e2520" }
+tab_width = 1
+
+# Find
+find_keyword = { fg = "#e8a090", bold = true, italic = true, underline = true }
+find_position = { fg = "#e8a090", bold = true, italic = true }
+
+# Marker - muted warm colors
+marker_copied = { fg = "#c8b888", bg = "#c8b888" }
+marker_cut = { fg = "#e8a090", bg = "#e8a090" }
+marker_marked = { fg = "#d8c8a0", bg = "#d8c8a0" }
+marker_selected = { fg = "#c8a898", bg = "#c8a898" }
+
+# Count
+count_copied = { fg = "#1a1513", bg = "#c8b888" }
+count_cut = { fg = "#1a1513", bg = "#e8a090" }
+count_selected = { fg = "#1a1513", bg = "#c8a898" }
+
+# Border - muted taupe accent
+border_symbol = " "
+border_style  = { fg = "#8a7968" }
+
+# : ]]]
+
+
+# : Status [[[
+
+[status]
+separator_open = "🭁"
+separator_close = "🭠"
+separator_style = { bg = "#1a1513", fg = "#c8a898" }
+
+[mode]
+# Mode - muted taupe
+normal_main = { bg = "#c8a898", fg = "#1a1513", bold = true }
+normal_alt  = { bg = "#3a322c", fg = "#d8ccc0" }
+
+# Select mode - warm caramel
+select_main = { bg = "#d8a078", fg = "#1a1513", bold = true }
+select_alt  = { bg = "#3a322c", fg = "#d8ccc0" }
+
+# Unset mode - warm olive
+unset_main = { bg = "#c8b888", fg = "#1a1513", bold = true }
+unset_alt  = { bg = "#3a322c", fg = "#d8ccc0" }
+
+# Progress
+progress_label = { bold = true }
+progress_normal = { fg = "#c8a898", bg = "#2e2520" }
+progress_error = { fg = "#e8a090", bg = "#2e2520" }
+
+# Permissions - muted warm
+permissions_t = { fg = "#8a7968" }
+permissions_r = { fg = "#c8b888" }
+permissions_w = { fg = "#d8a078" }
+permissions_x = { fg = "#e8a090" }
+permissions_s = { fg = "#d8a8a0" }
+
+# : ]]]
+
+
+# : Select [[[
+
+[select]
+border = { fg = "#8a7968" }
+active = { fg = "#d8ccc0", bold = true }
+
+# : ]]]
+
+
+# : Input [[[
+
+[input]
+border = { fg = "#8a7968" }
+value = { fg = "#f0e4dc" }
+
+# : ]]]
+
+# : Tabs [[[
+
+[tabs]
+active = { fg = "#c8a898", bold = true, bg = "#1a1513" }
+inactive = { fg = "#8a7968", bg = "#1a1513" }
+sep_inner = { open = "[", close = "]" }
+
+# : ]]]
+
+
+# : Completion [[[
+
+[completion]
+border = { fg = "#8a7968", bg = "#2e2520" }
+
+# : ]]]
+
+
+# : Tasks [[[
+
+[tasks]
+border = { fg = "#8a7968" }
+title = {}
+hovered = { fg = "#d8ccc0", underline = true }
+
+# : ]]]
+
+
+# : Which [[[
+
+[which]
+cols = 3
+mask = { bg = "#2e2520" }
+cand = { fg = "#c8a898" }
+rest = { fg = "#5c534a" }
+desc = { fg = "#d8ccc0" }
+separator = " ▶ "
+separator_style = { fg = "#d8ccc0" }
+
+# : ]]]
+
+
+# : Help [[[
+
+[help]
+on = { fg = "#d8ccc0" }
+run = { fg = "#d8ccc0" }
+footer = { fg = "#1a1513", bg = "#8a7968" }
+
+# : ]]]
+
+
+# : Notify [[[
+
+[notify]
+title_info = { fg = "#c8b888" }
+title_warn = { fg = "#d8a078" }
+title_error = { fg = "#e8a090" }
+
+# : ]]]
+
+
+# : File-specific styles [[[
+
+[filetype]
+
+rules = [
+    # Images
+    { mime = "image/*", fg = "#b8b098" },
+
+    # Media
+    { mime = "{audio,video}/*", fg = "#d8a078" },
+
+    # Archives
+    { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#d8a8a0" },
+
+    # Documents
+    { mime = "application/{pdf,doc,rtf}", fg = "#c8b888" },
+
+    # Special files
+    { name = "*", is = "orphan", bg = "#e8a090" },
+    { name = "*", is = "exec", fg = "#d8ccc0" },
+
+    # Fallback
+    { name = "*", fg = "#d8ccc0" },
+    { name = "*/", fg = "#c8a898" },
+]
+
+# : ]]]

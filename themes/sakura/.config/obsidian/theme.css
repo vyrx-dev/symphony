@@ -1,0 +1,38 @@
+/* Symphony - Sakura */
+.theme-dark, .theme-light {
+  --background-primary: #0d0509;
+  --background-primary-alt: #160a10;
+  --background-secondary: #1f1015;
+  --background-secondary-alt: #160a10;
+  --background-modifier-hover: #4a3c45;
+  --background-modifier-border: #4a3c45;
+
+  --text-normal: #f0eaed;
+  --text-muted: #d1b399;
+  --text-faint: #4a3c45;
+  --text-on-accent: #0d0509;
+
+  --interactive-accent: #E85F6F;
+  --interactive-accent-hover: #FF7A8A;
+  --text-accent: #E85F6F;
+  --text-accent-hover: #FF7A8A;
+
+  --link-color: #D9A56C;
+  --link-color-hover: #EBB97E;
+  --link-external-color: #F29B9A;
+
+  --code-background: #160a10;
+  --code-normal: #f0eaed;
+
+  --text-error: #E85F6F;
+  --text-success: #F29B9A;
+  --text-warning: #D4A882;
+
+  --divider-color: #4a3c45;
+  --icon-color: #d1b399;
+  --icon-color-hover: #f0eaed;
+  --tag-color: #E85F6F;
+  --tag-background: #1f1015;
+}
+
+::selection { background: #E85F6F40; }

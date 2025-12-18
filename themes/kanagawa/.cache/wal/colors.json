@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/vyrx/dotfiles/themes/kanagawa/wallpaper",
+    "alpha": "100",
+    "special": {
+        "background": "#1F1F28",
+        "foreground": "#DCD7BA",
+        "cursor": "#7E9CD8"
+    },
+    "colors": {
+        "color0": "#1F1F28",
+        "color1": "#C34043",
+        "color2": "#98BB6C",
+        "color3": "#E6C384",
+        "color4": "#7E9CD8",
+        "color5": "#957FB8",
+        "color6": "#7FB4CA",
+        "color7": "#C8C093",
+        "color8": "#54546D",
+        "color9": "#C34043",
+        "color10": "#98BB6C",
+        "color11": "#E6C384",
+        "color12": "#7E9CD8",
+        "color13": "#957FB8",
+        "color14": "#7FB4CA",
+        "color15": "#DCD7BA"
+    }
+}

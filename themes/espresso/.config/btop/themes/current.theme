@@ -1,0 +1,80 @@
+# Symphony by vyrx
+# Theme: Espresso
+# https://github.com/vyrx-dev
+# Cohesive warm espresso aesthetic
+
+# Main background
+theme[main_bg]="#1a1513"
+
+# Main text color
+theme[main_fg]="#f0e4dc"
+
+# Title color for boxes - warm peach cream
+theme[title]="#e8b89a"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#e8b89a"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#3a322c"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#f0e4dc"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#5c534a"
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="#c8b888"
+
+# Box outline and divider line color
+theme[cpu_box]="#3a322c"
+theme[mem_box]="#3a322c"
+theme[net_box]="#3a322c"
+theme[proc_box]="#3a322c"
+theme[div_line]="#2e2520"
+
+# Gradient for temperature - warm olive to peach to terracotta
+theme[temp_start]="#c8b888"
+theme[temp_mid]="#e8b89a"
+theme[temp_end]="#e8a090"
+
+# Gradient for CPU - warm espresso colors
+theme[cpu_start]="#e8b89a"
+theme[cpu_mid]="#d8a078"
+theme[cpu_end]="#e8a090"
+
+# Gradient for free memory - warm olive/sage
+theme[free_start]="#c8b888"
+theme[free_mid]="#d8c8a0"
+theme[free_end]="#c8b888"
+
+# Gradient for cached memory - warm caramel/honey
+theme[cached_start]="#d8a078"
+theme[cached_mid]="#e8b89a"
+theme[cached_end]="#f0c8a8"
+
+# Gradient for available memory - warm peach
+theme[available_start]="#e8b89a"
+theme[available_mid]="#f0c8a8"
+theme[available_end]="#e8b89a"
+
+# Gradient for used memory - warm terracotta/rose
+theme[used_start]="#e8a090"
+theme[used_mid]="#f0b8a8"
+theme[used_end]="#d8a8a0"
+
+# Gradient for download - warm olive to peach
+theme[download_start]="#c8b888"
+theme[download_mid]="#e8b89a"
+theme[download_end]="#d8a078"
+
+# Gradient for upload - caramel to terracotta
+theme[upload_start]="#d8a078"
+theme[upload_mid]="#e8b89a"
+theme[upload_end]="#e8a090"
+
+# Process box color gradient for threads, mem and cpu usage
+theme[process_start]="#c8b888"
+theme[process_mid]="#e8b89a"
+theme[process_end]="#e8a090"

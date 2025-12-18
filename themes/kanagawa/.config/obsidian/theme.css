@@ -1,0 +1,38 @@
+/* Symphony - Kanagawa */
+.theme-dark, .theme-light {
+  --background-primary: #1F1F28;
+  --background-primary-alt: #2A2A37;
+  --background-secondary: #363646;
+  --background-secondary-alt: #2A2A37;
+  --background-modifier-hover: #54546D;
+  --background-modifier-border: #54546D;
+
+  --text-normal: #DCD7BA;
+  --text-muted: #C8C093;
+  --text-faint: #727169;
+  --text-on-accent: #1F1F28;
+
+  --interactive-accent: #7E9CD8;
+  --interactive-accent-hover: #7FB4CA;
+  --text-accent: #7E9CD8;
+  --text-accent-hover: #7FB4CA;
+
+  --link-color: #7E9CD8;
+  --link-color-hover: #7FB4CA;
+  --link-external-color: #7AA89F;
+
+  --code-background: #2A2A37;
+  --code-normal: #DCD7BA;
+
+  --text-error: #C34043;
+  --text-success: #98BB6C;
+  --text-warning: #DCA561;
+
+  --divider-color: #54546D;
+  --icon-color: #C8C093;
+  --icon-color-hover: #DCD7BA;
+  --tag-color: #957FB8;
+  --tag-background: #363646;
+}
+
+::selection { background: #7E9CD840; }

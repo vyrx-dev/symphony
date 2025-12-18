@@ -1,26 +1,132 @@
 /* Symphony by vyrx
- * Theme: Rose Pine
- * https://github.com/vyrx-dev
+ * Theme: Rose-pine
+ * Enhanced with semantic colors for libadwaita support
  */
 
-/*
-* GTK Colors - Rose Pine
-*/
+/* Base terminal colors */
+@define-color background     #191724;
+@define-color foreground     #e0def4;
+@define-color black          #191724;
+@define-color red            #eb6f92;
+@define-color green          #31748f;
+@define-color yellow         #f6c177;
+@define-color blue           #9ccfd8;
+@define-color magenta        #c4a7e7;
+@define-color cyan           #ebbcba;
+@define-color white          #e0def4;
+@define-color bright_black   #6e6a86;
+@define-color bright_white   #e0def4;
 
-@define-color accent_color #ebbcba;
-@define-color accent_fg_color #1f1d2e;
-@define-color accent_bg_color #ebbcba;
+/* Accent colors */
+@define-color accent_bg_color #9ccfd8;
+@define-color accent_fg_color #191724;
+@define-color accent_color #9ccfd8;
+
+/* Window colors */
 @define-color window_bg_color #191724;
 @define-color window_fg_color #e0def4;
-@define-color headerbar_bg_color #191724;
-@define-color headerbar_fg_color #e0def4;
-@define-color popover_bg_color #191724;
-@define-color popover_fg_color #e0def4;
+
+/* View colors */
 @define-color view_bg_color #191724;
 @define-color view_fg_color #e0def4;
-@define-color card_bg_color #191724;
+
+/* Sidebar colors */
+@define-color sidebar_bg_color #26233a;
+@define-color sidebar_fg_color #e0def4;
+@define-color sidebar_backdrop_color #191724;
+@define-color sidebar_shade_color #191724;
+
+/* Headerbar colors */
+@define-color headerbar_bg_color #26233a;
+@define-color headerbar_fg_color #e0def4;
+@define-color headerbar_backdrop_color #191724;
+@define-color headerbar_shade_color #191724;
+
+/* Card colors */
+@define-color card_bg_color #26233a;
 @define-color card_fg_color #e0def4;
-@define-color sidebar_bg_color @window_bg_color;
-@define-color sidebar_fg_color @window_fg_color;
-@define-color sidebar_border_color @window_bg_color;
-@define-color sidebar_backdrop_color @window_bg_color;
+
+/* Popover colors */
+@define-color popover_bg_color #26233a;
+@define-color popover_fg_color #e0def4;
+
+/* Dialog colors */
+@define-color dialog_bg_color #26233a;
+@define-color dialog_fg_color #e0def4;
+
+/* Semantic status colors */
+@define-color destructive_bg_color #eb6f92;
+@define-color destructive_fg_color #191724;
+@define-color destructive_color #eb6f92;
+
+@define-color success_bg_color #31748f;
+@define-color success_fg_color #191724;
+@define-color success_color #31748f;
+
+@define-color warning_bg_color #f6c177;
+@define-color warning_fg_color #191724;
+@define-color warning_color #f6c177;
+
+@define-color error_bg_color #eb6f92;
+@define-color error_fg_color #191724;
+@define-color error_color #eb6f92;
+
+/* Legacy theme colors */
+@define-color borders alpha(@foreground, 0.1);
+
+@define-color theme_fg_color @foreground;
+@define-color theme_text_color @foreground;
+@define-color theme_bg_color @background;
+@define-color theme_base_color @black;
+@define-color theme_selected_bg_color @accent_bg_color;
+@define-color theme_selected_fg_color @accent_fg_color;
+
+@define-color insensitive_bg_color @background;
+@define-color insensitive_fg_color @bright_black;
+@define-color insensitive_base_color @black;
+
+@define-color theme_unfocused_fg_color @foreground;
+@define-color theme_unfocused_text_color @foreground;
+@define-color theme_unfocused_bg_color @background;
+@define-color theme_unfocused_base_color @black;
+@define-color theme_unfocused_selected_bg_color @accent_bg_color;
+@define-color theme_unfocused_selected_fg_color @accent_fg_color;
+
+@define-color unfocused_insensitive_color @bright_black;
+@define-color unfocused_borders alpha(@foreground, 0.1);
+
+@define-color content_view_bg @view_bg_color;
+@define-color text_view_bg @view_bg_color;
+
+/* Widget styling */
+messagedialog {
+    background-color: @dialog_bg_color;
+}
+
+messagedialog label {
+    color: @dialog_fg_color;
+}
+
+banner revealer widget {
+    background: @bright_black;
+    padding: 5px;
+    color: @foreground;
+}
+
+alertdialog.background {
+    background-color: @dialog_bg_color;
+    color: @dialog_fg_color;
+}
+
+alertdialog box {
+    background-color: @dialog_bg_color;
+}
+
+alertdialog label {
+    color: @dialog_fg_color;
+}
+
+toast {
+    background-color: @card_bg_color;
+    color: @foreground;
+}

@@ -1,0 +1,39 @@
+* {
+    /* Primary accent color (using cyan-teal as primary) */
+    primary: #8fbcbb;
+    primary-container: #81a1c1;
+    on-primary: #2e3440;
+    on-primary-container: #d8dee9;
+    
+    /* Secondary accent */
+    secondary: #b48ead;
+    secondary-container: #4c566a;
+    on-secondary: #2e3440;
+    on-secondary-container: #d8dee9;
+    
+    /* Surface backgrounds (progressively lighter) */
+    surface: #2e3440;
+    surface-dim: #2e3440;
+    surface-bright: #4c566a;
+    surface-container-lowest: #2e3440;
+    surface-container-low: #3b4252;
+    surface-container: #4c566a;
+    surface-container-high: #4c566a;
+    surface-container-highest: #4c566a;
+    
+    /* Text colors */
+    on-surface: #2e3440;
+    on-surface-variant: #e5e9f0;
+    
+    /* Outline/border colors */
+    outline: #4c566a;
+    outline-variant: #4c566a;
+    
+    /* Error colors */
+    error: #bf616a;
+    on-error: #2e3440;
+    
+    /* Inverse colors */
+    inverse-surface: #2e3440;
+    inverse-on-surface: #2e3440;
+}

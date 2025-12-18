@@ -1,0 +1,83 @@
+# Symphony
+# Author: vyrx
+# Theme: Nordic
+# Original By: Pascal Jaeger
+
+# Main bg
+theme[main_bg]="#2e3440"
+
+# Main text color
+theme[main_fg]="#d8dee9"
+
+# Title color for boxes
+theme[title]="#d8dee9"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#8fbcbb"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#4c566a"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#d8dee9"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#4c566a"
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="#8fbcbb"
+
+# Cpu box outline color
+theme[cpu_box]="#4c566a"
+
+# Memory/disks box outline color
+theme[mem_box]="#4c566a"
+
+# Net up/down box outline color
+theme[net_box]="#4c566a"
+
+# Processes box outline color
+theme[proc_box]="#4c566a"
+
+# Box divider line and small boxes line color
+theme[div_line]="#4c566a"
+
+# Temperature graph colors
+theme[temp_start]="#a3be8c"
+theme[temp_mid]="#ebcb8b"
+theme[temp_end]="#bf616a"
+
+# CPU graph colors
+theme[cpu_start]="#a3be8c"
+theme[cpu_mid]="#ebcb8b"
+theme[cpu_end]="#bf616a"
+
+# Mem/Disk free meter
+theme[free_start]="#a3be8c"
+theme[free_mid]="#ebcb8b"
+theme[free_end]="#bf616a"
+
+# Mem/Disk cached meter
+theme[cached_start]="#a3be8c"
+theme[cached_mid]="#ebcb8b"
+theme[cached_end]="#bf616a"
+
+# Mem/Disk available meter
+theme[available_start]="#a3be8c"
+theme[available_mid]="#ebcb8b"
+theme[available_end]="#bf616a"
+
+# Mem/Disk used meter
+theme[used_start]="#a3be8c"
+theme[used_mid]="#ebcb8b"
+theme[used_end]="#bf616a"
+
+# Download graph colors
+theme[download_start]="#a3be8c"
+theme[download_mid]="#ebcb8b"
+theme[download_end]="#bf616a"
+
+# Upload graph colors
+theme[upload_start]="#a3be8c"
+theme[upload_mid]="#ebcb8b"
+theme[upload_end]="#bf616a"

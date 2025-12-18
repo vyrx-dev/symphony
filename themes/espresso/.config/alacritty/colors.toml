@@ -1,0 +1,37 @@
+# Symphony by vyrx
+# Theme: Espresso
+# https://github.com/vyrx-dev
+# Warm cohesive espresso palette
+
+[colors]
+[colors.primary]
+background = "#1a1513"
+foreground = "#f0e4dc"
+
+[colors.cursor]
+text   = "#1a1513"
+cursor = "#e8b89a"
+
+[colors.selection]
+text = "#1a1513"
+background = "#e8b89a"
+
+[colors.normal]
+black   = "#2e2520"
+red     = "#e8a090"
+green   = "#c8b888"
+yellow  = "#e8c8a0"
+blue    = "#c8a898"
+magenta = "#d8a8a0"
+cyan    = "#b8b098"
+white   = "#d8ccc0"
+
+[colors.bright]
+black   = "#5c534a"
+red     = "#f0b8a8"
+green   = "#d8c8a0"
+yellow  = "#f0d8b8"
+blue    = "#d8b8a8"
+magenta = "#e8b8b0"
+cyan    = "#c8c0a8"
+white   = "#f0e4dc"

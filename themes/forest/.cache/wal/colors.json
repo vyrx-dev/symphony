@@ -1,12 +1,10 @@
 {
-    "checksum": "forest_theme_symphony",
     "wallpaper": "/home/vyrx/dotfiles/themes/forest/wallpaper",
     "alpha": "100",
-
     "special": {
         "background": "#020802",
         "foreground": "#fdfffd",
-        "cursor": "#fdfffd"
+        "cursor": "#70cf6c"
     },
     "colors": {
         "color0": "#020802",
@@ -16,8 +14,8 @@
         "color4": "#62e2a4",
         "color5": "#e0eb7a",
         "color6": "#9ed8dd",
-        "color7": "#fdfffd",
-        "color8": "#4a7a4a",
+        "color7": "#bff2ab",
+        "color8": "#70cf6c",
         "color9": "#dcb0be",
         "color10": "#b4e8b2",
         "color11": "#f6fdb7",

@@ -1,0 +1,39 @@
+* {
+    /* Primary accent color (warm peach cream) */
+    primary: #e8b89a;
+    primary-container: #d8a078;
+    on-primary: #1a1513;
+    on-primary-container: #f0e4dc;
+    
+    /* Secondary accent (warm taupe) */
+    secondary: #c8a898;
+    secondary-container: #3a322c;
+    on-secondary: #1a1513;
+    on-secondary-container: #f0e4dc;
+    
+    /* Surface backgrounds (progressively lighter) */
+    surface: #1a1513;
+    surface-dim: #1a1513;
+    surface-bright: #2e2520;
+    surface-container-lowest: #1a1513;
+    surface-container-low: #1a1513;
+    surface-container: #2e2520;
+    surface-container-high: #3a322c;
+    surface-container-highest: #4a423c;
+    
+    /* Text colors */
+    on-surface: #f0e4dc;
+    on-surface-variant: #d8ccc0;
+    
+    /* Outline/border colors */
+    outline: #8a7968;
+    outline-variant: #3a322c;
+    
+    /* Error colors */
+    error: #e8a090;
+    on-error: #1a1513;
+    
+    /* Inverse colors */
+    inverse-surface: #f0e4dc;
+    inverse-on-surface: #1a1513;
+}

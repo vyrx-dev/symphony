@@ -1,0 +1,23 @@
+# Symphony by vyrx
+# Theme: Forest
+# https://github.com/vyrx-dev
+
+background = #020802
+foreground = #fdfffd
+
+palette = 0=#020802
+palette = 1=#bf5a7c
+palette = 2=#70cf6c
+palette = 3=#DFEC63
+palette = 4=#62e2a4
+palette = 5=#e0eb7a
+palette = 6=#9ed8dd
+palette = 7=#bff2ab
+palette = 8=#518a51
+palette = 9=#dcb0be
+palette = 10=#b4e8b2
+palette = 11=#f6fdb7
+palette = 12=#b0f3d2
+palette = 13=#f8fdce
+palette = 14=#e3f5f6
+palette = 15=#fdfffd

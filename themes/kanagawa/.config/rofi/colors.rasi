@@ -1,0 +1,39 @@
+* {
+    /* Primary accent color (crystalBlue) */
+    primary: #7E9CD8;
+    primary-container: #957FB8;
+    on-primary: #16161D;
+    on-primary-container: #DCD7BA;
+    
+    /* Secondary accent (oniViolet) */
+    secondary: #957FB8;
+    secondary-container: #54546D;
+    on-secondary: #16161D;
+    on-secondary-container: #DCD7BA;
+    
+    /* Surface backgrounds (progressively lighter) */
+    surface: #1F1F28;
+    surface-dim: #1F1F28;
+    surface-bright: #54546D;
+    surface-container-lowest: #16161D;
+    surface-container-low: #1F1F28;
+    surface-container: #2A2A37;
+    surface-container-high: #363646;
+    surface-container-highest: #54546D;
+    
+    /* Text colors */
+    on-surface: #1F1F28;
+    on-surface-variant: #C8C093;
+    
+    /* Outline/border colors */
+    outline: #54546D;
+    outline-variant: #54546D;
+    
+    /* Error colors */
+    error: #C34043;
+    on-error: #16161D;
+    
+    /* Inverse colors */
+    inverse-surface: #1F1F28;
+    inverse-on-surface: #1F1F28;
+}

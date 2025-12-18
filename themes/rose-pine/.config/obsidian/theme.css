@@ -1,0 +1,38 @@
+/* Symphony - Rose Pine */
+.theme-dark, .theme-light {
+  --background-primary: #191724;
+  --background-primary-alt: #1f1d2e;
+  --background-secondary: #26233a;
+  --background-secondary-alt: #1f1d2e;
+  --background-modifier-hover: #403d52;
+  --background-modifier-border: #403d52;
+
+  --text-normal: #e0def4;
+  --text-muted: #908caa;
+  --text-faint: #6e6a86;
+  --text-on-accent: #191724;
+
+  --interactive-accent: #c4a7e7;
+  --interactive-accent-hover: #ebbcba;
+  --text-accent: #c4a7e7;
+  --text-accent-hover: #ebbcba;
+
+  --link-color: #9ccfd8;
+  --link-color-hover: #c4a7e7;
+  --link-external-color: #31748f;
+
+  --code-background: #1f1d2e;
+  --code-normal: #e0def4;
+
+  --text-error: #eb6f92;
+  --text-success: #31748f;
+  --text-warning: #f6c177;
+
+  --divider-color: #403d52;
+  --icon-color: #908caa;
+  --icon-color-hover: #e0def4;
+  --tag-color: #c4a7e7;
+  --tag-background: #26233a;
+}
+
+::selection { background: #c4a7e740; }

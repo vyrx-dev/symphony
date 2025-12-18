@@ -1,0 +1,38 @@
+/* Symphony - Espresso: Muted Warmth */
+.theme-dark, .theme-light {
+  --background-primary: #1a1513;
+  --background-primary-alt: #241e1b;
+  --background-secondary: #34302c;
+  --background-secondary-alt: #241e1b;
+  --background-modifier-hover: #34302c;
+  --background-modifier-border: #34302c;
+
+  --text-normal: #ece1d7;
+  --text-muted: #c1a78e;
+  --text-faint: #867462;
+  --text-on-accent: #1a1513;
+
+  --interactive-accent: #e49b5d;
+  --interactive-accent-hover: #ebc06d;
+  --text-accent: #e49b5d;
+  --text-accent-hover: #ebc06d;
+
+  --link-color: #7b9695;
+  --link-color-hover: #89b3b6;
+  --link-external-color: #b380b0;
+
+  --code-background: #241e1b;
+  --code-normal: #ece1d7;
+
+  --text-error: #bd8183;
+  --text-success: #78997a;
+  --text-warning: #e49b5d;
+
+  --divider-color: #34302c;
+  --icon-color: #c1a78e;
+  --icon-color-hover: #ece1d7;
+  --tag-color: #7b9695;
+  --tag-background: #34302c;
+}
+
+::selection { background: #e49b5d40; }

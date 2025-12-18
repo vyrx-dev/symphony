@@ -1,0 +1,38 @@
+/* Symphony - Gruvbox Material */
+.theme-dark, .theme-light {
+  --background-primary: #111313;
+  --background-primary-alt: #1a1c1c;
+  --background-secondary: #222525;
+  --background-secondary-alt: #1a1c1c;
+  --background-modifier-hover: #32302f;
+  --background-modifier-border: #32302f;
+
+  --text-normal: #ddc7a1;
+  --text-muted: #d4be98;
+  --text-faint: #32302f;
+  --text-on-accent: #111313;
+
+  --interactive-accent: #7daea3;
+  --interactive-accent-hover: #89b482;
+  --text-accent: #7daea3;
+  --text-accent-hover: #89b482;
+
+  --link-color: #7daea3;
+  --link-color-hover: #89b482;
+  --link-external-color: #d3869b;
+
+  --code-background: #1a1c1c;
+  --code-normal: #ddc7a1;
+
+  --text-error: #ea6962;
+  --text-success: #a9b665;
+  --text-warning: #d8a657;
+
+  --divider-color: #32302f;
+  --icon-color: #d4be98;
+  --icon-color-hover: #ddc7a1;
+  --tag-color: #7daea3;
+  --tag-background: #222525;
+}
+
+::selection { background: #7daea340; }

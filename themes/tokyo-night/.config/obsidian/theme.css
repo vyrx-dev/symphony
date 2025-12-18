@@ -1,0 +1,38 @@
+/* Symphony - Tokyo Night */
+.theme-dark, .theme-light {
+  --background-primary: #1a1b26;
+  --background-primary-alt: #1f2030;
+  --background-secondary: #292e42;
+  --background-secondary-alt: #1f2030;
+  --background-modifier-hover: #343a52;
+  --background-modifier-border: #414868;
+
+  --text-normal: #c0caf5;
+  --text-muted: #a9b1d6;
+  --text-faint: #545c7e;
+  --text-on-accent: #1a1b26;
+
+  --interactive-accent: #7aa2f7;
+  --interactive-accent-hover: #7dcfff;
+  --text-accent: #7aa2f7;
+  --text-accent-hover: #7dcfff;
+
+  --link-color: #7aa2f7;
+  --link-color-hover: #7dcfff;
+  --link-external-color: #73daca;
+
+  --code-background: #1f2030;
+  --code-normal: #c0caf5;
+
+  --text-error: #f7768e;
+  --text-success: #9ece6a;
+  --text-warning: #e0af68;
+
+  --divider-color: #414868;
+  --icon-color: #a9b1d6;
+  --icon-color-hover: #c0caf5;
+  --tag-color: #bb9af7;
+  --tag-background: #292e42;
+}
+
+::selection { background: #7aa2f740; }

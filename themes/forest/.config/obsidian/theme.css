@@ -1,0 +1,45 @@
+/* Symphony - Forest */
+.theme-dark, .theme-light {
+  /* backgrounds */
+  --background-primary: #020802;
+  --background-primary-alt: #0a1a0a;
+  --background-secondary: #0f240f;
+  --background-secondary-alt: #0a1a0a;
+  --background-modifier-hover: #1a3a1a;
+  --background-modifier-border: #518a51;
+
+  /* text */
+  --text-normal: #fdfffd;
+  --text-muted: #bff2ab;
+  --text-faint: #518a51;
+  --text-on-accent: #020802;
+
+  /* accent */
+  --interactive-accent: #62e2a4;
+  --interactive-accent-hover: #b0f3d2;
+  --text-accent: #62e2a4;
+  --text-accent-hover: #b0f3d2;
+
+  /* links */
+  --link-color: #62e2a4;
+  --link-color-hover: #b0f3d2;
+  --link-external-color: #9ed8dd;
+
+  /* code */
+  --code-background: #0a1a0a;
+  --code-normal: #fdfffd;
+
+  /* status */
+  --text-error: #bf5a7c;
+  --text-success: #70cf6c;
+  --text-warning: #DFEC63;
+
+  /* ui */
+  --divider-color: #518a51;
+  --icon-color: #bff2ab;
+  --icon-color-hover: #fdfffd;
+  --tag-color: #62e2a4;
+  --tag-background: #0f240f;
+}
+
+::selection { background: #62e2a440; }

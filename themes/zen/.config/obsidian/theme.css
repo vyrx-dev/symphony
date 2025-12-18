@@ -1,0 +1,38 @@
+/* Symphony - Zen */
+.theme-dark, .theme-light {
+  --background-primary: #0f0f0f;
+  --background-primary-alt: #171717;
+  --background-secondary: #1c1c1e;
+  --background-secondary-alt: #171717;
+  --background-modifier-hover: #2c2c2e;
+  --background-modifier-border: #2c2c2e;
+
+  --text-normal: #e8e8ed;
+  --text-muted: #d1d1d6;
+  --text-faint: #7a7a7c;
+  --text-on-accent: #0f0f0f;
+
+  --interactive-accent: #a8a8ac;
+  --interactive-accent-hover: #bebec2;
+  --text-accent: #a8a8ac;
+  --text-accent-hover: #bebec2;
+
+  --link-color: #bebec2;
+  --link-color-hover: #d1d1d6;
+  --link-external-color: #98989a;
+
+  --code-background: #171717;
+  --code-normal: #e8e8ed;
+
+  --text-error: #6e6e70;
+  --text-success: #98989a;
+  --text-warning: #8e8e90;
+
+  --divider-color: #2c2c2e;
+  --icon-color: #d1d1d6;
+  --icon-color-hover: #e8e8ed;
+  --tag-color: #a8a8ac;
+  --tag-background: #1c1c1e;
+}
+
+::selection { background: #a8a8ac40; }

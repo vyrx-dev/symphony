@@ -1,0 +1,38 @@
+/* Symphony - Nordic */
+.theme-dark, .theme-light {
+  --background-primary: #2e3440;
+  --background-primary-alt: #3b4252;
+  --background-secondary: #434c5e;
+  --background-secondary-alt: #3b4252;
+  --background-modifier-hover: #4c566a;
+  --background-modifier-border: #4c566a;
+
+  --text-normal: #d8dee9;
+  --text-muted: #e5e9f0;
+  --text-faint: #4c566a;
+  --text-on-accent: #2e3440;
+
+  --interactive-accent: #8fbcbb;
+  --interactive-accent-hover: #88c0d0;
+  --text-accent: #8fbcbb;
+  --text-accent-hover: #88c0d0;
+
+  --link-color: #81a1c1;
+  --link-color-hover: #88c0d0;
+  --link-external-color: #8fbcbb;
+
+  --code-background: #3b4252;
+  --code-normal: #d8dee9;
+
+  --text-error: #bf616a;
+  --text-success: #a3be8c;
+  --text-warning: #ebcb8b;
+
+  --divider-color: #4c566a;
+  --icon-color: #e5e9f0;
+  --icon-color-hover: #eceff4;
+  --tag-color: #b48ead;
+  --tag-background: #434c5e;
+}
+
+::selection { background: #8fbcbb40; }

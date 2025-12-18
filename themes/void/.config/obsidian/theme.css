@@ -1,0 +1,38 @@
+/* Symphony - Void */
+.theme-dark, .theme-light {
+  --background-primary: #05010C;
+  --background-primary-alt: #0d0515;
+  --background-secondary: #150a20;
+  --background-secondary-alt: #0d0515;
+  --background-modifier-hover: #382952;
+  --background-modifier-border: #382952;
+
+  --text-normal: #FFFFFF;
+  --text-muted: #DECCFF;
+  --text-faint: #6B578F;
+  --text-on-accent: #05010C;
+
+  --interactive-accent: #BB9AF7;
+  --interactive-accent-hover: #CBA6F8;
+  --text-accent: #BB9AF7;
+  --text-accent-hover: #CBA6F8;
+
+  --link-color: #C2B8FF;
+  --link-color-hover: #B3A8F7;
+  --link-external-color: #A6B8FF;
+
+  --code-background: #0d0515;
+  --code-normal: #FFFFFF;
+
+  --text-error: #F07178;
+  --text-success: #C2B8FF;
+  --text-warning: #DDCCFF;
+
+  --divider-color: #382952;
+  --icon-color: #DECCFF;
+  --icon-color-hover: #FFFFFF;
+  --tag-color: #BB9AF7;
+  --tag-background: #150a20;
+}
+
+::selection { background: #BB9AF740; }

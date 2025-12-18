@@ -1,0 +1,80 @@
+/**
+ * Symphony by vyrx
+ * Theme: Espresso
+ * https://github.com/vyrx-dev
+ * Cohesive warm espresso aesthetic
+ * 
+ * Based on midnight by refact0r
+ */
+
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+:root {
+  --font: 'figtree';
+  --corner-text: 'Symphony';
+
+  /* status indicators - cohesive warm */
+  --online-indicator: #c8b888;
+  --dnd-indicator: #e8a090;
+  --idle-indicator: #d8a078;
+  --streaming-indicator: #d8a8a0;
+
+  /* accent colors - warm peach */
+  --accent-1: #e8b89a;
+  --accent-2: #e8b89a;
+  --accent-3: #e8b89a;
+  --accent-4: #d8a078;
+  --accent-5: #f0c8a8;
+  --mention: #d8a078;
+  --mention-hover: #e8b89a;
+
+  /* text colors */
+  --text-0: #1a1513;
+  --text-1: #f0e4dc;
+  --text-2: #f0e4dc;
+  --text-3: #c8a898;
+  --text-4: #8a7968;
+  --text-5: #5c534a;
+
+  /* background colors */
+  --bg-1: #241e1b;
+  --bg-2: #3a322c;
+  --bg-3: #2e2520;
+  --bg-4: #1a1513;
+  --hover: #3a322c;
+  --active: #2e2520;
+  --message-hover: #241e1b;
+
+  --spacing: 12px;
+  --list-item-transition: 0.2s ease;
+  --unread-bar-transition: 0.2s ease;
+  --moon-spin-transition: 0.4s ease;
+  --icon-spin-transition: 1s ease;
+
+  --roundness-xl: 22px;
+  --roundness-l: 20px;
+  --roundness-m: 16px;
+  --roundness-s: 12px;
+  --roundness-xs: 10px;
+  --roundness-xxs: 8px;
+
+  --discord-icon: none;
+  --moon-icon: block;
+  --moon-icon-url: url('https://upload.wikimedia.org/wikipedia/commons/c/c4/Font_Awesome_5_solid_moon.svg');
+  --moon-icon-size: auto;
+
+  --login-bg-filter: saturate(0.3) hue-rotate(-15deg) brightness(0.4);
+  --green-to-accent-3-filter: hue-rotate(56deg) saturate(1.43);
+  --blurple-to-accent-3-filter: hue-rotate(304deg) saturate(0.84) brightness(1.2);
+}
+
+.selected_f5eb4b,
+.selected_f6f816 .link_d8bfb3 {
+  color: var(--text-0) !important;
+  background: var(--accent-3) !important;
+}
+
+.selected_f6f816 .link_d8bfb3 * {
+  color: var(--text-0) !important;
+  fill: var(--text-0) !important;
+}
