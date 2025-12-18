@@ -39,10 +39,11 @@ for wallpaper in "${wallpapers[@]}"; do
   [[ -n "$CURRENT_WALLPAPER" ]] && ln -sf "$CURRENT_WALLPAPER" "$HOME/.config/symphony/current/wallpaper"
   
   # Sync Hyprlock wallpaper from swww cache (same logic as lock-screen)
-  CACHE="$HOME/.cache/swww"
-  MON="$focused_monitor"
-  if [[ -n "$MON" && -f "$CACHE/$MON" ]]; then
-    ln -sf "$(tr '\0' '\n' < "$CACHE/$MON" | sed -n '3p')" "$HOME/.cache/hyprlock-wallpaper"
+  # Sync Hyprlock from swww query (monitor-agnostic)
+  sleep 0.2
+  CURRENT_SWWW=$(swww query 2>/dev/null | sed -n 's/.*image: //p' | tail -1)
+  if [[ -n "$CURRENT_SWWW" && -f "$CURRENT_SWWW" ]]; then
+    ln -sf "$CURRENT_SWWW" "$HOME/.cache/hyprlock-wallpaper"
   else
     ln -sf "$wallpaper" "$HOME/.cache/hyprlock-wallpaper"
   fi
