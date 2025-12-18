@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Nordic
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Nordic */
 @define-color background     #2e3440;
 @define-color foreground     #d8dee9;
 @define-color black          #3b4252;

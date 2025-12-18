@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Kanagawa
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Kanagawa */
 @define-color background     #1F1F28;
 @define-color foreground     #DCD7BA;
 @define-color black          #16161D;

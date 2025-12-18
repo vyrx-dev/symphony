@@ -1,3 +1,4 @@
+/* Theme: Zen */
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #a8a8ac;

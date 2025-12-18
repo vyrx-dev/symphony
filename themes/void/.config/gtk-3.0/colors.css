@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Void
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Void */
 @define-color background     #05010C;
 @define-color foreground     #FFFFFF;
 @define-color black          #05010C;

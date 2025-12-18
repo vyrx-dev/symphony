@@ -1,6 +1,4 @@
-# Symphony by vyrx
 # Theme: Gruvbox Material
-# https://github.com/vyrx-dev
 
 # Main background, empty for terminal default, need to be empty if you want transparent background
 theme[main_bg]="#111313"

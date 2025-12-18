@@ -1,3 +1,4 @@
+/* Theme: Tokyo Night */
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #7dcfff;

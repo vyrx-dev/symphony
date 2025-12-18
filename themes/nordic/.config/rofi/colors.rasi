@@ -1,3 +1,4 @@
+/* Theme: Nordic */
 * {
     /* Primary accent color (using cyan-teal as primary) */
     primary: #8fbcbb;

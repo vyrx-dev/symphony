@@ -1,9 +1,4 @@
-/* Symphony by vyrx
- * Theme: Zen
- * Enhanced with semantic colors for libadwaita support
- */
-
-/* Base terminal colors */
+/* Theme: Zen */
 @define-color background     #0f0f0f;
 @define-color foreground     #e8e8ed;
 @define-color black          #0f0f0f;

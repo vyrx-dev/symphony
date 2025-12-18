@@ -1,3 +1,4 @@
+/* Theme: Rose Pine */
 * {
     /* Primary accent color (using cyan/green as primary) */
     primary: #ebbcba;
