@@ -38,9 +38,14 @@ for wallpaper in "${wallpapers[@]}"; do
   CURRENT_WALLPAPER=$(swww query 2>/dev/null | grep "currently displaying" | head -1 | sed 's/.*image: //')
   [[ -n "$CURRENT_WALLPAPER" ]] && ln -sf "$CURRENT_WALLPAPER" "$HOME/.config/symphony/current/wallpaper"
   
-  # Sync Hyprlock wallpaper
-  mkdir -p "$HOME/.cache"
-  ln -sf "$wallpaper" "$HOME/.cache/hyprlock-wallpaper"
+  # Sync Hyprlock wallpaper from swww cache (same logic as lock-screen)
+  CACHE="$HOME/.cache/swww"
+  MON=$(ls "$CACHE" 2>/dev/null | grep -v '_' | head -1)
+  if [[ -f "$CACHE/$MON" ]]; then
+    ln -sf "$(tr '\0' '\n' < "$CACHE/$MON" | sed -n '3p')" "$HOME/.cache/hyprlock-wallpaper"
+  else
+    ln -sf "$wallpaper" "$HOME/.cache/hyprlock-wallpaper"
+  fi
   
   notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
   break
