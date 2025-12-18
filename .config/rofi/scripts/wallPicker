@@ -33,10 +33,14 @@ for wallpaper in "${wallpapers[@]}"; do
   
   swww img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
   
-  # Track current wallpaper
+  # Track current wallpaper (Symphony)
   mkdir -p "$HOME/.config/symphony/current"
   CURRENT_WALLPAPER=$(swww query 2>/dev/null | grep "currently displaying" | head -1 | sed 's/.*image: //')
   [[ -n "$CURRENT_WALLPAPER" ]] && ln -sf "$CURRENT_WALLPAPER" "$HOME/.config/symphony/current/wallpaper"
+  
+  # Sync Hyprlock wallpaper
+  mkdir -p "$HOME/.cache"
+  ln -sf "$wallpaper" "$HOME/.cache/hyprlock-wallpaper"
   
   notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
   break
