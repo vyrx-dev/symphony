@@ -4,10 +4,6 @@
 WALLPAPER_DIR="$HOME/Wallpapers/"
 SWWW_PARAMS="--transition-fps 120 --transition-type=center --transition-pos=bottom --transition-duration=1 --transition-bezier=0.25,0.1,0.25,1.0"
 
-# Get focused monitor
-focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
-: "${focused_monitor:=HDMI-A-1}"
-
 # Get wallpapers
 mapfile -d '' wallpapers < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
@@ -31,22 +27,14 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 for wallpaper in "${wallpapers[@]}"; do
   [[ "$(basename "$wallpaper")" == "$choice" ]] || continue
   
-  swww img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
+  swww img "$wallpaper" $SWWW_PARAMS
   
   # Track current wallpaper (Symphony)
   mkdir -p "$HOME/.config/symphony/current"
-  CURRENT_WALLPAPER=$(swww query 2>/dev/null | grep "currently displaying" | head -1 | sed 's/.*image: //')
-  [[ -n "$CURRENT_WALLPAPER" ]] && ln -sf "$CURRENT_WALLPAPER" "$HOME/.config/symphony/current/wallpaper"
+  ln -sf "$wallpaper" "$HOME/.config/symphony/current/wallpaper"
   
-  # Sync Hyprlock wallpaper from swww cache (same logic as lock-screen)
-  # Sync Hyprlock from swww query (monitor-agnostic)
-  sleep 0.2
-  CURRENT_SWWW=$(swww query 2>/dev/null | sed -n 's/.*image: //p' | tail -1)
-  if [[ -n "$CURRENT_SWWW" && -f "$CURRENT_SWWW" ]]; then
-    ln -sf "$CURRENT_SWWW" "$HOME/.cache/hyprlock-wallpaper"
-  else
-    ln -sf "$wallpaper" "$HOME/.cache/hyprlock-wallpaper"
-  fi
+  # Sync Hyprlock wallpaper
+  ln -sf "$wallpaper" "$HOME/.cache/hyprlock-wallpaper"
   
   notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
   break

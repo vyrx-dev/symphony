@@ -38,7 +38,7 @@
   "custom/logo": {
     "format": "󰊠",
     "tooltip": false,
-    "on-click": "~/dotfiles/theme-scripts/core/switch-theme.sh",
+    "on-click": "~/dotfiles/theme-scripts/symphony switch",
     "on-click-right": "~/.config/hypr/scripts/cycle-wallpaper next"
   },
   "hyprland/workspaces": {
@@ -181,13 +181,11 @@
     "spacing": 4
   },
   "mpris": {
-    "format": " {player_icon} {artist} - {title}",
+    "format": "{player_icon} {artist}{title}",
     "format-paused": "{status_icon} {artist} - {title}</i>",
     "player-icons": {
-      "default": "🎵",
-      "spotify": "🎵",
-      "mpv": "🎵",
-      "mpd": ""
+      // "default": "🎵",
+      // "mpv": ""
     },
     "status-icons": {
       "paused": "⏸"

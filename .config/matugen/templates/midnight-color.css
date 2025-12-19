@@ -1,13 +1,11 @@
 /**
- * @name midnight
- * @description A dark, rounded discord theme.
- * @author refact0r
- * @version 1.6.2
- * @invite nz87hXyvcy
+ * @name Symphony Discord
+ * @author vyrx
+ * @version 1.0.0
+ * @description Dynamic Symphony theme for Discord
+ * 
+ * Based on midnight by refact0r
  * @website https://github.com/refact0r/midnight-discord
- * @source https://github.com/refact0r/midnight-discord/blob/master/midnight.theme.css
- * @authorId 508863359777505290
- * @authorLink https://www.refact0r.dev
 */
 
 /* IMPORTANT: make sure to enable dark mode in discord settings for the theme to apply properly!!! */
@@ -20,7 +18,7 @@
   --font: 'figtree';
 
   /* top left corner text */
-  --corner-text: 'Midnight';
+  --corner-text: 'Symphony';
 
   /* color of status indicators and window controls */
   --online-indicator: {{ colors.primary.default.hex }}; /* change to #23a55a for default green */

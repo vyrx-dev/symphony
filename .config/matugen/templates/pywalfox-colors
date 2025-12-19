@@ -1,0 +1,16 @@
+{{colors.background.default.hex}}
+{{colors.error.default.hex}}
+{{colors.primary.default.hex}}
+{{colors.tertiary.default.hex}}
+{{colors.secondary.default.hex}}
+{{colors.tertiary_container.default.hex}}
+{{colors.secondary_container.default.hex}}
+{{colors.on_surface.default.hex}}
+{{colors.surface_container.default.hex}}
+{{colors.error.default.hex}}
+{{colors.primary.default.hex}}
+{{colors.tertiary.default.hex}}
+{{colors.secondary.default.hex}}
+{{colors.tertiary_container.default.hex}}
+{{colors.secondary_container.default.hex}}
+{{colors.on_background.default.hex}}

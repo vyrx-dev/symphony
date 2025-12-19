@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEME=$(cat ~/.current-theme)
+THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || cat ~/.current-theme 2>/dev/null || echo "dynamic")
 WALLDIR="$HOME/dotfiles/themes/$THEME/backgrounds"
 
 [ ! -d "$WALLDIR" ] && exit 1
