@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# Lock the screen
-pidof hyprlock || hyprlock &
+# Sync hyprlock wallpaper from swww cache (fast inline version)
+CACHE="$HOME/.cache/swww"
+MON=$(ls "$CACHE" 2>/dev/null | grep -v '_' | head -1)
+[[ -f "$CACHE/$MON" ]] && ln -sf "$(tr '\0' '\n' < "$CACHE/$MON" | sed -n '3p')" "$HOME/.cache/hyprlock-wallpaper"
 
-# # Ensure 1password is locked
-# if pgrep -x "1password" >/dev/null; then
-#   1password --lock &
-# fi
-
-# Avoid running screensaver when locked
+# Kill screensaver, launch hyprlock
 pkill -f "alacritty --class Screensaver"
+pidof hyprlock || exec hyprlock

@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Check if custom theme is active
-CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "matugen")
-if [[ "$CURRENT_THEME" != "matugen" ]]; then
-	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Matugen to use this"
+CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
+if [[ "$CURRENT_THEME" != "dynamic" ]]; then
+	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Dynamic to use this"
 	exit 0
 fi
 
-# Wallpaper picker with pywal integration
+# Wallpaper picker with dynamic color generation
 WALLPAPER_DIR="$HOME/Wallpapers/"
 SWWW_PARAMS="--transition-fps 120 --transition-type=grow --transition-duration=1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right "
 
@@ -47,40 +47,19 @@ for wallpaper in "${wallpapers[@]}"; do
 		# Apply wallpaper with swww
 		swww img "$wallpaper" $SWWW_PARAMS #-o  "$focused_monitor"
 
-		# Apply pywal16 and matugen color scheme
-		matugen image "$wallpaper" -m dark #matugen
-		wal -i "$wallpaper"                #pywal16
+		# Apply matugen color scheme
+		matugen image "$wallpaper" -m dark
 
-		# Update Symphony integrations after matugen generates new colors
-		"$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
-		"$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
-		"$HOME/dotfiles/theme-scripts/core/fix-symlinks.sh"
+		# Update Symphony with new colors and reload apps
+		"$HOME/dotfiles/theme-scripts/symphony" reload
 
-		# Update Obsidian theme
-		bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
-
-		# Update pywal integrations
-		pywalfox update
-		pywal-spicetify text
-
-		# Reload everything instantly
-		hyprctl reload
-		restart-app waybar
+		# Reload apps not handled by symphony
 		restart-app swayosd-server
-		killall -SIGUSR1 kitty
-		pkill -SIGUSR1 alacritty
-		pkill -SIGUSR2 btop
-		ghostty +reload-config
-		killall -SIGUSR2 ghostty
 
 		pgrep -x nautilus >/dev/null && (
 			pkill -x nautilus
 			nautilus &>/dev/null &
 		)
-
-		if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
-			touch ~/.config/alacritty/alacritty.toml
-		fi
 
 		# Send notification
 		notify-send -i "$wallpaper" "Theme Applied" "$(basename "$wallpaper")"

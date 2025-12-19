@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Check if custom theme is active
-CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "matugen")
-if [[ "$CURRENT_THEME" != "matugen" ]]; then
-	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Matugen to use this"
+CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
+if [[ "$CURRENT_THEME" != "dynamic" ]]; then
+	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Dynamic to use this"
 	exit 0
 fi
 
@@ -46,39 +46,22 @@ swww img "$CURRENT_WALLPAPER" \
 # Update wallpaper symlink to track current wallpaper
 DISPLAYED_WALLPAPER=$(swww query | grep "currently displaying" | head -1 | sed 's/.*image: //')
 if [ -n "$DISPLAYED_WALLPAPER" ]; then
-	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/dotfiles/themes/matugen/wallpaper"
+	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/dotfiles/themes/dynamic/wallpaper"
 fi
 
 # SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 matugen image "$CURRENT_WALLPAPER" -m dark
-wal -i "$CURRENT_WALLPAPER"
 
-# Update symphony apps that need special handling with matugen
-"$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
-"$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
-"$HOME/dotfiles/theme-scripts/core/fix-symlinks.sh"
+# Update Symphony apps that need special handling
+"$HOME/dotfiles/theme-scripts/symphony" reload
 
-# Update Obsidian theme
-bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
-
-pywalfox update
-hyprctl reload
-restart-app waybar
+# Reload apps not handled by symphony
 restart-app swayosd-server
-killall -SIGUSR1 kitty
-pkill -SIGUSR1 alacritty
-pkill -SIGUSR2 btop
-ghostty +reload-config
-killall -SIGUSR2 ghostty
 
 pgrep -x nautilus >/dev/null && (
 	pkill -x nautilus
 	nautilus &>/dev/null &
 	disown
 )
-
-if [[ -f ~/.config/alacritty/alacritty.toml ]]; then
-	touch ~/.config/alacritty/alacritty.toml
-fi
 
 notify-send -i "$CURRENT_WALLPAPER" "Theme changed" "Wallpaper has been updated."

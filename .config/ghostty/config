@@ -1,10 +1,5 @@
-# config-file = ?"~/.cache/wal/ghostty.conf"
-# config-file = ?"~/.config/ghostty/themes/Matugen"
-config-file = ?"~/.config/ghostty/themes/colors"
-config-file = ?"~/.config/ghostty/themes/overrides"
-# theme = "Matugen"  
-
-theme = Matugen
+# Colors from Symphony
+config-file = ?"~/.config/symphony/current/.config/ghostty/theme"
 # Dynamic theme colors
 # config-file = ?"~/.config/omarchy/themes/aether/ghostty.conf"
 
@@ -15,8 +10,8 @@ font-size = 13
 
 # Window
 window-theme = ghostty
-window-padding-x = 14
-window-padding-y = 14
+window-padding-x = 10
+window-padding-y = 0
 confirm-close-surface=false
 resize-overlay = never
 gtk-toolbar-style = flat
