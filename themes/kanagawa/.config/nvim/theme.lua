@@ -1,3 +1,7 @@
+-- Symphony by vyrx
+-- Theme: Kanagawa
+-- https://github.com/vyrx-dev
+
 return {
 	{
 		"rebelot/kanagawa.nvim",

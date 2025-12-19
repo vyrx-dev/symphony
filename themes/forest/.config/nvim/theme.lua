@@ -1,4 +1,7 @@
--- Symphony by vyrx / Theme: Forest / https://github.com/vyrx-dev
+-- Symphony by vyrx
+-- Theme: Forest
+-- https://github.com/vyrx-dev
+
 return {
 	{
 		"bjarneo/aether.nvim",
@@ -8,33 +11,38 @@ return {
 		opts = {
 			disable_italics = false,
 			colors = {
-				-- Monotone shades (base00-base07)
-				base00 = "#020802", -- Default background
-				base01 = "#518a51", -- Lighter background (status bars)
-				base02 = "#020802", -- Selection background
-				base03 = "#518a51", -- Comments, invisibles
-				base04 = "#bff2ab", -- Dark foreground
-				base05 = "#fdfffd", -- Default foreground
-				base06 = "#fdfffd", -- Light foreground
-				base07 = "#bff2ab", -- Light background
-
-				-- Accent colors (base08-base0F)
-				base08 = "#bf5a7c", -- Variables, errors, red
-				base09 = "#dcb0be", -- Integers, constants, orange
-				base0A = "#DFEC63", -- Classes, types, yellow
-				base0B = "#70cf6c", -- Strings, green
-				base0C = "#9ed8dd", -- Support, regex, cyan
-				base0D = "#62e2a4", -- Functions, keywords, blue
-				base0E = "#e0eb7a", -- Keywords, storage, magenta
-				base0F = "#f6fdb7", -- Deprecated, brown/yellow
+				base00 = "#020802",
+				base01 = "#518a51",
+				base02 = "#020802",
+				base03 = "#518a51",
+				base04 = "#bff2ab",
+				base05 = "#fdfffd",
+				base06 = "#fdfffd",
+				base07 = "#bff2ab",
+				base08 = "#bf5a7c",
+				base09 = "#dcb0be",
+				base0A = "#DFEC63",
+				base0B = "#70cf6c",
+				base0C = "#9ed8dd",
+				base0D = "#62e2a4",
+				base0E = "#e0eb7a",
+				base0F = "#f6fdb7",
 			},
 		},
 		config = function(_, opts)
 			require("aether").setup(opts)
 			vim.cmd.colorscheme("aether")
-			--
-			-- 		-- Enable hot reload
-			-- 		require("aether.hotreload").setup()
 		end,
 	},
+
+	-- Alternative: pixel.nvim (extracts colors from terminal)
+	-- {
+	-- 	"bjarneo/pixel.nvim",
+	-- 	name = "pixel",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("pixel")
+	-- 	end,
+	-- },
 }

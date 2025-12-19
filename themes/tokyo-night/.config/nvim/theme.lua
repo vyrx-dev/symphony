@@ -1,3 +1,7 @@
+-- Symphony by vyrx
+-- Theme: Tokyo Night
+-- https://github.com/vyrx-dev
+
 return {
 	{
 		"folke/tokyonight.nvim",
