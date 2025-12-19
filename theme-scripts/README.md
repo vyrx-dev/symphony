@@ -12,11 +12,9 @@
 
 I love music and musical films (La La Land, Your Lie in April), and I listen to a lot of jazz/instrumentals. That’s where the name and the setup idea come from. You’ll see the music touch more and more over time.
 
-> ⚠️ Warning: Read the scripts before running. This switches configs and reloads apps. You are responsible for what you run.
-
 ## Installation
 
-> ⚠️ Read first: this switches configs and reloads apps. You are responsible for what you run.
+> ⚠️ Warning: Read the scripts before running. This switches configs and reloads apps. You are responsible for what you run.
 
 ```bash
 git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
@@ -76,7 +74,7 @@ Symphony updates `~/.config/symphony/current` and runs hooks to reload apps. No 
 - UI: Hyprland, Waybar, GTK3/4, Rofi
 - Utilities: btop, cava
 - Apps: yazi, rmpc, vesktop, obsidian
-- Extras: pywalfox, Neovim
+- Extras: pywalfox
 
 ## Customization
 

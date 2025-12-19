@@ -2,6 +2,9 @@
 # ═══════════════════════════════════════════════════════════════════
 #  Symphony Installer
 #  https://github.com/vyrx-dev/dotfiles
+#
+#  Warning: Read before running. This switches configs and reloads apps.
+#  Found a bug? https://github.com/vyrx-dev/dotfiles/issues/new
 # ═══════════════════════════════════════════════════════════════════
 
 set -e
@@ -384,6 +387,16 @@ page_two() {
 # ═══════════════════════════════════════════════════════════════════
 
 main() {
+	echo
+	echo -e "${C_NOTE}  ⚠ This will switch configs and reload apps.${C_RESET}"
+	echo
+
+	if [[ $HAS_GUM -eq 1 ]]; then
+		gum confirm "Continue?" || exit 0
+	else
+		read -rp "  Continue? [y/N] " c && [[ "$c" =~ ^[Yy]$ ]] || exit 0
+	fi
+
 	page_one
 	page_two
 }
