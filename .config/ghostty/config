@@ -1,7 +1,7 @@
 # Colors from Symphony
 config-file = ?"~/.config/symphony/current/.config/ghostty/theme"
-# Dynamic theme colors
-# config-file = ?"~/.config/omarchy/themes/aether/ghostty.conf"
+
+
 
 # Font
 font-family = "JetBrainsMono Nerd Font"
@@ -15,6 +15,9 @@ window-padding-y = 0
 confirm-close-surface=false
 resize-overlay = never
 gtk-toolbar-style = flat
+
+# Opacity
+background-opacity = 0.8
 
 # Cursor styling
 cursor-style = "block"

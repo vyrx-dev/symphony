@@ -9,7 +9,7 @@ padding.x = 10
 padding.y = 1
 # dynamic_padding = true
 decorations = "None"
-opacity = 0.90
+opacity = 0.8
 
 [font]
 normal = { family = "CaskaydiaMono Nerd Font" }
