@@ -141,9 +141,23 @@ Perfect for deep work sessions where performance and focus take priority over vi
 
 ## Installation
 
+### Quick Install
+
+```bash
+git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
+```
+
+The installer will:
+1. Check prerequisites (git, Arch Linux, yay)
+2. Install all required packages (auto-detects official vs AUR)
+3. Deploy dotfiles with GNU Stow
+4. Set up themes with Symphony
+
 ### Before Installation
 
-> **⚠️ Important:** GNU Stow will not work if configuration directories or files already exist.
+> **Warning:** GNU Stow will not work if configuration directories or files already exist.
 
 Backup and remove existing configurations:
 
@@ -162,60 +176,67 @@ mv ~/.config/swaync ~/.config/swaync.bak
 rm -rf ~/.config/hypr ~/.config/nvim ~/.config/tmux
 ```
 
-### Prerequisites
+### Manual Installation
 
-```bash
-# Core dependencies
-sudo pacman -S stow git base-devel
-
-# Hyprland & Wayland
-sudo pacman -S hyprland xdg-desktop-portal-hyprland
-
-# System utilities
-sudo pacman -S waybar rofi swaync swww hypridle hyprlock wlogout
-sudo pacman -S polkit-gnome cliphist wl-clipboard 
-
-# Terminal & Shell
-sudo pacman -S kitty alacritty fish starship tmux
-
-# Development
-sudo pacman -S neovim lazygit btop yazi
-
-# Audio & Media
-sudo pacman -S pipewire wireplumber pavucontrol mpd mpc ncmpcpp mpv-mpris mpd-mpris
-
-# Theming
-sudo pacman -S matugen pywalfox
-
-# Additional tools
-sudo pacman -S fastfetch jq fd ripgrep fzf swayosd
-```
-
-### Clone & Install
+If you prefer to install manually:
 
 ```bash
 # Clone the repository
 git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
-
-# Navigate to the directory
 cd ~/dotfiles
 
-# Create symlinks using GNU Stow
-stow .
+# Install packages (edit install/pkgs.sh to customize)
+source install/utils.sh && source install/pkgs.sh
+
+# Deploy dotfiles
+source install/dotfiles.sh
+
+# Set up themes
+./install/themes/install.sh
 ```
 
-> **💡 Tip:** Grab wallpapers from [here](https://github.com/vyrx-dev/wallpapers) for automatic theming.
+### Optional Packages
 
-### Post-Installation
+Edit `install/pkgs.sh` and uncomment packages in the `optional_packages` array:
 
-After running `stow .`, all configuration files will be symlinked to their appropriate locations in `~/.config/`.
+```bash
+optional_packages=(
+    # Browsers
+    brave-bin
+    zen-browser-bin
+    
+    # Apps
+    obsidian
+    spotify-launcher
+    vesktop-bin
+    
+    # NVIDIA
+    nvidia
+    nvidia-utils
+)
+```
 
-If you want to uninstall:
+### Theme Management (Symphony)
+
+Switch themes on the fly:
+
+```bash
+symphony list          # List available themes
+symphony apply <name>  # Apply a theme
+symphony current       # Show current theme
+```
+
+Or use the keybind: `Super + Ctrl + Space`
+
+### Uninstall
 
 ```bash
 cd ~/dotfiles
-stow -D .
+stow -D .                           # Remove dotfile symlinks
+./install/themes/uninstall.sh       # Remove theme symlinks
 ```
+
+> **Tip:** Grab wallpapers from [here](https://github.com/vyrx-dev/wallpapers) for automatic theming.
 
 ---
 
@@ -306,18 +327,37 @@ stow -D .
 ## Configuration Structure
 
 ```
-.config/
-├── hypr/           # Hyprland configuration
-├── waybar/         # Status bar
-├── rofi/           # Launchers and menus
-├── swaync/         # Notification center
-├── kitty/          # Terminal (Kitty)
-├── alacritty/      # Terminal (Alacritty)
-├── nvim/           # Neovim configuration
-├── tmux/           # Tmux configuration
-├── fish/           # Fish shell
-├── matugen/        # Theme generator
-└── starship.toml   # Shell prompt
+~/dotfiles/
+├── install.sh              # Main installer
+├── install/
+│   ├── utils.sh            # Colors, helpers
+│   ├── checks.sh           # Preflight checks
+│   ├── pkgs.sh             # Package installation
+│   ├── dotfiles.sh         # Stow deployment
+│   └── themes/
+│       ├── symphony        # Theme switching command
+│       ├── install.sh      # Theme installer
+│       └── hooks/          # Theme apply hooks
+│
+├── themes/                 # Theme configurations
+│   ├── gruvbox-material/
+│   ├── tokyo-night/
+│   ├── rose-pine/
+│   └── ...
+│
+├── .config/
+│   ├── hypr/               # Hyprland configuration
+│   ├── waybar/             # Status bar
+│   ├── rofi/               # Launchers and menus
+│   ├── swaync/             # Notification center
+│   ├── kitty/              # Terminal (Kitty)
+│   ├── alacritty/          # Terminal (Alacritty)
+│   ├── nvim/               # Neovim configuration
+│   ├── tmux/               # Tmux configuration
+│   ├── fish/               # Fish shell
+│   └── matugen/            # Theme generator
+│
+└── scripts/                # Utility scripts
 ```
 
 ---
