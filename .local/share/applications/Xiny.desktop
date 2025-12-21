@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=xiny
+Comment=X in Y minutes
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://learnxinyminutes.com/go/
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/xiny.png
+StartupNotify=true

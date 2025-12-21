@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Audible
+Comment=Audible
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://www.audible.in/library/titles?ref_pageloadid=not_applicable&plink=ikjMKJQaIaYHvKas&pageLoadId=2c0vyXPuKqQ5jiFf&creativeId=2e6787a2-0cd0-4a6e-afe0-05766cd505e5
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Audible.png
+StartupNotify=true

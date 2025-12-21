@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Downgit
+Comment=Downgit
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://downgit.github.io/#/home
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Downgit.png
+StartupNotify=true

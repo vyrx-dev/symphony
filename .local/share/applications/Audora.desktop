@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Audora
+Comment=Audora
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://audora.rocks
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Audora.png
+StartupNotify=true

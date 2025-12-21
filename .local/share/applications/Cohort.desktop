@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Cohort
+Comment=Cohort
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://app.100xdevs.com/courses/14
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/cohort.jpg
+StartupNotify=true

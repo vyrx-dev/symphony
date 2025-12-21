@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Meet
+Comment=Meet
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://meet.google.com/landing?authuser=1
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Meet.png
+StartupNotify=true

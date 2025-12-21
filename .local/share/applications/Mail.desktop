@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Mail
+Comment=Mail
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://mail.google.com/mail/u/1/
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Mail.png
+StartupNotify=true

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Wallhaven
+Comment=Wallhaven
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://wallhaven.cc/
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Wallhaven.png
+StartupNotify=true

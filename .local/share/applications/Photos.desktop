@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Photos
+Comment=Photos
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://photos.google.com/u/1/?pli=1&pageId=none
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Photos.png
+StartupNotify=true

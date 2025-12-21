@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Train
+Comment=Train
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://www.irctc.co.in/nget/train-search
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Train.png
+StartupNotify=true

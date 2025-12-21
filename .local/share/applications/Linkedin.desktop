@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Linkedin
+Comment=Linkedin
+Exec=/home/vyrx/.config/hypr/scripts/launch-webapp https://www.linkedin.com/feed/
+Terminal=false
+Type=Application
+Icon=/home/vyrx/.local/share/applications/icons/Linkedin.png
+StartupNotify=true
