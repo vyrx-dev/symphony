@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Shared Utilities    |-/ /--|#
+#|/ /---+---------------------+/ /---|#
+
+# Bail if not running in bash
+if [ -z "$BASH_VERSION" ]; then
+    echo "Error: Run the installer with: ./install.sh"
+    return 1 2>/dev/null || exit 1
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Colors
+# ─────────────────────────────────────────────────────────────────────────────
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+DIM='\033[2m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Tool Detection
+# ─────────────────────────────────────────────────────────────────────────────
+
+HAS_GUM=$(command -v gum &>/dev/null && echo 1 || echo 0)
+HAS_TTE=$(command -v tte &>/dev/null && echo 1 || echo 0)
+DOTFILES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Section Headers (static ASCII, no dependencies)
+# ─────────────────────────────────────────────────────────────────────────────
+
+print_header() {
+    echo
+    echo -e "${MAGENTA}$1${RESET}"
+    echo
+}
+
+show_banner() {
+    cat <<"EOF"
+
+        ♪                                            ♫
+   ▄▄▄▄▄                                         ♪
+  ██▀▀▀▀█▄                      █▄           ♬
+  ▀██▄  ▄▀       ▄              ██          ▄
+    ▀██▄▄  ██ ██ ███▄███▄ ████▄ ████▄ ▄███▄ ████▄ ██ ██
+  ▄   ▀██▄ ██▄██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██▄██
+  ▀██████▀▄▄▀██▀▄██ ██ ▀█▄████▀▄██ ██▄▀███▀▄██ ▀█▄▄▀██▀
+     ♫       ██           ██                        ██
+           ▀▀▀     ♪      ▀              ♬        ▀▀▀
+
+EOF
+}
+
+# Animated logo (only used in themes/install.sh where tte is optional)
+show_logo() {
+    local logo="${1:-$DOTFILES_ROOT/branding/symphony.txt}"
+    [[ ! -f "$logo" ]] && return
+
+    echo
+    if [[ $HAS_TTE -eq 1 ]]; then
+        cat "$logo" | tte \
+            --frame-rate 60 beams \
+            --beam-row-symbols "▂" "▁" "_" \
+            --beam-column-symbols "▌" "▍" "▎" "▏" \
+            --beam-delay 3 \
+            --beam-row-speed-range 30-120 \
+            --beam-column-speed-range 18-30 \
+            --beam-gradient-stops FFEB3B FFB74D FF8A80 \
+            --beam-gradient-steps 2 6 \
+            --beam-gradient-frames 2 \
+            --final-gradient-stops FFEB3B FFB74D FF8A80 F48FB1 EC407A \
+            --final-gradient-steps 12 \
+            --final-gradient-frames 2 \
+            --final-gradient-direction vertical \
+            --final-wipe-speed 3 2>/dev/null || { echo -e "${MAGENTA}" && cat "$logo" && echo -e "${RESET}"; }
+    else
+        echo -e "${MAGENTA}"
+        cat "$logo"
+        echo -e "${RESET}"
+    fi
+}
+
+# Animated musical banner (only used in themes/install.sh)
+show_musical() {
+    local logo="${1:-$DOTFILES_ROOT/branding/musical.txt}"
+    [[ ! -f "$logo" ]] && return
+
+    echo
+    if [[ $HAS_TTE -eq 1 ]]; then
+        cat "$logo" | tte \
+            --frame-rate 60 waves \
+            --wave-symbols "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" "▇" "▆" "▅" "▄" "▃" "▂" "▁" \
+            --wave-gradient-stops FFEB3B FFB74D FF8A80 F48FB1 \
+            --wave-gradient-steps 6 \
+            --wave-count 3 \
+            --wave-length 2 \
+            --wave-direction row_bottom_to_top \
+            --final-gradient-stops FFEB3B FFB74D FF8A80 F48FB1 EC407A \
+            --final-gradient-steps 12 \
+            --final-gradient-direction horizontal 2>/dev/null || { echo -e "${MAGENTA}" && cat "$logo" && echo -e "${RESET}"; }
+    else
+        echo -e "${MAGENTA}"
+        cat "$logo"
+        echo -e "${RESET}"
+    fi
+}
+
+ok()   { echo -e "${GREEN}  ✓${RESET} $1"; }
+err()  { echo -e "${RED}  ✗${RESET} $1"; }
+warn() { echo -e "${YELLOW}  !${RESET} $1"; }
+info() { echo -e "${DIM}  $1${RESET}"; }
+step() { echo -e "\n${MAGENTA}::${RESET} ${BOLD}$1${RESET}"; }
+
+spin() {
+    local msg="$1"
+    shift
+    if [[ $HAS_GUM -eq 1 ]]; then
+        gum spin --spinner dot --title "  $msg" -- "$@"
+    else
+        info "$msg"
+        "$@" >/dev/null 2>&1
+    fi
+}
+
+confirm() {
+    local msg="${1:-Continue?}"
+    if [[ $HAS_GUM -eq 1 ]]; then
+        gum confirm "$msg" && return 0 || return 1
+    else
+        read -rp "  $msg [y/N] " ans
+        [[ "$ans" =~ ^[Yy]$ ]]
+    fi
+}
+
+pkg_installed() {
+    pacman -Qi "$1" &>/dev/null
+}
+
+pkg_available() {
+    pacman -Si "$1" &>/dev/null 2>&1
+}
+
+aur_installed() {
+    command -v yay &>/dev/null || command -v paru &>/dev/null
+}
+
+get_aur_helper() {
+    command -v yay &>/dev/null && echo "yay" && return
+    command -v paru &>/dev/null && echo "paru" && return
+    echo ""
+}
