@@ -46,9 +46,10 @@
 
 - [x] Theme switcher
 - [x] fish aliases → abbr
+- [x] Theme installer script
+- [x] Full installation script (modular: utils, checks, pkgs, dotfiles)
+- [x] Better directory structure (install/, themes/, scripts/)
 - [ ] Media conversion scripts
-- [ ] Theme installer script (almost done)
-- [ ] Full installation script
 - [ ] Optimize switching performance
 
 ---
@@ -65,18 +66,18 @@
 ## 🎯 Polish
 
 - [x] Symphony branding (all files)
+- [x] Better directory structure
 - [ ] ASCII art headers
-- [ ] Better directory structure
 - [ ] Full cleanup pass
 
 ---
 
 ## 📚 Documentation
 
-- [ ] Main README
-- [x] Themes & Scripts README (need some minor changes)
+- [x] Main README (updated with new install flow)
+- [x] Themes & Scripts README
 - [ ] Symphony Website
 
 ---
 
-*Last updated: December 7, 2025 at 07:16 AM*
+*Last updated: December 21, 2025*

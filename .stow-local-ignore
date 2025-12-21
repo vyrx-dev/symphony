@@ -25,4 +25,14 @@ _darcs
 ^zsh$
 scripts
 images
+assets
+branding
+themes
+install
+^install\.sh$
+^TODO\.md$
+^dummy-install\.sh$
+
+# Hidden apps are copied, not symlinked
+\.local/share/applications/hidden
 
