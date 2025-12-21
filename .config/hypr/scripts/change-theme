@@ -53,7 +53,7 @@ fi
 matugen image "$CURRENT_WALLPAPER" -m dark
 
 # Update Symphony apps that need special handling
-"$HOME/dotfiles/theme-scripts/symphony" reload
+"$HOME/dotfiles/install/themes/symphony" reload
 
 # Reload apps not handled by symphony
 restart-app swayosd-server
