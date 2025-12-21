@@ -31,7 +31,7 @@ packages=(
     # ╰───────────────────────────────────────────────────────────────────────╯
 
     waybar                      # status bar
-    rofi-wayland                # app launcher
+    rofi                        # app launcher (wayland native in 2.0+)
     swaync                      # notification center
     swayosd-git                 # OSD for volume/brightness
     swww                        # wallpaper daemon

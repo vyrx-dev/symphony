@@ -9,7 +9,7 @@ cd "$DOTFILES"
 
 if stow . 2>/dev/null; then
     ok "Dotfiles linked"
-    exit 0
+    return 0 2>/dev/null || true
 fi
 
 # Handle conflicts by adopting existing files
