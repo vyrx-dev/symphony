@@ -1,30 +1,26 @@
 #!/bin/bash
-# Symlink dotfiles using stow
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Stow Symlinks       |-/ /--|#
+#|/ /---+---------------------+/ /---|#
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-
-# Dirs that commonly conflict on fresh installs
-conflicts=(.config/hypr .config/waybar .config/rofi .config/kitty .config/fish)
 
 step "Linking dotfiles"
 
 # Backup existing configs
-for dir in "${conflicts[@]}"; do
-    target="$HOME/$dir"
-    [[ -e "$target" && ! -L "$target" ]] || continue
-    [[ -e "$target.bak" ]] && rm -rf "$target.bak"
-    mv "$target" "$target.bak"
-    info "Backed up $dir"
+backup_dirs=(.config/hypr .config/waybar .config/rofi .config/kitty .config/fish)
+for dir in "${backup_dirs[@]}"; do
+    [[ -d "$HOME/$dir" && ! -L "$HOME/$dir" ]] && {
+        mv "$HOME/$dir" "$HOME/$dir.bak"
+        info "Backed up $dir"
+    }
 done
 
+# Stow dotfiles
 cd "$DOTFILES"
-
-if stow . 2>&1 | grep -q "conflict"; then
-    warn "Conflicts detected"
-    stow . 2>&1 | grep "existing target" | head -5
-    err "Resolve conflicts manually"
-    return 1 2>/dev/null || exit 1
+if stow -v . 2>&1 | grep -q "LINK"; then
+    ok "Dotfiles linked"
+else
+    stow . 2>/dev/null && ok "Dotfiles linked" || warn "Some conflicts - check manually"
 fi
-
-stow . || { err "Stow failed"; return 1 2>/dev/null || exit 1; }
-ok "Dotfiles linked"

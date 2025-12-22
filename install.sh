@@ -1,97 +1,55 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #|---/ /+---------------------+---/ /|#
 #|--/ /-| Symphony Dotfiles   |--/ /-|#
-#|-/ /--| Main Installer      |-/ /--|#
+#|-/ /--| Installer           |-/ /--|#
 #|/ /---+---------------------+/ /---|#
 
 set -e
 
-[[ -z "$BASH_VERSION" ]] && exec bash "$0" "$@"
-
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
-cd "$DOTFILES"
+source "$DOTFILES/install/utils.sh"
 
-chmod +x install/themes/install.sh install/themes/symphony scripts/* 2>/dev/null || true
-
-source install/utils.sh
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Welcome
-# ─────────────────────────────────────────────────────────────────────────────
-
+# Banner
 clear
-echo
 show_banner
-info "A theme system that flows like music"
-info "https://github.com/vyrx-dev/dotfiles"
 echo
 
-# Check existing
-[[ -d "$HOME/.config/symphony" ]] && warn "Existing installation detected - configs will be updated"
+# Existing install warning
+[[ -d "$HOME/.config/symphony" ]] && warn "Existing installation detected"
 
 warn "This will install packages and modify your configs."
 echo
 confirm "Continue?" || exit 0
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Dependencies
-# ─────────────────────────────────────────────────────────────────────────────
-
+# Check core dependencies
 step "Checking dependencies"
-
 missing=()
-for dep in stow git; do
-    command -v "$dep" &>/dev/null && ok "$dep" || { err "$dep"; missing+=("$dep"); }
-done
-
-has_term=0
-for term in kitty ghostty alacritty; do
-    command -v "$term" &>/dev/null && { ok "$term"; has_term=1; break; }
-done
-[[ $has_term -eq 0 ]] && { err "terminal (kitty/ghostty/alacritty)"; missing+=("kitty"); }
-
-for dep in hyprctl swww waybar rofi gum; do
-    command -v "$dep" &>/dev/null && ok "$dep" || info "$dep (optional)"
+for dep in git stow; do
+    pkg_installed "$dep" && ok "$dep" || { err "$dep"; missing+=("$dep"); }
 done
 
 if [[ ${#missing[@]} -gt 0 ]]; then
     echo
-    err "Install missing dependencies first:"
-    for dep in "${missing[@]}"; do info "  sudo pacman -S $dep"; done
+    err "Missing: ${missing[*]}"
+    info "Run: sudo pacman -S ${missing[*]}"
     exit 1
 fi
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Packages
-# ─────────────────────────────────────────────────────────────────────────────
+# Install packages
+source "$DOTFILES/install/packages.sh"
 
-source install/packages.sh
+# Symlink dotfiles
+source "$DOTFILES/install/stow.sh"
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Stow
-# ─────────────────────────────────────────────────────────────────────────────
+# Setup desktop entries
+source "$DOTFILES/install/desktop-entries.sh"
 
-source install/stow.sh
+# Install themes (skip logo since we already showed banner)
+SYMPHONY_INSTALLING=1 "$DOTFILES/install/themes/install.sh"
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Desktop entries
-# ─────────────────────────────────────────────────────────────────────────────
-
-source install/desktop-entries.sh
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Themes
-# ─────────────────────────────────────────────────────────────────────────────
-
-"$DOTFILES/install/themes/install.sh" --skip-logo
-
-# ─────────────────────────────────────────────────────────────────────────────
 # Done
-# ─────────────────────────────────────────────────────────────────────────────
-
 echo
-ok "Installation complete!"
-echo
-info "Log out and back in for all changes to take effect."
-info "Run 'symphony help' to get started."
+ok "Installation complete"
+info "Log out and back in for changes to take effect"
+info "Run 'symphony help' to get started"
 echo

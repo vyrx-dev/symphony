@@ -100,6 +100,60 @@ clean_shell() {
     return 0
 }
 
+clean_desktop_entries() {
+    step "Cleaning desktop entries"
+    local target_dir="$HOME/.local/share/applications"
+    local apps_dir="$DOTFILES/.local/share/applications"
+    
+    [[ -d "$target_dir" ]] || return 0
+    
+    # Collect entries installed by Symphony
+    local entries=()
+    
+    # Web apps from dotfiles
+    for file in "$apps_dir"/*.desktop; do
+        [[ -f "$file" ]] || continue
+        local name=$(basename "$file")
+        [[ -f "$target_dir/$name" ]] && entries+=("$name")
+    done
+    
+    # Hidden app overrides (created by hide-apps script, contain NoDisplay=true)
+    while IFS= read -r -d '' file; do
+        local name=$(basename "$file")
+        grep -q "NoDisplay=true" "$file" 2>/dev/null && entries+=("$name")
+    done < <(find "$target_dir" -maxdepth 1 -name "*.desktop" -print0 2>/dev/null)
+    
+    # Dedupe
+    mapfile -t entries < <(printf '%s\n' "${entries[@]}" | sort -u)
+    
+    [[ ${#entries[@]} -eq 0 ]] && { info "No desktop entries to clean"; return 0; }
+    
+    if command -v gum &>/dev/null; then
+        gum confirm "Remove ${#entries[@]} desktop entries?" || return 0
+        
+        local selected
+        selected=$(printf '%s\n' "${entries[@]}" | gum choose --no-limit --height 20) || return 0
+        [[ -z "$selected" ]] && return 0
+        
+        for entry in $selected; do
+            rm -f "$target_dir/$entry"
+            ok "Removed $entry"
+        done
+    else
+        read -rp "Remove ${#entries[@]} desktop entries? [y/N] " c
+        [[ "$c" =~ ^[Yy]$ ]] || return 0
+        
+        for entry in "${entries[@]}"; do
+            rm -f "$target_dir/$entry"
+        done
+        ok "Removed ${#entries[@]} entries"
+    fi
+    
+    # Refresh
+    command -v update-desktop-database &>/dev/null && update-desktop-database "$target_dir" 2>/dev/null
+    return 0
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────────────────────────────────────
@@ -122,6 +176,7 @@ fi
 echo
 do_unstow
 restore_backups
+clean_desktop_entries
 ask_packages
 clean_shell
 
