@@ -1,0 +1,133 @@
+#!/usr/bin/env bash
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Uninstaller         |-/ /--|#
+#|/ /---+---------------------+/ /---|#
+
+set -e
+
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DOTFILES/install/utils.sh"
+
+# Core stuff - don't offer to uninstall
+skip=(
+    base-devel git stow fish tmux neovim nautilus
+    pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber
+    networkmanager bluez bluez-utils polkit-gnome power-profiles-daemon
+    xdg-utils xdg-user-dirs libnotify wl-clipboard ffmpeg jq wget curl unzip
+    qt5-wayland qt6-wayland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+    qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects
+    ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd noto-fonts-emoji
+    pamixer playerctl inotify-tools wtype v4l-utils adw-gtk-theme
+)
+
+# Backed up during install
+backup_dirs=(.config/hypr .config/waybar .config/rofi .config/kitty .config/fish)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Functions
+# ─────────────────────────────────────────────────────────────────────────────
+
+is_skipped() {
+    local pkg="$1"
+    for s in "${skip[@]}"; do [[ "$s" == "$pkg" ]] && return 0; done
+    return 1
+}
+
+get_packages() {
+    # Grab package names from packages.sh
+    sed -n '/^packages=(/,/^)/p' "$DOTFILES/install/packages.sh" | grep -oP '^\s+\K[a-z][a-z0-9_-]*'
+    sed -n '/^applications=(/,/^)/p' "$DOTFILES/install/packages.sh" | grep -oP '^\s+\K[a-z][a-z0-9_-]*'
+}
+
+do_unstow() {
+    step "Removing symlinks"
+    cd "$DOTFILES"
+    stow -D . 2>/dev/null && ok "Removed" || warn "Some failed"
+}
+
+restore_backups() {
+    step "Restoring backups"
+    local n=0
+    for dir in "${backup_dirs[@]}"; do
+        [[ -d "$HOME/$dir.bak" ]] || continue
+        rm -rf "$HOME/$dir"
+        mv "$HOME/$dir.bak" "$HOME/$dir"
+        ok "$dir"
+        ((n++)) || true
+    done
+    [[ $n -eq 0 ]] && info "No backups found"
+    return 0
+}
+
+ask_packages() {
+    command -v gum &>/dev/null || return 0
+    gum confirm "Uninstall packages?" || return 0
+
+    step "Checking installed"
+    local list=()
+    for pkg in $(get_packages | sort -u); do
+        is_skipped "$pkg" && continue
+        pkg_installed "$pkg" && list+=("$pkg")
+    done
+
+    [[ ${#list[@]} -eq 0 ]] && { info "Nothing to remove"; return 0; }
+
+    local selected
+    selected=$(printf '%s\n' "${list[@]}" | gum choose --no-limit --height 20) || return 0
+    [[ -z "$selected" ]] && return 0
+
+    warn "Removing: $selected"
+    gum confirm "Sure?" || return 0
+
+    if aur_installed; then
+        $(get_aur_helper) -Rns --noconfirm $selected 2>/dev/null || true
+    else
+        sudo pacman -Rns --noconfirm $selected 2>/dev/null || true
+    fi
+    ok "Done"
+    return 0
+}
+
+clean_shell() {
+    step "Cleaning shell config"
+    for rc in ~/.bashrc ~/.zshrc ~/.config/fish/config.fish; do
+        [[ -f "$rc" ]] || continue
+        grep -q "[Ss]ymphony" "$rc" 2>/dev/null || continue
+        sed -i '/[Ss]ymphony/d;/install\/themes/d' "$rc"
+        ok "$(basename "$rc")"
+    done
+    return 0
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Main
+# ─────────────────────────────────────────────────────────────────────────────
+
+echo
+warn "Symphony Uninstaller"
+echo
+echo "  - Remove symlinks"
+echo "  - Restore .bak configs"  
+echo "  - Optionally remove packages"
+echo "  - Clean shell PATH"
+echo
+
+if command -v gum &>/dev/null; then
+    gum confirm "Continue?" || exit 0
+else
+    read -rp "Continue? [y/N] " c && [[ "$c" =~ ^[Yy]$ ]] || exit 0
+fi
+
+echo
+do_unstow
+restore_backups
+ask_packages
+clean_shell
+
+[[ -x "$DOTFILES/install/themes/uninstall.sh" ]] && "$DOTFILES/install/themes/uninstall.sh"
+
+echo
+ok "Done"
+info "Restart session to complete"
+echo

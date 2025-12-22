@@ -94,6 +94,7 @@
     "tooltip": false
   },
   "network": {
+    "interface": "wlan*",
     "format-icons": [
       "󰤯",
       "󰤟",

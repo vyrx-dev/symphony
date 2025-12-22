@@ -239,42 +239,10 @@ page_two() {
 	# Use shared animated musical banner from utils.sh
 	show_musical "$MUSICAL_FILE"
 
-	# Select Theme
-	heading "Choose Your Theme"
+	# Apply default theme (sakura) - no selection prompt
+	heading "Applying Theme"
 
-	local themes=()
-	mapfile -t themes < <(get_themes)
-
-	# Bail if no themes found
-	if [[ ${#themes[@]} -eq 0 ]]; then
-		cross_mark "No themes found in $THEMES_DIR"
-		exit 1
-	fi
-
-	local selected_theme=""
-	if [[ $HAS_GUM -eq 1 ]]; then
-		selected_theme=$(printf '%s\n' "${themes[@]}" | gum choose --height=12) || true
-	else
-		echo
-		local i=1
-		for t in "${themes[@]}"; do
-			echo -e "  ${C_DIM}$i)${C_RESET} $t"
-			i=$((i + 1))
-		done
-		echo
-		read -rp "  Enter number or name: " choice
-		if [[ "$choice" =~ ^[0-9]+$ ]] && [[ "$choice" -ge 1 ]] && [[ "$choice" -le "${#themes[@]}" ]]; then
-			selected_theme="${themes[$((choice - 1))]}"
-		else
-			# Validate theme name exists
-			for t in "${themes[@]}"; do
-				[[ "$t" == "$choice" ]] && selected_theme="$choice" && break
-			done
-		fi
-	fi
-
-	# Default to first theme if nothing selected
-	[[ -z "$selected_theme" ]] && selected_theme="${themes[0]}"
+	local selected_theme="sakura"
 
 	# Ensure symphony dir exists before writing
 	mkdir -p "$SYMPHONY_DIR"

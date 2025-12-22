@@ -1,102 +1,59 @@
 #!/bin/bash
-# Desktop apps setup (webapps, browser overrides, hidden entries)
+# Desktop entries setup
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APPS_DIR="$DOTFILES/.local/share/applications"
 TARGET_DIR="$HOME/.local/share/applications"
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Browser Overrides (only install if browser is present)
-# ─────────────────────────────────────────────────────────────────────────────
+step "Setting up desktop entries"
 
-setup_browser_overrides() {
-    mkdir -p "$TARGET_DIR"
-    
-    # brave-browser override
-    if command -v brave &>/dev/null && [[ -f "$APPS_DIR/brave-browser.desktop" ]]; then
-        cp "$APPS_DIR/brave-browser.desktop" "$TARGET_DIR/"
-        ok "brave-browser override"
-    fi
-    
-    # chromium override
-    if command -v chromium &>/dev/null && [[ -f "$APPS_DIR/chromium.desktop" ]]; then
-        cp "$APPS_DIR/chromium.desktop" "$TARGET_DIR/"
-        ok "chromium override"
-    fi
-    
-    return 0
+mkdir -p "$TARGET_DIR"
+
+# Browser overrides (only if browser installed)
+command -v brave &>/dev/null && [[ -f "$APPS_DIR/brave-browser.desktop" ]] && {
+    cp "$APPS_DIR/brave-browser.desktop" "$TARGET_DIR/"
+    ok "brave override"
 }
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Web Apps (personal, users choose which ones)
-# ─────────────────────────────────────────────────────────────────────────────
+command -v chromium &>/dev/null && [[ -f "$APPS_DIR/chromium.desktop" ]] && {
+    cp "$APPS_DIR/chromium.desktop" "$TARGET_DIR/"
+    ok "chromium override"
+}
 
-ask_webapps() {
-    command -v gum &>/dev/null || return 0
+# Hidden apps
+if [[ -d "$APPS_DIR/hidden" ]]; then
+    n=0
+    for file in "$APPS_DIR/hidden"/*.desktop; do
+        [[ -f "$file" ]] || continue
+        cp "$file" "$TARGET_DIR/"
+        ((n++)) || true
+    done
+    [[ $n -gt 0 ]] && ok "Hidden $n apps"
+fi
 
-    # Collect webapp names (skip browser overrides and system entries)
-    local webapps=()
+# Web apps (gum prompt)
+if command -v gum &>/dev/null; then
+    webapps=()
     for file in "$APPS_DIR"/*.desktop; do
         [[ -f "$file" ]] || continue
-        local name=$(basename "$file" .desktop)
-        case "$name" in
-            brave-browser|chromium|grub-customizer) continue ;;
-        esac
+        name=$(basename "$file" .desktop)
+        case "$name" in brave-browser|chromium|grub-customizer) continue ;; esac
         webapps+=("$name")
     done
 
-    [[ ${#webapps[@]} -eq 0 ]] && return 0
+    if [[ ${#webapps[@]} -gt 0 ]]; then
+        echo
+        if gum confirm "Install web apps?"; then
+            selected=$(printf '%s\n' "${webapps[@]}" | gum choose --no-limit --height 15)
+            for app in $selected; do
+                cp "$APPS_DIR/$app.desktop" "$TARGET_DIR/"
+                ok "$app"
+            done
+        fi
+    fi
+fi
 
-    echo
-    gum confirm "Install web apps?" || return 0
-
-    step "Select web apps"
-    local selected=$(printf '%s\n' "${webapps[@]}" | gum choose --no-limit --height 15)
-
-    [[ -z "$selected" ]] && return 0
-
-    mkdir -p "$TARGET_DIR"
-    for app in $selected; do
-        local src="$APPS_DIR/$app.desktop"
-        local dst="$TARGET_DIR/$app.desktop"
-        [[ "$src" -ef "$dst" ]] && { ok "$app (linked)"; continue; }
-        cp "$src" "$dst"
-        ok "$app"
-    done
-    return 0
-}
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Hidden Apps (hide unwanted entries from launcher)
-# ─────────────────────────────────────────────────────────────────────────────
-
-setup_hidden() {
-    [[ -d "$APPS_DIR/hidden" ]] || return 0
-
-    mkdir -p "$TARGET_DIR"
-    local count=0
-
-    for file in "$APPS_DIR/hidden"/*.desktop; do
-        [[ -f "$file" ]] || continue
-        local dst="$TARGET_DIR/$(basename "$file")"
-        [[ "$file" -ef "$dst" ]] && continue
-        cp "$file" "$dst"
-        count=$((count + 1))
-    done
-
-    [[ $count -gt 0 ]] && ok "Hidden $count apps from launcher"
-    return 0
-}
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Run
-# ─────────────────────────────────────────────────────────────────────────────
-
-setup_browser_overrides
-ask_webapps
-setup_hidden
-
-# Refresh desktop database
+# Refresh
 command -v update-desktop-database &>/dev/null && update-desktop-database "$TARGET_DIR" 2>/dev/null
 rm -f "$HOME/.cache/rofi3.druncache" 2>/dev/null
-true  # ensure success exit code
+true

@@ -1,248 +1,168 @@
 #!/bin/bash
 # Package installation
 
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Core Packages                                                         │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
 packages=(
-
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Core System                                                           │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    base-devel                  # development tools (required for AUR)
+    base-devel                  # build tools
     git                         # version control
-    stow                        # symlink manager for dotfiles
+    stow                        # symlink manager
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Hyprland & Wayland                                                    │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    hyprland                    # tiling wayland compositor
+    # Hyprland
+    hyprland                    # compositor
     hypridle                    # idle daemon
     hyprlock                    # lock screen
     hyprpicker                  # color picker
     hyprsunset                  # blue light filter
-    xdg-desktop-portal-hyprland # screen sharing, file picker
-    xdg-desktop-portal-gtk      # GTK file picker fallback
-    qt5-wayland                 # Qt5 wayland support
-    qt6-wayland                 # Qt6 wayland support
+    xdg-desktop-portal-hyprland # screen sharing
+    xdg-desktop-portal-gtk      # file picker
+    qt5-wayland                 # Qt5 wayland
+    qt6-wayland                 # Qt6 wayland
     uwsm                        # session manager
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Desktop                                                               │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
+    # Desktop
     waybar                      # status bar
-    rofi                        # app launcher (wayland native in 2.0+)
-    swaync                      # notification center
-    swayosd                 # OSD for volume/brightness
-    swww                        # wallpaper daemon
+    rofi                        # launcher
+    swaync                      # notifications
+    swayosd                     # OSD
+    swww                        # wallpaper
     wlogout                     # logout menu
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Terminals                                                             │
-    # ╰───────────────────────────────────────────────────────────────────────╯
+    # Terminal
+    kitty                       # primary
+    alacritty                   # screensaver
 
-    kitty                       # primary terminal
-    alacritty                   # used for screensaver
-    # ghostty                   # alternative
-
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Shell                                                                 │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
+    # Shell
     fish                        # shell
     starship                    # prompt
     tmux                        # multiplexer
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ CLI Tools                                                             │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    eza                         # ls replacement
-    bat                         # cat with syntax highlighting
-    fd                          # find replacement
-    ripgrep                     # grep replacement
+    # CLI
+    eza                         # ls
+    bat                         # cat
+    fd                          # find
+    ripgrep                     # grep
     fzf                         # fuzzy finder
     zoxide                      # smart cd
-    jq                          # JSON processor
+    jq                          # JSON
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ File Management                                                       │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    yazi                        # terminal file manager
+    # Files
+    yazi                        # TUI file manager
     nautilus                    # GUI file manager
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Development                                                           │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
+    # Dev
     neovim                      # editor
     lazygit                     # git TUI
-    # lazydocker                # docker TUI
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Screenshots & Recording                                               │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
+    # Screenshot
     grim                        # screenshot
-    slurp                       # region selector
+    slurp                       # region select
     satty                       # annotation
-    wl-clipboard                # wl-copy, wl-paste
-    gpu-screen-recorder         # screen recording
-    ffmpeg                      # video processing
+    wl-clipboard                # clipboard
+    gpu-screen-recorder         # recording
+    ffmpeg                      # video
     v4l-utils                   # webcam
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Clipboard                                                             │
-    # ╰───────────────────────────────────────────────────────────────────────╯
+    # Clipboard
+    cliphist                    # history
+    wl-clip-persist             # persist
 
-    cliphist                    # clipboard history
-    wl-clip-persist             # persist after app closes
-
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Audio                                                                 │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    pipewire                    # audio server
-    pipewire-alsa               # ALSA compat
-    pipewire-pulse              # PulseAudio compat
-    pipewire-jack               # JACK compat
-    wireplumber                 # session manager
+    # Audio
+    pipewire                    # server
+    pipewire-alsa               # ALSA
+    pipewire-pulse              # PulseAudio
+    pipewire-jack               # JACK
+    wireplumber                 # session
     pamixer                     # CLI mixer
     pavucontrol                 # GUI mixer
     wiremix                     # TUI mixer
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Music                                                                 │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    mpd                         # music daemon
-    mpc                         # mpd CLI
-    rmpc                        # mpd TUI
+    # Music
+    mpd                         # daemon
+    mpc                         # CLI
+    rmpc                        # TUI
     cava                        # visualizer
-    playerctl                   # MPRIS control
+    playerctl                   # MPRIS
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Networking                                                            │
-    # ╰───────────────────────────────────────────────────────────────────────╯
+    # Network
+    networkmanager              # network
+    network-manager-applet      # tray
+    impala                      # wifi TUI
 
-    networkmanager              # network management
-    network-manager-applet      # tray applet
-    impala                      # TUI wifi manager
+    # Bluetooth
+    bluez                       # stack
+    bluez-utils                 # CLI
+    blueberry                   # GUI
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Bluetooth                                                             │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    bluez                       # bluetooth stack
-    bluez-utils                 # bluetoothctl
-    blueberry                   # GUI manager
-
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ System                                                                │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    polkit-gnome                # auth dialogs
-    brightnessctl               # laptop brightness
-    ddcutil                     # external monitor brightness
-    power-profiles-daemon       # power management
+    # System
+    polkit-gnome                # auth
+    brightnessctl               # brightness
+    ddcutil                     # monitor
+    power-profiles-daemon       # power
     libnotify                   # notify-send
     xdg-utils                   # xdg-open
-    xdg-user-dirs               # ~/Documents, etc.
-    inotify-tools               # filesystem monitoring
+    xdg-user-dirs               # user dirs
+    inotify-tools               # fs monitor
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Theming                                                               │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    matugen-bin                 # colorscheme from wallpaper
+    # Theming
+    matugen-bin                 # wallpaper colors
     nwg-look                    # GTK settings
-    adw-gtk-theme               # GTK3 theme matching libadwaita
-    bibata-cursor-theme-bin     # cursor theme
+    adw-gtk-theme               # GTK3 theme
+    bibata-cursor-theme-bin     # cursor
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Rofi                                                                  │
-    # ╰───────────────────────────────────────────────────────────────────────╯
+    # Rofi
+    rofimoji                    # emoji
+    wtype                       # keyboard
 
-    rofimoji                    # emoji picker
-    wtype                       # keyboard input
+    # Monitor
+    btop                        # system
+    fastfetch                   # info
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Monitoring                                                            │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    btop                        # system monitor
-    fastfetch                   # system info
-
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Fonts                                                                 │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    ttf-jetbrains-mono-nerd     # monospace font
-    ttf-cascadia-mono-nerd      # alt monospace
+    # Fonts
+    ttf-jetbrains-mono-nerd     # mono
+    ttf-cascadia-mono-nerd      # alt mono
     noto-fonts-emoji            # emoji
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Display Manager                                                       │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    sddm                        # login screen
+    # Display
+    sddm                        # login
     qt5-quickcontrols           # sddm deps
     qt5-quickcontrols2
     qt5-graphicaleffects
 
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ Misc                                                                  │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    python-terminaltexteffects  # tte animations
-    gum                         # interactive prompts
-    wget                        # downloader
-    curl                        # HTTP client
-    unzip                       # archive extraction
-    localsend-bin               # file sharing
-
-    # ╭───────────────────────────────────────────────────────────────────────╮
-    # │ NVIDIA (uncomment if needed, archinstall usually handles this)        │
-    # ╰───────────────────────────────────────────────────────────────────────╯
-
-    # linux-headers             # kernel headers
-    # nvidia-dkms               # driver
-    # nvidia-utils              # utilities
-    # libva-nvidia-driver       # hardware video accel
-
+    # Misc
+    python-terminaltexteffects  # tte
+    gum                         # prompts
+    wget                        # download
+    curl                        # HTTP
+    unzip                       # archive
+    localsend-bin               # file share
 )
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Optional applications
-# ─────────────────────────────────────────────────────────────────────────────
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Optional Applications                                                 │
+# ╰───────────────────────────────────────────────────────────────────────╯
 
 applications=(
-    # Browsers
-    brave-bin                   # privacy browser
+    brave-bin                   # browser
     zen-browser-bin             # firefox fork
     firefox
     chromium
-
-    # Productivity
     obsidian                    # notes
     bitwarden                   # passwords
     code                        # vscode OSS
-    visual-studio-code-bin      # vscode MS
-
-    # Communication
-    vesktop-bin                 # discord + plugins
+    visual-studio-code-bin      # vscode
+    vesktop-bin                 # discord
     discord
-
-    # Media
     spotify-launcher
-    spicetify-cli               # spotify theming
-    mpv                         # video player
-    yt-dlp                      # youtube downloader
-
-    # Gaming
-    steam
-    lutris                      # game launcher
+    spicetify-cli               # spotify theme
+    mpv                         # video
+    yt-dlp                      # youtube
+    steam                       # gaming
+    lutris                      # games
     gamemode                    # performance
     mangohud                    # overlay
 )
@@ -251,43 +171,46 @@ applications=(
 # Functions
 # ─────────────────────────────────────────────────────────────────────────────
 
-install_aur_helper() {
-    if aur_installed; then
-        ok "AUR helper: $(get_aur_helper)"
-        return
-    fi
+setup_aur() {
+    aur_installed && return 0
 
-    step "Installing yay"
+    info "Installing yay..."
     local tmp=$(mktemp -d)
-    git clone https://aur.archlinux.org/yay-bin.git "$tmp/yay-bin" --depth 1
-    (cd "$tmp/yay-bin" && makepkg -si --noconfirm)
+    git clone https://aur.archlinux.org/yay-bin.git "$tmp/yay-bin" --depth 1 >/dev/null 2>&1
+    (cd "$tmp/yay-bin" && makepkg -si --noconfirm) >/dev/null 2>&1
     rm -rf "$tmp"
-    ok "yay installed"
+    ok "yay"
+    return 0
 }
 
-install_packages() {
+do_install() {
     local aur=$(get_aur_helper)
-    local official=()
-    local from_aur=()
+    local official=() from_aur=()
 
     for pkg in "$@"; do
         [[ -z "$pkg" ]] && continue
-
         if pkg_installed "$pkg"; then
             ok "$pkg"
         elif pacman -Si "$pkg" &>/dev/null; then
             official+=("$pkg")
-            info "$pkg (official)"
         elif $aur -Si "$pkg" &>/dev/null; then
             from_aur+=("$pkg")
-            info "$pkg (aur)"
         else
             warn "$pkg (not found)"
         fi
     done
 
-    [[ ${#official[@]} -gt 0 ]] && sudo pacman -S --needed --noconfirm "${official[@]}"
-    [[ ${#from_aur[@]} -gt 0 ]] && $aur -S --needed --noconfirm "${from_aur[@]}"
+    [[ ${#official[@]} -gt 0 ]] && {
+        info "Installing ${#official[@]} from official repos..."
+        sudo pacman -S --needed --noconfirm "${official[@]}" >/dev/null 2>&1
+        for pkg in "${official[@]}"; do ok "$pkg"; done
+    }
+
+    [[ ${#from_aur[@]} -gt 0 ]] && {
+        info "Installing ${#from_aur[@]} from AUR..."
+        $aur -S --needed --noconfirm "${from_aur[@]}" >/dev/null 2>&1
+        for pkg in "${from_aur[@]}"; do ok "$pkg"; done
+    }
     return 0
 }
 
@@ -297,10 +220,11 @@ ask_applications() {
     echo
     gum confirm "Install optional applications?" || return 0
 
-    step "Select applications"
     local selected=$(printf '%s\n' "${applications[@]}" | gum choose --no-limit --height 20)
+    [[ -z "$selected" ]] && return 0
 
-    [[ -n "$selected" ]] && install_packages $selected
+    step "Installing applications"
+    do_install $selected
     return 0
 }
 
@@ -308,9 +232,7 @@ ask_applications() {
 # Run
 # ─────────────────────────────────────────────────────────────────────────────
 
-install_aur_helper
-
 step "Installing packages"
-install_packages "${packages[@]}"
-
+setup_aur
+do_install "${packages[@]}"
 ask_applications

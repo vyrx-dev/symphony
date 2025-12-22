@@ -6,35 +6,64 @@
 
 set -e
 
-if [ -z "$BASH_VERSION" ]; then
-    exec bash "$0" "$@"
-fi
+[[ -z "$BASH_VERSION" ]] && exec bash "$0" "$@"
 
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 cd "$DOTFILES"
 
-# Make scripts executable
-chmod +x install/themes/install.sh install/themes/symphony scripts/*
+chmod +x install/themes/install.sh install/themes/symphony scripts/* 2>/dev/null || true
 
 source install/utils.sh
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Pre-flight
+# Welcome
 # ─────────────────────────────────────────────────────────────────────────────
 
-source install/pre-install.sh
+clear
+echo
+show_banner
+info "A theme system that flows like music"
+info "https://github.com/vyrx-dev/dotfiles"
+echo
+
+# Check existing
+[[ -d "$HOME/.config/symphony" ]] && warn "Existing installation detected - configs will be updated"
+
+warn "This will install packages and modify your configs."
+echo
+confirm "Continue?" || exit 0
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dependencies
+# ─────────────────────────────────────────────────────────────────────────────
+
+step "Checking dependencies"
+
+missing=()
+for dep in stow git; do
+    command -v "$dep" &>/dev/null && ok "$dep" || { err "$dep"; missing+=("$dep"); }
+done
+
+has_term=0
+for term in kitty ghostty alacritty; do
+    command -v "$term" &>/dev/null && { ok "$term"; has_term=1; break; }
+done
+[[ $has_term -eq 0 ]] && { err "terminal (kitty/ghostty/alacritty)"; missing+=("kitty"); }
+
+for dep in hyprctl swww waybar rofi gum; do
+    command -v "$dep" &>/dev/null && ok "$dep" || info "$dep (optional)"
+done
+
+if [[ ${#missing[@]} -gt 0 ]]; then
+    echo
+    err "Install missing dependencies first:"
+    for dep in "${missing[@]}"; do info "  sudo pacman -S $dep"; done
+    exit 1
+fi
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Packages
 # ─────────────────────────────────────────────────────────────────────────────
-
-print_header "
- _         _       _ _ _
-|_|___ ___| |_ ___| | |_|___ ___
-| |   |_ -|  _| .'| | | |   | . |
-|_|_|_|___|_| |__,|_|_|_|_|_|_  |
-                            |___|
-"
 
 source install/packages.sh
 
@@ -42,28 +71,11 @@ source install/packages.sh
 # Stow
 # ─────────────────────────────────────────────────────────────────────────────
 
-print_header "
-     _
- ___| |_ _____      __
-/ __| __/ _ \ \ /\ / /
-\__ \ || (_) \ V  V /
-|___/\__\___/ \_/\_/
-"
-
 source install/stow.sh
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Desktop
+# Desktop entries
 # ─────────────────────────────────────────────────────────────────────────────
-
-print_header "
-     _           _    _
-  __| | ___  ___| | _| |_ ___  _ __
- / _\` |/ _ \/ __| |/ / __/ _ \| '_ \\
-| (_| |  __/\__ \   <| || (_) | |_) |
- \__,_|\___||___/_|\_\\\\__\___/| .__/
-                              |_|
-"
 
 source install/desktop-entries.sh
 
@@ -71,30 +83,15 @@ source install/desktop-entries.sh
 # Themes
 # ─────────────────────────────────────────────────────────────────────────────
 
-print_header "
- _   _
-| |_| |__   ___ _ __ ___   ___  ___
-| __| '_ \ / _ \ '_ \` _ \ / _ \/ __|
-| |_| | | |  __/ | | | | |  __/\__ \\
- \__|_| |_|\___|_| |_| |_|\___||___/
-"
-
 "$DOTFILES/install/themes/install.sh" --skip-logo
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Done
 # ─────────────────────────────────────────────────────────────────────────────
 
-print_header "
-     _
-  __| | ___  _ __   ___
- / _\` |/ _ \| '_ \ / _ \\
-| (_| | (_) | | | |  __/
- \__,_|\___/|_| |_|\___|
-"
-
+echo
 ok "Installation complete!"
 echo
 info "Log out and back in for all changes to take effect."
-info "Run 'symphony list' to see available themes."
+info "Run 'symphony help' to get started."
 echo
