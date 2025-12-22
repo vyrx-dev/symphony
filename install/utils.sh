@@ -122,10 +122,10 @@ spin() {
     local msg="$1"
     shift
     if [[ $HAS_GUM -eq 1 ]]; then
-        gum spin --spinner dot --title "  $msg" -- "$@"
+        gum spin --spinner dot --title "  $msg" -- "$@" || true
     else
         info "$msg"
-        "$@" >/dev/null 2>&1
+        "$@" >/dev/null 2>&1 || true
     fi
 }
 
