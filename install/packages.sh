@@ -33,7 +33,7 @@ packages=(
     waybar                      # status bar
     rofi                        # app launcher (wayland native in 2.0+)
     swaync                      # notification center
-    swayosd-git                 # OSD for volume/brightness
+    swayosd                 # OSD for volume/brightness
     swww                        # wallpaper daemon
     wlogout                     # logout menu
 
