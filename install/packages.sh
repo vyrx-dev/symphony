@@ -115,15 +115,17 @@ do_install() {
 	done
 
 	if [[ ${#official[@]} -gt 0 ]]; then
-		info "Installing ${#official[@]} packages..."
-		sudo pacman -S --needed --noconfirm "${official[@]}" &>/dev/null
-		for pkg in "${official[@]}"; do ok "$pkg"; done
+		echo
+		info "Installing ${#official[@]} packages from official repos..."
+		echo
+		sudo pacman -S --needed --noconfirm "${official[@]}"
 	fi
 
 	if [[ ${#from_aur[@]} -gt 0 ]]; then
-		info "Installing ${#from_aur[@]} from AUR..."
-		$aur -S --needed --noconfirm "${from_aur[@]}" &>/dev/null
-		for pkg in "${from_aur[@]}"; do ok "$pkg"; done
+		echo
+		info "Installing ${#from_aur[@]} packages from AUR..."
+		echo
+		$aur -S --needed --noconfirm "${from_aur[@]}"
 	fi
 
 	return 0
