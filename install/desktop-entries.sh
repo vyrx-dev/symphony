@@ -72,9 +72,9 @@ setup_hidden() {
 # Run
 # ─────────────────────────────────────────────────────────────────────────────
 
-ask_webapps
-setup_hidden
+ask_webapps || true
+setup_hidden || true
 
 # Refresh desktop database
-command -v update-desktop-database &>/dev/null && update-desktop-database "$TARGET_DIR" 2>/dev/null
-rm -f "$HOME/.cache/rofi3.druncache" 2>/dev/null
+command -v update-desktop-database &>/dev/null && update-desktop-database "$TARGET_DIR" 2>/dev/null || true
+rm -f "$HOME/.cache/rofi3.druncache" 2>/dev/null || true
