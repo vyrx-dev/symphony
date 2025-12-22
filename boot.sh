@@ -34,24 +34,30 @@ BRANCH="${SYMPHONY_BRANCH:-main}"
 DEST="${SYMPHONY_DEST:-$HOME/dotfiles}"
 
 # Bootstrap dependencies
-echo -e "${DIM}  Preparing system...${RESET}"
-sudo pacman -Syu --noconfirm --needed git stow gum >/dev/null 2>&1
-echo -e "${GREEN}  ✓${RESET} Dependencies ready"
+echo -e "\n${DIM}:: Preparing system${RESET}"
+sudo pacman -Syu --noconfirm --needed git stow gum
 
 # Clone or update
+echo
 if [[ -d "$DEST/.git" ]]; then
     echo -e "${DIM}  Updating dotfiles...${RESET}"
-    git -C "$DEST" pull --ff-only >/dev/null 2>&1 || true
+    git -C "$DEST" pull --ff-only || true
 else
-    echo -e "${DIM}  Cloning dotfiles...${RESET}"
+    echo -e "${DIM}  Cloning from github.com/${REPO}...${RESET}"
     rm -rf "$DEST"
-    git clone "https://github.com/${REPO}.git" "$DEST" --depth 1 >/dev/null 2>&1
+    git clone "https://github.com/${REPO}.git" "$DEST"
 fi
 
 # Switch branch if needed
 if [[ "$BRANCH" != "main" ]]; then
-    git -C "$DEST" fetch origin "$BRANCH" --depth 1 >/dev/null 2>&1
-    git -C "$DEST" checkout "$BRANCH" >/dev/null 2>&1
+    git -C "$DEST" fetch origin "$BRANCH"
+    git -C "$DEST" checkout "$BRANCH"
+fi
+
+# Verify clone worked
+if [[ ! -f "$DEST/install.sh" ]]; then
+    echo -e "\n${MAGENTA}  ✗${RESET} Clone failed - install.sh not found"
+    exit 1
 fi
 
 echo -e "${GREEN}  ✓${RESET} Repository ready"
