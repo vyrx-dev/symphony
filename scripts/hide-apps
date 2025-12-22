@@ -1,0 +1,80 @@
+#!/bin/bash
+# Hide system clutter apps from rofi/launchers
+# Creates override entries with NoDisplay=true
+
+TARGET_DIR="$HOME/.local/share/applications"
+mkdir -p "$TARGET_DIR"
+
+# Patterns to hide (grep -E regex)
+HIDE_PATTERNS=(
+    "^in\.lsp_plug\."           # LSP audio plugins
+    "^electron[0-9]+"           # Electron versions
+    "^java-.*-openjdk"          # OpenJDK launchers
+    "^jconsole-"                # Java tools
+    "^jshell-"
+    "^fcitx"                    # Input method internals
+    "^kbd-layout"               # Keyboard layout tools
+    "^kcm_"                     # KDE config modules
+    "^kvantum"                  # Qt theme manager
+    "^org\.fcitx\."             # Fcitx apps
+    "^org\.freedesktop\.Xwayland"
+    "^org\.gnome\.Evince"       # Document viewer (keep nautilus)
+    "^org\.gnome\.Zenity"
+    "^org\.gnupg\.pinentry"     # GPG pinentry
+    "^org\.kde\.kiod"           # KDE internals
+    "^org\.kde\.knewstuff"
+    "^org\.kde\.ksecretd"
+    "^polkit-gnome"             # Polkit agent
+    "^signon-ui"                # Sign-on UI
+    "^user-dirs-update"         # XDG dirs updater
+    "^nautilus-autorun"         # Autorun software
+    "^rofi-theme-selector"      # Rofi theme selector
+    "^avahi-discover"           # Avahi browser
+    "^bssh$"                    # Avahi SSH browser
+    "^bvnc$"                    # Avahi VNC browser
+    "^cmake-gui$"               # CMake GUI
+    "^cups$"                    # CUPS config
+    "^lstopo$"                  # Hardware topology
+    "^nm-connection-editor$"    # NetworkManager (use nm-applet)
+    "^qv4l2$"                   # Video4Linux
+    "^qvidcap$"
+    "^xgps"                     # GPS tools
+    "^vim$"                     # Terminal apps
+    "^nvim$"
+    "^btop$"
+    "^nvtop$"
+    "^qemu$"                    # QEMU (use virt-manager)
+    "^wine$"                    # Wine config
+    "^io\.elementary\."         # Elementary apps
+    "^li\.oever\."              # Aether
+    "^ktelnetservice"           # KDE telnet
+    "^kitty-open$"              # Kitty open handler
+    "^openstreetmap-geo"        # Geo handlers
+    "^wheelmap-geo"
+    "^google-maps-geo"
+    "^code-url-handler"         # VSCode URL handler
+)
+
+# Build regex
+PATTERN=$(printf "|%s" "${HIDE_PATTERNS[@]}")
+PATTERN="${PATTERN:1}"  # Remove leading |
+
+# Find and hide matching apps by copying and adding NoDisplay=true
+count=0
+for desktop in /usr/share/applications/*.desktop; do
+    [[ -f "$desktop" ]] || continue
+    name=$(basename "$desktop")
+    basename_no_ext=$(basename "$desktop" .desktop)
+    
+    if echo "$basename_no_ext" | grep -qE "$PATTERN"; then
+        # Copy original and append NoDisplay=true
+        cp "$desktop" "$TARGET_DIR/$name"
+        # Remove any existing NoDisplay/Hidden lines and add NoDisplay=true
+        sed -i '/^NoDisplay=/d; /^Hidden=/d' "$TARGET_DIR/$name"
+        sed -i '/^\[Desktop Entry\]/a NoDisplay=true' "$TARGET_DIR/$name"
+        ((count++))
+    fi
+done
+
+echo "Hidden $count system apps"
+update-desktop-database "$TARGET_DIR" 2>/dev/null

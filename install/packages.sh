@@ -1,145 +1,75 @@
 #!/bin/bash
-# Package installation
-
-DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Package Installer   |-/ /--|#
+#|/ /---+---------------------+/ /---|#
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Core Packages                                                         │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
 packages=(
-    base-devel                  # build tools
-    git                         # version control
-    stow                        # symlink manager
+	# Build
+	base-devel git stow
 
-    # Hyprland
-    hyprland                    # compositor
-    hypridle                    # idle daemon
-    hyprlock                    # lock screen
-    hyprpicker                  # color picker
-    hyprsunset                  # blue light filter
-    xdg-desktop-portal-hyprland # screen sharing
-    xdg-desktop-portal-gtk      # file picker
-    qt5-wayland                 # Qt5 wayland
-    qt6-wayland                 # Qt6 wayland
-    uwsm                        # session manager
+	# Hyprland
+	hyprland hypridle hyprlock hyprpicker hyprsunset
+	xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+	qt5-wayland qt6-wayland uwsm
 
-    # Desktop
-    waybar                      # status bar
-    rofi                        # launcher
-    swaync                      # notifications
-    swayosd                     # OSD
-    swww                        # wallpaper
-    wlogout                     # logout menu
+	# Desktop
+	waybar rofi swaync swayosd swww wlogout
 
-    # Terminal
-    kitty                       # primary
-    alacritty                   # screensaver
+	# Terminal & Shell
+	kitty alacritty fish starship tmux
 
-    # Shell
-    fish                        # shell
-    starship                    # prompt
-    tmux                        # multiplexer
+	# CLI Tools
+	eza bat fd ripgrep fzf zoxide jq
 
-    # CLI
-    eza                         # ls
-    bat                         # cat
-    fd                          # find
-    ripgrep                     # grep
-    fzf                         # fuzzy finder
-    zoxide                      # smart cd
-    jq                          # JSON
+	# Files
+	yazi nautilus
 
-    # Files
-    yazi                        # TUI file manager
-    nautilus                    # GUI file manager
+	# Editor
+	neovim lazygit
 
-    # Dev
-    neovim                      # editor
-    lazygit                     # git TUI
+	# Screenshot & Recording
+	grim slurp satty wl-clipboard gpu-screen-recorder ffmpeg v4l-utils
 
-    # Screenshot
-    grim                        # screenshot
-    slurp                       # region select
-    satty                       # annotation
-    wl-clipboard                # clipboard
-    gpu-screen-recorder         # recording
-    ffmpeg                      # video
-    v4l-utils                   # webcam
+	# Clipboard
+	cliphist wl-clip-persist
 
-    # Clipboard
-    cliphist                    # history
-    wl-clip-persist             # persist
+	# Audio
+	pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber
+	pamixer pavucontrol wiremix
 
-    # Audio
-    pipewire                    # server
-    pipewire-alsa               # ALSA
-    pipewire-pulse              # PulseAudio
-    pipewire-jack               # JACK
-    wireplumber                 # session
-    pamixer                     # CLI mixer
-    pavucontrol                 # GUI mixer
-    wiremix                     # TUI mixer
+	# Music
+	mpd mpc rmpc cava playerctl
 
-    # Music
-    mpd                         # daemon
-    mpc                         # CLI
-    rmpc                        # TUI
-    cava                        # visualizer
-    playerctl                   # MPRIS
+	# Network & Bluetooth
+	networkmanager network-manager-applet impala
+	bluez bluez-utils blueberry
 
-    # Network
-    networkmanager              # network
-    network-manager-applet      # tray
-    impala                      # wifi TUI
+	# System
+	polkit-gnome brightnessctl ddcutil power-profiles-daemon
+	libnotify xdg-utils xdg-user-dirs inotify-tools
 
-    # Bluetooth
-    bluez                       # stack
-    bluez-utils                 # CLI
-    blueberry                   # GUI
+	# Theming
+	matugen-bin nwg-look adw-gtk-theme bibata-cursor-theme-bin
 
-    # System
-    polkit-gnome                # auth
-    brightnessctl               # brightness
-    ddcutil                     # monitor
-    power-profiles-daemon       # power
-    libnotify                   # notify-send
-    xdg-utils                   # xdg-open
-    xdg-user-dirs               # user dirs
-    inotify-tools               # fs monitor
+	# Rofi Extras
+	rofimoji wtype
 
-    # Theming
-    matugen-bin                 # wallpaper colors
-    nwg-look                    # GTK settings
-    adw-gtk-theme               # GTK3 theme
-    bibata-cursor-theme-bin     # cursor
+	# Monitoring
+	btop fastfetch
 
-    # Rofi
-    rofimoji                    # emoji
-    wtype                       # keyboard
+	# Fonts
+	ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd noto-fonts-emoji
 
-    # Monitor
-    btop                        # system
-    fastfetch                   # info
+	# Display Manager
+	sddm qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects
 
-    # Fonts
-    ttf-jetbrains-mono-nerd     # mono
-    ttf-cascadia-mono-nerd      # alt mono
-    noto-fonts-emoji            # emoji
-
-    # Display
-    sddm                        # login
-    qt5-quickcontrols           # sddm deps
-    qt5-quickcontrols2
-    qt5-graphicaleffects
-
-    # Misc
-    python-terminaltexteffects  # tte
-    gum                         # prompts
-    wget                        # download
-    curl                        # HTTP
-    unzip                       # archive
-    localsend-bin               # file share
+	# Utilities
+	python-terminaltexteffects gum wget curl unzip localsend-bin
 )
 
 # ╭───────────────────────────────────────────────────────────────────────╮
@@ -147,90 +77,71 @@ packages=(
 # ╰───────────────────────────────────────────────────────────────────────╯
 
 applications=(
-    brave-bin                   # browser
-    zen-browser-bin             # firefox fork
-    firefox
-    chromium
-    obsidian                    # notes
-    bitwarden                   # passwords
-    code                        # vscode OSS
-    visual-studio-code-bin      # vscode
-    vesktop-bin                 # discord
-    discord
-    spotify-launcher
-    spicetify-cli               # spotify theme
-    mpv                         # video
-    yt-dlp                      # youtube
-    steam                       # gaming
-    lutris                      # games
-    gamemode                    # performance
-    mangohud                    # overlay
+	brave-bin zen-browser-bin firefox chromium
+	obsidian bitwarden code visual-studio-code-bin
+	vesktop-bin discord spotify-launcher spicetify-cli
+	mpv yt-dlp steam lutris gamemode mangohud
 )
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Functions
-# ─────────────────────────────────────────────────────────────────────────────
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Functions                                                             │
+# ╰───────────────────────────────────────────────────────────────────────╯
 
 setup_aur() {
-    aur_installed && return 0
-
-    info "Installing yay..."
-    local tmp=$(mktemp -d)
-    git clone https://aur.archlinux.org/yay-bin.git "$tmp/yay-bin" --depth 1 >/dev/null 2>&1
-    (cd "$tmp/yay-bin" && makepkg -si --noconfirm) >/dev/null 2>&1
-    rm -rf "$tmp"
-    ok "yay"
-    return 0
+	aur_installed && return 0
+	info "Installing yay..."
+	local tmp=$(mktemp -d)
+	git clone https://aur.archlinux.org/yay-bin.git "$tmp/yay-bin" --depth 1 &>/dev/null
+	(cd "$tmp/yay-bin" && makepkg -si --noconfirm) &>/dev/null
+	rm -rf "$tmp"
+	ok "yay"
 }
 
 do_install() {
-    local aur=$(get_aur_helper)
-    local official=() from_aur=()
+	local aur=$(get_aur_helper)
+	local official=() from_aur=()
 
-    for pkg in "$@"; do
-        [[ -z "$pkg" ]] && continue
-        if pkg_installed "$pkg"; then
-            ok "$pkg"
-        elif pacman -Si "$pkg" &>/dev/null; then
-            official+=("$pkg")
-        elif $aur -Si "$pkg" &>/dev/null; then
-            from_aur+=("$pkg")
-        else
-            warn "$pkg (not found)"
-        fi
-    done
+	for pkg in "$@"; do
+		[[ -z "$pkg" ]] && continue
+		if pkg_installed "$pkg"; then
+			ok "$pkg"
+		elif pacman -Si "$pkg" &>/dev/null; then
+			official+=("$pkg")
+		elif [[ -n "$aur" ]] && $aur -Si "$pkg" &>/dev/null 2>&1; then
+			from_aur+=("$pkg")
+		else
+			warn "$pkg not found"
+		fi
+	done
 
-    [[ ${#official[@]} -gt 0 ]] && {
-        info "Installing ${#official[@]} from official repos..."
-        sudo pacman -S --needed --noconfirm "${official[@]}" >/dev/null 2>&1
-        for pkg in "${official[@]}"; do ok "$pkg"; done
-    }
+	[[ ${#official[@]} -gt 0 ]] && {
+		info "Installing ${#official[@]} packages..."
+		sudo pacman -S --needed --noconfirm "${official[@]}" &>/dev/null
+		for pkg in "${official[@]}"; do ok "$pkg"; done
+	}
 
-    [[ ${#from_aur[@]} -gt 0 ]] && {
-        info "Installing ${#from_aur[@]} from AUR..."
-        $aur -S --needed --noconfirm "${from_aur[@]}" >/dev/null 2>&1
-        for pkg in "${from_aur[@]}"; do ok "$pkg"; done
-    }
-    return 0
+	[[ ${#from_aur[@]} -gt 0 ]] && {
+		info "Installing ${#from_aur[@]} from AUR..."
+		$aur -S --needed --noconfirm "${from_aur[@]}" &>/dev/null
+		for pkg in "${from_aur[@]}"; do ok "$pkg"; done
+	}
 }
 
 ask_applications() {
-    command -v gum &>/dev/null || return 0
+	command -v gum &>/dev/null || return 0
+	echo
+	gum confirm "Install optional applications?" || return 0
 
-    echo
-    gum confirm "Install optional applications?" || return 0
+	local selected=$(printf '%s\n' "${applications[@]}" | gum choose --no-limit --height 20)
+	[[ -z "$selected" ]] && return 0
 
-    local selected=$(printf '%s\n' "${applications[@]}" | gum choose --no-limit --height 20)
-    [[ -z "$selected" ]] && return 0
-
-    step "Installing applications"
-    do_install $selected
-    return 0
+	step "Installing applications"
+	do_install $selected
 }
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Run
-# ─────────────────────────────────────────────────────────────────────────────
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Run                                                                   │
+# ╰───────────────────────────────────────────────────────────────────────╯
 
 step "Installing packages"
 setup_aur
