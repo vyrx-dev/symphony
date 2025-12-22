@@ -158,6 +158,20 @@ clean_desktop_entries() {
 # Main
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Handle --desktop-entries flag for quick fix
+if [[ "$1" == "--desktop-entries" ]]; then
+    target_dir="$HOME/.local/share/applications"
+    if [[ -L "$target_dir" ]]; then
+        rm "$target_dir"
+        ok "Removed symlink: $target_dir"
+        info "Now re-run ./install.sh"
+    else
+        info "Not a symlink, running full cleanup..."
+        clean_desktop_entries
+    fi
+    exit 0
+fi
+
 echo
 warn "Symphony Uninstaller"
 echo

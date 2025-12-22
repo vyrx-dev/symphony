@@ -10,20 +10,25 @@ TARGET_DIR="$HOME/.local/share/applications"
 
 step "Setting up desktop entries"
 
+# If stow symlinked the whole directory, user needs to fix manually
+if [[ -L "$TARGET_DIR" ]]; then
+    warn "~/.local/share/applications is a symlink"
+    info "Run: ./uninstall.sh --desktop-entries"
+    info "Then re-run the installer"
+    true
+    return 0 2>/dev/null || exit 0
+fi
+
 mkdir -p "$TARGET_DIR"
 
-# Browser overrides (skip if stow already linked them)
+# Browser overrides
 if command -v brave &>/dev/null && [[ -f "$APPS_DIR/brave-browser.desktop" ]]; then
-    if [[ ! -L "$TARGET_DIR/brave-browser.desktop" ]]; then
-        cp -f "$APPS_DIR/brave-browser.desktop" "$TARGET_DIR/"
-    fi
+    cat "$APPS_DIR/brave-browser.desktop" > "$TARGET_DIR/brave-browser.desktop"
     ok "Brave override"
 fi
 
 if command -v chromium &>/dev/null && [[ -f "$APPS_DIR/chromium.desktop" ]]; then
-    if [[ ! -L "$TARGET_DIR/chromium.desktop" ]]; then
-        cp -f "$APPS_DIR/chromium.desktop" "$TARGET_DIR/"
-    fi
+    cat "$APPS_DIR/chromium.desktop" > "$TARGET_DIR/chromium.desktop"
     ok "Chromium override"
 fi
 
