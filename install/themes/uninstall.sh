@@ -18,8 +18,11 @@ SYMPHONY_DIR="$HOME/.config/symphony"
 # ─────────────────────────────────────────────────────────────────────────────
 
 show_menu() {
+    clear
     echo
-    warn "Symphony Theme Uninstaller"
+    show_banner
+    echo
+    warn "Theme Uninstaller"
     echo
     echo "  1) Delete specific themes"
     echo "  2) Complete removal"
