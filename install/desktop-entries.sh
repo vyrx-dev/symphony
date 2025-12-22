@@ -12,14 +12,18 @@ step "Setting up desktop entries"
 
 mkdir -p "$TARGET_DIR"
 
-# Browser overrides (use --remove-destination in case stow already symlinked them)
+# Browser overrides (skip if stow already linked them)
 if command -v brave &>/dev/null && [[ -f "$APPS_DIR/brave-browser.desktop" ]]; then
-    cp --remove-destination "$APPS_DIR/brave-browser.desktop" "$TARGET_DIR/"
+    if [[ ! -L "$TARGET_DIR/brave-browser.desktop" ]]; then
+        cp -f "$APPS_DIR/brave-browser.desktop" "$TARGET_DIR/"
+    fi
     ok "Brave override"
 fi
 
 if command -v chromium &>/dev/null && [[ -f "$APPS_DIR/chromium.desktop" ]]; then
-    cp --remove-destination "$APPS_DIR/chromium.desktop" "$TARGET_DIR/"
+    if [[ ! -L "$TARGET_DIR/chromium.desktop" ]]; then
+        cp -f "$APPS_DIR/chromium.desktop" "$TARGET_DIR/"
+    fi
     ok "Chromium override"
 fi
 
