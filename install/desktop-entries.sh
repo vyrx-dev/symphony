@@ -61,7 +61,7 @@ setup_hidden() {
         # Skip if already linked or same file
         [[ "$file" -ef "$dst" ]] && continue
         cp "$file" "$dst"
-        ((count++))
+        count=$((count + 1))
     done
 
     [[ $count -gt 0 ]] && ok "Hidden $count apps from launcher"
@@ -72,9 +72,10 @@ setup_hidden() {
 # Run
 # ─────────────────────────────────────────────────────────────────────────────
 
-ask_webapps || true
-setup_hidden || true
+ask_webapps
+setup_hidden
 
 # Refresh desktop database
-command -v update-desktop-database &>/dev/null && update-desktop-database "$TARGET_DIR" 2>/dev/null || true
-rm -f "$HOME/.cache/rofi3.druncache" 2>/dev/null || true
+command -v update-desktop-database &>/dev/null && update-desktop-database "$TARGET_DIR" 2>/dev/null
+rm -f "$HOME/.cache/rofi3.druncache" 2>/dev/null
+true  # ensure success exit code
