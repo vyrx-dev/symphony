@@ -180,8 +180,6 @@ clean_desktop_entries
 ask_packages
 clean_shell
 
-[[ -x "$DOTFILES/install/themes/uninstall.sh" ]] && "$DOTFILES/install/themes/uninstall.sh"
-
 echo
 ok "Done"
 info "Restart session to complete"
