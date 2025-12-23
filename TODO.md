@@ -7,8 +7,9 @@
         |___/                                  |___/              
 ```
 
-**Status**: 🚧 Under Development  
-**Previous Release**: [v1.0](https://github.com/vyrx-dev/dotfiles/releases/tag/v1.0.0)
+**Status**: ✅ Ready for Release  
+**Current**: v2.0.0 (pending release)  
+**Previous**: [v1.0](https://github.com/vyrx-dev/dotfiles/releases/tag/v1.0.0)
 
 ---
 
@@ -44,11 +45,16 @@
 
 ## 🔧 Scripts & Tools
 
-- [x] Theme switcher
+- [x] Theme switcher (`symphony` command)
 - [x] fish aliases → abbr
 - [x] Theme installer script
 - [x] Full installation script (modular: utils, checks, pkgs, dotfiles)
 - [x] Better directory structure (install/, themes/, scripts/)
+- [x] One-liner curl install (`boot.sh`)
+- [x] Uninstaller script
+- [x] Desktop entries & web apps
+- [x] MPD service setup
+- [x] Dynamic app hiding
 - [ ] Media conversion scripts
 - [ ] Optimize switching performance
 
@@ -56,8 +62,7 @@
 
 ## ✨ Features
 
-- [ ] Focus-vibe mode (Ghostty)
-- [ ] Focus-vibe mode (Alacritty)
+- [x] Focus-vibe mode (Kitty/Ghostty/Alacritty toggle transparency)
 - [ ] Neovim cleanup
 - [ ] Neovim hot reload
 
@@ -67,6 +72,8 @@
 
 - [x] Symphony branding (all files)
 - [x] Better directory structure
+- [x] Stow-local-ignore for clean symlinks
+- [x] GitHub issue templates
 - [ ] ASCII art headers
 - [ ] Full cleanup pass
 
@@ -76,8 +83,9 @@
 
 - [x] Main README (updated with new install flow)
 - [x] Themes & Scripts README
+- [ ] README video/screenshots
 - [ ] Symphony Website
 
 ---
 
-*Last updated: December 21, 2025*
+*Last updated: December 23, 2025*
