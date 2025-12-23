@@ -1,371 +1,344 @@
 <div align="center">
-<!---->
-<!-- <img src="assets/banner.jpg" alt="Symphony" width="100%" height="300" style="object-fit: cover; object-position: center;"> -->
-<!---->
-<!-- >*My daily driver setup — simple, calm and easy to work with. -->
-<!-- Minimal by default, but still has a bit of character. -->
-<!-- Animations, gaps, and extras can be toggled on/off, so you can choose between clean or pretty.* -->
-<!---->
-<!-- --- -->
 
-### 🎵 Symphony 2.0 - Coming Soon
+![Banner](assets/banner.jpg)
 
-Want to help make it happen faster? Contribute to the project!
-• [Check the TODO](TODO.md)
-• [Create an issue](https://github.com/vyrx-dev/dotfiles/issues) if you spot any problems
+**A minimal, music-inspired Hyprland rice with dynamic theming**
 
----
+[![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat&logo=arch-linux&logoColor=white)](https://archlinux.org/)
+[![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=wayland&logoColor=black)](https://hyprland.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 </div>
+
+---
 
 ## Showcase
 
 <div align="center">
 
-![Desktop Showcase](assets/Desktop.png)
-  
-<https://github.com/user-attachments/assets/75f0924e-fc4d-40ef-89c8-8034a750f886>
-
-<https://github.com/user-attachments/assets/f5f809f3-c88d-4c13-8684-80d48e206f5e>
-
-<https://github.com/user-attachments/assets/d733f891-dcc3-4d10-8efd-3e2f46fe9cdf>
+![Symphony Showcase](assets/symphony-showcase.gif)
 
 </div>
 
+---
+
 ## Features
 
-- **Matugen theming** — Automatic color scheme generation from wallpapers
-- **Modular configuration** — Clean, organized, and easy to customize
-- **Complete development environment** — Hyprland, Neovim, Tmux, and essential tools
-- **Comprehensive tooling** — Waybar, Rofi, Swaync, Wlogout, Hyprlock
-- **GNU Stow** — Efficient dotfile management
-- **Dual-mode system** — [Vibe mode](#dual-mode-system) for aesthetics, [Focus mode](#dual-mode-system) for distraction-free work
-- **[Wallpaper collection](https://github.com/vyrx-dev/wallpapers)** — My favourite Wallpapers Collection
-
----
-
-## Dual Mode System
-
-This setup adapts to your workflow with two distinct modes:
+- **One-command theming** — Switch entire desktop look with `symphony switch`
+- **Dynamic colors** — Matugen extracts palette from any wallpaper
+- **11 handcrafted themes** — Dark, cozy, and aesthetic
+- **Everything synced** — Terminal, bar, launcher, notifications, apps
+- **Rofi menus** — App launcher, emoji picker, clipboard, wallpaper selector, power profiles
+- **Dual mode** — Vibe (animations + blur) or Focus (minimal + fast)
+- **Music integration** — MPD + RMPC + Cava visualizer
 
 <details>
-<summary><b>Vibe Mode</b></summary>
+<summary><b>Dual Mode System</b></summary>
 
-Visual-first experience with animations, borders, and transparency for a polished aesthetic.
+Sometimes you want your desktop to look good. Other times you just need to get work done.
+
+**Vibe Mode**
+
+The default look — animations, blur, transparency, gaps. Makes everything feel smooth and polished.
+
+**Focus Mode**
+
+Strips it all down. No animations, minimal borders, transparency off. Just you and your work.
+
+Toggle between them with `Super + Ctrl + Backspace`
 
 </details>
 
-<details>
-<summary><b>Focus Mode</b></summary>
+---
 
-Minimal, distraction-free environment:
+## Themes
 
-- Animations disabled completely
-- Borders reduced to minimal thickness
-- Transparency removed by default
-- Toggle transparency on demand: `Super + Backspace`
+<table>
+<tr>
+<td align="center"><img src="assets/void.png" width="400"/><br><b>Void</b></td>
+<td align="center"><img src="assets/sakura.png" width="400"/><br><b>Sakura</b></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/espresso.png" width="400"/><br><b>Espresso</b></td>
+<td align="center"><img src="assets/rose-pine.png" width="400"/><br><b>Rosé Pine</b></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/gruvbox-material.png" width="400"/><br><b>Gruvbox Material</b></td>
+<td align="center"><img src="assets/tokyo-night.png" width="400"/><br><b>Tokyo Night</b></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/kanagawa.png" width="400"/><br><b>Kanagawa</b></td>
+<td align="center"><img src="assets/nordic.png" width="400"/><br><b>Nordic</b></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/forest.png" width="400"/><br><b>Forest</b></td>
+<td align="center"><img src="assets/zen.png" width="400"/><br><b>Zen</b></td>
+</tr>
+</table>
 
-Perfect for deep work sessions where performance and focus take priority over visuals.
+<div align="center">
 
-</details>
+### Dynamic Theme
 
-**Switch modes:** `Super + Ctrl + Backspace`
+![Dynamic Theme](assets/dynamic.gif)
+
+*Colors generated from wallpaper using Matugen*
+
+</div>
 
 ---
 
-## Components
+## Rofi & Notifications
+
+<div align="center">
+
+![Rofi and SwayNC](assets/rofi-swaync.gif)
+
+</div>
 
 <details>
 <summary><b>Rofi Menus</b></summary>
 
-![Rofi](assets/rofi.png)
+<div align="center">
 
-### Emoji Picker
+**Wallpaper Selector**
 
-![Emoji Picker](assets/emoji.png)
+![Wallpaper Selector](assets/rofi-wall-selector.png)
 
-### Clipboard Manager
+**Music**
 
-![Clipboard](assets/clipboard.png)
+![Music](assets/rofi-music.png)
 
-### Wallpaper Selector
+| App Launcher | Emoji Picker | Power Menu |
+|:---:|:---:|:---:|
+| ![App Launcher](assets/rofi-app.png) | ![Emoji Picker](assets/rofi-emoji.png) | ![Power Menu](assets/rofi-power-menu.png) |
 
-![Wallpaper Selector](assets/wallpaper-selector.png)
-
-### Power Profile Manager
-
-![Power Profile](assets/powerprofile.png)
+</div>
 
 </details>
 
-<details>
-<summary><b>Notification Center (Swaync)</b></summary>
+---
 
-![Swaync 1](assets/swaync-1.png)
-![Swaync 2](assets/swaync-2.png)
-![Swaync 3](assets/swaync-3.png)
+## Hyprlock
 
-</details>
-
-<details>
-<summary><b>Neovim & Tmux</b></summary>
-
-![Neovim Dashboard](assets/neovim_dashboard.png)
-![Neovim 1](assets/Neovim-1.png)
-![Neovim 2](assets/Neovim-2.png)
-
-</details>
-
-<details>
-<summary><b>Music (RMPC)</b></summary>
-
-![RMPC](assets/rmpc.png)
-
-</details>
-
-<details>
-<summary><b>Wlogout</b></summary>
-
-![Wlogout](assets/wlogout.png)
-
-</details>
-
-<details>
-<summary><b>Hyprlock</b></summary>
+<div align="center">
 
 ![Hyprlock](assets/hyprlock.png)
 
-</details>
+</div>
+
+---
+
+## Neovim
+
+<div align="center">
+
+![Neovim](assets/neovim-showcase.gif)
+
+</div>
+
+---
+
+## Music
+
+<div align="center">
+
+![Music](assets/music-showcase.gif)
+
+*RMPC + Cava visualizer*
+
+</div>
 
 ---
 
 ## Installation
 
-### Quick Install
-
 ```bash
-git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./install.sh
+curl -fsSL https://raw.githubusercontent.com/vyrx-dev/dotfiles/main/boot.sh | bash
 ```
 
-The installer will:
-1. Check prerequisites (git, Arch Linux, yay)
-2. Install all required packages (auto-detects official vs AUR)
-3. Deploy dotfiles with GNU Stow
-4. Set up themes with Symphony
-
-### Before Installation
-
-> **Warning:** GNU Stow will not work if configuration directories or files already exist.
-
-Backup and remove existing configurations:
+Or manually:
 
 ```bash
-# Backup existing configs (recommended)
-mv ~/.config/hypr ~/.config/hypr.bak
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.config/tmux ~/.config/tmux.bak
-mv ~/.config/waybar ~/.config/waybar.bak
-mv ~/.config/rofi ~/.config/rofi.bak
-mv ~/.config/kitty ~/.config/kitty.bak
-mv ~/.config/fish ~/.config/fish.bak
-mv ~/.config/swaync ~/.config/swaync.bak
-
-# Or remove directly (use with caution)
-rm -rf ~/.config/hypr ~/.config/nvim ~/.config/tmux
+git clone https://github.com/vyrx-dev/dotfiles ~/dotfiles
+cd ~/dotfiles && ./install.sh
 ```
 
-### Manual Installation
+### Themes Only
 
-If you prefer to install manually:
-
-```bash
-# Clone the repository
-git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-
-# Install packages (edit install/pkgs.sh to customize)
-source install/utils.sh && source install/pkgs.sh
-
-# Deploy dotfiles
-source install/dotfiles.sh
-
-# Set up themes
-./install/themes/install.sh
-```
-
-### Optional Packages
-
-Edit `install/pkgs.sh` and uncomment packages in the `optional_packages` array:
-
-```bash
-optional_packages=(
-    # Browsers
-    brave-bin
-    zen-browser-bin
-    
-    # Apps
-    obsidian
-    spotify-launcher
-    vesktop-bin
-    
-    # NVIDIA
-    nvidia
-    nvidia-utils
-)
-```
-
-### Theme Management (Symphony)
-
-Switch themes on the fly:
-
-```bash
-symphony list          # List available themes
-symphony apply <name>  # Apply a theme
-symphony current       # Show current theme
-```
-
-Or use the keybind: `Super + Ctrl + Space`
-
-### Uninstall
-
-```bash
-cd ~/dotfiles
-stow -D .                           # Remove dotfile symlinks
-./install/themes/uninstall.sh       # Remove theme symlinks
-```
-
-> **Tip:** Grab wallpapers from [here](https://github.com/vyrx-dev/wallpapers) for automatic theming.
+Want just the themes without the full setup? See [install/themes/README.md](install/themes/README.md)
 
 ---
 
-## Tools Included
+## Usage
 
-| Tool | Description |
-|------|-------------|
-| **[Hyprland](https://github.com/hyprwm/Hyprland)** | Dynamic tiling Wayland compositor |
-| **[Waybar](https://github.com/Alexays/Waybar)** | Highly customizable status bar |
-| **[Rofi](https://github.com/lbonn/rofi)** | Application launcher and menu system |
-| **[Swaync](https://github.com/ErikReider/SwayNotificationCenter)** | Notification daemon with control center |
-| **[Kitty](https://github.com/kovidgoyal/kitty)** | GPU-accelerated terminal emulator |
-| **[Alacritty](https://github.com/alacritty/alacritty)** | Fast, cross-platform terminal emulator |
-| **[Neovim](https://github.com/neovim/neovim)** | Hyperextensible Vim-based text editor |
-| **[Tmux](https://github.com/tmux/tmux)** | Terminal multiplexer |
-| **[Fish](https://github.com/fish-shell/fish-shell)** | Smart and user-friendly shell |
-| **[Starship](https://github.com/starship/starship)** | Minimal, fast, and customizable prompt |
-| **[Lazygit](https://github.com/jesseduffield/lazygit)** | Simple terminal UI for git commands |
-| **[Matugen](https://github.com/InioX/matugen)** | Material Design color scheme generator |
-| **[RMPC](https://github.com/mierak/rmpc)** | Rusty Music Player Client for MPD |
+### Theme Switching
 
----
+```bash
+symphony switch          # interactive picker
+symphony switch sakura   # direct switch
+symphony list            # show all themes
+symphony reload          # re-apply current
+```
 
-## Keyboard Shortcuts
+Or press `Super + Ctrl + Shift + Space` for the theme picker.
 
-### Applications
+### Keybindings
 
-| Keybind | Action |
-|---------|--------|
-| `Super + Return` | Terminal (Kitty) |
+<details>
+<summary><b>Applications</b></summary>
+
+| Key | Action |
+|-----|--------|
+| `Super + Return` | Terminal |
 | `Super + B` | Browser |
-| `Super + E` | File Manager (Nautilus) |
-| `Super + M` | Music (Spotify) |
+| `Super + E` | File Manager |
+| `Super + M` | Spotify |
 | `Super + D` | Discord |
 | `Super + O` | Obsidian |
 | `Super + C` | VS Code |
+| `Alt + M` | RMPC |
+| `Alt + N` | Neovim |
+| `Alt + Q` | Yazi |
+| `Alt + /` | Btop |
 
-### Rofi Menus
+</details>
 
-| Keybind | Action |
-|---------|--------|
-| `Super + Space` | Application Launcher |
-| `Alt + ,` | Clipboard Manager |
+<details>
+<summary><b>Rofi Menus</b></summary>
+
+| Key | Action |
+|-----|--------|
+| `Super + Space` | App Launcher |
+| `Alt + ,` | Clipboard |
 | `Alt + .` | Emoji Picker |
 | `Super + Ctrl + B` | Power Profiles |
-| `Super + Ctrl + Space` | Theme Selector (Matugen) |
+| `Super + Ctrl + Space` | Matugen Theme |
 | `Super + Alt + Space` | Wallpaper Picker |
+| `Super + Ctrl + Shift + Space` | Theme Switcher |
 
-### Window Management
+</details>
 
-| Keybind | Action |
-|---------|--------|
+<details>
+<summary><b>Window Management</b></summary>
+
+| Key | Action |
+|-----|--------|
 | `Super + Q` | Close Window |
 | `Super + K` | Kill Application |
+| `Super + Arrow` | Move Focus |
+| `Super + Shift + Arrow` | Move Window |
+| `Super + Ctrl + Arrow` | Resize Window |
+| `Super + 1-9` | Switch Workspace |
+| `Super + Shift + 1-9` | Move to Workspace |
+| `Super + F` | Fullscreen |
+| `Super + V` | Toggle Floating |
 | `Super + Shift + O` | Pop Window (Float & Pin) |
 
-### System
+</details>
 
-| Keybind | Action |
-|---------|--------|
-| `Super + L` | Lock Screen (Hyprlock) |
-| `Super + Escape` | Wlogout Menu |
-| `Super + N` | Notification Center |
-| `Alt + /` | System Monitor (btop) |
-| `Super + Backspace` | Toggle Terminal Transparency |
+<details>
+<summary><b>System</b></summary>
+
+| Key | Action |
+|-----|--------|
+| `Super + Shift + L` | Lock Screen |
+| `Super + Escape` | Power Menu |
+| `Super + N` | Notifications |
+| `Super + Backspace` | Toggle Transparency |
 | `Super + Ctrl + Backspace` | Toggle Focus/Vibe Mode |
 
-### Screenshots & Recording
+</details>
 
-| Keybind | Action |
-|---------|--------|
-| `Super + P` | Screenshot Region |
-| `Super + R` | Screen Record (System Audio) |
-| `Super + Alt + R` | Screen Record (System + Mic) |
+<details>
+<summary><b>Screenshots & Recording</b></summary>
+
+| Key | Action |
+|-----|--------|
+| `Super + P` | Screenshot |
+| `Super + R` | Screen Record |
+| `Super + Shift + R` | Record with Mic |
 | `Super + Shift + P` | Color Picker |
 
-### Tmux Sessions
+</details>
 
-| Keybind | Action |
-|---------|--------|
-| `Super + Shift + Return` | Attach Tmux Session |
-| `Super + Alt + Return` | New Tmux Session |
+<details>
+<summary><b>Wallpapers</b></summary>
 
-*For complete keybindings, see [.config/hypr/bindings.conf](.config/hypr/bindings.conf)*
+| Key | Action |
+|-----|--------|
+| `Ctrl + Alt + Space` | Random Wallpaper + Colors |
+| `Super + Alt + Left/Right` | Cycle Wallpapers |
+
+</details>
+
+See [.config/hypr/bindings.conf](.config/hypr/bindings.conf) for full list.
 
 ---
 
-## Configuration Structure
+## Components
+
+| Component | Tool |
+|-----------|------|
+| Compositor | [Hyprland](https://hyprland.org/) |
+| Bar | [Waybar](https://github.com/Alexays/Waybar) |
+| Launcher | [Rofi](https://github.com/lbonn/rofi) |
+| Terminal | [Kitty](https://sw.kovidgoyal.net/kitty/) / [Ghostty](https://ghostty.org/) |
+| Notifications | [SwayNC](https://github.com/ErikReider/SwayNotificationCenter) |
+| Lock screen | [Hyprlock](https://github.com/hyprwm/hyprlock) |
+| Theme engine | [Matugen](https://github.com/InioX/matugen) |
+| Music | [MPD](https://musicpd.org/) + [RMPC](https://github.com/mierak/rmpc) |
+| Visualizer | [Cava](https://github.com/karlstav/cava) |
+| Editor | [Neovim](https://neovim.io/) |
+| Shell | [Fish](https://fishshell.com/) + [Starship](https://starship.rs/) |
+
+---
+
+## Structure
 
 ```
 ~/dotfiles/
-├── install.sh              # Main installer
-├── install/
-│   ├── utils.sh            # Colors, helpers
-│   ├── checks.sh           # Preflight checks
-│   ├── pkgs.sh             # Package installation
-│   ├── dotfiles.sh         # Stow deployment
-│   └── themes/
-│       ├── symphony        # Theme switching command
-│       ├── install.sh      # Theme installer
-│       └── hooks/          # Theme apply hooks
-│
-├── themes/                 # Theme configurations
-│   ├── gruvbox-material/
-│   ├── tokyo-night/
-│   ├── rose-pine/
-│   └── ...
-│
 ├── .config/
-│   ├── hypr/               # Hyprland configuration
-│   ├── waybar/             # Status bar
-│   ├── rofi/               # Launchers and menus
-│   ├── swaync/             # Notification center
-│   ├── kitty/              # Terminal (Kitty)
-│   ├── alacritty/          # Terminal (Alacritty)
-│   ├── nvim/               # Neovim configuration
-│   ├── tmux/               # Tmux configuration
-│   ├── fish/               # Fish shell
-│   └── matugen/            # Theme generator
-│
-└── scripts/                # Utility scripts
+│   ├── hypr/           # Hyprland (compositor, bindings, animations)
+│   ├── waybar/         # Status bar
+│   ├── rofi/           # Launcher & menus
+│   ├── swaync/         # Notifications
+│   ├── kitty/          # Terminal
+│   ├── ghostty/        # Terminal (alt)
+│   ├── alacritty/      # Terminal (alt)
+│   ├── nvim/           # Neovim
+│   ├── fish/           # Shell
+│   ├── tmux/           # Terminal multiplexer
+│   ├── yazi/           # File manager
+│   ├── btop/           # System monitor
+│   ├── rmpc/           # Music player
+│   ├── matugen/        # Theme generator templates
+│   └── lazygit/        # Git UI
+├── themes/             # Theme configs (colors, wallpapers)
+├── scripts/            # Utility scripts
+└── install/            # Installer
+    ├── packages.sh     # Package lists
+    ├── stow.sh         # Dotfile deployment
+    ├── services.sh     # Systemd services
+    └── themes/         # Symphony theme system
 ```
+
+---
+
+## Credits
+
+Learned a lot from these projects:
+- [HyDE-Project/HyDE](https://github.com/HyDE-Project/HyDE)
+- [JaKooLit/Hyprland-Dots](https://github.com/JaKooLit/Hyprland-Dots)
+- [basecamp/omarchy](https://github.com/basecamp/omarchy)
+- [bjarneo/aether.nvim](https://github.com/bjarneo/aether.nvim)
+
+Wallpapers: [vyrx-dev/wallpapers](https://github.com/vyrx-dev/wallpapers)
 
 ---
 
 <div align="center">
 
-**If you found this useful, consider giving it a ⭐**
-
-Made with ❤️ for the Linux community
+**[Report Bug](https://github.com/vyrx-dev/dotfiles/issues/new?template=bug_report.yml)** · **[Request Feature](https://github.com/vyrx-dev/dotfiles/issues/new?template=feature_request.yml)** · **[TODO](TODO.md)**
 
 </div>

@@ -5,23 +5,40 @@ set -euo pipefail
 # This script displays the 16 standard ANSI colors (0-15) as large squares
 # in two rows: first row shows colors 0-7, second row shows colors 8-15
 
-echo ""
+show_colors() {
+    # Get current theme name
+    theme=$(basename "$(readlink -f ~/.config/symphony/current 2>/dev/null)" 2>/dev/null || echo "unknown")
 
-# First row: ANSI colors 0-7 (dark colors)
-for row in {1..4}; do
-  for color in {0..7}; do
-    printf "\e[38;5;${color}m\e[48;5;${color}m████████\e[0m  "
-  done
-  echo ""
-done
-echo ""
+    clear
+    echo ""
+    echo "  Theme: $theme"
+    echo ""
 
-# Second row: ANSI colors 8-15 (bright colors)
-for row in {1..4}; do
-  for color in {8..15}; do
-    printf "\e[38;5;${color}m\e[48;5;${color}m████████\e[0m  "
-  done
-  echo ""
-done
+    # First row: ANSI colors 0-7 (dark colors)
+    for row in {1..4}; do
+      for color in {0..7}; do
+        printf "\e[38;5;${color}m\e[48;5;${color}m████████\e[0m  "
+      done
+      echo ""
+    done
+    echo ""
 
-echo ""
+    # Second row: ANSI colors 8-15 (bright colors)
+    for row in {1..4}; do
+      for color in {8..15}; do
+        printf "\e[38;5;${color}m\e[48;5;${color}m████████\e[0m  "
+      done
+      echo ""
+    done
+    echo ""
+}
+
+# Watch mode: refresh every second
+if [[ "${1:-}" == "-w" || "${1:-}" == "--watch" ]]; then
+    while true; do
+        show_colors
+        sleep 1
+    done
+else
+    show_colors
+fi
