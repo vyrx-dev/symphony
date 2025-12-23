@@ -52,8 +52,7 @@
 - [x] Symphony branding
 - [x] Stow-local-ignore
 - [x] GitHub issue templates
-- [ ] README video/screenshots
-- [ ] ASCII art headers
+- [x] README video/screenshots
 - [ ] Full cleanup pass
 
 ---
@@ -66,4 +65,4 @@
 
 ---
 
-*Last updated: December 23, 2025*
+*Last updated: December 24, 2025*
