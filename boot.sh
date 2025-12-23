@@ -30,7 +30,7 @@ EOF
 echo -e "${RESET}"
 
 REPO="${SYMPHONY_REPO:-vyrx-dev/dotfiles}"
-BRANCH="${SYMPHONY_BRANCH:-symphony-2}"
+BRANCH="${SYMPHONY_BRANCH:-main}"
 DEST="${SYMPHONY_DEST:-$HOME/dotfiles}"
 
 # Bootstrap dependencies
