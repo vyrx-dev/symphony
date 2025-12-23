@@ -13,37 +13,56 @@
 
 ---
 
-## Remaining
+## Theme Support
 
-**Theme Support**
-- [ ] Spicetify integration
+- [x] Kitty / Ghostty / Alacritty
+- [x] Rofi / Waybar / SwayNC
+- [x] GTK 3 & 4
+- [x] Btop / Cava / Yazi
+- [x] RMPC / Starship
+- [x] Vesktop / Obsidian / Firefox
+- [ ] Spicetify
 
-**Features**
-- [ ] Neovim cleanup & hot reload
-- [ ] Media conversion scripts
-- [ ] Optimize theme switching performance
+---
 
-**Polish**
+## Installer
+
+- [x] One-liner curl install (`boot.sh`)
+- [x] Modular structure (utils, packages, stow, services)
+- [x] Interactive package selection
+- [x] Desktop entries & web apps
+- [x] MPD service setup
+- [x] Uninstaller
+
+---
+
+## Theme System
+
+- [x] `symphony` command (switch, list, current, edit, reload)
+- [x] Hook-based post-switch actions
+- [x] New themes: espresso, kanagawa, nordic
+- [x] Terminal transparency toggle
+- [x] Dynamic app hiding
+- [ ] Optimize switching performance
+
+---
+
+## Polish
+
+- [x] Symphony branding
+- [x] Stow-local-ignore
+- [x] GitHub issue templates
 - [ ] README video/screenshots
-- [ ] Symphony website
 - [ ] ASCII art headers
 - [ ] Full cleanup pass
 
 ---
 
-## Completed in 2.0
+## Backlog
 
-- One-liner install (`curl | bash`)
-- Modular installer (packages, stow, services, desktop entries)
-- `symphony` command (switch, list, current, edit, reload)
-- Hook-based theme system
-- New themes: espresso, kanagawa, nordic
-- Terminal transparency toggle
-- Web apps & browser hardware acceleration
-- Dynamic app hiding
-- MPD service setup
-- GitHub issue templates
-- Full theme support: terminals, GTK, waybar, rofi, btop, cava, vesktop, obsidian, firefox
+- [ ] Neovim cleanup & hot reload
+- [ ] Media conversion scripts
+- [ ] Symphony website
 
 ---
 
