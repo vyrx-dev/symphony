@@ -29,7 +29,10 @@ assets
 branding
 themes
 install
+\.github
 ^install\.sh$
+^boot\.sh$
+^uninstall\.sh$
 ^TODO\.md$
 ^dummy-install\.sh$
 
