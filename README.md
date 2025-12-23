@@ -2,15 +2,20 @@
 
 ![Banner](assets/banner.jpg)
 
-**A minimal, music-inspired Hyprland rice with dynamic theming**
+**a minimal, music-inspired hyprland rice for the productive**
 
-[![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat&logo=arch-linux&logoColor=white)](https://archlinux.org/)
-[![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=wayland&logoColor=black)](https://hyprland.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+<a href="#installation"><img src="https://img.shields.io/badge/Install-c4a7e7?style=for-the-badge&logoColor=1a1b26" alt="Install"/></a>&ensp;
+<a href="#themes"><img src="https://img.shields.io/badge/Themes-f5a97f?style=for-the-badge&logoColor=1a1b26" alt="Themes"/></a>&ensp;
+<a href="install/themes/README.md"><img src="https://img.shields.io/badge/Symphony-f5c2e7?style=for-the-badge&logoColor=1a1b26" alt="Symphony"/></a>&ensp;
+<a href="#usage"><img src="https://img.shields.io/badge/Usage-7aa2f7?style=for-the-badge&logoColor=1a1b26" alt="Usage"/></a>&ensp;
+<a href="#keybindings"><img src="https://img.shields.io/badge/Keys-9ece6a?style=for-the-badge&logoColor=1a1b26" alt="Keybindings"/></a>&ensp;
+<a href="#components"><img src="https://img.shields.io/badge/Components-bb9af7?style=for-the-badge&logoColor=1a1b26" alt="Components"/></a>
+
+[![Arch](https://img.shields.io/badge/Arch-1793D1?style=flat&logo=arch-linux&logoColor=white)](https://archlinux.org/)
+[![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=wayland&logoColor=white)](https://hyprland.org/)
+[![MIT](https://img.shields.io/badge/MIT-9ece6a?style=flat)](LICENSE)
 
 </div>
-
----
 
 ## Showcase
 
@@ -182,6 +187,8 @@ symphony reload          # re-apply current
 ```
 
 Or press `Super + Ctrl + Shift + Space` for the theme picker.
+
+<a id="keybindings"></a>
 
 ### Keybindings
 

@@ -1,20 +1,12 @@
-<pre>
-        ♪                                            ♫
-   ▄▄▄▄▄                                         ♪
-  ██▀▀▀▀█▄                      █▄           ♬
-  ▀██▄  ▄▀       ▄              ██          ▄
-    ▀██▄▄  ██ ██ ███▄███▄ ████▄ ████▄ ▄███▄ ████▄ ██ ██
-  ▄   ▀██▄ ██▄██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██▄██
-  ▀██████▀▄▄▀██▀▄██ ██ ▀█▄████▀▄██ ██▄▀███▀▄██ ▀█▄▄▀██▀
-     ♫       ██           ██                        ██
-           ▀▀▀     ♪      ▀              ♬        ▀▀▀
-</pre>
+<div align="center">
 
-I love music and musical films (La La Land, Your Lie in April), and I listen to a lot of jazz/instrumentals. That’s where the name and the setup idea come from. You’ll see the music touch more and more over time.
+![Banner](../../assets/banner.jpg)
+
+</div>
+
+I spend a lot of time with music — jazz, instrumentals, film scores. La La Land and Your Lie in April are some of my favorites. Symphony is named after that love, and you'll see the music touch throughout the setup.
 
 ## Installation
-
-> ⚠️ Warning: Read the scripts before running. This switches configs and reloads apps. You are responsible for what you run.
 
 ```bash
 git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
@@ -29,17 +21,38 @@ Uninstall:
 
 ## Themes
 
-- dynamic
-- espresso 
-- forest
-- gruvbox-material
-- kanagawa
-- nordic
-- rose-pine
-- sakura
-- tokyo-night
-- void
-- zen
+<table>
+<tr>
+<td align="center"><img src="../../assets/void.png" width="400"/><br><b>Void</b></td>
+<td align="center"><img src="../../assets/sakura.png" width="400"/><br><b>Sakura</b></td>
+</tr>
+<tr>
+<td align="center"><img src="../../assets/espresso.png" width="400"/><br><b>Espresso</b></td>
+<td align="center"><img src="../../assets/rose-pine.png" width="400"/><br><b>Rosé Pine</b></td>
+</tr>
+<tr>
+<td align="center"><img src="../../assets/gruvbox-material.png" width="400"/><br><b>Gruvbox Material</b></td>
+<td align="center"><img src="../../assets/tokyo-night.png" width="400"/><br><b>Tokyo Night</b></td>
+</tr>
+<tr>
+<td align="center"><img src="../../assets/kanagawa.png" width="400"/><br><b>Kanagawa</b></td>
+<td align="center"><img src="../../assets/nordic.png" width="400"/><br><b>Nordic</b></td>
+</tr>
+<tr>
+<td align="center"><img src="../../assets/forest.png" width="400"/><br><b>Forest</b></td>
+<td align="center"><img src="../../assets/zen.png" width="400"/><br><b>Zen</b></td>
+</tr>
+</table>
+
+<div align="center">
+
+### Dynamic Theme
+
+<img src="../../assets/dynamic.gif" width="800"/>
+
+*Colors generated from wallpaper using Matugen*
+
+</div>
 
 Wallpapers: [vyrx-dev/wallpapers](https://github.com/vyrx-dev/wallpapers)
 
