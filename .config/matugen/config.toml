@@ -2,20 +2,14 @@
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-# output_path = '~/.config/hypr/colors.conf'
 output_path = '~/dotfiles/themes/dynamic/.config/hypr/theme/colors.conf'
-post_hook = 'hyprctl reload'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
-# output_path = '~/.config/kitty/colors.conf'
 output_path = '~/dotfiles/themes/dynamic/.config/kitty/colors.conf'
-post_hook = 'pkill -SIGUSR1 kitty'
-
 
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
-# output_path = '~/.config/btop/themes/matugen.theme'
 output_path = '~/dotfiles/themes/dynamic/.config/btop/themes/current.theme'
 
 [templates.yazi]
@@ -24,8 +18,7 @@ output_path = '~/dotfiles/themes/dynamic/.config/yazi/theme.toml'
 
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
-output_path = '~/dotfiles/themes/dynamic/.config/cava/colors.ini'
-post_hook = "pkill -USR1 cava"
+output_path = '~/dotfiles/themes/dynamic/.config/cava/config'
 
 [templates.fuzzel]
 input_path = '~/.config/matugen/templates/fuzzel_theme.ini'
@@ -34,12 +27,10 @@ output_path = '~/dotfiles/themes/dynamic/.config/fuzzel/fuzzel_theme.ini'
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty'
 output_path = '~/dotfiles/themes/dynamic/.config/ghostty/theme'
-post_hook = 'pkill -SIGUSR2 ghostty'
 
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/dotfiles/themes/dynamic/.config/waybar/colors.css'
-post_hook = 'pkill -SIGUSR2 waybar'
 
 [templates.starship]
 input_path = '~/.config/matugen/templates/starship-colors.toml'
@@ -76,7 +67,6 @@ output_path = '~/dotfiles/themes/dynamic/.cache/wal/colors.json'
 [templates.pywalfox-colors]
 input_path = '~/.config/matugen/templates/pywalfox-colors'
 output_path = '~/dotfiles/themes/dynamic/.cache/wal/colors'
-post_hook = 'pywalfox update'
 
 [templates.vesktop]
 input_path = '~/.config/matugen/templates/midnight-color.css'

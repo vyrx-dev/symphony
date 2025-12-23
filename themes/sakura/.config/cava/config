@@ -1,0 +1,11 @@
+[color]
+background = 'default'
+gradient = 1
+gradient_count = 7
+gradient_color_1 = '#4a3c45'
+gradient_color_2 = '#F29B9A'
+gradient_color_3 = '#FFB5B4'
+gradient_color_4 = '#D4A882'
+gradient_color_5 = '#E6BA94'
+gradient_color_6 = '#E8C099'
+gradient_color_7 = '#FBD2AB'
