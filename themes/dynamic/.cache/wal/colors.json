@@ -1,27 +1,27 @@
 {
-    "wallpaper": "/home/vyrx/Wallpapers/a_building_with_a_red_and_white_surface.jpg",
+    "wallpaper": "/home/vyrx/Wallpapers/others/a_sculpture_of_a_man_with_a_face_on_his_head.png",
     "alpha": "100",
     "special": {
-        "background": "#1a110f",
-        "foreground": "#f1dfda",
-        "cursor": "#ffb59f"
+        "background": "#18130b",
+        "foreground": "#ede1d4",
+        "cursor": "#f2be6e"
     },
     "colors": {
-        "color0": "#1a110f",
+        "color0": "#18130b",
         "color1": "#ffb4ab",
-        "color2": "#ffb59f",
-        "color3": "#d8c58d",
-        "color4": "#e7bdb2",
-        "color5": "#524619",
-        "color6": "#5d4037",
-        "color7": "#f1dfda",
-        "color8": "#271d1b",
+        "color2": "#f2be6e",
+        "color3": "#b6cea3",
+        "color4": "#dcc3a1",
+        "color5": "#384c2b",
+        "color6": "#55442a",
+        "color7": "#ede1d4",
+        "color8": "#241f17",
         "color9": "#ffb4ab",
-        "color10": "#ffb59f",
-        "color11": "#d8c58d",
-        "color12": "#e7bdb2",
-        "color13": "#524619",
-        "color14": "#5d4037",
-        "color15": "#f1dfda"
+        "color10": "#f2be6e",
+        "color11": "#b6cea3",
+        "color12": "#dcc3a1",
+        "color13": "#384c2b",
+        "color14": "#55442a",
+        "color15": "#ede1d4"
     }
 }

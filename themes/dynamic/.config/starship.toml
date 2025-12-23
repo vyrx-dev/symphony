@@ -16,18 +16,18 @@ palette = "colors"
 
 [palettes.colors]
 mustard = '#af8700' # example
-color1 = '#ffb59f'
-color2 = '#561f0e'
-color3 = '#d8c2bc'
-color4 = '#271d1b'
-color5 = '#561f0e'
-color6 = '#1a110f'
-color7 = '#1a110f'
-color8 = '#ffb59f'
-color9 = '#d8c58d'
+color1 = '#f2be6e'
+color2 = '#442c00'
+color3 = '#d2c4b4'
+color4 = '#241f17'
+color5 = '#442c00'
+color6 = '#18130b'
+color7 = '#18130b'
+color8 = '#f2be6e'
+color9 = '#b6cea3'
 
 [directory]
-style = "fg:#ffb59f bold" # color1
+style = "fg:#f2be6e bold" # color1
 read_only = " 󰌾"
 read_only_style = "fg:#ea6962" # dark blue
 truncation_length = 0
@@ -39,12 +39,12 @@ format = "[$path]($style)[$read_only]($read_only_style)"
 '~/Testing-repo' = 'work-project'
 
 [character]
-success_symbol = '[❯](fg:#ffb59f bold)'
+success_symbol = '[❯](fg:#f2be6e bold)'
 error_symbol = '[❯](fg:#ffb4ab bold)'
-vicmd_symbol = '[❮](fg:#1a110f bold)'
+vicmd_symbol = '[❮](fg:#18130b bold)'
 
 [git_branch]
-style = "fg:#d8c58d bold" # color9 (red)
+style = "fg:#b6cea3 bold" # color9 (red)
 format = '[$symbol$branch]($style) '
 
 [git_status]
@@ -56,7 +56,7 @@ format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
 
 [os]
 format = "[$symbol]($style)"
-style = "fg:#ffb59f bold" # color8
+style = "fg:#f2be6e bold" # color8
 disabled = false
 
 [os.symbols]

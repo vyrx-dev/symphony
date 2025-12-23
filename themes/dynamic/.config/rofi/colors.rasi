@@ -1,55 +1,47 @@
-/**
- * ════════════════════════════════════════════════════════
- *   Symphony by https://github.com/vyrx-dev
- *   Theme: Dynamic
- *   Generated with Matugen
- * ════════════════════════════════════════════════════════
- */
-
 * {
-    primary: #ffb59f;
-    primary-fixed: #ffdbd1;
-    primary-fixed-dim: #ffb59f;
-    on-primary: #561f0e;
-    on-primary-fixed: #3a0b01;
-    on-primary-fixed-variant: #723522;
-    primary-container: #723522;
-    on-primary-container: #ffdbd1;
-    secondary: #e7bdb2;
-    secondary-fixed: #ffdbd1;
-    secondary-fixed-dim: #e7bdb2;
-    on-secondary: #442a22;
-    on-secondary-fixed: #2c150f;
-    on-secondary-fixed-variant: #5d4037;
-    secondary-container: #5d4037;
-    on-secondary-container: #ffdbd1;
-    tertiary: #d8c58d;
-    tertiary-fixed: #f5e1a7;
-    tertiary-fixed-dim: #d8c58d;
-    on-tertiary: #3a2f05;
-    on-tertiary-fixed: #231b00;
-    on-tertiary-fixed-variant: #524619;
-    tertiary-container: #524619;
-    on-tertiary-container: #f5e1a7;
+    primary: #f2be6e;
+    primary-fixed: #ffddaf;
+    primary-fixed-dim: #f2be6e;
+    on-primary: #442c00;
+    on-primary-fixed: #281800;
+    on-primary-fixed-variant: #614000;
+    primary-container: #614000;
+    on-primary-container: #ffddaf;
+    secondary: #dcc3a1;
+    secondary-fixed: #f9dfbb;
+    secondary-fixed-dim: #dcc3a1;
+    on-secondary: #3d2e16;
+    on-secondary-fixed: #261904;
+    on-secondary-fixed-variant: #55442a;
+    secondary-container: #55442a;
+    on-secondary-container: #f9dfbb;
+    tertiary: #b6cea3;
+    tertiary-fixed: #d2eabd;
+    tertiary-fixed-dim: #b6cea3;
+    on-tertiary: #233517;
+    on-tertiary-fixed: #0e2005;
+    on-tertiary-fixed-variant: #384c2b;
+    tertiary-container: #384c2b;
+    on-tertiary-container: #d2eabd;
     error: #ffb4ab;
     on-error: #690005;
     error-container: #93000a;
     on-error-container: #ffdad6;
-    surface: #1a110f;
-    on-surface: #f1dfda;
-    on-surface-variant: #d8c2bc;
-    outline: #a08c87;
-    outline-variant: #53433f;
+    surface: #18130b;
+    on-surface: #ede1d4;
+    on-surface-variant: #d2c4b4;
+    outline: #9b8f80;
+    outline-variant: #4f4539;
     shadow: #000000;
     scrim: #000000;
-    inverse-surface: #f1dfda;
-    inverse-on-surface: #392e2b;
-    inverse-primary: #8f4c37;
-    surface-dim: #1a110f;
-    surface-bright: #423734;
-    surface-container-lowest: #140c0a;
-    surface-container-low: #231917;
-    surface-container: #271d1b;
-    surface-container-high: #322825;
-    surface-container-highest: #3d322f;
+    inverse-surface: #ede1d4;
+    inverse-on-surface: #362f27;
+    inverse-primary: #7e570e;
+    surface-dim: #18130b;
+    surface-bright: #3f382f;
+    surface-container-lowest: #120d07;
+    surface-container-low: #201b13;
+    surface-container: #241f17;
+    surface-container-high: #2f2921;
+    surface-container-highest: #3a342b;
 }

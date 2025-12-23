@@ -1,108 +1,131 @@
-/**
- * ════════════════════════════════════════════════════════
- *   Symphony by https://github.com/vyrx-dev
- *   Theme: Dynamic
- *   Generated with Matugen
- * ════════════════════════════════════════════════════════
+/*
+ * GTK Colors - Symphony
+ * Enhanced with semantic colors for libadwaita support
  */
 
-@define-color background     #1a110f;
-@define-color foreground     #f1dfda;
-@define-color black          #1a110f;
+/* Base terminal colors */
+@define-color background     #18130b;
+@define-color foreground     #ede1d4;
+@define-color black          #18130b;
 @define-color red            #ffb4ab;
-@define-color green          #ffb59f;
-@define-color yellow         #d8c58d;
-@define-color blue           #e7bdb2;
-@define-color magenta        #524619;
-@define-color cyan           #5d4037;
-@define-color white          #f1dfda;
-@define-color bright_black   #271d1b;
-@define-color bright_white   #f1dfda;
+@define-color green          #f2be6e;
+@define-color yellow         #b6cea3;
+@define-color blue           #dcc3a1;
+@define-color magenta        #384c2b;
+@define-color cyan           #55442a;
+@define-color white          #ede1d4;
+@define-color bright_black   #241f17;
+@define-color bright_white   #ede1d4;
+
 /* Accent colors */
-@define-color accent_bg_color #ffb59f;
-@define-color accent_fg_color #561f0e;
-@define-color accent_color #ffb59f;
+@define-color accent_bg_color #f2be6e;
+@define-color accent_fg_color #442c00;
+@define-color accent_color #f2be6e;
+
 /* Window colors */
-@define-color window_bg_color #1a110f;
-@define-color window_fg_color #f1dfda;
+@define-color window_bg_color #18130b;
+@define-color window_fg_color #ede1d4;
+
 /* View colors */
-@define-color view_bg_color #1a110f;
-@define-color view_fg_color #f1dfda;
+@define-color view_bg_color #18130b;
+@define-color view_fg_color #ede1d4;
+
 /* Sidebar colors */
-@define-color sidebar_bg_color #1a110f;
-@define-color sidebar_fg_color #f1dfda;
-@define-color sidebar_backdrop_color #1a110f;
-@define-color sidebar_shade_color #1a110f;
+@define-color sidebar_bg_color #18130b;
+@define-color sidebar_fg_color #ede1d4;
+@define-color sidebar_backdrop_color #18130b;
+@define-color sidebar_shade_color #18130b;
+
 /* Headerbar colors */
-@define-color headerbar_bg_color #1a110f;
-@define-color headerbar_fg_color #f1dfda;
-@define-color headerbar_backdrop_color #1a110f;
-@define-color headerbar_shade_color #1a110f;
+@define-color headerbar_bg_color #18130b;
+@define-color headerbar_fg_color #ede1d4;
+@define-color headerbar_backdrop_color #18130b;
+@define-color headerbar_shade_color #18130b;
+
 /* Card colors */
-@define-color card_bg_color #271d1b;
-@define-color card_fg_color #f1dfda;
+@define-color card_bg_color #241f17;
+@define-color card_fg_color #ede1d4;
+
 /* Popover colors */
-@define-color popover_bg_color #271d1b;
-@define-color popover_fg_color #f1dfda;
+@define-color popover_bg_color #241f17;
+@define-color popover_fg_color #ede1d4;
+
 /* Dialog colors */
-@define-color dialog_bg_color #271d1b;
-@define-color dialog_fg_color #f1dfda;
+@define-color dialog_bg_color #241f17;
+@define-color dialog_fg_color #ede1d4;
+
 /* Semantic status colors */
 @define-color destructive_bg_color #ffb4ab;
 @define-color destructive_fg_color #690005;
 @define-color destructive_color #ffb4ab;
-@define-color success_bg_color #ffb59f;
-@define-color success_fg_color #561f0e;
-@define-color success_color #ffb59f;
-@define-color warning_bg_color #d8c58d;
-@define-color warning_fg_color #3a2f05;
-@define-color warning_color #d8c58d;
+
+@define-color success_bg_color #f2be6e;
+@define-color success_fg_color #442c00;
+@define-color success_color #f2be6e;
+
+@define-color warning_bg_color #b6cea3;
+@define-color warning_fg_color #233517;
+@define-color warning_color #b6cea3;
+
 @define-color error_bg_color #ffb4ab;
 @define-color error_fg_color #690005;
 @define-color error_color #ffb4ab;
+
 /* Legacy theme colors */
 @define-color borders alpha(@foreground, 0.1);
+
 @define-color theme_fg_color @foreground;
 @define-color theme_text_color @foreground;
 @define-color theme_bg_color @background;
 @define-color theme_base_color @black;
 @define-color theme_selected_bg_color @accent_bg_color;
 @define-color theme_selected_fg_color @accent_fg_color;
+
 @define-color insensitive_bg_color @background;
 @define-color insensitive_fg_color @bright_black;
 @define-color insensitive_base_color @black;
+
 @define-color theme_unfocused_fg_color @foreground;
 @define-color theme_unfocused_text_color @foreground;
 @define-color theme_unfocused_bg_color @background;
 @define-color theme_unfocused_base_color @black;
 @define-color theme_unfocused_selected_bg_color @accent_bg_color;
 @define-color theme_unfocused_selected_fg_color @accent_fg_color;
+
 @define-color unfocused_insensitive_color @bright_black;
 @define-color unfocused_borders alpha(@foreground, 0.1);
+
 @define-color content_view_bg @view_bg_color;
 @define-color text_view_bg @view_bg_color;
+
 /* Widget styling */
 messagedialog {
     background-color: @dialog_bg_color;
 }
+
 messagedialog label {
     color: @dialog_fg_color;
 }
+
 banner revealer widget {
     background: @bright_black;
     padding: 5px;
     color: @foreground;
 }
+
 alertdialog.background {
     background-color: @dialog_bg_color;
     color: @dialog_fg_color;
 }
+
 alertdialog box {
     background-color: @dialog_bg_color;
 }
+
 alertdialog label {
     color: @dialog_fg_color;
 }
+
 toast {
     background-color: @card_bg_color;
     color: @foreground;
