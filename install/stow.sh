@@ -81,12 +81,16 @@ stow_output=$(stow -v . 2>&1)
 stow_status=$?
 
 # Check if stow succeeded
-if [[ $stow_status -ne 0 ]] || echo "$stow_output" | grep -qE "WARNING|ERROR|cannot stow|All operations aborted"; then
+# Note: We ignore "WARNING: in simulation mode" as that's expected for dry-runs
+# We check for actual error indicators: non-zero exit, "cannot stow", "All operations aborted", "ERROR"
+if [[ $stow_status -ne 0 ]] || echo "$stow_output" | grep -qE "cannot stow|All operations aborted|ERROR"; then
     err "Failed to link dotfiles"
     echo
     echo "$stow_output" | grep -vE "^LINK:|^MKDIR:" | sed 's/^/  /'
     echo
-    info "Backups are in: $BACKUP_DIR"
+    if [[ -d "$BACKUP_DIR" ]]; then
+        info "Backups are in: $BACKUP_DIR"
+    fi
     info "To retry: cd ~/dotfiles && stow ."
     exit 1
 fi
