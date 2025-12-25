@@ -32,24 +32,25 @@ backup_item() {
 cd "$DOTFILES"
 info "Checking for conflicts..."
 dry_run_output=$(stow -n -v . 2>&1)
-dry_run_status=$?
 
 # Parse conflicts from dry-run
 conflicts=()
 absolute_symlinks=()
+dotfiles_name="$(basename "$DOTFILES")"
 
 while IFS= read -r line; do
     # Match "cannot stow" errors
     if [[ "$line" =~ "cannot stow" ]]; then
-        # Extract the target path from the error message
-        if [[ "$line" =~ "existing target "([^[:space:]]+) ]]; then
+        # Extract the target path from the error message (with optional quotes)
+        if [[ "$line" =~ "existing target "\"?([^[:space:]\"]+) ]]; then
             target="${BASH_REMATCH[1]}"
             conflicts+=("$target")
         fi
     fi
     # Match absolute symlink warnings
     if [[ "$line" =~ "source is an absolute symlink" ]]; then
-        if [[ "$line" =~ dotfiles/([^[:space:]]+) ]]; then
+        # Use the actual dotfiles directory name instead of hardcoding "dotfiles"
+        if [[ "$line" =~ $dotfiles_name/([^[:space:]]+) ]]; then
             symlink_path="${BASH_REMATCH[1]}"
             absolute_symlinks+=("$symlink_path")
         fi
