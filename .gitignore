@@ -7,6 +7,8 @@
 .config/btop/themes/current.theme
 .config/rmpc/themes/current.ron
 .config/rmpc/themes/pywall16.ron
+.config/gtk-3.0/colors.css
+.config/gtk-4.0/colors.css
 .config/gtk-3.0/bookmarks
 .config/gtk-4.0/bookmarks
 # Theme wallpaper symlinks (user preference, changes frequently)
