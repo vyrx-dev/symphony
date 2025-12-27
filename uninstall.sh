@@ -51,25 +51,20 @@ restore_backups() {
 
     [[ ! -d "$BACKUP_DIR" ]] && { info "No backups found"; return 0; }
 
-    # Find most recent backup (timestamped subdirectory)
+    # Find most recent backup
     local latest=$(find "$BACKUP_DIR" -maxdepth 1 -type d -name "20*" | sort -r | head -1)
-    [[ -z "$latest" ]] && latest="$BACKUP_DIR"
-
-    [[ ! -d "$latest/.config" ]] && { info "No configs to restore"; return 0; }
+    [[ -z "$latest" ]] && { info "No backups found"; return 0; }
 
     info "Restoring from: $latest"
-    local n=0
 
-    for item in "$latest/.config"/*; do
-        [[ -d "$item" ]] || continue
-        local name=$(basename "$item")
-        rm -rf "$HOME/.config/$name"
-        cp -r "$item" "$HOME/.config/$name"
-        ok ".config/$name"
-        ((n++)) || true
-    done
+    # Restore preserving directory structure
+    while IFS= read -r file; do
+        local dest="$HOME/${file#$latest/}"
+        mkdir -p "$(dirname "$dest")"
+        cp "$file" "$dest"
+    done < <(find "$latest" -type f)
 
-    [[ $n -eq 0 ]] && info "Nothing to restore"
+    ok "Backups restored"
     return 0
 }
 
