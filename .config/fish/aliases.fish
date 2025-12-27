@@ -12,10 +12,10 @@ abbr -a ld 'eza -lhD --icons=auto'
 abbr -a lt 'eza --icons=auto --tree'
 abbr -a ltt 'eza --tree --level=2 --long --icons --git'
 abbr -a lta 'lt -a'
-abbr -a bash 'source ~/.bashrc'
+# abbr -a bash 'source ~/.bashrc'
 abbr -a bfile 'nvim ~/.bashrc'
 abbr -a ffile 'nvim ~/.config/fish/config.fish'
-abbr -a fish 'source ~/.config/fish/config.fish'
+# abbr -a fish 'source ~/.config/fish/config.fish'
 abbr -a xx tmux
 
 # change your default USER shell
