@@ -130,17 +130,6 @@ cmd_reload() {
 	run_hooks
 	hyprctl keyword misc:disable_autoreload 0 &>/dev/null || true
 
-	hyprctl reload &>/dev/null || true
-	killall -SIGUSR1 kitty 2>/dev/null || true
-	pkill -SIGUSR2 btop 2>/dev/null || true
-	pkill -SIGUSR2 ghostty 2>/dev/null || true
-
-	if pgrep -x waybar &>/dev/null; then
-		pkill waybar
-		waybar &>/dev/null &
-		disown
-	fi
-
 	ok "Reloaded $theme"
 }
 
