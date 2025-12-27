@@ -52,6 +52,7 @@ packages=(
 	# System
 	polkit-gnome brightnessctl ddcutil power-profiles-daemon
 	libnotify xdg-utils xdg-user-dirs inotify-tools
+	gnome-keyring libsecret
 
 	# Theming
 	matugen-bin nwg-look adw-gtk-theme bibata-cursor-theme-bin
