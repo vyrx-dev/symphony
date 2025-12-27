@@ -16,7 +16,7 @@ mkdir -p "$HOME/.config" "$HOME/.local/share"
 # Backup conflicting files/dirs before stow runs
 backup_conflicts() {
     local dry_run
-    dry_run=$(stow -n -v . 2>&1)
+    dry_run=$(stow -n -v . 2>&1) || true
 
     local -A seen
     while IFS= read -r line; do
