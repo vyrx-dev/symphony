@@ -21,9 +21,6 @@ skip=(
     pamixer playerctl inotify-tools wtype v4l-utils adw-gtk-theme
 )
 
-# Backup location used by stow.sh
-BACKUP_DIR="$HOME/.dotfiles-backup"
-
 # ─────────────────────────────────────────────────────────────────────────────
 # Functions
 # ─────────────────────────────────────────────────────────────────────────────
@@ -49,11 +46,9 @@ do_unstow() {
 restore_backups() {
     step "Restoring backups"
 
-    [[ ! -d "$BACKUP_DIR" ]] && { info "No backups found"; return 0; }
-
-    # Find most recent backup
-    local latest=$(find "$BACKUP_DIR" -maxdepth 1 -type d -name "20*" | sort -r | head -1)
-    [[ -z "$latest" ]] && { info "No backups found"; return 0; }
+    # Find most recent backup directory (dotfiles-backup, dotfiles-backup-2, etc.)
+    local latest=$(ls -d "$HOME"/dotfiles-backup* 2>/dev/null | sort -V | tail -1)
+    [[ -z "$latest" || ! -d "$latest" ]] && { info "No backups found"; return 0; }
 
     info "Restoring from: $latest"
 
@@ -100,7 +95,7 @@ ask_packages() {
 clean_shell() {
     step "Cleaning shell config"
     for rc in ~/.bashrc ~/.zshrc ~/.config/fish/config.fish; do
-        [[ -f "$rc" ]] || continue
+        [[ -f "$rc" && ! -L "$rc" ]] || continue
         grep -q "[Ss]ymphony" "$rc" 2>/dev/null || continue
         sed -i '/[Ss]ymphony/d;/install\/themes/d' "$rc"
         ok "$(basename "$rc")"
