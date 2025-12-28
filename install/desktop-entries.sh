@@ -18,6 +18,11 @@ fi
 
 mkdir -p "$TARGET_DIR"
 
+# Copy icons folder for web apps
+if [[ -d "$APPS_DIR/icons" ]]; then
+    cp -r "$APPS_DIR/icons" "$TARGET_DIR/"
+fi
+
 # Browser overrides
 if command -v brave &>/dev/null && [[ -f "$APPS_DIR/brave-browser.desktop" ]]; then
     cat "$APPS_DIR/brave-browser.desktop" > "$TARGET_DIR/brave-browser.desktop"
