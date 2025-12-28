@@ -16,6 +16,9 @@ cd "$DOTFILES"
 # Prevent stow from symlinking ~/.config itself
 mkdir -p "$HOME/.config" "$HOME/.local/share"
 
+# Create directories needed by scripts
+mkdir -p "$HOME/Pictures/Screenshots"
+
 # Backup existing configs so stow creates clean directory symlinks
 backup_if_exists() {
     for item in "$1"/*; do
