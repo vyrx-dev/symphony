@@ -23,6 +23,10 @@ case "$choice" in
   systemctl suspend
   ;;
 "Logout")
-  uwsm stop
+  if pgrep -x uwsm > /dev/null; then
+    uwsm stop
+  else
+    hyprctl dispatch exit
+  fi
   ;;
 esac
