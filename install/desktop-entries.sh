@@ -56,7 +56,11 @@ if command -v gum &>/dev/null; then
         if gum confirm "Install web apps?"; then
             selected=$(printf '%s\n' "${webapps[@]}" | gum choose --no-limit --height 15) || true
             for app in $selected; do
-                [[ -n "$app" ]] && cp --remove-destination "$APPS_DIR/$app.desktop" "$TARGET_DIR/" && ok "$app"
+                if [[ -n "$app" ]]; then
+                    # Replace hardcoded /home/vyrx with user's $HOME
+                    sed "s|/home/vyrx|$HOME|g" "$APPS_DIR/$app.desktop" > "$TARGET_DIR/$app.desktop"
+                    ok "$app"
+                fi
             done
         fi
     fi
