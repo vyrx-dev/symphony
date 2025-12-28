@@ -6,6 +6,13 @@
 
 step "Setting up services"
 
+# Set GTK dark theme via gsettings
+if command -v gsettings &>/dev/null; then
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+    ok "GTK dark theme"
+fi
+
 # MPD user service
 if pkg_installed mpd; then
     mkdir -p ~/.config/systemd/user/mpd.service.d
