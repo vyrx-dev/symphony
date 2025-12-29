@@ -4,6 +4,8 @@
 (
     address: "127.0.0.1:6600",
     cache_dir: Some("/tmp/rmpc/cache"),
+    lyrics_dir: "~/Music/lyrics",
+    on_song_change: ["~/.config/rmpc/fetch-lyrics"],
     theme: "current",
     password: None,
     enable_config_hot_reload: true,
@@ -114,7 +116,19 @@
             name: "Playing",
             pane: Split(
                 direction: Horizontal,
-                panes: [(size: "25%", pane: Pane(AlbumArt)), (size: "80%", pane: Pane(Queue))],
+                panes: [
+                    (
+                        size: "25%",
+                        pane: Split(
+                            direction: Vertical,
+                            panes: [
+                                (size: "50%", pane: Pane(AlbumArt)),
+                                (size: "50%", borders: "TOP", pane: Pane(Lyrics)),
+                            ],
+                        ),
+                    ),
+                    (size: "75%", borders: "LEFT", pane: Pane(Queue)),
+                ],
             ),
         ),
         (
