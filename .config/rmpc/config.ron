@@ -23,6 +23,18 @@
         vertical_align: Top,
         horizontal_align: Center,
     ),
+    cava: (
+        framerate: 60,
+        autosens: true,
+        sensitivity: 100,
+        input: (
+            method: Fifo,
+            source: "/tmp/mpd.fifo",
+            sample_rate: 44100,
+            channels: 2,
+            sample_bits: 16,
+        ),
+    ),
     keybinds: (
         global: {
             ":":       CommandMode,
@@ -127,7 +139,17 @@
                             ],
                         ),
                     ),
-                    (size: "75%", borders: "LEFT", pane: Pane(Queue)),
+                    (
+                        size: "75%",
+                        borders: "LEFT",
+                        pane: Split(
+                            direction: Vertical,
+                            panes: [
+                                (size: "85%", pane: Pane(Queue)),
+                                (size: "15%", borders: "TOP", pane: Pane(Cava)),
+                            ],
+                        ),
+                    ),
                 ],
             ),
         ),

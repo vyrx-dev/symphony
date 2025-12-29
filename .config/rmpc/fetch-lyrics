@@ -1,8 +1,35 @@
 #!/bin/sh
 
+# ═══════════════════════════════════════════════════════════
+# rmpc on_song_change script
+# - Sends desktop notification with album art
+# - Auto-fetches lyrics from LRCLIB
+# ═══════════════════════════════════════════════════════════
+
+TMP_DIR="/tmp/rmpc"
+ALBUM_ART_PATH="$TMP_DIR/notification_cover.jpg"
 LRCLIB_INSTANCE="https://lrclib.net"
 
-# Only fetch if no lyrics exist
+mkdir -p "$TMP_DIR"
+
+# ───────────────────────────────────────────────────────────
+# Desktop Notification
+# ───────────────────────────────────────────────────────────
+
+# Get album art for notification
+if rmpc albumart --output "$ALBUM_ART_PATH" 2>/dev/null; then
+    ICON="$ALBUM_ART_PATH"
+else
+    ICON="audio-x-generic"
+fi
+
+# Send notification
+notify-send -i "$ICON" "Now Playing" "$ARTIST - $TITLE"
+
+# ───────────────────────────────────────────────────────────
+# Auto-fetch Lyrics
+# ───────────────────────────────────────────────────────────
+
 if [ "$HAS_LRC" = "false" ]; then
     mkdir -p "$(dirname "$LRC_FILE")"
 

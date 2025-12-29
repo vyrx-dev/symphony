@@ -148,4 +148,15 @@
             default: (kind: Property(Filename))
         ),
     ],
+    cava: (
+        bar_symbols: ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'],
+        bar_width: 2,
+        bar_spacing: 1,
+        orientation: Bottom,
+        bar_color: Gradient({
+              0: "#6e6a86",
+             50: "#c4a7e7",
+            100: "#9ccfd8",
+        }),
+    ),
 )

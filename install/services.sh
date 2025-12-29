@@ -21,6 +21,15 @@ if pkg_installed mpd; then
     systemctl --user enable --now mpd && ok "mpd" || warn "mpd failed"
 fi
 
+# mpdscribble - Last.fm scrobbler for MPD
+if pkg_installed mpdscribble; then
+    if grep -q "YOUR_USERNAME" ~/.config/mpdscribble/mpdscribble.conf 2>/dev/null; then
+        warn "mpdscribble: Edit ~/.config/mpdscribble/mpdscribble.conf with your Last.fm credentials"
+    else
+        systemctl --user enable --now mpdscribble && ok "mpdscribble" || warn "mpdscribble failed"
+    fi
+fi
+
 # GNOME Keyring - prevents browser logout after suspend
 # Creates an auto-unlock keyring that never locks
 if pkg_installed gnome-keyring; then
