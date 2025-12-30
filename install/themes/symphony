@@ -376,6 +376,228 @@ import_generate() {
 	tab_inactive = { fg = "${c[7]:-#c5c8c6}", bg = "${c[8]:-#444444}" }
 	border_style = { fg = "${c[4]:-#81a2be}" }
 	EOF
+
+	# rmpc
+	cat > "$dest/.config/rmpc/themes/current.ron" <<-EOF
+	#![enable(implicit_some)]
+	#![enable(unwrap_newtypes)]
+	#![enable(unwrap_variant_newtypes)]
+	(
+	    default_album_art_path: None,
+	    show_song_table_header: false,
+	    draw_borders: true,
+	    browser_column_widths: [20, 38, 42],
+	    text_color: "$fg",
+	    tab_bar: (
+	        enabled: true,
+	        active_style: (fg: "$fg", bg: "$bg", modifiers: "Bold"),
+	        inactive_style: (fg: "${c[8]:-#969896}", modifiers: ""),
+	    ),
+	    highlighted_item_style: (fg: "${c[4]:-#81a2be}", modifiers: "Bold"),
+	    current_item_style: (fg: "$bg", bg: "${c[4]:-#81a2be}", modifiers: "Bold"),
+	    borders_style: (fg: "${c[8]:-#969896}", modifiers: ""),
+	    highlight_border_style: (fg: "${c[4]:-#81a2be}"),
+	    symbols: (song: "󰝚 ", dir: " ", marker: "* ", ellipsis: "..."),
+	    progress_bar: (
+	        symbols: ["█", "█", "█"],
+	        track_style: (fg: "${c[8]:-#969896}"),
+	        elapsed_style: (fg: "${c[4]:-#81a2be}"),
+	        thumb_style: (fg: "${c[4]:-#81a2be}"),
+	    ),
+	    scrollbar: (
+	        symbols: ["", "", "", ""],
+	        track_style: (fg: "${c[8]:-#969896}"),
+	        ends_style: (fg: "${c[8]:-#969896}"),
+	        thumb_style: (fg: "${c[4]:-#81a2be}"),
+	    ),
+	    song_table_format: [
+	        (
+	            prop: (kind: Property(Title), style: (fg: "$fg"),
+	                highlighted_item_style: (fg: "$bg", modifiers: "Bold"),
+	                default: (kind: Property(Filename), style: (fg: "${c[8]:-#969896}"),)
+	            ),
+	            width: "70%",
+	        ),
+	        (
+	            prop: (kind: Property(Album), style: (fg: "${c[8]:-#969896}"),
+	                default: (kind: Text("Unknown Album"), style: (fg: "${c[8]:-#969896}"))
+	            ),
+	            width: "30%",
+	        ),
+	    ],
+	    layout: Split(
+	        direction: Vertical,
+	        panes: [
+	            (size: "3", pane: Pane(Tabs)),
+	            (size: "4", pane: Split(direction: Horizontal, panes: [(size: "100%", pane: Split(direction: Vertical, panes: [(size: "4", borders: "ALL", pane: Pane(Header))]))])),
+	            (size: "100%", pane: Split(direction: Horizontal, panes: [(size: "100%", borders: "NONE", pane: Pane(TabContent))])),
+	            (size: "3", borders: "TOP | BOTTOM", pane: Pane(ProgressBar)),
+	        ],
+	    ),
+	    header: (
+	        rows: [
+	            (
+	                left: [(kind: Property(Status(StateV2(playing_label: " ", paused_label: "❚❚", stopped_label: "❚❚"))), style: (fg: "${c[4]:-#81a2be}", modifiers: "Bold"))],
+	                center: [(kind: Property(Song(Title)), style: (fg: "$fg", modifiers: "Bold"), default: (kind: Property(Song(Filename)), style: (fg: "$fg", modifiers: "Bold")))],
+	                right: [(kind: Text("Vol: "), style: (fg: "${c[4]:-#81a2be}", modifiers: "Bold")), (kind: Property(Status(Volume)), style: (fg: "${c[4]:-#81a2be}", modifiers: "Bold")), (kind: Text("% "), style: (fg: "${c[4]:-#81a2be}", modifiers: "Bold"))],
+	            ),
+	            (
+	                left: [(kind: Property(Status(Elapsed)), style: (fg: "$fg")), (kind: Text("/"), style: (fg: "${c[8]:-#969896}")), (kind: Property(Status(Duration)), style: (fg: "$fg"))],
+	                center: [(kind: Property(Song(Artist)), style: (fg: "${c[3]:-#f0c674}", modifiers: "Bold"), default: (kind: Text("Unknown Artist"), style: (fg: "${c[8]:-#969896}", modifiers: "")))],
+	                right: [(kind: Property(Widget(States(active_style: (fg: "${c[4]:-#81a2be}", modifiers: "Bold"), separator_style: (fg: "${c[8]:-#969896}")))), style: (fg: "${c[8]:-#969896}"))],
+	            ),
+	        ],
+	    ),
+	    browser_song_format: [
+	        (kind: Group([(kind: Property(Track)), (kind: Text(" "))])),
+	        (kind: Group([(kind: Property(Artist)), (kind: Text(" - ")), (kind: Property(Title))]), default: (kind: Property(Filename))),
+	    ],
+	)
+	EOF
+
+	# vesktop/discord
+	cat > "$dest/.config/vesktop/themes/symphony-discord.css" <<-EOF
+	/**
+	 * Symphony Theme
+	 * Based on: midnight by refact0r
+	 */
+	@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+	:root {
+	  --font: 'figtree';
+	  --corner-text: 'Symphony';
+	  --online-indicator: ${c[2]:-#b5bd68};
+	  --dnd-indicator: ${c[1]:-#cc6666};
+	  --idle-indicator: ${c[3]:-#f0c674};
+	  --streaming-indicator: ${c[5]:-#b294bb};
+	  --accent-1: ${c[6]:-#8abeb7};
+	  --accent-2: ${c[6]:-#8abeb7};
+	  --accent-3: ${c[4]:-#81a2be};
+	  --accent-4: ${c[4]:-#81a2be};
+	  --accent-5: ${c[4]:-#81a2be};
+	  --mention: ${c[4]:-#81a2be};
+	  --mention-hover: ${c[6]:-#8abeb7};
+	  --text-0: $bg;
+	  --text-1: $fg;
+	  --text-2: $fg;
+	  --text-3: ${c[7]:-#c5c8c6};
+	  --text-4: ${c[8]:-#969896};
+	  --text-5: ${c[8]:-#969896};
+	  --bg-1: ${c[0]:-$bg};
+	  --bg-2: ${c[8]:-#969896};
+	  --bg-3: ${c[8]:-#969896};
+	  --bg-4: $bg;
+	  --hover: ${c[8]:-#969896};
+	  --active: ${c[4]:-#81a2be};
+	  --message-hover: ${c[8]:-#969896};
+	  --spacing: 12px;
+	  --list-item-transition: 0.2s ease;
+	  --unread-bar-transition: 0.2s ease;
+	  --moon-spin-transition: 0.4s ease;
+	  --icon-spin-transition: 1s ease;
+	  --roundness-xl: 22px;
+	  --roundness-l: 20px;
+	  --roundness-m: 16px;
+	  --roundness-s: 12px;
+	  --roundness-xs: 10px;
+	  --roundness-xxs: 8px;
+	  --discord-icon: none;
+	  --moon-icon: block;
+	}
+	.selected_f5eb4b, .selected_f6f816 .link_d8bfb3 {
+	  color: var(--text-0) !important;
+	  background: var(--accent-3) !important;
+	}
+	.selected_f6f816 .link_d8bfb3 * {
+	  color: var(--text-0) !important;
+	  fill: var(--text-0) !important;
+	}
+	EOF
+
+	# obsidian
+	cat > "$dest/.config/obsidian/theme.css" <<-EOF
+	/* Symphony Theme */
+	.theme-dark, .theme-light {
+	  --background-primary: $bg;
+	  --background-primary-alt: ${c[0]:-$bg};
+	  --background-secondary: ${c[8]:-#969896};
+	  --background-secondary-alt: ${c[0]:-$bg};
+	  --background-modifier-hover: ${c[8]:-#969896};
+	  --background-modifier-border: ${c[8]:-#969896};
+	  --text-normal: $fg;
+	  --text-muted: ${c[7]:-#c5c8c6};
+	  --text-faint: ${c[8]:-#969896};
+	  --text-on-accent: $bg;
+	  --interactive-accent: ${c[4]:-#81a2be};
+	  --interactive-accent-hover: ${c[6]:-#8abeb7};
+	  --text-accent: ${c[4]:-#81a2be};
+	  --text-accent-hover: ${c[6]:-#8abeb7};
+	  --link-color: ${c[4]:-#81a2be};
+	  --link-color-hover: ${c[6]:-#8abeb7};
+	  --link-external-color: ${c[6]:-#8abeb7};
+	  --code-background: ${c[0]:-$bg};
+	  --code-normal: $fg;
+	  --text-error: ${c[1]:-#cc6666};
+	  --text-success: ${c[2]:-#b5bd68};
+	  --text-warning: ${c[3]:-#f0c674};
+	  --divider-color: ${c[8]:-#969896};
+	  --icon-color: ${c[7]:-#c5c8c6};
+	  --icon-color-hover: $fg;
+	  --tag-color: ${c[5]:-#b294bb};
+	  --tag-background: ${c[8]:-#969896};
+	}
+	::selection { background: ${c[4]:-#81a2be}40; }
+	EOF
+
+	# starship
+	cat > "$dest/.config/starship.toml" <<-EOF
+	add_newline = false
+	command_timeout = 60
+	format = "\$os \$directory \$git_branch\$git_status\$line_break\$character"
+	palette = "colors"
+
+	[palettes.colors]
+	color1 = '${c[6]:-#8abeb7}'
+	color6 = '${c[8]:-#969896}'
+	color8 = '${c[4]:-#81a2be}'
+	color9 = '${c[5]:-#b294bb}'
+	error = '${c[1]:-#cc6666}'
+
+	[directory]
+	style = "fg:color1 bold"
+	read_only = " 󰌾"
+	read_only_style = "fg:error"
+	truncation_length = 0
+	truncate_to_repo = false
+	format = "[\$path](\$style)[\$read_only](\$read_only_style)"
+
+	[character]
+	success_symbol = '[❯](fg:color8 bold)'
+	error_symbol = '[❯](fg:error bold)'
+	vicmd_symbol = '[❮](fg:color6 bold)'
+
+	[git_branch]
+	style = "fg:color9 bold"
+	format = '[\$symbol\$branch](\$style) '
+
+	[git_status]
+	ahead = '⇡\${count}'
+	behind = '⇣\${count}'
+	diverged = '⇕⇡\${ahead_count}⇣\${behind_count}'
+	format = '[[\$all_status\$ahead_behind ](fg:error)](\$style)'
+
+	[os]
+	format = "[\$symbol](\$style)"
+	style = "fg:color8 bold"
+	disabled = false
+
+	[os.symbols]
+	Linux = "󰊠 "
+	Arch = "󰣇"
+	Ubuntu = "󰕈"
+
+	[line_break]
+	disabled = true
+	EOF
 }
 
 cmd_import() {
@@ -418,7 +640,7 @@ cmd_import() {
 	# create structure
 	info "Creating $name..."
 	mkdir -p "$dest"/{backgrounds,.cache/wal}
-	mkdir -p "$dest/.config"/{alacritty,btop/themes,cava,ghostty,gtk-3.0,gtk-4.0,hypr/theme,kitty,nvim,rofi,waybar,yazi}
+	mkdir -p "$dest/.config"/{alacritty,btop/themes,cava,ghostty,gtk-3.0,gtk-4.0,hypr/theme,kitty,nvim,obsidian,rmpc/themes,rofi,vesktop/themes,waybar,yazi}
 
 	# copy backgrounds
 	if [[ -d "$src/backgrounds" ]]; then
@@ -473,8 +695,21 @@ Commands:
   reload             Re-apply current theme
   fix                Fix broken symlinks
   remove <theme>     Delete a theme
+  uninstall          Remove Symphony
   help               This help
   version            Version info
+
+Keybindings:
+  SUPER+CTRL+SHIFT+SPACE    Theme switcher
+  SUPER+CTRL+SPACE          Matugen theme from wallpaper
+  SUPER+ALT+SPACE           Wallpaper picker
+  SUPER+ALT+LEFT/RIGHT      Cycle wallpapers
+  SUPER+BACKSPACE           Toggle terminal transparency
+  SUPER+CTRL+BACKSPACE      Toggle focus/vibe mode
+  SUPER+K                   Show all keybindings
+
+Tip:
+  Waybar brightness icon: left-click for Random wallpaper picker, right-click to apply random wallpaper
 
 Examples:
   symphony switch
@@ -500,6 +735,7 @@ cmd_version() {
 EOF
 	echo ""
 	echo "  Symphony v$VERSION"
+	echo "  Author: vyrx"
 	echo "  https://github.com/vyrx-dev/dotfiles"
 }
 
