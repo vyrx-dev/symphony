@@ -41,7 +41,7 @@ fi
 if [[ -n $CUSTOM_EXEC ]]; then
   EXEC_COMMAND="$CUSTOM_EXEC"
 else
-  EXEC_COMMAND="sh -c '\$HOME/.config/hypr/scripts/launch-webapp $APP_URL'"
+  EXEC_COMMAND="$HOME/.config/hypr/scripts/launch-webapp $APP_URL"
 fi
 
 # Create application .desktop file
