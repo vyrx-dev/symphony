@@ -7,11 +7,6 @@
 [mgr]
 cwd = { fg = "#DCD7BA" }
 
-# Tab
-tab_active = { fg = "#1F1F28", bg = "#7E9CD8", bold = true }
-tab_inactive = { fg = "#54546D", bg = "#16161D" }
-tab_width = 1
-
 # Find
 find_keyword = { fg = "#7FB4CA", bold = true, italic = true, underline = true }
 find_position = { fg = "#7FB4CA", bold = true, italic = true }
@@ -37,9 +32,20 @@ border_style  = { fg = "#7E9CD8" }
 # : Status [[[
 
 [status]
-separator_open = "🭁"
-separator_close = "🭠"
-separator_style = { bg = "#1F1F28", fg = "#7E9CD8" }
+sep_left = { open = "", close = "🭠" }
+sep_right = { open = "🭁", close = "" }
+
+# Permissions
+perm_type = { fg = "#7E9CD8" }
+perm_read = { fg = "#7FB4CA" }
+perm_write = { fg = "#E6C384" }
+perm_exec = { fg = "#C34043" }
+perm_sep = { fg = "#957FB8" }
+
+# Progress
+progress_label = { bold = true }
+progress_normal = { fg = "#7E9CD8", bg = "#2A2A37" }
+progress_error = { fg = "#C34043", bg = "#2A2A37" }
 
 [mode]
 # Mode
@@ -53,18 +59,6 @@ select_alt  = { bg = "#2A2A37", fg = "#C8C093" }
 # Unset mode
 unset_main = { bg = "#7FB4CA", fg = "#1F1F28", bold = true }
 unset_alt  = { bg = "#2A2A37", fg = "#C8C093" }
-
-# Progress
-progress_label = { bold = true }
-progress_normal = { fg = "#7E9CD8", bg = "#2A2A37" }
-progress_error = { fg = "#C34043", bg = "#2A2A37" }
-
-# Permissions
-permissions_t = { fg = "#7E9CD8" }
-permissions_r = { fg = "#7FB4CA" }
-permissions_w = { fg = "#E6C384" }
-permissions_x = { fg = "#C34043" }
-permissions_s = { fg = "#957FB8" }
 
 # : ]]]
 
@@ -98,7 +92,7 @@ sep_inner = { open = "[", close = "]" }
 
 # : Completion [[[
 
-[completion]
+[cmp]
 border = { fg = "#7E9CD8", bg = "#1F1F28" }
 
 # : ]]]
@@ -166,12 +160,12 @@ rules = [
     { mime = "application/{pdf,doc,rtf}", fg = "#7E9CD8" },
 
     # Special files
-    { name = "*", is = "orphan", bg = "#C34043" },
-    { name = "*", is = "exec", fg = "#98BB6C" },
+    { url = "*", is = "orphan", bg = "#C34043" },
+    { url = "*", is = "exec", fg = "#98BB6C" },
 
     # Fallback
-    { name = "*", fg = "#DCD7BA" },
-    { name = "*/", fg = "#7E9CD8" },
+    { url = "*", fg = "#DCD7BA" },
+    { url = "*/", fg = "#7E9CD8" },
 ]
 
 # : ]]]
