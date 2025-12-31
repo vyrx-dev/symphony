@@ -35,7 +35,7 @@ HIDE_PATTERNS=(
     "^cmake-gui$"               # CMake GUI
     "^cups$"                    # CUPS config
     "^lstopo$"                  # Hardware topology
-    "^nm-connection-editor$"    # NetworkManager (use nm-applet)
+    "^nm-connection-editor$"    # NetworkManager (use rofi/nmtui)
     "^qv4l2$"                   # Video4Linux
     "^qvidcap$"
     "^xgps"                     # GPS tools
