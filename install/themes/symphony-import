@@ -384,6 +384,17 @@ RMPC_START
         (left: [(kind: Property(Status(Elapsed)), style: (fg: "$fg")), (kind: Text("/"), style: (fg: "$bblack")), (kind: Property(Status(Duration)), style: (fg: "$fg"))], center: [(kind: Property(Song(Artist)), style: (fg: "$yellow", modifiers: "Bold"), default: (kind: Text("Unknown Artist"), style: (fg: "$bblack", modifiers: "")))], right: [(kind: Property(Widget(States(active_style: (fg: "$accent", modifiers: "Bold"), separator_style: (fg: "$bblack")))), style: (fg: "$bblack"))]),
     ]),
     browser_song_format: [(kind: Group([(kind: Property(Track)), (kind: Text(" "))])), (kind: Group([(kind: Property(Artist)), (kind: Text(" - ")), (kind: Property(Title))]), default: (kind: Property(Filename)))],
+    cava: (
+        bar_symbols: ['⣀', '⣤', '⣶', '⣿'],
+        bar_width: 1,
+        bar_spacing: 0,
+        orientation: Bottom,
+        bar_color: Gradient({
+              0: "$bblack",
+             50: "$cyan",
+            100: "$accent",
+        }),
+    ),
 )
 EOF
 
