@@ -226,13 +226,14 @@ Commands:
   version            Version info
 
 Keybindings:
-  SUPER+CTRL+SHIFT+SPACE    Theme switcher
-  SUPER+CTRL+SPACE          Matugen theme from wallpaper
-  SUPER+ALT+SPACE           Wallpaper picker
-  SUPER+ALT+LEFT/RIGHT      Cycle wallpapers
-  SUPER+BACKSPACE           Toggle terminal transparency
-  SUPER+CTRL+BACKSPACE      Toggle focus/vibe mode
-  SUPER+K                   Show all keybindings
+  SUPER+SHIFT+I               Symphony TUI
+  SUPER+CTRL+SHIFT+SPACE      Theme switcher
+  SUPER+CTRL+SPACE            Matugen theme from wallpaper
+  SUPER+ALT+SPACE             Wallpaper picker
+  SUPER+ALT+LEFT/RIGHT        Cycle wallpapers
+  SUPER+BACKSPACE             Toggle terminal transparency
+  SUPER+CTRL+BACKSPACE        Toggle focus/vibe mode
+  SUPER+K                     Show all keybindings
 
 Tip:
   Waybar brightness icon: left-click for Random wallpaper picker, right-click to apply random wallpaper
