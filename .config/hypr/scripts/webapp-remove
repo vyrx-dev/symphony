@@ -3,23 +3,27 @@
 APPS_DIR="$HOME/.local/share/applications"
 ICON_DIR="$APPS_DIR/icons"
 
-# Find all webapp desktop files (created by webapp-install.sh)
-mapfile -t DESKTOP_FILES < <(find "$APPS_DIR" -maxdepth 1 -name "*.desktop" -type f)
+# Find only webapps (desktop files with X-WebApp=true or using launch-webapp)
+APP_NAMES=()
+for file in "$APPS_DIR"/*.desktop; do
+  [[ -f "$file" ]] || continue
+  if grep -q "X-WebApp=true\|launch-webapp" "$file"; then
+    APP_NAMES+=("$(basename "$file" .desktop)")
+  fi
+done
 
-if [[ ${#DESKTOP_FILES[@]} -eq 0 ]]; then
+if [[ ${#APP_NAMES[@]} -eq 0 ]]; then
   echo "No webapps found."
   exit 0
 fi
 
-# Extract app names for display
-APP_NAMES=()
-for file in "${DESKTOP_FILES[@]}"; do
-  name=$(basename "$file" .desktop)
-  APP_NAMES+=("$name")
-done
-
-# Let user select apps to remove (multi-select with space, confirm with enter)
-SELECTED=$(printf '%s\n' "${APP_NAMES[@]}" | gum choose --no-limit --header "Select webapps to remove (Space to select, Enter to confirm)")
+# Let user select apps to remove
+SELECTED=$(printf '%s\n' "${APP_NAMES[@]}" | gum choose --no-limit \
+  --cursor="› " \
+  --cursor-prefix="○ " \
+  --selected-prefix="● " \
+  --unselected-prefix="○ " \
+  --header "Select webapps to remove (x toggle • enter submit)")
 
 if [[ -z "$SELECTED" ]]; then
   echo "No apps selected."
@@ -28,12 +32,9 @@ fi
 
 # Remove selected apps
 while IFS= read -r app; do
-  DESKTOP_FILE="$APPS_DIR/$app.desktop"
-  ICON_FILE="$ICON_DIR/$app.png"
-
-  rm -f "$DESKTOP_FILE"
-  rm -f "$ICON_FILE"
+  rm -f "$APPS_DIR/$app.desktop"
+  rm -f "$ICON_DIR/$app.png"
   echo "Removed: $app"
-done <<<"$SELECTED"
+done <<< "$SELECTED"
 
 echo -e "\nRemoval complete!"
