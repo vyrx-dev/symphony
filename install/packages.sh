@@ -40,14 +40,14 @@ packages=(
 
 	# Audio
 	pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber
-	pamixer pavucontrol wiremix
+	pamixer wiremix
 
 	# Music
 	mpd mpc rmpc cava playerctl mpdscribble
 
 	# Network & Bluetooth
-	networkmanager network-manager-applet impala kdeconnect
-	bluez bluez-utils blueberry
+	networkmanager nmgui-bin kdeconnect
+	bluez bluez-utils blueman
 
 	# System
 	polkit-gnome brightnessctl ddcutil power-profiles-daemon

@@ -111,7 +111,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "kitty -e --class=impala impala"
+    "on-click": "nmgui"
   },
   "battery": {
     "format": "{icon}",
@@ -159,7 +159,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueberry"
+    "on-click": "blueman-manager"
   },
   "pulseaudio": {
     "format": "{icon}",
