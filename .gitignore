@@ -21,6 +21,9 @@ themes/*/wallpaper
 .config/fish/install.log
 .config/fish/api.fish
 
+# mpdscribble credentials
+.config/mpdscribble/
+
 # Typora - ignore everything except custom themes
 .config/Typora/*
 !.config/Typora/themes/
