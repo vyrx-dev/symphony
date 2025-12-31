@@ -1,0 +1,572 @@
+#!/bin/bash
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Theme Importer      |-/ /--|#
+#|/ /---+---------------------+/ /---|#
+
+set -e
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Setup                                                                 │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+if [[ -z "$THEMES_DIR" ]]; then
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
+    THEMES_DIR="$DOTFILES/themes"
+    RED='\033[0;31m' GREEN='\033[0;32m' BLUE='\033[0;34m' RESET='\033[0m'
+    ok()   { echo -e "${GREEN}[OK]${RESET} $1"; }
+    err()  { echo -e "${RED}[ERROR]${RESET} $1" >&2; }
+    info() { echo -e "${BLUE}[INFO]${RESET} $1"; }
+fi
+
+hex() { echo "${1#\#}"; }
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Color Extraction                                                      │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+get_colors() {
+    local src="$1"
+    
+    if [[ -f "$src/kitty.conf" ]]; then
+        awk '/^background / {bg=$2} /^foreground / {fg=$2}
+             /^color[0-9]+ / {c[$1]=$2}
+             END {
+                 if(bg && fg) {
+                     printf "%s %s ", bg, fg
+                     for(i=0;i<16;i++) printf "%s ", c["color"i]
+                 }
+             }' "$src/kitty.conf"
+        return
+    fi
+    
+    if [[ -f "$src/alacritty.toml" ]]; then
+        awk -F"[\"']" '
+            /^\[colors\.primary\]/ {sec="primary"}
+            /^\[colors\.normal\]/ {sec="normal"}
+            /^\[colors\.bright\]/ {sec="bright"}
+            /^\[/ && !/colors\.(primary|normal|bright)/ {sec=""}
+            sec=="primary" && /background/ {bg=$2}
+            sec=="primary" && /foreground/ {fg=$2}
+            sec=="normal" && /black/ {c[0]=$2} sec=="normal" && /red/ {c[1]=$2}
+            sec=="normal" && /green/ {c[2]=$2} sec=="normal" && /yellow/ {c[3]=$2}
+            sec=="normal" && /blue/ {c[4]=$2} sec=="normal" && /magenta/ {c[5]=$2}
+            sec=="normal" && /cyan/ {c[6]=$2} sec=="normal" && /white/ {c[7]=$2}
+            sec=="bright" && /black/ {c[8]=$2} sec=="bright" && /red/ {c[9]=$2}
+            sec=="bright" && /green/ {c[10]=$2} sec=="bright" && /yellow/ {c[11]=$2}
+            sec=="bright" && /blue/ {c[12]=$2} sec=="bright" && /magenta/ {c[13]=$2}
+            sec=="bright" && /cyan/ {c[14]=$2} sec=="bright" && /white/ {c[15]=$2}
+            END {
+                if(bg && fg) {
+                    printf "%s %s ", bg, fg
+                    for(i=0;i<16;i++) printf "%s ", c[i]
+                }
+            }' "$src/alacritty.toml"
+        return
+    fi
+    return 1
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Config Generation                                                     │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+write_configs() {
+    local name="$1" dest="$2" bg="$3" fg="$4"; shift 4
+    local c=("$@")
+    
+    # color aliases with fallbacks
+    local black=${c[0]:-$bg} red=${c[1]:-#cc6666} green=${c[2]:-#b5bd68}
+    local yellow=${c[3]:-#f0c674} blue=${c[4]:-#81a2be} magenta=${c[5]:-#b294bb}
+    local cyan=${c[6]:-#8abeb7} white=${c[7]:-#c5c8c6} bblack=${c[8]:-#969896}
+    local bred=${c[9]:-$red} bgreen=${c[10]:-$green} byellow=${c[11]:-$yellow}
+    local bblue=${c[12]:-$blue} bmagenta=${c[13]:-$magenta} bcyan=${c[14]:-$cyan}
+    local bwhite=${c[15]:-#ffffff}
+    local accent=$blue
+
+    # ── kitty ──
+    cat > "$dest/.config/kitty/colors.conf" <<EOF
+background $bg
+foreground $fg
+selection_background $cyan
+selection_foreground $bg
+cursor $fg
+cursor_text_color $bg
+active_tab_background $accent
+active_tab_foreground $bg
+inactive_tab_background $bblack
+inactive_tab_foreground $white
+active_border_color $accent
+inactive_border_color $bblack
+color0 $black
+color1 $red
+color2 $green
+color3 $yellow
+color4 $blue
+color5 $magenta
+color6 $cyan
+color7 $white
+color8 $bblack
+color9 $bred
+color10 $bgreen
+color11 $byellow
+color12 $bblue
+color13 $bmagenta
+color14 $bcyan
+color15 $bwhite
+EOF
+
+    # ── alacritty ──
+    cat > "$dest/.config/alacritty/colors.toml" <<EOF
+[colors.primary]
+background = '$bg'
+foreground = '$fg'
+
+[colors.normal]
+black = '$black'
+red = '$red'
+green = '$green'
+yellow = '$yellow'
+blue = '$blue'
+magenta = '$magenta'
+cyan = '$cyan'
+white = '$white'
+
+[colors.bright]
+black = '$bblack'
+red = '$bred'
+green = '$bgreen'
+yellow = '$byellow'
+blue = '$bblue'
+magenta = '$bmagenta'
+cyan = '$bcyan'
+white = '$bwhite'
+EOF
+
+    # ── ghostty ──
+    cat > "$dest/.config/ghostty/theme" <<EOF
+background = $bg
+foreground = $fg
+palette = 0=$black
+palette = 1=$red
+palette = 2=$green
+palette = 3=$yellow
+palette = 4=$blue
+palette = 5=$magenta
+palette = 6=$cyan
+palette = 7=$white
+palette = 8=$bblack
+palette = 9=$bred
+palette = 10=$bgreen
+palette = 11=$bblue
+palette = 12=$bblue
+palette = 13=$bmagenta
+palette = 14=$bcyan
+palette = 15=$bwhite
+EOF
+
+    # ── hyprland ──
+    cat > "$dest/.config/hypr/theme/colors.conf" <<EOF
+\$activeBorderColor = rgba($(hex "$accent")aa)
+general { col.active_border = \$activeBorderColor }
+group { col.border_active = \$activeBorderColor }
+\$secondary = \$activeBorderColor
+\$outline_variant = rgba($(hex "$bblack")ff)
+decoration {
+    shadow {
+        color = rgba($(hex "$bg")80)
+        color_inactive = rgba($(hex "$bg")4d)
+        offset = 2 2
+        range = 20
+        render_power = 3
+    }
+}
+EOF
+
+    # ── waybar ──
+    cat > "$dest/.config/waybar/colors.css" <<EOF
+@define-color waybar_accent rgba($(hex "$cyan" | sed 's/../0x& /g' | xargs printf '%d, %d, %d'), 0.20);
+@define-color waybar_accent_fg @on_background;
+@define-color on_background $fg;
+@define-color surface_container $black;
+@define-color error $red;
+EOF
+
+    # ── rofi ──
+    cat > "$dest/.config/rofi/colors.rasi" <<EOF
+* {
+    primary: $cyan;
+    primary-container: $accent;
+    on-primary: $bg;
+    on-primary-container: $fg;
+    secondary: $magenta;
+    secondary-container: $bblack;
+    on-secondary: $bg;
+    on-secondary-container: $fg;
+    surface: $bg;
+    surface-dim: $bg;
+    surface-bright: $bblack;
+    surface-container-lowest: $bg;
+    surface-container-low: $bg;
+    surface-container: $bblack;
+    surface-container-high: $bblack;
+    surface-container-highest: $bblack;
+    on-surface: $bg;
+    on-surface-variant: $white;
+    outline: $bblack;
+    outline-variant: $bblack;
+    error: $red;
+    on-error: $bg;
+    inverse-surface: $bg;
+    inverse-on-surface: $bg;
+}
+EOF
+
+    # ── gtk ──
+    local gtk_css="$dest/.config/gtk-3.0/colors.css"
+    cat > "$gtk_css" <<EOF
+@define-color background $bg;
+@define-color foreground $fg;
+@define-color black $black;
+@define-color red $red;
+@define-color green $green;
+@define-color yellow $yellow;
+@define-color blue $blue;
+@define-color magenta $magenta;
+@define-color cyan $cyan;
+@define-color white $white;
+@define-color bright_black $bblack;
+@define-color bright_white $bwhite;
+@define-color accent_bg_color $accent;
+@define-color accent_fg_color $bg;
+@define-color accent_color $accent;
+@define-color window_bg_color $bg;
+@define-color window_fg_color $fg;
+@define-color view_bg_color $bg;
+@define-color view_fg_color $fg;
+@define-color sidebar_bg_color $black;
+@define-color sidebar_fg_color $fg;
+@define-color sidebar_backdrop_color $bg;
+@define-color sidebar_shade_color $bg;
+@define-color headerbar_bg_color $black;
+@define-color headerbar_fg_color $fg;
+@define-color headerbar_backdrop_color $bg;
+@define-color headerbar_shade_color $bg;
+@define-color card_bg_color $black;
+@define-color card_fg_color $fg;
+@define-color popover_bg_color $black;
+@define-color popover_fg_color $fg;
+@define-color dialog_bg_color $black;
+@define-color dialog_fg_color $fg;
+@define-color destructive_bg_color $red;
+@define-color destructive_fg_color $bg;
+@define-color destructive_color $red;
+@define-color success_bg_color $green;
+@define-color success_fg_color $bg;
+@define-color success_color $green;
+@define-color warning_bg_color $yellow;
+@define-color warning_fg_color $bg;
+@define-color warning_color $yellow;
+@define-color error_bg_color $red;
+@define-color error_fg_color $bg;
+@define-color error_color $red;
+@define-color borders alpha(@foreground, 0.1);
+@define-color theme_fg_color @foreground;
+@define-color theme_text_color @foreground;
+@define-color theme_bg_color @background;
+@define-color theme_base_color @black;
+@define-color theme_selected_bg_color @accent_bg_color;
+@define-color theme_selected_fg_color @accent_fg_color;
+@define-color insensitive_bg_color @background;
+@define-color insensitive_fg_color @bright_black;
+@define-color insensitive_base_color @black;
+messagedialog { background-color: @dialog_bg_color; }
+messagedialog label { color: @dialog_fg_color; }
+banner revealer widget { background: @bright_black; padding: 5px; color: @foreground; }
+alertdialog.background { background-color: @dialog_bg_color; color: @dialog_fg_color; }
+alertdialog box { background-color: @dialog_bg_color; }
+alertdialog label { color: @dialog_fg_color; }
+toast { background-color: @card_bg_color; color: @foreground; }
+EOF
+    cp "$gtk_css" "$dest/.config/gtk-4.0/colors.css"
+
+    # ── btop ──
+    cat > "$dest/.config/btop/themes/current.theme" <<EOF
+theme[main_bg]="$bg"
+theme[main_fg]="$fg"
+theme[title]="$white"
+theme[selected_bg]="$bblack"
+theme[selected_fg]="$bwhite"
+theme[inactive_fg]="$bblack"
+theme[cpu_box]="$accent"
+theme[mem_box]="$accent"
+theme[net_box]="$accent"
+theme[proc_box]="$accent"
+theme[div_line]="$bblack"
+theme[cpu_start]="$green"
+theme[cpu_mid]="$yellow"
+theme[cpu_end]="$red"
+EOF
+
+    # ── cava ──
+    cat > "$dest/.config/cava/config" <<EOF
+[color]
+gradient = 1
+gradient_count = 4
+gradient_color_1 = '$accent'
+gradient_color_2 = '$magenta'
+gradient_color_3 = '$cyan'
+gradient_color_4 = '$green'
+EOF
+
+    # ── wal ──
+    cat > "$dest/.cache/wal/colors.json" <<EOF
+{"special":{"background":"$bg","foreground":"$fg","cursor":"$cyan"}}
+EOF
+
+    # ── yazi ──
+    cat > "$dest/.config/yazi/theme.toml" <<EOF
+[mgr]
+cwd = { fg = "$fg" }
+tab_active = { fg = "$bg", bg = "$accent" }
+tab_inactive = { fg = "$white", bg = "$bblack" }
+border_style = { fg = "$accent" }
+EOF
+
+    # ── rmpc ──
+    cat > "$dest/.config/rmpc/themes/current.ron" <<'RMPC_START'
+#![enable(implicit_some)]
+#![enable(unwrap_newtypes)]
+#![enable(unwrap_variant_newtypes)]
+(
+    default_album_art_path: None,
+    show_song_table_header: false,
+    draw_borders: true,
+    browser_column_widths: [20, 38, 42],
+RMPC_START
+    cat >> "$dest/.config/rmpc/themes/current.ron" <<EOF
+    text_color: "$fg",
+    tab_bar: (
+        enabled: true,
+        active_style: (fg: "$fg", bg: "$bg", modifiers: "Bold"),
+        inactive_style: (fg: "$bblack", modifiers: ""),
+    ),
+    highlighted_item_style: (fg: "$accent", modifiers: "Bold"),
+    current_item_style: (fg: "$bg", bg: "$accent", modifiers: "Bold"),
+    borders_style: (fg: "$bblack", modifiers: ""),
+    highlight_border_style: (fg: "$accent"),
+    symbols: (song: "󰝚 ", dir: " ", marker: "* ", ellipsis: "..."),
+    progress_bar: (
+        symbols: ["█", "█", "█"],
+        track_style: (fg: "$bblack"),
+        elapsed_style: (fg: "$accent"),
+        thumb_style: (fg: "$accent"),
+    ),
+    scrollbar: (
+        symbols: ["", "", "", ""],
+        track_style: (fg: "$bblack"),
+        ends_style: (fg: "$bblack"),
+        thumb_style: (fg: "$accent"),
+    ),
+    song_table_format: [
+        (prop: (kind: Property(Title), style: (fg: "$fg"), highlighted_item_style: (fg: "$bg", modifiers: "Bold"), default: (kind: Property(Filename), style: (fg: "$bblack"))), width: "70%"),
+        (prop: (kind: Property(Album), style: (fg: "$bblack"), default: (kind: Text("Unknown Album"), style: (fg: "$bblack"))), width: "30%"),
+    ],
+    layout: Split(direction: Vertical, panes: [
+        (size: "3", pane: Pane(Tabs)),
+        (size: "4", pane: Split(direction: Horizontal, panes: [(size: "100%", pane: Split(direction: Vertical, panes: [(size: "4", borders: "ALL", pane: Pane(Header))]))])),
+        (size: "100%", pane: Split(direction: Horizontal, panes: [(size: "100%", borders: "NONE", pane: Pane(TabContent))])),
+        (size: "3", borders: "TOP | BOTTOM", pane: Pane(ProgressBar)),
+    ]),
+    header: (rows: [
+        (left: [(kind: Property(Status(StateV2(playing_label: " ", paused_label: "❚❚", stopped_label: "❚❚"))), style: (fg: "$accent", modifiers: "Bold"))], center: [(kind: Property(Song(Title)), style: (fg: "$fg", modifiers: "Bold"), default: (kind: Property(Song(Filename)), style: (fg: "$fg", modifiers: "Bold")))], right: [(kind: Text("Vol: "), style: (fg: "$accent", modifiers: "Bold")), (kind: Property(Status(Volume)), style: (fg: "$accent", modifiers: "Bold")), (kind: Text("% "), style: (fg: "$accent", modifiers: "Bold"))]),
+        (left: [(kind: Property(Status(Elapsed)), style: (fg: "$fg")), (kind: Text("/"), style: (fg: "$bblack")), (kind: Property(Status(Duration)), style: (fg: "$fg"))], center: [(kind: Property(Song(Artist)), style: (fg: "$yellow", modifiers: "Bold"), default: (kind: Text("Unknown Artist"), style: (fg: "$bblack", modifiers: "")))], right: [(kind: Property(Widget(States(active_style: (fg: "$accent", modifiers: "Bold"), separator_style: (fg: "$bblack")))), style: (fg: "$bblack"))]),
+    ]),
+    browser_song_format: [(kind: Group([(kind: Property(Track)), (kind: Text(" "))])), (kind: Group([(kind: Property(Artist)), (kind: Text(" - ")), (kind: Property(Title))]), default: (kind: Property(Filename)))],
+)
+EOF
+
+    # ── vesktop ──
+    cat > "$dest/.config/vesktop/themes/symphony-discord.css" <<EOF
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+:root {
+    --font: 'figtree';
+    --corner-text: 'Symphony';
+    --online-indicator: $green;
+    --dnd-indicator: $red;
+    --idle-indicator: $yellow;
+    --streaming-indicator: $magenta;
+    --accent-1: $cyan;
+    --accent-2: $cyan;
+    --accent-3: $accent;
+    --accent-4: $accent;
+    --accent-5: $accent;
+    --mention: $accent;
+    --mention-hover: $cyan;
+    --text-0: $bg;
+    --text-1: $fg;
+    --text-2: $fg;
+    --text-3: $white;
+    --text-4: $bblack;
+    --text-5: $bblack;
+    --bg-1: $black;
+    --bg-2: $bblack;
+    --bg-3: $bblack;
+    --bg-4: $bg;
+    --hover: $bblack;
+    --active: $accent;
+    --message-hover: $bblack;
+}
+.selected_f5eb4b, .selected_f6f816 .link_d8bfb3 { color: var(--text-0) !important; background: var(--accent-3) !important; }
+.selected_f6f816 .link_d8bfb3 * { color: var(--text-0) !important; fill: var(--text-0) !important; }
+EOF
+
+    # ── obsidian ──
+    cat > "$dest/.config/obsidian/theme.css" <<EOF
+.theme-dark, .theme-light {
+    --background-primary: $bg;
+    --background-primary-alt: $black;
+    --background-secondary: $bblack;
+    --background-secondary-alt: $black;
+    --background-modifier-hover: $bblack;
+    --background-modifier-border: $bblack;
+    --text-normal: $fg;
+    --text-muted: $white;
+    --text-faint: $bblack;
+    --text-on-accent: $bg;
+    --interactive-accent: $accent;
+    --interactive-accent-hover: $cyan;
+    --text-accent: $accent;
+    --text-accent-hover: $cyan;
+    --link-color: $accent;
+    --link-color-hover: $cyan;
+    --link-external-color: $cyan;
+    --code-background: $black;
+    --code-normal: $fg;
+    --text-error: $red;
+    --text-success: $green;
+    --text-warning: $yellow;
+    --divider-color: $bblack;
+    --icon-color: $white;
+    --icon-color-hover: $fg;
+    --tag-color: $magenta;
+    --tag-background: $bblack;
+}
+::selection { background: ${accent}40; }
+EOF
+
+    # ── starship ──
+    cat > "$dest/.config/starship.toml" <<EOF
+add_newline = false
+command_timeout = 60
+format = "\$os \$directory \$git_branch\$git_status\$line_break\$character"
+palette = "theme"
+
+[palettes.theme]
+accent = '$accent'
+cyan = '$cyan'
+dim = '$bblack'
+purple = '$magenta'
+error = '$red'
+
+[directory]
+style = "fg:cyan bold"
+read_only = " 󰌾"
+read_only_style = "fg:error"
+truncation_length = 0
+truncate_to_repo = false
+format = "[\$path](\$style)[\$read_only](\$read_only_style)"
+
+[character]
+success_symbol = '[❯](fg:accent bold)'
+error_symbol = '[❯](fg:error bold)'
+vicmd_symbol = '[❮](fg:dim bold)'
+
+[git_branch]
+style = "fg:purple bold"
+format = '[\$symbol\$branch](\$style) '
+
+[git_status]
+ahead = '⇡\${count}'
+behind = '⇣\${count}'
+diverged = '⇕⇡\${ahead_count}⇣\${behind_count}'
+format = '[[\$all_status\$ahead_behind ](fg:error)](\$style)'
+
+[os]
+format = "[\$symbol](\$style)"
+style = "fg:accent bold"
+disabled = false
+
+[os.symbols]
+Linux = "󰊠 "
+Arch = "󰣇"
+Ubuntu = "󰕈"
+
+[line_break]
+disabled = true
+EOF
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Main Import                                                           │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+run_import() {
+    local url="$1"
+    [[ -z "$url" ]] && { err "usage: symphony import <url|user/repo>"; exit 1; }
+    
+    [[ "$url" =~ ^https?:// ]] || url="https://github.com/$url"
+    url="${url%.git}"
+    
+    local name
+    name=$(basename "$url" | sed 's/^omarchy-//; s/^omakub-//; s/-theme$//; s/-omarchy$//' | tr '[:upper:]' '[:lower:]')
+    name="$name (omarchy)"
+    local dest="$THEMES_DIR/$name"
+    
+    if [[ -d "$dest" ]]; then
+        printf 'theme "%s" exists. overwrite? [y/N] ' "$name"
+        read -r ans
+        [[ "$ans" == "y" ]] || exit 0
+        rm -rf "$dest"
+    fi
+    
+    local tmp="/tmp/symphony-import.$$"
+    trap 'rm -rf "$tmp"' EXIT
+    
+    info "cloning $url..."
+    git clone --depth 1 --quiet "$url" "$tmp/repo" || { err "clone failed"; exit 1; }
+    
+    info "extracting colors..."
+    local colors
+    colors=$(get_colors "$tmp/repo") || { err "no kitty.conf or alacritty.toml found"; exit 1; }
+    read -ra C <<< "$colors"
+    local bg="${C[0]}" fg="${C[1]}"
+    local palette=("${C[@]:2}")
+    
+    info "creating $name..."
+    mkdir -p "$dest"/{backgrounds,.cache/wal}
+    mkdir -p "$dest/.config"/{alacritty,btop/themes,cava,ghostty,gtk-3.0,gtk-4.0,hypr/theme,kitty,nvim,obsidian,rmpc/themes,rofi,vesktop/themes,waybar,yazi}
+    
+    # copy wallpapers
+    [[ -d "$tmp/repo/backgrounds" ]] && cp "$tmp/repo/backgrounds"/* "$dest/backgrounds/" 2>/dev/null || true
+    for f in "$tmp/repo"/background*.{jpg,png,webp}; do
+        [[ -f "$f" ]] && cp "$f" "$dest/backgrounds/"
+    done 2>/dev/null
+    
+    local wall
+    wall=$(find "$dest/backgrounds" -type f 2>/dev/null | head -1)
+    [[ -n "$wall" ]] && ln -sfn "backgrounds/${wall##*/}" "$dest/wallpaper"
+    
+    write_configs "$name" "$dest" "$bg" "$fg" "${palette[@]}"
+    
+    # use original configs if available
+    [[ -f "$tmp/repo/btop.theme" ]] && cp "$tmp/repo/btop.theme" "$dest/.config/btop/themes/current.theme"
+    [[ -f "$tmp/repo/waybar.css" ]] && cp "$tmp/repo/waybar.css" "$dest/.config/waybar/colors.css"
+    [[ -f "$tmp/repo/neovim.lua" ]] && cp "$tmp/repo/neovim.lua" "$dest/.config/nvim/theme.lua"
+    
+    ok "imported $name"
+    command -v symphony &>/dev/null && symphony switch "$name" || echo "run 'symphony switch $name' to apply"
+}
+
+[[ "${BASH_SOURCE[0]}" == "${0}" ]] && run_import "$@"

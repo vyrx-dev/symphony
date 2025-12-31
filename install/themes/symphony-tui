@@ -1,0 +1,177 @@
+#!/bin/bash
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Theme Manager TUI   |-/ /--|#
+#|/ /---+---------------------+/ /---|#
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
+THEMES_DIR="$DOTFILES/themes"
+BRANDING="$DOTFILES/branding"
+API="https://omarchythemes.com/api/themes/all"
+
+C_ACCENT="\033[38;5;218m"
+C_DIM="\033[38;5;245m"
+C_OK="\033[38;5;215m"
+C_ERR="\033[38;5;203m"
+C_RESET="\033[0m"
+
+command -v gum &>/dev/null || { echo "need gum"; exit 1; }
+
+current_theme() { cat "$HOME/.config/symphony/.current-theme" 2>/dev/null || echo "dynamic"; }
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Browse Omarchy Themes                                                 │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+browse_inner() {
+    local data
+    data=$(curl -sL "$API") || { echo -e "${C_ERR}fetch failed${C_RESET}"; sleep 2; return 1; }
+    
+    local preview_script
+    preview_script=$(mktemp)
+    trap "rm -f '$preview_script'" RETURN
+    
+    cat > "$preview_script" <<'EOF'
+#!/bin/bash
+[[ -z "$1" || "$1" == "null" ]] && exit 0
+command -v chafa &>/dev/null && curl -sL "$1" 2>/dev/null | chafa -s "${FZF_PREVIEW_COLUMNS:-60}x${FZF_PREVIEW_LINES:-30}" -
+EOF
+    chmod +x "$preview_script"
+    
+    local sel
+    sel=$(echo "$data" | jq -r '.[] | [.name, .url, .preview_img] | @tsv' | sort | \
+        fzf --delimiter=$'\t' --with-nth=1 \
+            --preview="$preview_script {3}" \
+            --preview-window=right:50% \
+            --prompt="  " --pointer="›" \
+            --color="pointer:5,prompt:5,border:8" \
+            --border=rounded --padding=1,2) || return 0
+    
+    [[ -z "$sel" ]] && return 0
+    
+    local name url
+    name=$(cut -f1 <<< "$sel")
+    url=$(cut -f2 <<< "$sel")
+    
+    echo ""
+    "$SCRIPT_DIR/symphony-import" "$url" && echo -e "${C_OK}done${C_RESET}" || echo -e "${C_ERR}failed${C_RESET}"
+    sleep 2
+}
+
+browse() { kitty --title symphony-browse -e "$0" --browse-inner; }
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Delete Themes                                                         │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+delete_themes() {
+    local themes=()
+    
+    for d in "$THEMES_DIR"/*/; do
+        local t=$(basename "$d")
+        [[ "$t" != "Wallpapers" && "$t" != "dynamic" ]] && themes+=("$t")
+    done
+    
+    [[ ${#themes[@]} -eq 0 ]] && { echo -e "${C_ERR}no themes to delete${C_RESET}"; sleep 1; return; }
+    
+    IFS=$'\n' read -d '' -ra themes < <(printf '%s\n' "${themes[@]}" | sort) || true
+    
+    local result
+    result=$(printf '%s\n' "${themes[@]}" | gum choose --no-limit --height=15) || return
+    [[ -z "$result" ]] && return
+    
+    echo -e "\n${C_DIM}deleting:${C_RESET}"
+    while IFS= read -r theme; do
+        echo -e "  ${C_ERR}$theme${C_RESET}"
+    done <<< "$result"
+    echo ""
+    
+    gum confirm "confirm?" || return
+    
+    while IFS= read -r theme; do
+        "$SCRIPT_DIR/symphony" remove "$theme" <<< "y" 2>/dev/null
+    done <<< "$result"
+    echo -e "${C_OK}done${C_RESET}"
+    sleep 1
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Import Theme                                                          │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+import_url() {
+    echo -e "\n${C_DIM}enter a github url or user/repo${C_RESET}"
+    echo -e "${C_DIM}eg: bjarneo/omarchy-sakura-theme${C_RESET}\n"
+    
+    local url
+    url=$(gum input --placeholder="user/repo" --width=50)
+    [[ -z "$url" ]] && return
+    
+    echo ""
+    "$SCRIPT_DIR/symphony-import" "$url" && echo -e "${C_OK}done${C_RESET}" || echo -e "${C_ERR}failed${C_RESET}"
+    sleep 2
+}
+
+omarchy_menu() {
+    clear
+    gum style --bold --foreground 212 "♪ omarchy themes"
+    echo ""
+    
+    local choice
+    choice=$(gum choose "browse" "import" "back")
+    
+    case "$choice" in
+        "browse") browse ;;
+        "import") import_url ;;
+        *)        return ;;
+    esac
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Main Menu                                                             │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+show_banner() {
+    [[ ! -f "$BRANDING/symphony.txt" ]] && return
+    
+    local cols=$(tput cols)
+    local pad=$(( (cols - 55) / 2 ))
+    [[ $pad -lt 0 ]] && pad=0
+    local padding=$(printf '%*s' "$pad" '')
+    
+    if command -v tte &>/dev/null; then
+        sed "s/^/$padding/" "$BRANDING/symphony.txt" | tte expand \
+            --movement-speed 0.5 \
+            --expand-easing IN_OUT_QUART \
+            --final-gradient-stops FFEB3B FFB74D FF8A80 F48FB1 EC407A \
+            --final-gradient-steps 12 \
+            --final-gradient-frames 3 \
+            --final-gradient-direction vertical 2>/dev/null && return
+    fi
+    
+    echo -e "${C_ACCENT}"
+    sed "s/^/$padding/" "$BRANDING/symphony.txt"
+    echo -e "${C_RESET}"
+}
+
+main() {
+    clear
+    echo ""
+    show_banner
+    echo ""
+    
+    local choice
+    choice=$(gum choose "omarchy themes" "delete" "exit")
+    
+    case "$choice" in
+        "omarchy themes") omarchy_menu; main ;;
+        "delete")         delete_themes; main ;;
+        *)                clear; exit 0 ;;
+    esac
+}
+
+[[ "$1" == "--browse-inner" ]] && { browse_inner; exit 0; }
+main
