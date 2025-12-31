@@ -20,7 +20,22 @@ C_RESET="\033[0m"
 
 command -v gum &>/dev/null || { echo "need gum"; exit 1; }
 
-current_theme() { cat "$HOME/.config/symphony/.current-theme" 2>/dev/null || echo "dynamic"; }
+# gum choose wrappers with consistent styling
+choose() {
+    gum choose --cursor="› " --show-help "$@"
+}
+
+choose_multi() {
+    local header="${1:-Select items}"
+    shift
+    gum choose --no-limit \
+        --cursor="› " \
+        --cursor-prefix="○ " \
+        --selected-prefix="● " \
+        --unselected-prefix="○ " \
+        --header "$header (x toggle • ←↓↑→ navigate • enter submit • ctrl+a select all)" \
+        "$@"
+}
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Browse Omarchy Themes                                                 │
@@ -42,18 +57,16 @@ EOF
     chmod +x "$preview_script"
     
     local sel
-    sel=$(echo "$data" | jq -r '.[] | [.name, .url, .preview_img] | @tsv' | sort | \
+    sel=$(echo "$data" | jq -r '.[] | select(.url | startswith("https://github.com")) | [.name, .url, .preview_img] | @tsv' | sort | \
         fzf --delimiter=$'\t' --with-nth=1 \
             --preview="$preview_script {3}" \
             --preview-window=right:50% \
-            --prompt="  " --pointer="›" \
-            --color="pointer:5,prompt:5,border:8" \
-            --border=rounded --padding=1,2) || return 0
+            --prompt="› " --pointer="›" \
+            --layout=reverse) || return 0
     
     [[ -z "$sel" ]] && return 0
     
-    local name url
-    name=$(cut -f1 <<< "$sel")
+    local url
     url=$(cut -f2 <<< "$sel")
     
     echo ""
@@ -61,7 +74,7 @@ EOF
     sleep 2
 }
 
-browse() { kitty --title symphony-browse -e "$0" --browse-inner; }
+browse() { kitty --title symphony-browse -e "$0" --browse-inner 2>/dev/null; }
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Delete Themes                                                         │
@@ -77,10 +90,10 @@ delete_themes() {
     
     [[ ${#themes[@]} -eq 0 ]] && { echo -e "${C_ERR}no themes to delete${C_RESET}"; sleep 1; return; }
     
-    IFS=$'\n' read -d '' -ra themes < <(printf '%s\n' "${themes[@]}" | sort) || true
+    mapfile -t themes < <(printf '%s\n' "${themes[@]}" | sort)
     
     local result
-    result=$(printf '%s\n' "${themes[@]}" | gum choose --no-limit --height=15) || return
+    result=$(printf '%s\n' "${themes[@]}" | choose_multi "Select themes to delete" --height=15) || return
     [[ -z "$result" ]] && return
     
     echo -e "\n${C_DIM}deleting:${C_RESET}"
@@ -103,14 +116,14 @@ delete_themes() {
 # ╰───────────────────────────────────────────────────────────────────────╯
 
 import_url() {
-    echo -e "\n${C_DIM}enter a github url or user/repo${C_RESET}"
-    echo -e "${C_DIM}eg: bjarneo/omarchy-sakura-theme${C_RESET}\n"
+    echo -e "${C_DIM}e.g. https://github.com/bjarneo/omarchy-sakura-theme${C_RESET}"
+    echo ""
     
     local url
-    url=$(gum input --placeholder="user/repo" --width=50)
+    url=$(gum input --placeholder "user/repo or github url" --width=50)
     [[ -z "$url" ]] && return
-    
     echo ""
+    
     "$SCRIPT_DIR/symphony-import" "$url" && echo -e "${C_OK}done${C_RESET}" || echo -e "${C_ERR}failed${C_RESET}"
     sleep 2
 }
@@ -121,12 +134,33 @@ omarchy_menu() {
     echo ""
     
     local choice
-    choice=$(gum choose "browse" "import" "back")
+    choice=$(choose "Browse" "Import" "Back")
     
     case "$choice" in
-        "browse") browse ;;
-        "import") import_url ;;
+        "Browse") browse ;;
+        "Import") import_url ;;
         *)        return ;;
+    esac
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Web Apps                                                              │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+WEBAPP_DIR="$DOTFILES/.config/hypr/scripts"
+
+webapp_menu() {
+    clear
+    gum style --bold --foreground 212 "♪ web apps"
+    echo ""
+    
+    local choice
+    choice=$(choose "Install" "Remove" "Back")
+    
+    case "$choice" in
+        "Install") "$WEBAPP_DIR/webapp-install"; sleep 1; webapp_menu ;;
+        "Remove")  "$WEBAPP_DIR/webapp-remove"; sleep 1; webapp_menu ;;
+        *)         return ;;
     esac
 }
 
@@ -164,11 +198,13 @@ main() {
     echo ""
     
     local choice
-    choice=$(gum choose "omarchy themes" "delete" "exit")
+    choice=$(choose "Web Apps" "Choose Shell" "Omarchy Themes" "Delete Themes" "Exit")
     
     case "$choice" in
-        "omarchy themes") omarchy_menu; main ;;
-        "delete")         delete_themes; main ;;
+        "Omarchy Themes") omarchy_menu; main ;;
+        "Web Apps")       webapp_menu; main ;;
+        "Choose Shell")   "$DOTFILES/scripts/choose-shell"; main ;;
+        "Delete Themes")  delete_themes; main ;;
         *)                clear; exit 0 ;;
     esac
 }
