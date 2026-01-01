@@ -190,8 +190,7 @@ cmd_fix() {
 
 # Import command - delegates to symphony-import
 cmd_import() {
-	source "$SCRIPT_DIR/symphony-import"
-	run_import "$@"
+	"$SCRIPT_DIR/symphony-import" "$@"
 }
 
 # ╭───────────────────────────────────────────────────────────────────────╮

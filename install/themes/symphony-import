@@ -10,15 +10,13 @@ set -e
 # │ Setup                                                                 │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
-if [[ -z "$THEMES_DIR" ]]; then
-    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
-    THEMES_DIR="$DOTFILES/themes"
-    RED='\033[0;31m' GREEN='\033[0;32m' BLUE='\033[0;34m' RESET='\033[0m'
-    ok()   { echo -e "${GREEN}[OK]${RESET} $1"; }
-    err()  { echo -e "${RED}[ERROR]${RESET} $1" >&2; }
-    info() { echo -e "${BLUE}[INFO]${RESET} $1"; }
-fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
+THEMES_DIR="$DOTFILES/themes"
+RED='\033[0;31m' GREEN='\033[0;32m' BLUE='\033[0;34m' RESET='\033[0m'
+ok()   { echo -e "${GREEN}[OK]${RESET} $1"; }
+err()  { echo -e "${RED}[ERROR]${RESET} $1" >&2; }
+info() { echo -e "${BLUE}[INFO]${RESET} $1"; }
 
 hex() { echo "${1#\#}"; }
 
@@ -33,7 +31,9 @@ get_colors() {
         awk '/^background / {bg=$2} /^foreground / {fg=$2}
              /^color[0-9]+ / {c[$1]=$2}
              END {
-                 if(bg && fg) {
+                 if(!bg) bg=c["color0"]
+                 if(!fg) fg=c["color7"]
+                 if(bg || fg) {
                      printf "%s %s ", bg, fg
                      for(i=0;i<16;i++) printf "%s ", c["color"i]
                  }
@@ -75,6 +75,10 @@ get_colors() {
 write_configs() {
     local name="$1" dest="$2" bg="$3" fg="$4"; shift 4
     local c=("$@")
+    
+    # fallback if bg/fg are empty
+    [[ -z "$bg" ]] && bg="#0f0f0f"
+    [[ -z "$fg" ]] && fg="#e0e0e0"
     
     # color aliases with fallbacks
     local black=${c[0]:-$bg} red=${c[1]:-#cc6666} green=${c[2]:-#b5bd68}
@@ -621,7 +625,15 @@ run_import() {
     [[ -f "$tmp/repo/neovim.lua" ]] && cp "$tmp/repo/neovim.lua" "$dest/.config/nvim/theme.lua"
     
     ok "imported $name"
-    command -v symphony &>/dev/null && symphony switch "$name" || echo "run 'symphony switch $name' to apply"
+    if command -v symphony &>/dev/null; then
+        if [[ "$(cat "$HOME/.config/symphony/.current-theme" 2>/dev/null)" == "$name" ]]; then
+            symphony reload
+        else
+            symphony switch "$name"
+        fi
+    else
+        echo "run 'symphony switch $name' to apply"
+    fi
 }
 
-[[ "${BASH_SOURCE[0]}" == "${0}" ]] && run_import "$@"
+run_import "$@"
