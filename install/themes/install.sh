@@ -188,19 +188,14 @@ page_one() {
     heading "Gathering the Orchestra"
     
     local apps=("kitty" "ghostty" "alacritty" "waybar" "rofi" "swaync" "btop" "cava" "yazi" "rmpc" "nvim" "obsidian" "vesktop")
-    local found_apps=()
     for app in "${apps[@]}"; do
         if command -v "$app" &>/dev/null; then
             found_item "$app"
-            found_apps+=("$app")
         else
             skip_mark "$app"
         fi
         sleep 0.08
     done
-    
-    echo
-    info_line "${#found_apps[@]} musicians ready"
 
     # Phase 3: Setting the Stage
     heading "Setting the Stage"
