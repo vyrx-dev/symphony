@@ -48,6 +48,7 @@ source "$DOTFILES/install/desktop-entries.sh"
 source "$DOTFILES/install/services.sh"
 
 # Choose default shell
+echo
 "$DOTFILES/scripts/choose-shell"
 
 # Install themes (skip logo since we already showed banner)
