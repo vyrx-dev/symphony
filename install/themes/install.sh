@@ -20,25 +20,6 @@ source "$DOTFILES/install/utils.sh"
 # │ Error Handling                                                        │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
-QR_GITHUB='
-█████████████████████████████████████
-████ ▄▄▄▄▄ ██▄▄ ▀▀ █ █▀███ ▄▄▄▄▄ ████
-████ █   █ █▀▄  █▀▄██▀ ▄██ █   █ ████
-████ █▄▄▄█ █▄▀ █▄▄██ ▄▄▄ █ █▄▄▄█ ████
-████▄▄▄▄▄▄▄█▄▀▄█ █ █ █▄█▄█▄▄▄▄▄▄▄████
-████▄ █▀█▄▄ █▄ █▄▄▄ █▄▀ ▄▀█▀ ▄▀▀█████
-████▄█▄█▀▀▄█▄▄▀ ▄▄▀▄▀█▀▀▀▀██▄▀███████
-████▀█▄█▄▀▄▀   █▀█▀▀ █▀ ▀█  ▀██▀ ████
-████▀▄▀█▄▄▄ ▀█▄█▀▄█▄ ██▀▄▄█▀ ▄ █▀████
-████▀▀  ▄ ▄▀ █ █▄▄ ▀▀▄█ █▄▀ ▀▄ ▀▀████
-████ ▄█▄▄█▄█▀▀▀▀▄▄▀  █▀▄▀█▀█▄▄██▄████
-████▄█▄█▄█▄█▀██▄▀▄  █  ▄ ▄▄▄ ▀▄▄▄████
-████ ▄▄▄▄▄ █ ▀▀█▀█ ▄▀▄█  █▄█ ▄▄▀▀████
-████ █   █ ██▀█▄▄█▀ ▀█▀   ▄▄▄ ▀▄▀████
-████ █▄▄▄█ █▀██ ▄▄█ ▄█▀▄▄▄  ▄  ▄▀████
-████▄▄▄▄▄▄▄█▄▄█▄▄████▄█▄██▄▄▄█▄██████
-█████████████████████████████████████'
-
 QR_DISCORD='
 █████████████████████████████████████
 ████ ▄▄▄▄▄ █▀█ █▄█▄ ▀█▄▄ █ ▄▄▄▄▄ ████
@@ -62,22 +43,21 @@ catch_error() {
     clear
     show_cursor
     echo
-    echo -e "${C_RED}  Something went wrong!${C_RESET}"
+    echo -e "${C_CORAL}  Oops! Something didn't go as planned.${C_RESET}"
     echo
-    echo -e "${C_DIM}  Command: $BASH_COMMAND${C_RESET}"
+    echo -e "${C_DIM}  Don't worry - this happens sometimes.${C_RESET}"
     echo
-    echo -e "${C_WHITE}  Report an issue:${C_RESET}"
-    echo -e "${C_CORAL}$QR_GITHUB${C_RESET}"
-    echo -e "  ${C_DIM}https://github.com/vyrx-dev/dotfiles/issues${C_RESET}"
-    echo
-    echo -e "${C_WHITE}  Or DM me on Discord:${C_RESET}"
     echo -e "${C_PINK}$QR_DISCORD${C_RESET}"
-    echo -e "  ${C_DIM}https://discord.com/users/1087059817367080980${C_RESET}"
+    echo
+    echo -e "${C_WHITE}  Scan to DM me on Discord, happy to help!${C_RESET}"
+    echo -e "${C_DIM}  https://discord.com/users/1087059817367080980${C_RESET}"
+    echo
+    echo -e "${C_DIM}  Or create an issue: https://github.com/vyrx-dev/dotfiles/issues${C_RESET}"
     echo
     exit 1
 }
 
-trap catch_error ERR
+trap catch_error ERR INT
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Fullscreen Re-launch                                                  │
