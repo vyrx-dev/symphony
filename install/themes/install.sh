@@ -25,8 +25,6 @@ if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && "$SYMPHONY_FULLSCREEN" != "1" ]]; the
     if command -v alacritty &>/dev/null; then
         alacritty --class Screensaver \
             -o font.size=12 \
-            -o 'colors.cursor.cursor="#000000"' \
-            -o cursor.blink_interval=0 \
             -e "$SCRIPT_DIR/install.sh" "$@" && exit 0
     fi
 fi
@@ -222,7 +220,9 @@ page_one() {
     [[ -z "$rc" && -f "$HOME/.zshrc" ]] && rc="$HOME/.zshrc" && shell_name="zsh"
     [[ -z "$rc" && -f "$HOME/.bashrc" ]] && rc="$HOME/.bashrc" && shell_name="bash"
 
+    spin "Checking shell config" 0.3
     if [[ -n "$rc" ]] && ! grep -q "symphony" "$rc" 2>/dev/null; then
+        spin "Adding to PATH" 0.3
         echo -e "\n# Symphony" >> "$rc"
         [[ "$shell_name" == "fish" ]] && echo "set -gx PATH $SCRIPT_DIR \$PATH" >> "$rc" ||
             echo "export PATH=\"$SCRIPT_DIR:\$PATH\"" >> "$rc"
