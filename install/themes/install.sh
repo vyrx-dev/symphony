@@ -387,6 +387,7 @@ main() {
         else
             hide_cursor
             echo
+            echo
             center_text "A reboot is needed to complete the setup." "$C_DIM"
             center_text "Restart when you're ready." "$C_DIM"
         fi
