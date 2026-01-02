@@ -84,13 +84,11 @@ center_text() {
 
 heading() {
     echo
-    echo
     if [[ $HAS_GUM -eq 1 ]]; then
         gum style --foreground 218 --bold --padding "0 0 0 $PADDING_LEFT" "$1"
     else
         printf "%${PADDING_LEFT}s" "" && echo -e "${C_ACCENT}$1${C_RESET}"
     fi
-    echo
 }
 
 spin() {
@@ -242,7 +240,6 @@ page_one() {
     local theme_count=$(count_themes)
     spin "Reading the scores" 0.3
     check_mark "$theme_count compositions found"
-    echo
     spin "Mixing harmonies" 0.3
     spin "Balancing tones" 0.3
     spin "Polishing melodies" 0.3
@@ -250,7 +247,6 @@ page_one() {
     check_mark "All pieces perfected"
 
     # Transition
-    echo
     echo
     echo
     
@@ -279,7 +275,6 @@ page_two() {
     clear
     echo
     echo
-    echo
 
     # Animated musical banner
     if [[ -f "$MUSICAL_FILE" && $HAS_TTE -eq 1 ]]; then
@@ -298,27 +293,20 @@ page_two() {
     fi
 
     echo
-    echo
 
     center_text "Your symphony. You decide how to play." "$C_WHITE"
-    echo
     center_text "For those who notice the little things." "$C_DIM"
 
     echo
     echo
 
-    # First time setup notice
     center_text "After reboot, apply a theme:" "$C_WHITE"
-    echo
-    center_text "symphony switch sakura" "$C_NOTE"
-    center_text "or  Super + Ctrl + Shift + Space" "$C_DIM"
+    center_text "symphony switch sakura  or  Super+Ctrl+Shift+Space" "$C_DIM"
 
     echo
-    echo
 
-    center_text "Found a problem? https://github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
+    center_text "Found a problem? github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
 
-    echo
     echo
 
     # Animated footer
