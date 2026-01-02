@@ -333,7 +333,6 @@ choose_shell() {
     
     case $shell in
         bash|fish|zsh)
-            command -v "$shell" &>/dev/null || sudo pacman -S --noconfirm "$shell"
             chsh -s "$(command -v "$shell")"
             echo
             center_text "Shell set to $shell" "$C_OK"
