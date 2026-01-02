@@ -328,17 +328,16 @@ choose_shell() {
     center_text "Pick your default shell" "$C_WHITE"
     echo
     
-    local shell_pad=$(( (TERM_WIDTH - 30) / 2 ))
     local choice
     choice=$(gum choose --height 5 --cursor.foreground="218" \
-        "fish" "zsh" "bash" "skip" 2>/dev/null) || choice="skip"
+        "fish" "zsh" "bash" "skip" 2>/dev/null || echo "skip")
     
-    if [[ "$choice" == "skip" ]]; then
+    if [[ "$choice" == "skip" || -z "$choice" ]]; then
         echo
         center_text "Keeping current shell" "$C_DIM"
     else
-        command -v "$choice" &>/dev/null || sudo pacman -S --noconfirm "$choice" &>/dev/null
-        chsh -s "$(command -v "$choice")" &>/dev/null
+        command -v "$choice" &>/dev/null || sudo pacman -S --noconfirm "$choice" &>/dev/null || true
+        chsh -s "$(command -v "$choice")" &>/dev/null || true
         echo
         center_text "Shell set to $choice" "$C_OK"
     fi
