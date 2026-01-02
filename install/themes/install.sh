@@ -316,38 +316,8 @@ page_two() {
 
     echo
     echo
-}
-
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Shell Chooser                                                         │
-# ╰───────────────────────────────────────────────────────────────────────╯
-
-choose_shell() {
-    echo
-    echo
-    center_text "Pick your default shell" "$C_WHITE"
-    echo
     
-    local shell
-    shell=$(gum choose --height 5 bash fish zsh skip) || shell="skip"
-    
-    case $shell in
-        bash|fish|zsh)
-            chsh -s "$(command -v "$shell")"
-            echo
-            center_text "Shell set to $shell" "$C_OK"
-            ;;
-        *)
-            echo
-            center_text "Keeping current shell" "$C_DIM"
-            ;;
-    esac
-}
-
-show_footer() {
-    echo
-    echo
-    
+    # Animated footer
     local footer="♪ Let the music play ♫"
     if [[ $HAS_TTE -eq 1 ]]; then
         echo "$footer" | tte \
@@ -364,7 +334,7 @@ show_footer() {
     else
         center_text "$footer" "$C_ACCENT"
     fi
-    
+
     echo
 }
 
@@ -403,14 +373,6 @@ main() {
 
     page_one
     page_two
-    
-    # Choose shell
-    show_cursor
-    choose_shell
-    hide_cursor
-    
-    # Animated footer
-    show_footer
     
     # Reboot prompt
     local btn_pad=$(( (TERM_WIDTH - 29) / 2 ))
