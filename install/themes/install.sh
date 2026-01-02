@@ -84,11 +84,13 @@ center_text() {
 
 heading() {
     echo
+    echo
     if [[ $HAS_GUM -eq 1 ]]; then
         gum style --foreground 218 --bold --padding "0 0 0 $PADDING_LEFT" "$1"
     else
         printf "%${PADDING_LEFT}s" "" && echo -e "${C_ACCENT}$1${C_RESET}"
     fi
+    echo
 }
 
 spin() {
@@ -241,6 +243,7 @@ page_one() {
     local theme_count=$(count_themes)
     spin "Reading the scores" 0.3
     check_mark "$theme_count compositions found"
+    echo
     spin "Mixing harmonies" 0.3
     spin "Balancing tones" 0.3
     spin "Polishing melodies" 0.3
@@ -248,6 +251,7 @@ page_one() {
     check_mark "All pieces perfected"
 
     # Transition
+    echo
     echo
     echo
     
