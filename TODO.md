@@ -23,7 +23,7 @@
 - [x] Hyprland v0.53.0 rule syntax migration
 - [x] Yazi 25.x theme format update
 - [x] Improved shadow and decoration settings
-- [ ] Theme switcher with preview
+- [x] Theme switcher with preview
 - [ ] README cleanup and compress showcase GIFs
 - [ ] Optimize theme switching performance
 - [ ] Full cleanup pass
