@@ -263,13 +263,29 @@ page_two() {
     echo
 
     center_text "Your symphony. You decide how to play." "$C_WHITE"
-    echo
     center_text "For those who notice the little things." "$C_DIM"
 
     echo
     echo
+    echo
 
-    center_text "Found a problem? https://github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
+    center_text "After reboot, pick your first theme:" "$C_DIM"
+    echo
+    center_text "symphony switch <theme>  ·  Super+Ctrl+Shift+Space" "$C_CORAL"
+    echo
+    center_text "This fixes any initial Hyprland errors." "$C_DIMMER"
+
+    echo
+    echo
+    echo
+
+    center_text "symphony help" "$C_PINK"
+    center_text "for available commands" "$C_DIMMER"
+
+    echo
+    echo
+
+    center_text "https://github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
 
     echo
     echo
