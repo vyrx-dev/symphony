@@ -171,13 +171,6 @@ page_one() {
         sleep 0.08
     done
     
-    local terminal=""
-    for t in kitty ghostty alacritty; do
-        command -v "$t" &>/dev/null && { check_mark "$t"; terminal="$t"; break; }
-    done
-    [[ -z "$terminal" ]] && { cross_mark "terminal"; missing+=("kitty"); }
-    sleep 0.08
-    
     for dep in waybar rofi gum tte matugen; do
         command -v "$dep" &>/dev/null && check_mark "$dep" || skip_mark "$dep"
         sleep 0.08
@@ -196,16 +189,17 @@ page_one() {
     # Phase 2: Gathering the Orchestra
     heading "Gathering the Orchestra"
     
-    local apps=("waybar" "rofi" "swaync" "btop" "cava" "yazi" "rmpc" "obsidian" "vesktop")
+    local apps=("kitty" "ghostty" "alacritty" "waybar" "rofi" "swaync" "btop" "cava" "yazi" "rmpc" "nvim" "obsidian" "vesktop")
     local found_apps=()
     for app in "${apps[@]}"; do
         if command -v "$app" &>/dev/null; then
             found_item "$app"
             found_apps+=("$app")
-            sleep 0.08
+        else
+            skip_mark "$app"
         fi
+        sleep 0.08
     done
-    [[ -n "$terminal" ]] && found_item "$terminal" && found_apps+=("$terminal")
     
     echo
     info_line "${#found_apps[@]} musicians ready"
