@@ -316,8 +316,38 @@ page_two() {
 
     echo
     echo
+}
 
-    # Animated footer
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Shell Chooser                                                         │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+choose_shell() {
+    echo
+    echo
+    center_text "Pick your default shell" "$C_WHITE"
+    echo
+    
+    local shell_pad=$(( (TERM_WIDTH - 30) / 2 ))
+    local choice
+    choice=$(gum choose --height 5 --cursor.foreground="218" \
+        "fish" "zsh" "bash" "skip" 2>/dev/null) || choice="skip"
+    
+    if [[ "$choice" == "skip" ]]; then
+        echo
+        center_text "Keeping current shell" "$C_DIM"
+    else
+        command -v "$choice" &>/dev/null || sudo pacman -S --noconfirm "$choice" &>/dev/null
+        chsh -s "$(command -v "$choice")" &>/dev/null
+        echo
+        center_text "Shell set to $choice" "$C_OK"
+    fi
+}
+
+show_footer() {
+    echo
+    echo
+    
     local footer="♪ Let the music play ♫"
     if [[ $HAS_TTE -eq 1 ]]; then
         echo "$footer" | tte \
@@ -334,7 +364,7 @@ page_two() {
     else
         center_text "$footer" "$C_ACCENT"
     fi
-
+    
     echo
 }
 
@@ -374,12 +404,13 @@ main() {
     page_one
     page_two
     
-    # Choose shell before reboot
-    if [[ -x "$DOTFILES/scripts/choose-shell" ]]; then
-        show_cursor
-        "$DOTFILES/scripts/choose-shell"
-        hide_cursor
-    fi
+    # Choose shell
+    show_cursor
+    choose_shell
+    hide_cursor
+    
+    # Animated footer
+    show_footer
     
     # Reboot prompt
     local btn_pad=$(( (TERM_WIDTH - 29) / 2 ))
