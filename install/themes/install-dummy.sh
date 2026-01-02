@@ -1,15 +1,18 @@
 #!/bin/bash
 #|---/ /+---------------------+---/ /|#
 #|--/ /-| Symphony Dotfiles   |--/ /-|#
-#|-/ /--| Theme Installer     |-/ /--|#
+#|-/ /--| DUMMY Installer     |-/ /--|#
 #|/ /---+---------------------+/ /---|#
+#
+# Visual replica of install.sh - does NOT change anything
+# Use this to test visuals before editing main installer
+#
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
 THEMES_DIR="$DOTFILES/themes"
-SYMPHONY_DIR="$HOME/.config/symphony"
 BRANDING="$DOTFILES/branding"
 LOGO_FILE="$BRANDING/symphony.txt"
 MUSICAL_FILE="$BRANDING/musical.txt"
@@ -27,7 +30,7 @@ if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && "$SYMPHONY_FULLSCREEN" != "1" ]]; the
             -o font.size=12 \
             -o 'colors.cursor.cursor="#000000"' \
             -o cursor.blink_interval=0 \
-            -e "$SCRIPT_DIR/install.sh" "$@" && exit 0
+            -e "$SCRIPT_DIR/install-dummy.sh" "$@" && exit 0
     fi
 fi
 
@@ -45,13 +48,15 @@ C_ACCENT="$C_PINK"
 C_OK="$C_GOLD"
 C_NOTE="$C_CORAL"
 
-# Terminal dimensions
+
+# Terminal dimensions - will be set in main() after fullscreen is ready
 TERM_WIDTH=80
 TERM_HEIGHT=24
 CONTENT_WIDTH=55
 PADDING_LEFT=0
 
 init_dimensions() {
+    # Brief wait for fullscreen terminal to be ready
     [[ "$SYMPHONY_FULLSCREEN" == "1" ]] && sleep 0.15
     TERM_WIDTH=$(tput cols 2>/dev/null || echo 80)
     TERM_HEIGHT=$(tput lines 2>/dev/null || echo 24)
@@ -84,11 +89,13 @@ center_text() {
 
 heading() {
     echo
+    echo
     if [[ $HAS_GUM -eq 1 ]]; then
         gum style --foreground 218 --bold --padding "0 0 0 $PADDING_LEFT" "$1"
     else
         printf "%${PADDING_LEFT}s" "" && echo -e "${C_ACCENT}$1${C_RESET}"
     fi
+    echo
 }
 
 spin() {
@@ -115,10 +122,6 @@ info_line() {
     printf "%${PADDING_LEFT}s" "" && echo -e "${C_DIM}$1${C_RESET}"
 }
 
-padded_line() {
-    printf "%${PADDING_LEFT}s" "" && echo -e "$1"
-}
-
 count_themes() {
     local n=0
     for d in "$THEMES_DIR"/*/; do
@@ -129,6 +132,7 @@ count_themes() {
     echo "$n"
 }
 
+
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Page 1: Setup                                                         │
 # ╰───────────────────────────────────────────────────────────────────────╯
@@ -138,7 +142,7 @@ page_one() {
     echo
     echo
 
-    # Animated logo
+    # Animated logo with TTE beams
     if [[ -f "$LOGO_FILE" && $HAS_TTE -eq 1 ]]; then
         tte -i "$LOGO_FILE" \
             --canvas-width 0 \
@@ -158,14 +162,8 @@ page_one() {
     # Phase 1: Tuning the Instruments
     heading "Tuning the Instruments"
     
-    local missing=()
     for dep in stow hyprctl swww; do
-        if command -v "$dep" &>/dev/null; then
-            check_mark "$dep"
-        else
-            cross_mark "$dep"
-            missing+=("$dep")
-        fi
+        command -v "$dep" &>/dev/null && check_mark "$dep" || cross_mark "$dep"
         sleep 0.08
     done
     
@@ -173,23 +171,13 @@ page_one() {
     for t in kitty ghostty alacritty; do
         command -v "$t" &>/dev/null && { check_mark "$t"; terminal="$t"; break; }
     done
-    [[ -z "$terminal" ]] && { cross_mark "terminal"; missing+=("kitty"); }
+    [[ -z "$terminal" ]] && cross_mark "terminal"
     sleep 0.08
     
     for dep in waybar rofi gum tte matugen; do
         command -v "$dep" &>/dev/null && check_mark "$dep" || skip_mark "$dep"
         sleep 0.08
     done
-
-    if [[ ${#missing[@]} -gt 0 ]]; then
-        echo
-        padded_line "${C_RED}Missing required:${C_RESET}"
-        for dep in "${missing[@]}"; do
-            padded_line "${C_DIM}  sudo pacman -S $dep${C_RESET}"
-        done
-        show_cursor
-        exit 1
-    fi
 
     # Phase 2: Gathering the Orchestra
     heading "Gathering the Orchestra"
@@ -212,28 +200,9 @@ page_one() {
     heading "Setting the Stage"
     
     spin "Arranging the seats" 0.4
-    mkdir -p "$SYMPHONY_DIR" "$HOME/.config/rmpc/themes" "$HOME/.cache/wal"
     spin "Adjusting the lights" 0.35
-    chmod +x "$SCRIPT_DIR/symphony" "$SCRIPT_DIR/hooks"/*.sh 2>/dev/null || true
     spin "Testing the acoustics" 0.35
     check_mark "Stage is set"
-
-    # PATH setup
-    heading "Tuning the Paths"
-    
-    local rc="" shell_name=""
-    [[ -f "$HOME/.config/fish/config.fish" ]] && rc="$HOME/.config/fish/config.fish" && shell_name="fish"
-    [[ -z "$rc" && -f "$HOME/.zshrc" ]] && rc="$HOME/.zshrc" && shell_name="zsh"
-    [[ -z "$rc" && -f "$HOME/.bashrc" ]] && rc="$HOME/.bashrc" && shell_name="bash"
-
-    if [[ -n "$rc" ]] && ! grep -q "symphony" "$rc" 2>/dev/null; then
-        echo -e "\n# Symphony" >> "$rc"
-        [[ "$shell_name" == "fish" ]] && echo "set -gx PATH $SCRIPT_DIR \$PATH" >> "$rc" ||
-            echo "export PATH=\"$SCRIPT_DIR:\$PATH\"" >> "$rc"
-        check_mark "Added to $shell_name PATH"
-    else
-        check_mark "PATH already configured"
-    fi
 
     # Phase 4: Composing the Themes
     heading "Composing the Themes"
@@ -241,13 +210,15 @@ page_one() {
     local theme_count=$(count_themes)
     spin "Reading the scores" 0.3
     check_mark "$theme_count compositions found"
+    echo
     spin "Mixing harmonies" 0.3
     spin "Balancing tones" 0.3
     spin "Polishing melodies" 0.3
     spin "Final rehearsal" 0.25
     check_mark "All pieces perfected"
 
-    # Transition
+    # Transition to page 2
+    echo
     echo
     echo
     
@@ -278,7 +249,7 @@ page_two() {
     echo
     echo
 
-    # Animated musical banner
+    # Animated musical banner with TTE spotlights
     if [[ -f "$MUSICAL_FILE" && $HAS_TTE -eq 1 ]]; then
         tte -i "$MUSICAL_FILE" \
             --canvas-width "$TERM_WIDTH" \
@@ -304,13 +275,7 @@ page_two() {
     echo
     echo
 
-    center_text "After reboot, apply a theme:" "$C_WHITE"
-    center_text "symphony switch sakura  or  Super+Ctrl+Shift+Space" "$C_DIM"
-
-    echo
-    echo
-
-    center_text "Found a problem? github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
+    center_text "Found a problem? https://github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
 
     echo
     echo
@@ -344,29 +309,29 @@ main() {
     hide_cursor
     trap 'show_cursor' EXIT
     
+    # Initialize dimensions after fullscreen terminal is ready
     init_dimensions
     
-    # Skip confirmation if called from main installer
-    if [[ "${SYMPHONY_INSTALLING:-}" != "1" ]]; then
-        clear
-        
-        local vertical_pad=$(( (TERM_HEIGHT - 6) / 2 ))
-        for ((i=0; i<vertical_pad; i++)); do echo; done
-        
-        center_text "This will switch configs and reload apps." "$C_NOTE"
+    clear
+    
+    # Center initial prompt vertically
+    local vertical_pad=$(( (TERM_HEIGHT - 6) / 2 ))
+    for ((i=0; i<vertical_pad; i++)); do echo; done
+    
+    center_text "⚠ DUMMY MODE - This will NOT change anything" "$C_NOTE"
+    echo
+    
+    if [[ $HAS_GUM -eq 1 ]]; then
+        center_text "Run visual test?" "$C_WHITE"
         echo
-        
-        if [[ $HAS_GUM -eq 1 ]]; then
-            center_text "Continue?" "$C_WHITE"
-            echo
-            local btn_pad=$(( (TERM_WIDTH - 27) / 2 ))
-            hide_cursor
-            gum confirm --padding "0 0 0 $btn_pad" --show-help=false --affirmative " Yes " --negative " No  " "" || exit 0
-            hide_cursor
-        else
-            center_text "Continue? [y/N]" "$C_WHITE"
-            read -rp "" c && [[ "$c" =~ ^[Yy]$ ]] || exit 0
-        fi
+        local btn_pad=$(( (TERM_WIDTH - 27) / 2 ))
+        hide_cursor
+        gum confirm --padding "0 0 0 $btn_pad" --show-help=false --affirmative " Yes " --negative " No  " "" || exit 0
+        hide_cursor
+    else
+        echo
+        center_text "Run visual test? [y/N]" "$C_WHITE"
+        read -rp "" c && [[ "$c" =~ ^[Yy]$ ]] || exit 0
     fi
 
     page_one
@@ -379,9 +344,7 @@ main() {
         hide_cursor
         if gum confirm --padding "0 0 0 $btn_pad" --show-help=false --default=yes --affirmative " Reboot " --negative " Later  " ""; then
             hide_cursor
-            center_text "Rebooting..." "$C_OK"
-            sleep 1
-            systemctl reboot
+            center_text "✓ DUMMY - would reboot here" "$C_OK"
         else
             hide_cursor
             echo
@@ -393,9 +356,7 @@ main() {
         center_text "Reboot now? [Y/n]" "$C_WHITE"
         read -rp "" c
         if [[ ! "$c" =~ ^[Nn]$ ]]; then
-            center_text "Rebooting..." "$C_OK"
-            sleep 1
-            systemctl reboot
+            center_text "✓ DUMMY - would reboot here" "$C_OK"
         else
             echo
             center_text "A reboot is needed to complete the setup." "$C_DIM"
