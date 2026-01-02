@@ -374,6 +374,13 @@ main() {
     page_one
     page_two
     
+    # Choose shell before reboot
+    if [[ -x "$DOTFILES/scripts/choose-shell" ]]; then
+        show_cursor
+        "$DOTFILES/scripts/choose-shell"
+        hide_cursor
+    fi
+    
     # Reboot prompt
     local btn_pad=$(( (TERM_WIDTH - 29) / 2 ))
     
