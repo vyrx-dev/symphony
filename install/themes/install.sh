@@ -303,8 +303,10 @@ page_two() {
     echo
     echo
 
-    center_text "After reboot, apply a theme:" "$C_WHITE"
-    center_text "symphony switch sakura  or  Super+Ctrl+Shift+Space" "$C_DIM"
+    center_text "After reboot, pick your first theme:" "$C_WHITE"
+    center_text "symphony switch <theme>  or  Super+Ctrl+Shift+Space" "$C_DIM"
+    echo
+    center_text "Switching a theme fixes any initial Hyprland errors." "$C_CORAL"
 
     echo
     echo
