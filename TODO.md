@@ -13,71 +13,32 @@
 
 ---
 
-## Theme Support
+## v3.0.0
 
-- [x] Kitty / Ghostty / Alacritty
-- [x] Rofi / Waybar / SwayNC
-- [x] GTK 3 & 4
-- [x] Btop / Cava / Yazi
-- [x] RMPC / Starship
-- [x] Vesktop / Obsidian / Firefox
-- [ ] QT Theming (kvantum/qt5ct)
-- [ ] Spicetify
-
----
-
-## Installer
-
-- [x] One-liner curl install (`boot.sh`)
-- [x] Modular structure (utils, packages, stow, services)
-- [x] Interactive package selection
-- [x] Desktop entries & web apps
-- [x] MPD service setup
-- [x] mpdscribble (Last.fm) setup
-- [x] Gnome-keyring auto-setup
-- [x] Uninstaller
-
----
-
-## Theme System
-
-- [x] `symphony` command (switch, list, current, edit, reload)
-- [x] Hook-based post-switch actions
-- [x] New themes: espresso, kanagawa, nordic
-- [x] Terminal transparency toggle
-- [x] Dynamic app hiding
-- [x] Omarchy themes import (`symphony import`, `symphony tui`)
-- [ ] Optimize switching performance
-
----
-
-## RMPC
-
-- [x] Lyrics pane with auto-fetch
-- [x] Cava visualizer integration
-- [x] Desktop notifications
-- [x] Last.fm scrobbling
-
----
-
-## Polish
-
-- [x] Symphony branding
-- [x] Stow-local-ignore
-- [x] GitHub issue templates
-- [x] README video/screenshots
-- [x] Graceful shutdown/reboot
+- [x] Omarchy themes import (`symphony import`)
+- [x] Symphony TUI (`symphony tui`) - web apps, choose shell, browse/import themes
+- [x] Theme installer visual redesign with Symphony branding
+- [x] Error handling with Discord QR and GitHub link
+- [x] Shell chooser in install flow
+- [x] Hyprland v0.53.0 rule syntax migration
+- [x] Yazi 25.x theme format update
+- [x] Improved shadow and decoration settings
+- [ ] Theme switcher with preview
+- [ ] README cleanup and compress showcase GIFs
+- [ ] Optimize theme switching performance
 - [ ] Full cleanup pass
 
 ---
 
 ## Backlog
 
+- [ ] SDDM setup
 - [ ] QT theming (kvantum/qt5ct)
+- [ ] Spicetify theming
 - [ ] Neovim cleanup & hot reload
 - [ ] Media conversion scripts
 - [ ] Symphony website
 
 ---
 
-*Last updated: December 29, 2025*
+*Last updated: January 3, 2026*
