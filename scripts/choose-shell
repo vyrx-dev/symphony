@@ -19,6 +19,7 @@ set_shell() {
   chsh -s "$(command -v "$1")"
   ok "Shell choice: $1"
   echo "Logout and log back in for the change to take effect."
+  sleep 2
 }
 
 shell=$(gum choose --height 5 --header "Choose your default shell" bash fish zsh quit)
