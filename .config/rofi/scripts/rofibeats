@@ -1,118 +1,88 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# For Rofi Beats to play online Music or Locally save media files
+# rofi music player - plays online streams or local files
 
-# Directory local music folder
-mDIR="$HOME/Music/"
+music_dir="$HOME/Music"
+icon="$HOME/.config/rofi/music.png"
+rofi_dir="$HOME/.config/rofi/custom-rofi"
 
-# Directory for icons
-iDIR="$HOME/.config/rofi"
-
-# Online Stations. Edit as required
-declare -A online_music=(
-  ["Radio - Lofi Girl 🎧🎶"]="https://play.streamafrica.net/lofiradio"
-  ["Radio - Chillhop 🎧🎶"]="http://stream.zeno.fm/fyn8eh3h5f8uv"
-  ["FM - Love Radio 90.7 📻🎶"]="https://radio-stations-philippines.com/love"
-  ["YT - Relaxing Music 📹🎶"]="https://youtube.com/playlist?list=PLMIbmfP_9vb8BCxRoraJpoo4q1yMFg4CE"
-  ["YT - Youtube Remix 📹🎶"]="https://youtube.com/playlist?list=PLeqTkIUlrZXlSNn3tcXAa-zbo95j0iN-0"
-  ["YT - Korean Drama OST 📹🎶"]="https://youtube.com/playlist?list=PLUge_o9AIFp4HuA-A3e3ZqENh63LuRRlQ"
-  ["YT - Relaxing Piano Jazz Music 🎹🎶"]="https://youtu.be/85UEqRat6E4?si=jXQL1Yp2VP_G6NSn"
-  ["YT - John Snow reveal🎶"]="https://youtu.be/dNOZ7MuET2E?si=MDfxr_LrpEEcYslC"
-  ["YT - Moody Classic🎶"]="https://youtube.com/playlist?list=PLgIxeDoNjzdD0EpiuE6KaBWiIrgGI2QvE&si=Z6C-Vm8u9cNZ8tny"
-  ["YT - Japanese City Pop🎶"]="https://youtu.be/Rh7u_cbAiZc?si=gRa6zNjYQZweSm8u"
-  ["YT - Starboy Vibes🎶"]="https://youtu.be/fykM0vDDUnU?si=bnfSyV-LTxVfSyhU"
-  ["YT - Jazz Lounge🎶"]="https://youtu.be/kJl319t76z8?si=ny03bA2GHDRwXW5-"
-  ["YT - Friends S1📺"]="https://youtube.com/playlist?list=PLnS-KSZtIXlH8YNow_rTIflrX6ZEF1uNd&si=Y-0aWZSaBJ4peNfu"
-  ["YT - Hindi Cover Songs🎶"]="https://youtube.com/playlist?list=PLjqy7NBQvw8wnorOYEom-tBnd1wtiveQZ&si=hVjVxPXF5Bl8zH8l"
-
+declare -A stations=(
+  ["Radio - Lofi Girl"]="https://play.streamafrica.net/lofiradio"
+  ["Radio - Chillhop"]="http://stream.zeno.fm/fyn8eh3h5f8uv"
+  ["FM - Love Radio 90.7"]="https://radio-stations-philippines.com/love"
+  ["YT - Relaxing Music"]="https://youtube.com/playlist?list=PLMIbmfP_9vb8BCxRoraJpoo4q1yMFg4CE"
+  ["YT - Youtube Remix"]="https://youtube.com/playlist?list=PLeqTkIUlrZXlSNn3tcXAa-zbo95j0iN-0"
+  ["YT - Korean Drama OST"]="https://youtube.com/playlist?list=PLUge_o9AIFp4HuA-A3e3ZqENh63LuRRlQ"
+  ["YT - Relaxing Piano Jazz"]="https://youtu.be/85UEqRat6E4?si=jXQL1Yp2VP_G6NSn"
+  ["YT - John Snow reveal"]="https://youtu.be/dNOZ7MuET2E?si=MDfxr_LrpEEcYslC"
+  ["YT - Moody Classic"]="https://youtube.com/playlist?list=PLgIxeDoNjzdD0EpiuE6KaBWiIrgGI2QvE&si=Z6C-Vm8u9cNZ8tny"
+  ["YT - Japanese City Pop"]="https://youtu.be/Rh7u_cbAiZc?si=gRa6zNjYQZweSm8u"
+  ["YT - Starboy Vibes"]="https://youtu.be/fykM0vDDUnU?si=bnfSyV-LTxVfSyhU"
+  ["YT - Jazz Lounge"]="https://youtu.be/kJl319t76z8?si=ny03bA2GHDRwXW5-"
+  ["YT - Friends S1"]="https://youtube.com/playlist?list=PLnS-KSZtIXlH8YNow_rTIflrX6ZEF1uNd&si=Y-0aWZSaBJ4peNfu"
+  ["YT - Hindi Cover Songs"]="https://youtube.com/playlist?list=PLjqy7NBQvw8wnorOYEom-tBnd1wtiveQZ&si=hVjVxPXF5Bl8zH8l"
 )
-# Populate local_music array with files from music directory and subdirectories
-populate_local_music() {
-  local_music=()
-  filenames=()
-  while IFS= read -r file; do
-    local_music+=("$file")
-    filenames+=("$(basename "$file")")
-  done < <(find "$mDIR" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.wav" -o -iname "*.ogg" -o -iname "*.mp4" \))
+
+notify() {
+  notify-send -u normal -i "$icon" "Now Playing" "$1"
 }
 
-# Function for displaying notifications
-notification() {
-  notify-send -u normal -i "$iDIR/music.png" " Now Playing:" " $@"
-}
-
-# Main function for playing local music
-play_local_music() {
-  populate_local_music
-
-  # Prompt the user to select a song
-  choice=$(printf "%s\n" "${filenames[@]}" | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-rofi-Beats.rasi -p "Local Music")
-
-  if [ -z "$choice" ]; then
+play_local() {
+  if [[ ! -d "$music_dir" ]]; then
+    notify-send -u critical "Error" "Music directory not found"
     exit 1
   fi
 
-  # Find the corresponding file path based on user's choice and set that to play the song then continue on the list
-  for ((i = 0; i < "${#filenames[@]}"; ++i)); do
-    if [ "${filenames[$i]}" = "$choice" ]; then
+  # get all music files
+  mapfile -t files < <(find "$music_dir" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.wav" -o -iname "*.ogg" -o -iname "*.mp4" \))
 
-      notification "$choice"
+  if [[ ${#files[@]} -eq 0 ]]; then
+    notify-send -u critical "Error" "No music files found"
+    exit 1
+  fi
 
-      # Play the selected local music file using mpv
-      mpv --playlist-start="$i" --loop-playlist --vid=no "${local_music[@]}"
+  # show only filenames in rofi
+  choice=$(printf "%s\n" "${files[@]}" | xargs -d '\n' -n1 basename | rofi -i -dmenu -config "$rofi_dir/config-rofi-Beats.rasi" -p "Local Music")
+  [[ -z "$choice" ]] && exit 0
 
-      break
+  # find which file was selected and its index
+  for i in "${!files[@]}"; do
+    if [[ "$(basename "${files[$i]}")" == "$choice" ]]; then
+      notify "$choice"
+      mpv --playlist-start="$i" --loop-playlist --vid=no "${files[@]}"
+      exit 0
     fi
   done
 }
 
-# Main function for shuffling local music
-shuffle_local_music() {
-  notification "Shuffle Play local music"
-
-  # Play music in $mDIR on shuffle
-  mpv --shuffle --loop-playlist --vid=no "$mDIR"
-}
-
-# Main function for playing online music
-play_online_music() {
-  choice=$(printf "%s\n" "${!online_music[@]}" | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-rofi-theme.rasi -p "🎵 Online Music")
-
-  if [ -z "$choice" ]; then
+play_shuffle() {
+  if [[ ! -d "$music_dir" ]]; then
+    notify-send -u critical "Error" "Music directory not found"
     exit 1
   fi
-
-  link="${online_music[$choice]}"
-
-  notification "$choice"
-
-  # Play the selected online music using mpv
-  mpv --shuffle --vid=no "$link"
+  notify "Shuffle Play"
+  mpv --shuffle --loop-playlist --vid=no "$music_dir"
 }
 
-# Check if an online music process is running and send a notification, otherwise run the main function
-pkill mpv && notify-send -u low -i "$iDIR/music.png" "Music stopped" || {
+play_online() {
+  choice=$(printf "%s\n" "${!stations[@]}" | sort | rofi -i -dmenu -config "$rofi_dir/config-rofi-theme.rasi" -p "Online Music")
+  [[ -z "$choice" ]] && exit 0
 
-  # Check if rofi is already running
-  if pidof rofi >/dev/null; then
-    pkill rofi
-  fi
-
-  # Prompt the user to choose between local and online music
-  user_choice=$(printf "Play from Online Stations\nPlay from Music Folder\nShuffle Music Folder" | rofi -dmenu -config ~/.config/rofi/custom-rofi/config-rofi-Beats-menu.rasi -p "")
-
-  case "$user_choice" in
-  "Play from Music Folder")
-    play_local_music
-    ;;
-  "Play from Online Stations")
-    play_online_music
-    ;;
-  "Shuffle Music Folder")
-    shuffle_local_music
-    ;;
-  *)
-    echo "Invalid choice"
-    ;;
-  esac
+  notify "$choice"
+  mpv --vid=no "${stations[$choice]}"
 }
+
+# if mpv is running, stop it. otherwise show menu
+if pkill mpv; then
+  notify-send -u low -i "$icon" "Music stopped"
+  exit 0
+fi
+
+pkill -x rofi 2>/dev/null
+
+choice=$(printf "Play from Online Stations\nPlay from Music Folder\nShuffle Music Folder" | rofi -dmenu -config "$rofi_dir/config-rofi-Beats-menu.rasi" -p "")
+
+case "$choice" in
+  "Play from Music Folder") play_local ;;
+  "Play from Online Stations") play_online ;;
+  "Shuffle Music Folder") play_shuffle ;;
+esac

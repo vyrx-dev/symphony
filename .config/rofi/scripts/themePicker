@@ -1,42 +1,41 @@
 #!/bin/bash
-# Theme picker with image previews
+# theme picker with image previews
 
-THEMES_DIR="$HOME/dotfiles/themes"
-SYMPHONY="$HOME/dotfiles/install/themes/symphony"
-CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
+themes_dir="$HOME/dotfiles/themes"
+symphony="$HOME/dotfiles/install/themes/symphony"
+current_theme=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
 
-# Get preview image (preview.png > backgrounds/* > wallpaper symlink)
+# get preview image: preview.png > backgrounds/* > wallpaper symlink
 get_preview() {
 	local dir="$1"
 	[[ -f "$dir/preview.png" ]] && echo "$dir/preview.png" && return
 	[[ -f "$dir/preview.jpg" ]] && echo "$dir/preview.jpg" && return
-	
-	local wall=$(find "$dir/backgrounds" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) 2>/dev/null | sort | head -1)
+
+	local wall=$(find "$dir/backgrounds" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) 2>/dev/null | head -1)
 	[[ -n "$wall" ]] && echo "$wall" && return
-	
+
 	[[ -L "$dir/wallpaper" ]] && readlink -f "$dir/wallpaper"
 }
 
-# Build rofi menu
 menu() {
-	for dir in "$THEMES_DIR"/*/; do
-		local name=$(basename "$dir")
+	for dir in "$themes_dir"/*/; do
+		name=$(basename "$dir")
 		[[ "$name" == "Wallpapers" || "$name" == ".git" ]] && continue
 		[[ ! -d "$dir/.config" ]] && continue
-		
-		local preview=$(get_preview "$dir")
+
+		preview=$(get_preview "$dir")
 		[[ -z "$preview" ]] && continue
-		
+
 		printf "%s\x00icon\x1f%s\n" "$name" "$preview"
 	done | sort
 }
 
-# Show menu
 choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-theme-picker.rasi)
 [[ -z "$choice" ]] && exit 0
 
-# Skip if already active
-[[ "$choice" == "$CURRENT_THEME" ]] && { notify-send "Symphony" "Already using $choice"; exit 0; }
+if [[ "$choice" == "$current_theme" ]]; then
+	notify-send "Symphony" "Already using $choice"
+	exit 0
+fi
 
-# Switch theme
-"$SYMPHONY" switch "$choice"
+"$symphony" switch "$choice"

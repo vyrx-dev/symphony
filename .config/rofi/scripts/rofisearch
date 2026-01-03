@@ -1,16 +1,9 @@
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# Modified Script for Google Search
-# Original Submitted by https://github.com/LeventKaanOguz
-
-# Opens rofi in dmenu mod and waits for input. Then pushes the input to the query of the URL.
+#!/bin/bash
+# quick google search from rofi
 
 rofi_config="$HOME/.config/rofi/custom-rofi/config-search.rasi"
 
-# Kill Rofi if already running before execution
-if pgrep -x "rofi" >/dev/null; then
-  pkill rofi
-  #exit 0
-fi
+pkill -x rofi 2>/dev/null
 
-# Open rofi with a dmenu and pass the selected item to xdg-open for Google search
-echo "" | rofi -dmenu -config "$rofi_config" -p "" | xargs -I{} xdg-open "https://www.google.com/search?q={}"
+query=$(rofi -dmenu -config "$rofi_config" -p "")
+[[ -n "$query" ]] && xdg-open "https://www.google.com/search?q=$query"

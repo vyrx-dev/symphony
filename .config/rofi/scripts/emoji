@@ -1,13 +1,12 @@
 #!/bin/bash
-# Emoji picker - shows emoji-only grid
 
 # Kill existing rofi
-pidof rofi > /dev/null && pkill rofi
+pidof rofi >/dev/null && pkill rofi
 
 rofimoji \
-  --skin-tone neutral \
-  --hidden-descriptions \
-  --clipboarder wl-copy \
-  --typer wtype \
-  --selector-args="-theme ~/.config/rofi/custom-rofi/config-emoji.rasi"
+	--skin-tone neutral \
+	--hidden-descriptions \
+	--clipboarder wl-copy \
+	--typer wtype \
+	--selector-args="-theme ~/.config/rofi/custom-rofi/config-emoji.rasi"
 # --action clipboard \ show in clipboard history

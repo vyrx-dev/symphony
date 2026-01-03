@@ -3,7 +3,7 @@
 # Enter = copy | Ctrl+Del = delete | Alt+Del = wipe all
 
 if pidof rofi >/dev/null; then
-  pkill rofi
+	pkill rofi
 fi
 
 tmp_dir="/tmp/cliphist"
@@ -12,46 +12,46 @@ mkdir -p "$tmp_dir"
 
 # Generate entries with image icons
 generate_list() {
-  cliphist list | while IFS= read -r line; do
-    id="${line%%$'\t'*}"
-    
-    if [[ "$line" =~ binary.*(jpg|jpeg|png|bmp) ]]; then
-      ext="${BASH_REMATCH[1]}"
-      img_path="$tmp_dir/$id.$ext"
-      echo -e "$id\t" | cliphist decode > "$img_path" 2>/dev/null
-      echo -en "${line}\0icon\x1f${img_path}\n"
-    elif [[ "$line" =~ \.png$ ]] || [[ "$line" =~ \.jpg$ ]] || [[ "$line" =~ \.jpeg$ ]]; then
-      # File path to image - use the path as icon
-      img_path="${line#*$'\t'}"
-      img_path="${img_path## }"
-      if [[ -f "$img_path" ]]; then
-        echo -en "${line}\0icon\x1f${img_path}\n"
-      else
-        echo "$line"
-      fi
-    else
-      echo "$line"
-    fi
-  done
+	cliphist list | while IFS= read -r line; do
+		id="${line%%$'\t'*}"
+
+		if [[ "$line" =~ binary.*(jpg|jpeg|png|bmp) ]]; then
+			ext="${BASH_REMATCH[1]}"
+			img_path="$tmp_dir/$id.$ext"
+			echo -e "$id\t" | cliphist decode >"$img_path" 2>/dev/null
+			echo -en "${line}\0icon\x1f${img_path}\n"
+		elif [[ "$line" =~ \.png$ ]] || [[ "$line" =~ \.jpg$ ]] || [[ "$line" =~ \.jpeg$ ]]; then
+			# File path to image - use the path as icon
+			img_path="${line#*$'\t'}"
+			img_path="${img_path## }"
+			if [[ -f "$img_path" ]]; then
+				echo -en "${line}\0icon\x1f${img_path}\n"
+			else
+				echo "$line"
+			fi
+		else
+			echo "$line"
+		fi
+	done
 }
 
 while true; do
-  result=$(
-    generate_list | rofi -dmenu -p "📋" -i \
-      -show-icons \
-      -kb-custom-1 "Control-Delete" \
-      -kb-custom-2 "Alt-Delete" \
-      -config ~/.config/rofi/custom-rofi/config-clipboard.rasi
-  )
+	result=$(
+		generate_list | rofi -dmenu -p "📋" -i \
+			-show-icons \
+			-kb-custom-1 "Control-Delete" \
+			-kb-custom-2 "Alt-Delete" \
+			-config ~/.config/rofi/custom-rofi/config-clipboard.rasi
+	)
 
-  case "$?" in
-    1) exit ;;
-    0)
-      [[ -z "$result" ]] && continue
-      cliphist decode <<<"$result" | wl-copy
-      exit
-      ;;
-    10) cliphist delete <<<"$result" ;;
-    11) cliphist wipe ;;
-  esac
+	case "$?" in
+	1) exit ;;
+	0)
+		[[ -z "$result" ]] && continue
+		cliphist decode <<<"$result" | wl-copy
+		exit
+		;;
+	10) cliphist delete <<<"$result" ;;
+	11) cliphist wipe ;;
+	esac
 done

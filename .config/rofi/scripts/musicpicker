@@ -4,7 +4,7 @@
 file="$(mpc listall | rofi -dmenu -i -p "" -l 10 -config ~/.config/rofi/custom-rofi/config-rofi-Beats.rasi)" || exit 0
 
 if ! mpc status | grep -q playing; then
-  notify-send "Playing $file" && mpc clear && mpc add "$file" && mpc play >/dev/null
+	notify-send "Playing $file" && mpc clear && mpc add "$file" && mpc play >/dev/null
 else
-  notify-send "Playing $file" && mpc insert "$file" && mpc next >/dev/null
+	notify-send "Playing $file" && mpc insert "$file" && mpc next >/dev/null
 fi

@@ -1,69 +1,55 @@
 #!/bin/bash
+# wallpaper picker with dynamic color generation
 
-# Check if custom theme is active
-CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
-if [[ "$CURRENT_THEME" != "dynamic" ]]; then
-	notify-send "Theme Locked" "Using custom theme: $CURRENT_THEME\\nSwitch to Dynamic to use this"
+current_theme=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
+if [[ "$current_theme" != "dynamic" ]]; then
+	notify-send "Theme Locked" "Using custom theme: $current_theme\nSwitch to Dynamic to use this"
 	exit 0
 fi
 
-# Wallpaper picker with dynamic color generation
-WALLPAPER_DIR="$HOME/Wallpapers/"
-SWWW_PARAMS="--transition-fps 120 --transition-type=grow --transition-duration=1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right "
+wallpaper_dir="$HOME/Wallpapers"
+swww_params="--transition-fps 120 --transition-type grow --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right"
 
-# Get focused monitor (fallback to HDMI-A-1)
-focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
-focused_monitor="${focused_monitor:-HDMI-A-1}"
+mapfile -d '' wallpapers < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
-# Get wallpaper files
-mapfile -d '' wallpapers < <(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
-
-# Check if wallpapers exist
 if [[ ${#wallpapers[@]} -eq 0 ]]; then
-	notify-send "error" "no wallpapers found in $wallpaper_dir"
+	notify-send "Error" "No wallpapers found in $wallpaper_dir"
 	exit 1
 fi
 
-# Build rofi menu with thumbnail icons
+# build rofi menu with thumbnails
 menu() {
-	for wallpaper in "${wallpapers[@]}"; do
-		name=$(basename "$wallpaper")
-		printf "%s\x00icon\x1f%s\n" "$name" "$wallpaper"
+	for wp in "${wallpapers[@]}"; do
+		name=$(basename "$wp")
+		printf "%s\x00icon\x1f%s\n" "$name" "$wp"
 	done | sort
 }
 
-# Start swww daemon if needed
 swww query &>/dev/null || swww-daemon --format xrgb
 
-# Show menu and get selection
 choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
-
-# Exit if nothing selected
 [[ -z "$choice" ]] && exit 0
 
-# Find selected wallpaper and apply theme
-for wallpaper in "${wallpapers[@]}"; do
-	if [[ "$(basename "$wallpaper")" == "$choice" ]]; then
-		# Apply wallpaper with swww
-		swww img "$wallpaper" $SWWW_PARAMS #-o  "$focused_monitor"
+# find and apply selected wallpaper
+for wp in "${wallpapers[@]}"; do
+	if [[ "$(basename "$wp")" == "$choice" ]]; then
+		swww img "$wp" $swww_params
+		matugen image "$wp" -m dark
 
-		# Apply matugen color scheme
-		matugen image "$wallpaper" -m dark
+		# update wallpaper symlink for hyprlock
+		mkdir -p "$HOME/.config/symphony/current"
+		ln -sf "$wp" "$HOME/.config/symphony/current/wallpaper"
 
-		# Update Symphony with new colors and reload apps
 		"$HOME/dotfiles/install/themes/symphony" reload
-
-		# Reload apps not handled by symphony
 		restart-app swayosd-server
 
+		# nautilus needs full restart to pick up new gtk theme
 		pgrep -x nautilus >/dev/null && (
 			pkill -x nautilus
 			nautilus &>/dev/null &
 		)
 
-		# Send notification
-		notify-send -i "$wallpaper" "Theme Applied" "$(basename "$wallpaper")"
-
+		notify-send -i "$wp" "Theme Applied" "$(basename "$wp")"
 		break
 	fi
 done

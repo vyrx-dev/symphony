@@ -10,28 +10,28 @@ audio=""
 name=""
 
 for arg in "$@"; do
-    if [[ $arg == name=* ]]; then
-        name="${arg#name=}"
-        name="${name#\"}"
-        name="${name%\"}"
-    elif [[ -z "$video" ]]; then
-        video="$arg"
-    elif [[ -z "$audio" ]]; then
-        audio="$arg"
-    fi
+	if [[ $arg == name=* ]]; then
+		name="${arg#name=}"
+		name="${name#\"}"
+		name="${name%\"}"
+	elif [[ -z "$video" ]]; then
+		video="$arg"
+	elif [[ -z "$audio" ]]; then
+		audio="$arg"
+	fi
 done
 
 # If no arguments, check for hardcoded values
 if [ -z "$video" ] || [ -z "$audio" ] || [ -z "$name" ]; then
-    # Set your paths here (edit these if running without arguments)
-    video=""
-    audio=""
-    name=""
-    
-    if [ -z "$video" ] || [ -z "$audio" ] || [ -z "$name" ]; then
-        echo "Error: Missing arguments or hardcoded values"
-        exit 1
-    fi
+	# Set your paths here (edit these if running without arguments)
+	video=""
+	audio=""
+	name=""
+
+	if [ -z "$video" ] || [ -z "$audio" ] || [ -z "$name" ]; then
+		echo "Error: Missing arguments or hardcoded values"
+		exit 1
+	fi
 fi
 
 ffmpeg -i "$video" -i "$audio" -c:v copy -map 0:v:0 -map 1:a:0 -shortest -c:a aac -b:a 320k "$name"

@@ -1,32 +1,26 @@
 #!/bin/bash
 
-# Power menu with graceful shutdown
-# Closes all windows before shutdown/reboot to allow apps to save state
-
 scrDir="$HOME/.config/hypr/scripts"
 
-# Power menu options
 options="Shutdown\nReboot\nSuspend\nLogout"
 
-# Show menu and get selection
 choice=$(echo -e "$options" | rofi -dmenu -p "" -config "$HOME/.config/rofi/custom-rofi/config-powermenu.rasi")
 
-# Execute based on selection
 case "$choice" in
 "Shutdown")
-  "$scrDir/graceful-shutdown"
-  ;;
+	"$scrDir/graceful-shutdown"
+	;;
 "Reboot")
-  "$scrDir/graceful-reboot"
-  ;;
+	"$scrDir/graceful-reboot"
+	;;
 "Suspend")
-  systemctl suspend
-  ;;
+	systemctl suspend
+	;;
 "Logout")
-  if pgrep -x uwsm > /dev/null; then
-    uwsm stop
-  else
-    hyprctl dispatch exit
-  fi
-  ;;
+	if pgrep -x uwsm >/dev/null; then
+		uwsm stop
+	else
+		hyprctl dispatch exit
+	fi
+	;;
 esac
