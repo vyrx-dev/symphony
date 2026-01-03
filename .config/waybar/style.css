@@ -95,10 +95,9 @@ window#waybar {
 }
 
 #custom-logo {
-  padding: 0 6px;
+  padding: 0 10px 0 6px;
+  margin-right: 4px;
   font-size: 15px;
-  background: @waybar_accent;
-  color: @waybar_accent_fg;
 }
 
 #custom-screenrecording-indicator.active {

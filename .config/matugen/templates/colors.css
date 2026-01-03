@@ -6,9 +6,12 @@
  * ════════════════════════════════════════════════════════
  */
 
-    @define-color waybar_accent rgba({{colors.primary.default.red}}, {{colors.primary.default.green}}, {{colors.primary.default.blue}}, 0.10);
-    @define-color waybar_accent_fg @on_background;
+    @define-color waybar_accent rgba({{colors.secondary.default.red}}, {{colors.secondary.default.green}}, {{colors.secondary.default.blue}}, 0.18);
+    @define-color waybar_accent_fg @secondary;
 
 <* for name, value in colors *>
     @define-color {{name}} {{value.default.hex}};
 <* endfor *>
+
+    /* Override on_background with secondary for softer waybar text */
+    @define-color on_background {{colors.secondary.default.hex}};

@@ -5,6 +5,7 @@
   "spacing": 0,
   "height": 28,
   "modules-left": [
+    "custom/logo",
     "hyprland/workspaces"
   ],
   "modules-center": [
@@ -181,10 +182,10 @@
     "spacing": 4
   },
   "mpris": {
-    "format": "{player_icon} {artist}{title}",
-    "format-paused": "{status_icon} {artist} - {title}</i>",
+    "format": "{player_icon} {artist} - {title}",
+    "format-paused": "{status_icon} {artist} - {title}",
     "player-icons": {
-      // "default": "🎵",
+      // "default": "🎵"
       // "mpv": ""
     },
     "status-icons": {

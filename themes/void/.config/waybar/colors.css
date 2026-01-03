@@ -5,8 +5,8 @@
  * ════════════════════════════════════════════════════════
  */
 
-@define-color waybar_accent rgba(187, 154, 247, 0.25);
+@define-color waybar_accent rgba(192, 168, 224, 0.18);
 @define-color waybar_accent_fg @on_background;
-@define-color on_background #f0dfd8;
+@define-color on_background #C0A8E0;
 @define-color surface_container #271e1a;
 @define-color error #ffb4ab;
