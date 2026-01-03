@@ -210,6 +210,7 @@ Usage: symphony <command> [options]
 
 Commands:
   switch [theme]     Switch theme (menu if no name given)
+  browse             Browse & import Omarchy themes with preview
   import <url>       Import Omarchy theme from GitHub
   tui                Interactive theme browser & manager
   list               Show all themes
@@ -268,6 +269,7 @@ EOF
 
 case "${1:-help}" in
 	switch)          shift; cmd_switch "$@" ;;
+	browse)          exec "$SCRIPT_DIR/symphony-tui" --browse-inner ;;
 	import)          shift; cmd_import "$@" ;;
 	tui)             exec "$SCRIPT_DIR/symphony-tui" ;;
 	reload)          cmd_reload ;;
