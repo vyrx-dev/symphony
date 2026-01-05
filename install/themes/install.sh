@@ -20,16 +20,28 @@ source "$DOTFILES/install/utils.sh"
 # │ Fullscreen Re-launch                                                  │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
-# Re-launch in fullscreen terminal with inline config (no external config dependency)
+# Re-launch in fullscreen alacritty
 if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && "$SYMPHONY_FULLSCREEN" != "1" ]]; then
     export SYMPHONY_FULLSCREEN=1
     if command -v alacritty &>/dev/null; then
-        # Use hyprctl dispatch exec so Hyprland applies window rules before window appears
-        hyprctl dispatch exec -- alacritty --class Screensaver \
-            -o 'font.size=10' \
-            -o 'window.opacity=1.0' \
-            -o 'colors.primary.background="0x000000"' \
-            -e "$SCRIPT_DIR/install.sh" "$@"
+        if [[ -d "$HOME/.config/symphony" ]]; then
+            # Existing install: window rules are active, use hyprctl dispatch
+            hyprctl dispatch exec -- alacritty --class Screensaver \
+                -o 'font.size=10' \
+                -o 'window.opacity=1.0' \
+                -o 'colors.primary.background="0x000000"' \
+                -e "$SCRIPT_DIR/install.sh" "$@"
+        else
+            # Fresh install: no window rules yet, force fullscreen manually
+            alacritty --class Screensaver \
+                -o 'font.size=10' \
+                -o 'window.opacity=1.0' \
+                -o 'colors.primary.background="0x000000"' \
+                -e "$SCRIPT_DIR/install.sh" "$@" &
+            sleep 0.3
+            hyprctl dispatch fullscreen 1 >/dev/null 2>&1 || true
+            wait
+        fi
         exit 0
     fi
 fi
