@@ -36,6 +36,7 @@
 
 ## Backlog
 
+- [ ] Modularize symphony-import config generators into per-app files
 - [ ] SDDM setup
 - [ ] QT theming (kvantum/qt5ct)
 - [ ] Neovim cleanup & hot reload

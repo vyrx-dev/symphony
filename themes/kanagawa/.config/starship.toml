@@ -1,6 +1,6 @@
 add_newline = false
 command_timeout = 60
-format = """$os $directory $git_branch$git_status$line_break$character"""
+format = """$os$hostname $directory $git_branch$git_status$line_break$character"""
 
 # right_format = """# $time# """
 
@@ -18,6 +18,11 @@ color7 = '#1F1F28'          # unused
 color8 = '#7E9CD8'        # os symbol, success character (crystalBlue)
 color9 = '#957FB8'     # git branch (oniViolet)
 error = '#C34043'          # error character (autumnRed)
+
+[hostname]
+ssh_only = true
+style = "fg:color8"
+format = "[ @$hostname]($style)"
 
 [directory]
 style = "fg:color1 bold"

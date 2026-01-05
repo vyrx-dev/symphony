@@ -720,7 +720,7 @@ EOF
 
 add_newline = false
 command_timeout = 60
-format = "\$os \$directory \$git_branch\$git_status\$line_break\$character"
+format = "\$os\$hostname \$directory \$git_branch\$git_status\$line_break\$character"
 palette = "theme"
 
 [palettes.theme]
@@ -729,6 +729,11 @@ cyan = '$cyan'
 dim = '$bblack'
 purple = '$magenta'
 error = '$red'
+
+[hostname]
+ssh_only = true
+style = "fg:accent"
+format = "[ @\$hostname](\$style)"
 
 [directory]
 style = "fg:cyan bold"

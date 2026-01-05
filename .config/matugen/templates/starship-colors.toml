@@ -1,7 +1,7 @@
 add_newline = false
 command_timeout = 60
 format = """\
-$os \
+$os$hostname \
 $directory \
 $git_branch$git_status\
 $line_break\
@@ -25,6 +25,11 @@ color6 = '{{colors.surface_dim.default.hex}}'
 color7 = '{{colors.surface.default.hex}}'
 color8 = '{{colors.primary.default.hex}}'
 color9 = '{{colors.tertiary.default.hex}}'
+
+[hostname]
+ssh_only = true
+style = "fg:color8"
+format = "[ @$hostname]($style)"
 
 [directory]
 style = "fg:{{colors.primary_fixed_dim.default.hex}} bold" # color1
