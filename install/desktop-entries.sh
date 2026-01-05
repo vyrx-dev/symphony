@@ -43,7 +43,7 @@ if command -v gum &>/dev/null; then
     echo
     if gum confirm "Install web apps?"; then
         source "$DOTFILES/install/webapps.sh"
-        install_webapps || true
+        install_webapps
     fi
 fi
 

@@ -93,4 +93,4 @@ install_webapps() {
 }
 
 # Run if executed directly
-[[ "${BASH_SOURCE[0]}" == "${0}" ]] && install_webapps
+[[ "${BASH_SOURCE[0]}" == "${0}" ]] && install_webapps || true
