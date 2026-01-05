@@ -20,7 +20,8 @@ source "$DOTFILES/install/utils.sh"
 # │ Fullscreen Re-launch                                                  │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
-if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && "$SYMPHONY_FULLSCREEN" != "1" ]]; then
+# Skip re-launch during fresh install (no theme = broken transparent terminal)
+if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && "$SYMPHONY_FULLSCREEN" != "1" && "${SYMPHONY_INSTALLING:-}" != "1" ]]; then
     export SYMPHONY_FULLSCREEN=1
     if command -v alacritty &>/dev/null; then
         alacritty --class Screensaver \
