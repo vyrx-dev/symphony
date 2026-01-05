@@ -3,5 +3,5 @@
 if pgrep -x hypridle >/dev/null; then
   echo '{"text": ""}'
 else
-  echo '{"text": "󰌾", "tooltip": "Sleep disabled - Click to enable"}'
+  echo '{"text": "󰅶", "tooltip": "Screen Lock Off"}'
 fi

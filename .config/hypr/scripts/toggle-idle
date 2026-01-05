@@ -2,11 +2,10 @@
 
 if pgrep -x hypridle >/dev/null; then
   pkill -x hypridle
-  notify-send "Auto-lock" "Disabled"
+  notify-send "Screen Lock" "Off - Display will stay on"
 else
   uwsm-app -- hypridle >/dev/null 2>&1 &
-  notify-send "Auto-lock" "Enabled"
+  notify-send "Screen Lock" "On - Display will sleep when inactive"
 fi
 
-# Signal waybar to update indicator (RTMIN+9)
 pkill -RTMIN+9 waybar

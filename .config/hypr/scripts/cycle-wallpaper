@@ -1,36 +1,72 @@
 #!/bin/bash
+# Wallpaper cycling and picker for current theme
+# Usage: cycle-wallpaper [left|prev|right|next]
+#   no args    = open rofi picker
+#   left/prev  = previous wallpaper
+#   right/next = next wallpaper
 
-THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || cat ~/.current-theme 2>/dev/null || echo "dynamic")
+source "$HOME/.config/rofi/scripts/thumbcache"
+
+THEME=$(cat "$HOME/.config/symphony/.current-theme" 2>/dev/null || echo "dynamic")
 WALLDIR="$HOME/dotfiles/themes/$THEME/backgrounds"
+SWWW_PARAMS="--transition-fps 120 --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0"
 
-[ ! -d "$WALLDIR" ] && exit 1
-
-WALLS=($(cd "$WALLDIR" && ls *.{jpg,png,jpeg} 2>/dev/null | sort -V))
-TOTAL=${#WALLS[@]}
-[ $TOTAL -eq 0 ] && exit 1
-
-CURRENT=$(swww query | grep -oP 'image: \K.*')
-
-INDEX=0
-for i in "${!WALLS[@]}"; do
-  [[ "$CURRENT" == *"${WALLS[$i]}" ]] && INDEX=$i && break
-done
-
-if [ "$1" = "prev" ]; then
-  INDEX=$(((INDEX - 1 + TOTAL) % TOTAL))
-else
-  INDEX=$(((INDEX + 1) % TOTAL))
+if [[ "$THEME" == "dynamic" || ! -d "$WALLDIR" ]]; then
+  notify-send "Wallpaper Cycling" "Not available for '$THEME' theme.\nUse SUPER+CTRL+SPACE for dynamic wallpaper picker."
+  exit 0
 fi
 
-WALLPAPER="$WALLDIR/${WALLS[$INDEX]}"
-swww img "$WALLPAPER" \
-  --transition-type right \
-  --transition-pos top-right \
-  --transition-fps 120 \
-  --transition-duration 1 \
-  --transition-bezier 0.25,0.1,0.25,1.0
+mapfile -t WALLS < <(find "$WALLDIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) -printf '%f\n' | sort -V | while read -r f; do echo "$WALLDIR/$f"; done)
+TOTAL=${#WALLS[@]}
 
-# Update wallpaper symlink to track current wallpaper
-ln -sf "$WALLPAPER" "$HOME/dotfiles/themes/$THEME/wallpaper"
+[[ $TOTAL -eq 0 ]] && notify-send "Wallpaper Cycling" "No wallpapers found" && exit 0
 
-notify-send -i "$WALLPAPER" "Wallpaper" "$(($INDEX + 1))/$TOTAL"
+CURRENT=$(swww query | head -1 | grep -oP 'image: \K.*')
+
+find_index() {
+  for i in "${!WALLS[@]}"; do
+    [[ "${WALLS[$i]}" == "$CURRENT" ]] && echo "$i" && return
+  done
+  echo 0
+}
+
+INDEX=$(find_index)
+
+apply_wallpaper() {
+  local idx=$1 trans=$2 pos=$3
+  local wall="${WALLS[$idx]}"
+  swww img "$wall" --transition-type "$trans" --transition-pos "$pos" $SWWW_PARAMS
+  ln -sf "$wall" "$HOME/dotfiles/themes/$THEME/wallpaper"
+  notify-send -i "$wall" "Wallpaper" "$((idx + 1))/$TOTAL"
+}
+
+if [[ -z "$1" ]]; then
+  mon_width=$(hyprctl monitors -j | jq '.[0].width // 1920')
+  cols=$(( (mon_width * 80 / 100) / 200 ))
+  ((cols < 3)) && cols=3
+  ((cols > 6)) && cols=6
+
+  menu() {
+    for i in "${!WALLS[@]}"; do
+      name=$(basename "${WALLS[$i]}")
+      [[ "${WALLS[$i]}" == "$CURRENT" ]] && name="● $name"
+      printf "%s\x00icon\x1f%s\n" "$name" "$(get_thumb "${WALLS[$i]}")"
+    done
+  }
+
+  choice=$(menu | rofi -i -dmenu -p "$THEME" \
+    -theme-str "listview{columns:$cols;} element-icon{size:16em;}" \
+    -config "$HOME/.config/rofi/custom-rofi/config-theme-picker.rasi")
+  [[ -z "$choice" ]] && exit 0
+
+  choice="${choice#● }"
+  for i in "${!WALLS[@]}"; do
+    [[ "$(basename "${WALLS[$i]}")" == "$choice" ]] && apply_wallpaper "$i" "grow" "top-right" && break
+  done
+  exit 0
+fi
+
+case "$1" in
+  prev|left) INDEX=$(( (INDEX - 1 + TOTAL) % TOTAL )); apply_wallpaper "$INDEX" "left" "top-left" ;;
+  *)         INDEX=$(( (INDEX + 1) % TOTAL )); apply_wallpaper "$INDEX" "right" "top-right" ;;
+esac
