@@ -24,26 +24,10 @@ source "$DOTFILES/install/utils.sh"
 if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && "$SYMPHONY_FULLSCREEN" != "1" ]]; then
     export SYMPHONY_FULLSCREEN=1
     if command -v alacritty &>/dev/null; then
-        # Alacritty options: disable imports (may not exist), black bg, no transparency
-        ALACRITTY_OPTS=(
-            -o 'general.import=[]'
-            -o 'font.size=10'
-            -o 'window.opacity=1.0'
-            -o 'colors.primary.background="#000000"'
-            -o 'colors.primary.foreground="#ffffff"'
-        )
-        if [[ -d "$HOME/.config/symphony" ]]; then
-            # Existing install: window rules are active
-            hyprctl dispatch exec -- alacritty --class Screensaver \
-                "${ALACRITTY_OPTS[@]}" -e "$SCRIPT_DIR/install.sh" "$@"
-        else
-            # Fresh install: force fullscreen manually
-            alacritty --class Screensaver "${ALACRITTY_OPTS[@]}" \
-                -e "$SCRIPT_DIR/install.sh" "$@" &
-            sleep 0.3
-            hyprctl dispatch fullscreen 1 >/dev/null 2>&1 || true
-            wait
-        fi
+        hyprctl dispatch exec -- alacritty --class Screensaver \
+            --config-file "$DOTFILES/.config/alacritty/screensaver.toml" \
+            -o 'font.size=10' \
+            -e "$SCRIPT_DIR/install.sh" "$@"
         exit 0
     fi
 fi
