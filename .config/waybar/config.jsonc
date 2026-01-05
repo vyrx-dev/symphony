@@ -1,22 +1,21 @@
 {
   "reload_style_on_change": true,
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "spacing": 0,
   "height": 28,
   "modules-left": [
-      "hyprland/workspaces",
-      "niri/workspaces"
+      "memory",
+      "disk",
   ],
   "modules-center": [
+      "hyprland/workspaces",
       "mpris"
   ],
   "modules-right": [
       "custom/screenrecording-indicator",
       "custom/idle-indicator",
       // "cpu",
-      "memory",
-      "disk",
       "network",
       "bluetooth",
       "backlight",
@@ -40,7 +39,7 @@
   "custom/logo": {
     "format": "󰊠",
     "tooltip": false,
-    "on-click": "~/dotfiles/theme-scripts/core/switch-theme.sh",
+    "on-click": "~/Documents/github/dotfiles/theme-scripts/core/switch-theme.sh",
     "on-click-right": "~/.config/hypr/scripts/cycle-wallpaper next"
   },
   "hyprland/workspaces": {

@@ -195,10 +195,10 @@ sudo pacman -S fastfetch jq fd ripgrep fzf swayosd
 
 ```bash
 # Clone the repository
-git clone https://github.com/vyrx-dev/dotfiles.git ~/dotfiles
+git clone https://github.com/vyrx-dev/dotfiles.git ~/Documents/github/dotfiles
 
 # Navigate to the directory
-cd ~/dotfiles
+cd ~/Documents/github/dotfiles
 
 # Create symlinks using GNU Stow
 stow .
@@ -213,7 +213,7 @@ After running `stow .`, all configuration files will be symlinked to their appro
 If you want to uninstall:
 
 ```bash
-cd ~/dotfiles
+cd ~/Documents/github/dotfiles
 stow -D .
 ```
 

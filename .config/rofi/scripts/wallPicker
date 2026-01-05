@@ -6,7 +6,7 @@ SWWW_PARAMS="--transition-fps 120 --transition-type=center --transition-pos=bott
 
 # Get focused monitor
 focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
-: "${focused_monitor:=HDMI-A-1}"
+: "${focused_monitor:=DP-2}"
 
 # Get wallpapers
 mapfile -d '' wallpapers < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)

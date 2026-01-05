@@ -55,7 +55,20 @@ abbr -a fdh 'fd --hidden'
 abbr -a f "find . | grep "
 
 #Life Easy
-alias cd='z'
+# Override cd to use zoxide if available (zoxide must be initialized first)
+function cd --description "Change directory, using zoxide if available"
+    if test (count $argv) -eq 0
+        builtin cd $HOME
+    else if test (count $argv) -eq 1 -a "$argv[1]" = "-"
+        builtin cd -
+    else if functions -q __zoxide_z
+        # zoxide is initialized, use it
+        z $argv
+    else
+        # zoxide not available or not initialized, use regular cd
+        builtin cd $argv
+    end
+end
 abbr -a vim nvim
 abbr -a nd 'npm run dev'
 abbr -a n nvim
@@ -79,7 +92,7 @@ abbr -a regfont "setfont default8x16"
 
 # Some useful aliases
 abbr -a update 'sudo pacman -Syu'
-abbr -a pwreset 'faillock --reset --user vyrx'
+abbr -a pwreset "faillock --reset --user $USER"
 abbr -a pg 'ping -c 10 google.com'
 
 # Automatically do an ls after each cd, z, or zoxide
@@ -94,7 +107,7 @@ abbr -a folders 'du -h --max-depth=1'
 
 # Git aliases
 abbr -a gits 'git status'
-abbr -a ghs 'streaker vyrx-dev'
+abbr -a ghs "streaker Arenz2001"
 abbr -a ghp 'gh repo create --public $(basename "$PWD") --source=. --description="desc" --push'
 
 # Grub Update

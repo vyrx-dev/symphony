@@ -1,0 +1,36 @@
+#!/bin/bash
+# Simple script to clone wallpapers repository
+
+WALLPAPER_DIR="$HOME/Wallpapers"
+REPO_URL="https://github.com/vyrx-dev/wallpapers.git"
+
+# Create directory if it doesn't exist
+mkdir -p "$WALLPAPER_DIR"
+
+# Check if directory is already a git repo or has content
+if [ -d "$WALLPAPER_DIR/.git" ]; then
+  echo "📁 Wallpapers directory is already a git repository"
+  echo "   To update, run: cd $WALLPAPER_DIR && git pull"
+  exit 0
+fi
+
+if [ "$(ls -A $WALLPAPER_DIR 2>/dev/null)" ]; then
+  echo "⚠️  Wallpapers directory is not empty"
+  echo "   Please backup or empty $WALLPAPER_DIR first"
+  exit 1
+fi
+
+# Clone the repository
+echo "📥 Cloning wallpapers repository..."
+git clone "$REPO_URL" "$WALLPAPER_DIR"
+
+if [ $? -eq 0 ]; then
+  echo "✅ Wallpapers downloaded successfully!"
+  echo "   Location: $WALLPAPER_DIR"
+  echo ""
+  echo "💡 To update later: cd $WALLPAPER_DIR && git pull"
+else
+  echo "❌ Failed to clone wallpapers repository"
+  exit 1
+fi
+

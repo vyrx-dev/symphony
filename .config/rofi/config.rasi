@@ -11,15 +11,17 @@ configuration {
     font: "CaskaydiaCove Nerd Font Mono 11";
 }
 
+@import "~/.config/rofi/colors.rasi"
+
 * {
     background: rgba(0, 0, 0, 0);
     background-alt: rgba(0, 0, 0, 0);
-    foreground: rgba(255, 255, 255, 0.97);
-    selected: rgba(255, 255, 255, 0.10);
-    active: rgba(255, 255, 255, 0.10);
-    urgent: rgba(255, 85, 85, 0.67);
+    foreground: @on-surface;
+    selected: @primary;
+    active: @secondary;
+    urgent: @error;
     
-    border-colour: rgba(255, 255, 255, 0.10);
+    border-colour: @outline;
     separatorcolor: transparent;
     background-color: transparent;
     text-color: @foreground;

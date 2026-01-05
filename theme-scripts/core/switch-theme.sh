@@ -5,7 +5,7 @@
 # Usage: ./switch-theme.sh
 # https://github.com/vyrx-dev/dotfiles
 
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 CURRENT_THEME_FILE="$HOME/.config/symphony/.current-theme"
 ROFI_CONFIG="$HOME/.config/rofi/config.rasi"
 
@@ -130,16 +130,16 @@ if [ "$SELECTED" = "matugen" ] || [ -d "$THEMES_DIR/$SELECTED" ]; then
 
   # Update cava colors directly in config
   if [ -f "$SYMPHONY_CURRENT/.config/cava/colors.ini" ] || [ -f "$SYMPHONY_CURRENT/.config/cava" ]; then
-    "$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" "$SELECTED" >/dev/null 2>&1
+    "$HOME/Documents/github/dotfiles/theme-scripts/core/update-cava-colors.sh" "$SELECTED" >/dev/null 2>&1
   fi
 
   # Update rmpc theme
   if [ -f "$SYMPHONY_CURRENT/.config/rmpc/themes/theme.ron" ] || [ -f "$SYMPHONY_CURRENT/.config/rmpc/themes/current.ron" ]; then
-    "$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" "$SELECTED" >/dev/null 2>&1
+    "$HOME/Documents/github/dotfiles/theme-scripts/core/update-rmpc-theme.sh" "$SELECTED" >/dev/null 2>&1
   fi
 
   # Update Obsidian theme for all vaults
-  bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh" >/dev/null 2>&1
+  bash "$HOME/Documents/github/dotfiles/theme-scripts/core/update-obsidian-theme.sh" >/dev/null 2>&1
 
   # Waybar colors
   if [ -f "$SYMPHONY_CURRENT/.config/waybar/colors.css" ]; then
@@ -216,7 +216,7 @@ if [ "$SELECTED" = "matugen" ] || [ -d "$THEMES_DIR/$SELECTED" ]; then
   killall -SIGUSR2 ghostty
 
   # Restart OSD service
-  "$HOME/dotfiles/scripts/restart-app" swayosd-server
+  "$HOME/Documents/github/dotfiles/scripts/restart-app" swayosd-server
 
   # Force Starship reload by touching the config file (triggers inotify)
   touch "$HOME/.config/starship.toml"

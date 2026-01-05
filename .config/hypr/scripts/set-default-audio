@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Wait for PipeWire to be ready
+max_attempts=30
+attempt=0
+
+while [ $attempt -lt $max_attempts ]; do
+  if pactl info &>/dev/null; then
+    break
+  fi
+  sleep 0.5
+  attempt=$((attempt + 1))
+done
+
+# Wait a bit more for all sinks to be available
+sleep 1
+
+# Try to set HyperX Cloud Alpha Wireless as default sink
+hyperx_sink="alsa_output.usb-HP__Inc_HyperX_Cloud_Alpha_Wireless_00000001-00.iec958-ac3-surround-51"
+
+if pactl list sinks short | grep -q "$hyperx_sink"; then
+  pactl set-default-sink "$hyperx_sink" 2>/dev/null
+fi
+

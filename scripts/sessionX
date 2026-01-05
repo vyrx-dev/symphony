@@ -3,7 +3,7 @@
 # Directories to search recursively (includes one-level subdirs)
 # Customize these paths according to your needs
 directories=(
-  "$HOME/dotfiles/.config"
+  "$HOME/Documents/github/dotfiles/.config"
   "$HOME/Downloads"
   "$HOME/Documents/"
   "$HOME/Projects/"

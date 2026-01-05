@@ -1,5 +1,5 @@
 #!/bin/bash
-# launch_webapp="$HOME/dotfiles/scripts/launch-webapp"
+# launch_webapp="$HOME/Documents/github/dotfiles/scripts/launch-webapp"
 if [ "$#" -lt 3 ]; then
   echo -e "\e[32mLet's create a new web app.\n\e[0m"
   APP_NAME=$(gum input --prompt "Name> " --placeholder "My favorite web app")

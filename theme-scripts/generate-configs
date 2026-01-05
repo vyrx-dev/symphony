@@ -7,7 +7,7 @@
 
 set -e
 
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 FORCE=false
 THEME_NAME=""
 ALL_THEMES=false

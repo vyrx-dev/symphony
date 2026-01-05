@@ -1,3 +1,3 @@
 function sessionizer --description "Launch sessionX script"
-    $HOME/dotfiles/scripts/sessionX
+    $HOME/Documents/github/dotfiles/scripts/sessionX
 end

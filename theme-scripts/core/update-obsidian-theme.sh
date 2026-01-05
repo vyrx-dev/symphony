@@ -7,7 +7,7 @@
 # https://github.com/vyrx-dev/dotfiles
 
 VAULTS_FILE="$HOME/.local/state/symphony/obsidian-vaults"
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 CURRENT_THEME_FILE="$HOME/.config/symphony/.current-theme"
 
 # Get current theme name

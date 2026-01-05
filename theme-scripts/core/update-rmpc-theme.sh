@@ -6,7 +6,7 @@
 # https://github.com/vyrx-dev/dotfiles
 
 THEME=$1
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 RMPC_CONFIG_DIR="$HOME/.config/rmpc"
 RMPC_THEMES_DIR="$RMPC_CONFIG_DIR/themes"
 

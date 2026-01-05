@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_DIR="$HOME/dotfiles/theme-scripts"
+SCRIPT_DIR="$HOME/Documents/github/dotfiles/theme-scripts"
 
 show_ascii_art() {
   cat <<'ASCII'
@@ -58,7 +58,7 @@ KEYBOARD SHORTCUTS (Hyprland)
   SUPER+ALT+SPACE           Wallpaper picker
 
 FILES STRUCTURE
-  ~/dotfiles/themes/zen/.config/
+  ~/Documents/github/dotfiles/themes/zen/.config/
     ├── kitty/colors.conf        [Main color source]
     ├── rofi/colors.rasi         [Generated from kitty]
     ├── starship.toml            [Generated from kitty]
@@ -84,7 +84,7 @@ TROUBLESHOOTING
   Config missing:      symphony-theme generate --theme <name>
 
 DOCUMENTATION
-  README:  ~/dotfiles/theme-scripts/README.md
+  README:  ~/Documents/github/dotfiles/theme-scripts/README.md
   Source:  https://github.com/vyrx-dev/dotfiles
   License: MIT
 
@@ -116,14 +116,14 @@ switch)
   ;;
 list)
   echo "Installed themes:"
-  find "$HOME/dotfiles/themes" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort
+  find "$HOME/Documents/github/dotfiles/themes" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort
   ;;
 remove)
   if [[ -z "$2" ]]; then
     echo "Usage: symphony-theme remove <theme-name>"
     exit 1
   fi
-  THEME_DIR="$HOME/dotfiles/themes/$2"
+  THEME_DIR="$HOME/Documents/github/dotfiles/themes/$2"
   if [[ ! -d "$THEME_DIR" ]]; then
     echo "Theme not found: $2"
     exit 1

@@ -46,7 +46,7 @@ swww img "$CURRENT_WALLPAPER" \
 # Update wallpaper symlink to track current wallpaper
 DISPLAYED_WALLPAPER=$(swww query | grep "currently displaying" | head -1 | sed 's/.*image: //')
 if [ -n "$DISPLAYED_WALLPAPER" ]; then
-	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/dotfiles/themes/matugen/wallpaper"
+	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/Documents/github/dotfiles/themes/matugen/wallpaper"
 fi
 
 # SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
@@ -54,12 +54,12 @@ matugen image "$CURRENT_WALLPAPER" -m dark
 wal -i "$CURRENT_WALLPAPER"
 
 # Update symphony apps that need special handling with matugen
-"$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
-"$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
-"$HOME/dotfiles/theme-scripts/core/fix-symlinks.sh"
+"$HOME/Documents/github/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
+"$HOME/Documents/github/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
+"$HOME/Documents/github/dotfiles/theme-scripts/core/fix-symlinks.sh"
 
 # Update Obsidian theme
-bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
+bash "$HOME/Documents/github/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
 
 pywalfox update
 hyprctl reload

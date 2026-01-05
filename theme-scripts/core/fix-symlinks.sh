@@ -6,7 +6,7 @@
 # https://github.com/vyrx-dev
 
 CURRENT_THEME=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "zen")
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 
 echo "Fixing symlinks for theme: $CURRENT_THEME"
 
@@ -67,13 +67,13 @@ fi
 
 # Cava colors - directly update config file
 if [ -f "$THEMES_DIR/$CURRENT_THEME/.config/cava" ]; then
-  "$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" "$CURRENT_THEME" >/dev/null 2>&1
+  "$HOME/Documents/github/dotfiles/theme-scripts/core/update-cava-colors.sh" "$CURRENT_THEME" >/dev/null 2>&1
   echo "✅ Updated cava colors"
 fi
 
 # RMPC theme - directly update theme file
 if [ -f "$THEMES_DIR/$CURRENT_THEME/.config/rmpc/themes/theme.ron" ] || [ "$CURRENT_THEME" = "matugen" ]; then
-  "$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" "$CURRENT_THEME" >/dev/null 2>&1
+  "$HOME/Documents/github/dotfiles/theme-scripts/core/update-rmpc-theme.sh" "$CURRENT_THEME" >/dev/null 2>&1
   echo "✅ Updated rmpc theme"
 fi
 

@@ -13,7 +13,7 @@ Unified theme switcher for Hyprland. Change colors, wallpapers, and app themes w
 
 ```bash
 # Install
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./install.sh
 
 # Switch themes
@@ -34,7 +34,7 @@ symphony-theme fix
 Symphony uses **symlinks** to connect theme files to your configs.
 
 ```
-~/dotfiles/themes/zen/           → Theme storage
+~/Documents/github/dotfiles/themes/zen/           → Theme storage
     ├── .config/kitty/colors.conf
     ├── .config/rofi/colors.rasi
     └── backgrounds/wallpaper.jpg
@@ -57,7 +57,7 @@ When switching themes:
 ### One-line install
 
 ```bash
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./install.sh
 ```
 
@@ -111,16 +111,16 @@ symphony-theme switch
 
 ```bash
 # Copy template
-cp -r ~/dotfiles/themes/zen ~/dotfiles/themes/my-theme
+cp -r ~/Documents/github/dotfiles/themes/zen ~/Documents/github/dotfiles/themes/my-theme
 
 # Edit colors (most important file)
-nvim ~/dotfiles/themes/my-theme/.config/kitty/colors.conf
+nvim ~/Documents/github/dotfiles/themes/my-theme/.config/kitty/colors.conf
 
 # Add wallpaper
-cp wallpaper.jpg ~/dotfiles/themes/my-theme/backgrounds/
+cp wallpaper.jpg ~/Documents/github/dotfiles/themes/my-theme/backgrounds/
 
 # Generate other configs
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./generate-configs --theme my-theme
 
 # Test it
@@ -131,11 +131,11 @@ symphony-theme switch
 
 ```bash
 # Create structure
-mkdir -p ~/dotfiles/themes/my-theme/.config/kitty
-mkdir ~/dotfiles/themes/my-theme/backgrounds
+mkdir -p ~/Documents/github/dotfiles/themes/my-theme/.config/kitty
+mkdir ~/Documents/github/dotfiles/themes/my-theme/backgrounds
 
 # Create kitty colors (16-color palette)
-nvim ~/dotfiles/themes/my-theme/.config/kitty/colors.conf
+nvim ~/Documents/github/dotfiles/themes/my-theme/.config/kitty/colors.conf
 ```
 
 **Kitty colors format:**
@@ -157,10 +157,10 @@ color9-15        # bright versions of 1-7
 
 ```bash
 # Add wallpaper
-cp wallpaper.jpg ~/dotfiles/themes/my-theme/backgrounds/
+cp wallpaper.jpg ~/Documents/github/dotfiles/themes/my-theme/backgrounds/
 
 # Generate all other configs
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./generate-configs --theme my-theme
 
 # Test
@@ -183,7 +183,7 @@ symphony-theme switch
 ### Interactive Mode
 
 ```bash
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./generate-configs
 ```
 
@@ -225,7 +225,7 @@ Shows missing configs and lets you generate them.
 ### Uninstall Script
 
 ```bash
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./uninstall.sh
 ```
 
@@ -241,7 +241,7 @@ cd ~/dotfiles/theme-scripts
 symphony-theme switch
 
 # Delete theme
-rm -rf ~/dotfiles/themes/old-theme
+rm -rf ~/Documents/github/dotfiles/themes/old-theme
 ```
 
 </details>
@@ -294,7 +294,7 @@ symphony-theme switch  # Select "matugen"
 ### Scripts
 
 ```bash
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 
 # Generate configs
 ./generate-configs                    # Interactive
@@ -326,7 +326,7 @@ symphony-theme fix
 cat ~/.config/symphony/.current-theme
 
 # Manual switch
-cd ~/dotfiles/themes
+cd ~/Documents/github/dotfiles/themes
 stow -D old-theme
 stow new-theme
 ```
@@ -340,7 +340,7 @@ stow new-theme
 ### Config missing
 
 ```bash
-cd ~/dotfiles/theme-scripts
+cd ~/Documents/github/dotfiles/theme-scripts
 ./generate-configs --theme my-theme
 ```
 

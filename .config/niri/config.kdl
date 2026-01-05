@@ -111,7 +111,7 @@ input {
 output "eDP-1" {
     position x=0 y=0
 }
-output "HDMI-A-1" {
+output "DP-2" {
   scale 1
 position x=1920 y=0
 }
@@ -278,7 +278,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"  // Commented out - waybar is launched from Hyprland autostart.conf
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -387,7 +387,7 @@ binds {
     Ctrl+Alt+Space allow-when-locked=true hotkey-overlay-title=null { spawn-sh "~/.config/rofi/scripts/wallPicker"; }
     Mod+Space allow-when-locked=true hotkey-overlay-title=null { spawn-sh "rofi -show drun"; }
     Mod+Alt+right allow-when-locked=true hotkey-overlay-title=null { spawn-sh "~/.config/hypr/scripts/cycle-wallpaper"; }
-    Mod+Ctrl+Shift+space allow-when-locked=true hotkey-overlay-title=null { spawn-sh "~/dotfiles/theme-scripts/core/switch-theme.sh"; }
+    Mod+Ctrl+Shift+space allow-when-locked=true hotkey-overlay-title=null { spawn-sh "~/Documents/github/dotfiles/theme-scripts/core/switch-theme.sh"; }
 
 
     // Example volume keys mappings for PipeWire & WirePlumber.

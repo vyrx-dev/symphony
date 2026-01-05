@@ -11,9 +11,9 @@ fi
 WALLPAPER_DIR="$HOME/Wallpapers/"
 SWWW_PARAMS="--transition-fps 120 --transition-type=grow --transition-duration=1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right "
 
-# Get focused monitor (fallback to HDMI-A-1)
+# Get focused monitor (fallback to DP-2)
 focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
-focused_monitor="${focused_monitor:-HDMI-A-1}"
+focused_monitor="${focused_monitor:-DP-2}"
 
 # Get wallpaper files
 mapfile -d '' wallpapers < <(find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
@@ -52,12 +52,12 @@ for wallpaper in "${wallpapers[@]}"; do
 		wal -i "$wallpaper"                #pywal16
 
 		# Update Symphony integrations after matugen generates new colors
-		"$HOME/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
-		"$HOME/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
-		"$HOME/dotfiles/theme-scripts/core/fix-symlinks.sh"
+		"$HOME/Documents/github/dotfiles/theme-scripts/core/update-cava-colors.sh" matugen
+		"$HOME/Documents/github/dotfiles/theme-scripts/core/update-rmpc-theme.sh" matugen
+		"$HOME/Documents/github/dotfiles/theme-scripts/core/fix-symlinks.sh"
 
 		# Update Obsidian theme
-		bash "$HOME/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
+		bash "$HOME/Documents/github/dotfiles/theme-scripts/core/update-obsidian-theme.sh"
 
 		# Update pywal integrations
 		pywalfox update

@@ -5,7 +5,7 @@
 # Usage: ./generate-vesktop-themes.sh
 # https://github.com/vyrx-dev
 
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Color manipulation functions

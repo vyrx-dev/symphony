@@ -8,7 +8,7 @@
 
 set -e
 
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 SYMPHONY_DIR="$HOME/.config/symphony"
 
 # Check if gum available
@@ -123,7 +123,7 @@ nuke_everything() {
   # Remove theme-scripts
   read -p "Remove theme-scripts directory? (yes/no): " remove_scripts
   if [[ "$remove_scripts" == "yes" ]]; then
-    rm -rf "$HOME/dotfiles/theme-scripts"
+    rm -rf "$HOME/Documents/github/dotfiles/theme-scripts"
     echo "✓ Scripts"
   fi
   

@@ -1,0 +1,9 @@
+{
+  "shutdown": "systemctl poweroff",
+  "reboot": "systemctl reboot",
+  "suspend": "systemctl suspend",
+  "hibernate": "systemctl hibernate",
+  "logout": "hyprctl dispatch exit",
+  "lock": "hyprlock"
+}
+

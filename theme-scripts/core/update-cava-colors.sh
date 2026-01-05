@@ -6,7 +6,7 @@
 # https://github.com/vyrx-dev/dotfiles
 
 THEME=$1
-THEMES_DIR="$HOME/dotfiles/themes"
+THEMES_DIR="$HOME/Documents/github/dotfiles/themes"
 CAVA_CONFIG="$HOME/.config/cava/config"
 TEMP_FILE="$HOME/.config/cava/config.tmp"
 

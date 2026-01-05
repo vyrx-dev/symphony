@@ -5,7 +5,7 @@
 ## Prerequisites
 
 - **MPD**: Must be pre-installed and configured
-- Check configuration at [`~/dotfiles/.config/mpd`](../mpd/)
+- Check configuration at [`~/Documents/github/dotfiles/.config/mpd`](../mpd/)
 
 ## Installation
 
@@ -14,7 +14,7 @@ sudo pacman -S rmpc
 ```
 
 ```bash
-cp -r ~/dotfiles/.config/rmpc ~/.config/
+cp -r ~/Documents/github/dotfiles/.config/rmpc ~/.config/
 ```
 
 ![RMPC](../../images/rmpc.png)
