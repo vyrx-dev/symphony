@@ -1,8 +1,7 @@
 #!/bin/bash
 
-MARKER="$HOME/.local/state/symphony/first-run.mode"
-[[ ! -f "$MARKER" ]] && exit 0
-rm -f "$MARKER"
+MARKER="$HOME/.local/state/symphony/first-run-done"
+[[ -f "$MARKER" ]] && exit 0
 
 # Wait for Hyprland to initialize
 sleep 2
@@ -14,3 +13,7 @@ sleep 2
 notify-send -u critical "App Launcher" "Press Super + Space to launch apps"
 notify-send -u critical "Keybindings" "Press Super + K to view all keybindings"
 notify-send -u critical "Welcome to Symphony" "Run 'symphony help' for available commands."
+
+# Mark as done (prevents re-running on future boots)
+mkdir -p "$(dirname "$MARKER")"
+touch "$MARKER"

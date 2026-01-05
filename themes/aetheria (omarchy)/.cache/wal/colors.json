@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/vyrx/dotfiles/themes/aetheria (omarchy)/wallpaper",
+    "alpha": "100",
+    "special": {
+        "background": "#0e091d",
+        "foreground": "#14B9B5",
+        "cursor": "#FF7F41"
+    },
+    "colors": {
+        "color0": "#000000",
+        "color1": "#c8e967",
+        "color2": "#E20342",
+        "color3": "#7cd699",
+        "color4": "#BE3F50",
+        "color5": "#9147a8",
+        "color6": "#FF7F41",
+        "color7": "#A60234",
+        "color8": "#c53253",
+        "color9": "#CE4F48",
+        "color10": "#f93d3b",
+        "color11": "#FD3E6A",
+        "color12": "#04C5F0",
+        "color13": "#6C032C",
+        "color14": "#ffbe74",
+        "color15": "#11AEB3"
+    }
+}

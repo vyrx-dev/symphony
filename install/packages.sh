@@ -62,7 +62,7 @@ packages=(
 	rofimoji wtype
 
 	# Monitoring
-	btop fastfetch
+	btop fastfetch chafa
 
 	# Fonts
 	ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd noto-fonts-emoji

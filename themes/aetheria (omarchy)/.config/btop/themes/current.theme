@@ -1,0 +1,50 @@
+# Main background
+theme[main_bg]="#0e091d"
+
+# Main text color
+theme[main_fg]="#14b9b5"
+
+# Title color for boxes
+theme[title]="#14B9B5"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#ff7f41"
+
+# Background color of selected items
+theme[selected_bg]="#c8e967"
+
+# Foreground color of selected items
+theme[selected_fg]="#000000"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#c53253"
+
+# Color of text appearing on top of graphs
+theme[graph_text]="#fd3e6a"
+
+# Misc colors for processes box
+theme[proc_misc]="#7cd699"
+
+# Cpu box outline color
+theme[cpu_box]="#e20342"
+
+# Memory/disks box outline color
+theme[mem_box]="#7cd699"
+
+# Net up/down box outline color
+theme[net_box]="#9147a8"
+
+# Processes box outline color
+theme[proc_box]="#c8e967"
+
+# Box divider line and small boxes line color
+theme[div_line]="#a60234"
+
+# Ensures squared corners and braille graphs
+rounded_corners= "False"
+graph_symbol= "braille"
+graph_symbol_cpu = "braille"
+graph_symbol_gpu = "braille"
+graph_symbol_mem = "braille"
+graph_symbol_net = "braille"
+graph_symbol_proc = "braille"

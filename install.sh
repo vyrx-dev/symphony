@@ -51,9 +51,8 @@ source "$DOTFILES/install/services.sh"
 echo
 "$DOTFILES/scripts/choose-shell"
 
-# Create first-run marker for theme application after reboot
-mkdir -p ~/.local/state/symphony
-touch ~/.local/state/symphony/first-run.mode
+# Remove any stale first-run marker (fresh installs should run first-run)
+rm -f ~/.local/state/symphony/first-run-done
 
 # Install themes (skip logo since we already showed banner)
 SYMPHONY_INSTALLING=1 "$DOTFILES/install/themes/install.sh"

@@ -1,0 +1,42 @@
+/* ╭─ ♪ Symphony ─╮
+   │  Generated   │
+   ╰──────────────╯
+   Theme: Omarchy aetheria (omarchy) */
+
+.theme-dark, .theme-light {
+    --background-primary: #0e091d;
+    --background-primary-alt: #221d31;
+    --background-secondary: #221d31;
+    --background-secondary-alt: #221d31;
+    --background-modifier-hover: #221d31;
+    --background-modifier-border: #c53253;
+
+    --text-normal: #14B9B5;
+    --text-muted: #A60234;
+    --text-faint: #c53253;
+    --text-on-accent: #0e091d;
+
+    --interactive-accent: #BE3F50;
+    --interactive-accent-hover: #FF7F41;
+    --text-accent: #BE3F50;
+    --text-accent-hover: #FF7F41;
+
+    --link-color: #BE3F50;
+    --link-color-hover: #FF7F41;
+    --link-external-color: #FF7F41;
+
+    --code-background: #221d31;
+    --code-normal: #14B9B5;
+
+    --text-error: #c8e967;
+    --text-success: #E20342;
+    --text-warning: #7cd699;
+
+    --divider-color: #c53253;
+    --icon-color: #A60234;
+    --icon-color-hover: #14B9B5;
+    --tag-color: #9147a8;
+    --tag-background: #221d31;
+}
+
+::selection { background: #BE3F5040; }

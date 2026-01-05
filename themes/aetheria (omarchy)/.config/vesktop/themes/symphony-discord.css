@@ -1,0 +1,60 @@
+/* ╭─ ♪ Symphony ─╮
+   │  Generated   │
+   ╰──────────────╯
+
+   Theme: Omarchy aetheria (omarchy)
+   Based on midnight by refact0r
+   https://github.com/refact0r/midnight-discord */
+
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+:root {
+    --font: 'figtree';
+    --corner-text: 'Symphony';
+
+    /* status indicators */
+    --online-indicator: #E20342;
+    --dnd-indicator: #c8e967;
+    --idle-indicator: #7cd699;
+    --streaming-indicator: #9147a8;
+
+    /* accent colors */
+    --accent-1: #BE3F50;
+    --accent-2: #BE3F50;
+    --accent-3: #BE3F50;
+    --accent-4: #8c0d1e;
+    --accent-5: #a52637;
+    --mention: #8c0d1e;
+    --mention-hover: #a52637;
+
+    /* text colors */
+    --text-0: #0e091d;
+    --text-1: #14B9B5;
+    --text-2: #14B9B5;
+    --text-3: #A60234;
+    --text-4: #c53253;
+    --text-5: #c53253;
+
+    /* background colors */
+    --bg-1: #000000;
+    --bg-2: #221d31;
+    --bg-3: #221d31;
+    --bg-4: #0e091d;
+    --hover: #221d31;
+    --active: #BE3F50;
+    --message-hover: #221d31;
+
+    /* corner roundness */
+    --roundness-xl: 22px;
+    --roundness-l: 20px;
+    --roundness-m: 16px;
+    --roundness-s: 12px;
+    --roundness-xs: 10px;
+    --roundness-xxs: 8px;
+
+    --discord-icon: none;
+    --moon-icon: block;
+}
+
+.selected_f5eb4b, .selected_f6f816 .link_d8bfb3 { color: var(--text-0) !important; background: var(--accent-3) !important; }
+.selected_f6f816 .link_d8bfb3 * { color: var(--text-0) !important; fill: var(--text-0) !important; }

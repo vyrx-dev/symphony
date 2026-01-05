@@ -1,0 +1,28 @@
+# ╭─ ♪ Symphony ─╮
+# │  Generated   │
+# ╰──────────────╯
+# Theme: Omarchy aetheria (omarchy)
+
+[colors.primary]
+background = '#0e091d'
+foreground = '#14B9B5'
+
+[colors.normal]
+black = '#000000'
+red = '#c8e967'
+green = '#E20342'
+yellow = '#7cd699'
+blue = '#BE3F50'
+magenta = '#9147a8'
+cyan = '#FF7F41'
+white = '#A60234'
+
+[colors.bright]
+black = '#c53253'
+red = '#CE4F48'
+green = '#f93d3b'
+yellow = '#FD3E6A'
+blue = '#04C5F0'
+magenta = '#6C032C'
+cyan = '#ffbe74'
+white = '#11AEB3'

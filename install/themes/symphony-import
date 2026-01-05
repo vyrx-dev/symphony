@@ -1595,14 +1595,10 @@ run_import() {
     [[ -f "$tmp/repo/neovim.lua" ]] && cp "$tmp/repo/neovim.lua" "$dest/.config/nvim/theme.lua"
     
     ok "imported $name"
-    if command -v symphony &>/dev/null; then
-        if [[ "$(cat "$HOME/.config/symphony/.current-theme" 2>/dev/null)" == "$name" ]]; then
-            symphony reload
-        else
-            symphony switch "$name"
-        fi
+    if [[ "$(cat "$HOME/.config/symphony/.current-theme" 2>/dev/null)" == "$name" ]]; then
+        "$SCRIPT_DIR/symphony" reload
     else
-        echo "run 'symphony switch $name' to apply"
+        "$SCRIPT_DIR/symphony" switch "$name"
     fi
 }
 

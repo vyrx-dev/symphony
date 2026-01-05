@@ -1,0 +1,10 @@
+/* ╭─ ♪ Symphony ─╮
+   │  Generated   │
+   ╰──────────────╯
+   Theme: Omarchy aetheria (omarchy) */
+
+@define-color waybar_accent rgba(20, 185, 181, 0.18);
+@define-color waybar_accent_fg @on_background;
+@define-color on_background #14B9B5;
+@define-color surface_container #000000;
+@define-color error #c8e967;

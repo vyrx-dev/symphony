@@ -1,0 +1,13 @@
+# ╭─ ♪ Symphony ─╮
+# │  Generated   │
+# ╰──────────────╯
+# Theme: Omarchy aetheria (omarchy)
+
+[color]
+background = 'default'
+gradient = 1
+gradient_count = 4
+gradient_color_1 = '#BE3F50'
+gradient_color_2 = '#9147a8'
+gradient_color_3 = '#FF7F41'
+gradient_color_4 = '#E20342'

@@ -1,0 +1,31 @@
+/* ╭─ ♪ Symphony ─╮
+   │  Generated   │
+   ╰──────────────╯
+   Theme: Omarchy aetheria (omarchy) */
+
+* {
+    primary: #FF7F41;
+    primary-container: #BE3F50;
+    on-primary: #0e091d;
+    on-primary-container: #14B9B5;
+    secondary: #9147a8;
+    secondary-container: #c53253;
+    on-secondary: #0e091d;
+    on-secondary-container: #14B9B5;
+    surface: #0e091d;
+    surface-dim: #0e091d;
+    surface-bright: #c53253;
+    surface-container-lowest: #0e091d;
+    surface-container-low: #0e091d;
+    surface-container: #c53253;
+    surface-container-high: #c53253;
+    surface-container-highest: #c53253;
+    on-surface: #0e091d;
+    on-surface-variant: #A60234;
+    outline: #c53253;
+    outline-variant: #c53253;
+    error: #c8e967;
+    on-error: #0e091d;
+    inverse-surface: #0e091d;
+    inverse-on-surface: #0e091d;
+}
