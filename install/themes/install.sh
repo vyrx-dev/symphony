@@ -20,9 +20,10 @@ source "$DOTFILES/install/utils.sh"
 # │ Fullscreen Re-launch                                                  │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
-# Re-launch in fullscreen alacritty (use marker file since env vars don't propagate through hyprctl)
+# Re-launch in fullscreen alacritty (only when run directly, not from main installer)
+# Use marker file since env vars don't propagate through hyprctl
 FULLSCREEN_MARKER="/tmp/symphony-installer-running"
-if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && ! -f "$FULLSCREEN_MARKER" ]]; then
+if [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" && -z "$SYMPHONY_INSTALLING" && ! -f "$FULLSCREEN_MARKER" ]]; then
     touch "$FULLSCREEN_MARKER"
     if command -v alacritty &>/dev/null; then
         hyprctl dispatch exec -- alacritty --class Screensaver \
