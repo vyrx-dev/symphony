@@ -1,79 +1,41 @@
-add_newline = false
-command_timeout = 60
-format = """\
-$os$hostname \
-$directory \
-$git_branch$git_status\
-$line_break\
-$character\
-"""
+"$schema" = 'https://starship.rs/config-schema.json'
 
-# right_format = """\
-# $time\
-# """
-
+add_newline = true
+command_timeout = 200
+format = """$hostname$directory$git_branch$git_status$character"""
 palette = "colors"
 
 [palettes.colors]
-mustard = '#af8700' # example
-color1 = '{{colors.primary_fixed_dim.default.hex}}'
-color2 = '{{colors.on_primary.default.hex}}'
-color3 = '{{colors.on_surface_variant.default.hex}}'
-color4 = '{{colors.surface_container.default.hex}}'
-color5 = '{{colors.on_primary.default.hex}}'
-color6 = '{{colors.surface_dim.default.hex}}'
-color7 = '{{colors.surface.default.hex}}'
-color8 = '{{colors.primary.default.hex}}'
-color9 = '{{colors.tertiary.default.hex}}'
+primary = '{{colors.primary.default.hex}}'       # directory, prompt
+secondary = '{{colors.tertiary.default.hex}}'     # git branch
+error = '{{colors.error.default.hex}}'         # errors, git status
 
 [hostname]
 ssh_only = true
-style = "fg:color8"
-format = "[ @$hostname]($style)"
+style = "fg:primary"
+format = "[@$hostname]($style) "
 
 [directory]
-style = "fg:{{colors.primary_fixed_dim.default.hex}} bold" # color1
+style = "fg:primary bold"
 read_only = " 󰌾"
-read_only_style = "fg:#ea6962" # dark blue
-truncation_length = 0
-truncate_to_repo = false
-format = "[$path]($style)[$read_only]($read_only_style)"
-
-[directory.substitutions]
-'~/100xCodes/Cohort-3-WebDev' = 'Learning'
-'~/Testing-repo' = 'work-project'
+read_only_style = "fg:error"
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[$path]($style)[$read_only]($read_only_style) "
 
 [character]
-success_symbol = '[❯](fg:{{colors.primary.default.hex}} bold)'
-error_symbol = '[❯](fg:{{colors.error.default.hex}} bold)'
-vicmd_symbol = '[❮](fg:{{colors.surface_dim.default.hex}} bold)'
+success_symbol = '[❯](fg:primary bold)'
+error_symbol = '[❯](fg:error bold)'
 
 [git_branch]
-style = "fg:{{colors.tertiary.default.hex}} bold" # color9 (red)
-format = '[$symbol$branch]($style) '
+style = "fg:secondary"
+format = '[$branch]($style) '
 
 [git_status]
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
-format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
-# style = "bg:#394260"
-
-[os]
-format = "[$symbol]($style)"
-style = "fg:{{colors.primary.default.hex}} bold" # color8
-disabled = false
-
-[os.symbols]
-Linux = "󰊠 "
-Arch = "󰣇"
-Ubuntu = "󰕈"
-
-# [time]
-# disabled = false
-# format = '[[ $time ](fg:#ea6962 )]($style)'
-# time_format = "%R"
+format = '[$all_status$ahead_behind](fg:error) '
 
 [line_break]
 disabled = true
-

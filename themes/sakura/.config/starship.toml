@@ -1,71 +1,41 @@
-add_newline = false
-command_timeout = 60
-format = """$os$hostname $directory $git_branch$git_status$line_break$character"""
+"$schema" = 'https://starship.rs/config-schema.json'
 
-# right_format = """# $time# """
-
+add_newline = true
+command_timeout = 200
+format = """$hostname$directory$git_branch$git_status$character"""
 palette = "colors"
 
 [palettes.colors]
-mustard = '#af8700'
-color1 = '#E8C099'        # directory path (cyan accent)
-color2 = '#0d0509'          # unused
-color3 = '#f0eaed'          # unused
-color4 = '#0d0509'          # unused
-color5 = '#0d0509'          # unused
-color6 = '#4a3c45'        # vicmd symbol (muted gray)
-color7 = '#0d0509'          # unused
-color8 = '#E8C099'        # os symbol, success character (primary)
-color9 = '#D1B399'     # git branch (secondary accent)
-error = '#E85F6F'          # error character
+primary = '#E3C5AB'       # directory, prompt
+secondary = '#F29B9A'     # git branch
+error = '#E85F6F'         # errors, git status
 
 [hostname]
 ssh_only = true
-style = "fg:color8"
-format = "[ @$hostname]($style)"
+style = "fg:primary"
+format = "[@$hostname]($style) "
 
 [directory]
-style = "fg:color1 bold"
+style = "fg:primary bold"
 read_only = " 󰌾"
-read_only_style = "fg:#ea6962"
-truncation_length = 0
-truncate_to_repo = false
-format = "[$path]($style)[$read_only]($read_only_style)"
-
-[directory.substitutions]
-'~/100xCodes/Cohort-3-WebDev' = 'Learning'
-'~/Testing-repo' = 'work-project'
+read_only_style = "fg:error"
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[$path]($style)[$read_only]($read_only_style) "
 
 [character]
-success_symbol = '[❯](fg:color8 bold)'
+success_symbol = '[❯](fg:primary bold)'
 error_symbol = '[❯](fg:error bold)'
-vicmd_symbol = '[❮](fg:color6 bold)'
 
 [git_branch]
-style = "fg:color9 bold"
-format = '[$symbol$branch]($style) '
+style = "fg:secondary"
+format = '[$branch]($style) '
 
 [git_status]
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
-format = '[[($all_status$ahead_behind )](fg:#ea6962)]($style)'
-
-[os]
-format = "[$symbol]($style)"
-style = "fg:color8 bold"
-disabled = false
-
-[os.symbols]
-Linux = "󰊠 "
-Arch = "󰣇"
-Ubuntu = "󰕈"
-
-# [time]
-# disabled = false
-# format = '[[ $time ](fg:#ea6962 )]($style)'
-# time_format = "%R"
+format = '[$all_status$ahead_behind](fg:error) '
 
 [line_break]
 disabled = true
-
