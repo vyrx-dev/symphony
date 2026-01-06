@@ -11,7 +11,10 @@ focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name
 # Get wallpapers
 mapfile -d '' wallpapers < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
-[[ ${#wallpapers[@]} -eq 0 ]] && { notify-send "Error" "No wallpapers found in $WALLPAPER_DIR"; exit 1; }
+if [[ ${#wallpapers[@]} -eq 0 ]]; then
+  (action=$(notify-send -A "open=Get Wallpapers" --wait "No Wallpapers Found" "Add images to ~/Wallpapers to use dynamic theming") && [[ "$action" == "open" ]] && xdg-open "https://github.com/vyrx-dev/Wallpapers") &
+  exit 1
+fi
 
 # Build menu with thumbnails
 menu() {

@@ -7,7 +7,7 @@ swww_params="--transition-fps 120 --transition-type center --transition-pos bott
 mapfile -d '' wallpapers < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
 if [[ ${#wallpapers[@]} -eq 0 ]]; then
-	notify-send "Error" "No wallpapers found in $wallpaper_dir"
+	(action=$(notify-send -A "open=Get Wallpapers" --wait "No Wallpapers Found" "Add images to ~/Wallpapers to use dynamic theming") && [[ "$action" == "open" ]] && xdg-open "https://github.com/vyrx-dev/Wallpapers") &
 	exit 1
 fi
 
