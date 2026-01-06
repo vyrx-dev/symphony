@@ -1,0 +1,47 @@
+#!/bin/bash
+
+gen_starship() {
+    cat > "$dest/.config/starship.toml" <<EOF
+"\$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+command_timeout = 200
+format = """\$hostname\$directory\$git_branch\$git_status\$character"""
+palette = "colors"
+
+[palettes.colors]
+primary = '$blue'       # directory, prompt
+secondary = '$magenta'     # git branch
+error = '$red'         # errors, git status
+
+[hostname]
+ssh_only = true
+style = "fg:primary"
+format = "[@\$hostname](\$style) "
+
+[directory]
+style = "fg:primary bold"
+read_only = " 󰌾"
+read_only_style = "fg:error"
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[\$path](\$style)[\$read_only](\$read_only_style) "
+
+[character]
+success_symbol = '[❯](fg:primary bold)'
+error_symbol = '[❯](fg:error bold)'
+
+[git_branch]
+style = "fg:secondary"
+format = '[\$branch](\$style) '
+
+[git_status]
+ahead = '⇡\${count}'
+behind = '⇣\${count}'
+diverged = '⇕⇡\${ahead_count}⇣\${behind_count}'
+format = '[\$all_status\$ahead_behind](fg:error) '
+
+[line_break]
+disabled = true
+EOF
+}
