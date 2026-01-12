@@ -27,7 +27,7 @@ packages=(
 	eza bat fd ripgrep fzf zoxide jq
 
 	# Files
-	yazi nautilus
+	yazi nautilus nautilus-dropbox
 
 	# Editor
 	neovim lazygit
@@ -39,7 +39,7 @@ packages=(
 	cliphist wl-clip-persist
 
 	# Audio
-	pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber
+	pipewire pipewire-alsa pipewire-pulse wireplumber
 	pamixer wiremix
 
 	# Music
@@ -53,7 +53,7 @@ packages=(
 	# System
 	polkit-gnome brightnessctl ddcutil power-profiles-daemon upower
 	libnotify xdg-utils xdg-user-dirs inotify-tools
-	gnome-keyring libsecret
+	gnome-keyring libsecret xorg-xhost libappindicator
 
 	# Theming
 	matugen-bin nwg-look adw-gtk-theme bibata-cursor-theme-bin imagemagick
@@ -71,7 +71,7 @@ packages=(
 	sddm qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects
 
 	# Utilities
-	python-terminaltexteffects gum wget curl unzip localsend-bin
+	python-terminaltexteffects gum wget curl unzip localsend deno npm keyd 
 )
 
 # ╭───────────────────────────────────────────────────────────────────────╮
@@ -81,8 +81,8 @@ packages=(
 applications=(
 	brave-bin zen-browser-bin firefox chromium
 	obsidian bitwarden code visual-studio-code-bin
-	vesktop-bin discord
-	mpv yt-dlp steam lutris gamemode mangohud
+	vesktop-bin discord keychain zed opencode
+	mpv yt-dlp steam lutris gamemode mangohud typora 
 )
 
 # ╭───────────────────────────────────────────────────────────────────────╮
