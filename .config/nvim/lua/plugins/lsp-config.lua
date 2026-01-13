@@ -23,7 +23,7 @@ return {
           "efm",
 
           -- Formatters
-          "prettier",
+          "prettierd",
           "stylua",
           "gofumpt",
           "shfmt",
