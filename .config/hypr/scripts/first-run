@@ -11,7 +11,7 @@ sleep 2
 
 # Welcome notifications
 notify-send -u critical "App Launcher" "Press Super + Space to launch apps"
-notify-send -u critical "Keybindings" "Press Super + K to view all keybindings"
+notify-send -u critical "Keybindings" "Press Super + K to view all   keybindings"
 notify-send -u critical "Welcome to Symphony" "Run 'symphony help' for available commands."
 
 # Mark as done (prevents re-running on future boots)

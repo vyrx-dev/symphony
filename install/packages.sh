@@ -27,7 +27,7 @@ packages=(
 	eza bat fd ripgrep fzf zoxide jq
 
 	# Files
-	yazi nautilus # nautilus-dropbox
+	yazi nautilus 
 
 	# Editor
 	neovim lazygit
@@ -82,7 +82,7 @@ applications=(
 	zen-browser-bin firefox chromium
 	obsidian bitwarden code visual-studio-code-bin
 	vesktop-bin discord keychain zed opencode
-	mpv yt-dlp steam lutris gamemode mangohud typora sddm-silent-theme
+	mpv yt-dlp steam lutris gamemode mangohud typora sddm-silent-theme nautilus-dropbox
 )
 
 # ╭───────────────────────────────────────────────────────────────────────╮
