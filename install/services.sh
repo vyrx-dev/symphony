@@ -181,8 +181,7 @@ if pkg_installed spicetify-cli; then
 		spicetify config inject_css 1 replace_colors 1 &>/dev/null
 
 		#setup marketplace
-		iwr -useb https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.ps1 | iex
-
+        curl -fsSL https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.sh | sh
 		if spicetify backup apply &>/dev/null; then
 			ok "spicetify"
 		else
