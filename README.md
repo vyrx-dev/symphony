@@ -181,6 +181,7 @@ Want just the themes without the full setup? See [install/themes/README.md](inst
 ```bash
 symphony switch          # interactive picker
 symphony switch sakura   # direct switch
+symphony switch --random # random theme
 symphony list            # show all themes
 symphony reload          # re-apply current
 ```
