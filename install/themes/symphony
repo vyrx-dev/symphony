@@ -90,51 +90,29 @@ set_wallpaper() {
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Commands                                                              │
 # ╰───────────────────────────────────────────────────────────────────────╯
+get_random_theme() {
+	local themes=()
+	mapfile -t themes < <(list_themes)
+	[[ ${#themes[@]} -eq 0 ]] && { err "No themes found"; exit 1; }
+	
+	local current=$(current_theme)
+	local theme="${themes[RANDOM % ${#themes[@]}]}"
+	
+	# Avoid current theme if possible
+	if [[ ${#themes[@]} -gt 1 ]]; then
+		for _ in {1..10}; do
+			[[ "$theme" != "$current" ]] && break
+			theme="${themes[RANDOM % ${#themes[@]}]}"
+		done
+	fi
+	
+	echo "$theme"
+}
 
 cmd_switch() {
-	local random=0
-	local theme=""
+	local theme="$1"
 
-	# Parse flags for switch subcommand
-	while [[ $# -gt 0 ]]; do
-		case "$1" in
-			-r|--random) random=1; shift ;;
-			-h|--help)
-				echo "Usage: symphony switch [theme] [-r|--random]"
-				exit 0
-				;;
-			--) shift; break ;;
-			-*) err "Unknown option for switch: $1"; exit 1 ;;
-			*) theme="$1"; shift ;;
-		esac
-	done
-
-	# Remaining arg (if any) is theme
-	[[ -z "$theme" && $# -gt 0 ]] && theme="$1"
-
-	# Random theme selection (prefer not current)
-	if [[ "$random" -eq 1 ]]; then
-		if [[ -n "$theme" ]]; then
-			err "Can't combine --random with an explicit theme name"
-			exit 1
-		fi
-
-		local current
-		current=$(current_theme)
-
-		local themes
-		mapfile -t themes < <(list_themes)
-		[[ ${#themes[@]} -eq 0 ]] && { err "No themes found"; exit 1; }
-
-		theme="${themes[RANDOM % ${#themes[@]}]}"
-		# Try a few times to avoid picking the current theme
-		if [[ ${#themes[@]} -gt 1 ]]; then
-			for _ in {1..10}; do
-				[[ "$theme" != "$current" ]] && break
-				theme="${themes[RANDOM % ${#themes[@]}]}"
-			done
-		fi
-	fi
+    [[ "$theme" == "--random" ]] && theme=$(get_random_theme)
 
 	if [[ -z "$theme" ]]; then
 		command -v rofi &>/dev/null || { err "rofi is required"; exit 1; }
