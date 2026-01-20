@@ -90,29 +90,9 @@ set_wallpaper() {
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Commands                                                              │
 # ╰───────────────────────────────────────────────────────────────────────╯
-get_random_theme() {
-	local themes=()
-	mapfile -t themes < <(list_themes)
-	[[ ${#themes[@]} -eq 0 ]] && { err "No themes found"; exit 1; }
-	
-	local current=$(current_theme)
-	local theme="${themes[RANDOM % ${#themes[@]}]}"
-	
-	# Avoid current theme if possible
-	if [[ ${#themes[@]} -gt 1 ]]; then
-		for _ in {1..10}; do
-			[[ "$theme" != "$current" ]] && break
-			theme="${themes[RANDOM % ${#themes[@]}]}"
-		done
-	fi
-	
-	echo "$theme"
-}
 
 cmd_switch() {
 	local theme="$1"
-
-    [[ "$theme" == "--random" ]] && theme=$(get_random_theme)
 
 	if [[ -z "$theme" ]]; then
 		command -v rofi &>/dev/null || { err "rofi is required"; exit 1; }
@@ -242,7 +222,7 @@ cmd_help() {
 Usage: symphony <command> [options]
 
 Commands:
-  switch [theme]     Switch theme (menu if no name given; use -r/--random for random)
+  switch [theme]     Switch theme (menu if no name given)
   browse             Browse & import Omarchy themes with preview
   import <url>       Import Omarchy theme from GitHub
   tui                Interactive theme browser & manager
@@ -271,7 +251,6 @@ Tip:
 Examples:
   symphony switch
   symphony switch tokyo-night
-  symphony switch --random
   symphony import bjarneo/omarchy-sakura-theme
   symphony import https://github.com/user/omarchy-theme
 

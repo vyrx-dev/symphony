@@ -65,7 +65,6 @@ Wallpapers: [vyrx-dev/wallpapers](https://github.com/vyrx-dev/wallpapers)
 ```bash
 symphony switch          # pick a theme
 symphony switch zen      # switch directly
-symphony switch --random # switch to a random theme
 symphony list            # see all themes
 symphony reload          # re-apply current
 symphony fix             # fix broken symlinks
