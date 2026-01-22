@@ -2,7 +2,7 @@
 
 ![Banner](assets/banner.jpg)
 
-**a minimal, music-inspired hyprland rice for the productive**
+**A minimal, productivity-focused Arch + Hyprland setup**
 
 <a href="#installation"><img src="https://img.shields.io/badge/Install-c4a7e7?style=for-the-badge&logoColor=1a1b26" alt="Install"/></a>&ensp;
 <a href="#themes"><img src="https://img.shields.io/badge/Themes-f5a97f?style=for-the-badge&logoColor=1a1b26" alt="Themes"/></a>&ensp;
@@ -10,18 +10,12 @@
 <a href="#usage"><img src="https://img.shields.io/badge/Usage-7aa2f7?style=for-the-badge&logoColor=1a1b26" alt="Usage"/></a>&ensp;
 <a href="#keybindings"><img src="https://img.shields.io/badge/Keybindings-9ece6a?style=for-the-badge&logoColor=1a1b26" alt="Keybindings"/></a>
 
-[![Arch](https://img.shields.io/badge/Arch-1793D1?style=flat&logo=arch-linux&logoColor=white)](https://archlinux.org/)
-[![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=wayland&logoColor=white)](https://hyprland.org/)
-[![MIT](https://img.shields.io/badge/MIT-9ece6a?style=flat)](LICENSE)
-
 </div>
 
 ## Showcase
 
 <div align="center">
-
-![Symphony Showcase](assets/symphony-showcase.gif)
-
+https://github.com/user-attachments/assets/c8d3894a-8b45-4536-8a32-c84fac883821
 </div>
 
 ---
@@ -86,7 +80,7 @@ Toggle between them with `Super + Ctrl + Backspace`
 
 ![Dynamic Theme](assets/dynamic.gif)
 
-*Colors generated from wallpaper using Matugen*
+_Colors generated from wallpaper using Matugen_
 
 </div>
 
@@ -113,8 +107,8 @@ Toggle between them with `Super + Ctrl + Backspace`
 
 ![Music](assets/rofi-music.png)
 
-| App Launcher | Emoji Picker | Power Menu |
-|:---:|:---:|:---:|
+|             App Launcher             |              Emoji Picker              |                Power Menu                 |
+| :----------------------------------: | :------------------------------------: | :---------------------------------------: |
 | ![App Launcher](assets/rofi-app.png) | ![Emoji Picker](assets/rofi-emoji.png) | ![Power Menu](assets/rofi-power-menu.png) |
 
 </div>
@@ -149,7 +143,7 @@ Toggle between them with `Super + Ctrl + Backspace`
 
 ![Music](assets/music-showcase.gif)
 
-*RMPC + Cava visualizer*
+_RMPC + Cava visualizer_
 
 </div>
 
@@ -195,64 +189,64 @@ Or press `Super + Ctrl + Shift + Space` for the theme picker.
 <details>
 <summary><b>Applications</b></summary>
 
-| Key | Action |
-|-----|--------|
-| `Super + Return` | Terminal |
-| `Super + B` | Browser |
-| `Super + E` | File Manager |
-| `Super + M` | Spotify |
-| `Super + D` | Discord |
-| `Super + O` | Obsidian |
-| `Super + C` | VS Code |
-| `Alt + M` | RMPC |
-| `Alt + N` | Neovim |
-| `Alt + Q` | Yazi |
-| `Alt + /` | Btop |
+| Key              | Action       |
+| ---------------- | ------------ |
+| `Super + Return` | Terminal     |
+| `Super + B`      | Browser      |
+| `Super + E`      | File Manager |
+| `Super + M`      | Spotify      |
+| `Super + D`      | Discord      |
+| `Super + O`      | Obsidian     |
+| `Super + C`      | VS Code      |
+| `Alt + M`        | RMPC         |
+| `Alt + N`        | Neovim       |
+| `Alt + Q`        | Yazi         |
+| `Alt + /`        | Btop         |
 
 </details>
 
 <details>
 <summary><b>Rofi Menus</b></summary>
 
-| Key | Action |
-|-----|--------|
-| `Super + Space` | App Launcher |
-| `Alt + ,` | Clipboard |
-| `Alt + .` | Emoji Picker |
-| `Super + Ctrl + B` | Power Profiles |
-| `Super + Ctrl + Space` | Matugen Theme |
-| `Super + Alt + Space` | Wallpaper Picker |
-| `Super + Ctrl + Shift + Space` | Theme Switcher |
+| Key                            | Action           |
+| ------------------------------ | ---------------- |
+| `Super + Space`                | App Launcher     |
+| `Alt + ,`                      | Clipboard        |
+| `Alt + .`                      | Emoji Picker     |
+| `Super + Ctrl + B`             | Power Profiles   |
+| `Super + Ctrl + Space`         | Matugen Theme    |
+| `Super + Alt + Space`          | Wallpaper Picker |
+| `Super + Ctrl + Shift + Space` | Theme Switcher   |
 
 </details>
 
 <details>
 <summary><b>Window Management</b></summary>
 
-| Key | Action |
-|-----|--------|
-| `Super + Q` | Close Window |
-| `Super + K` | Kill Application |
-| `Super + Arrow` | Move Focus |
-| `Super + Shift + Arrow` | Move Window |
-| `Super + Ctrl + Arrow` | Resize Window |
-| `Super + 1-9` | Switch Workspace |
-| `Super + Shift + 1-9` | Move to Workspace |
-| `Super + F` | Fullscreen |
-| `Super + V` | Toggle Floating |
-| `Super + Shift + O` | Pop Window (Float & Pin) |
+| Key                     | Action                   |
+| ----------------------- | ------------------------ |
+| `Super + Q`             | Close Window             |
+| `Super + K`             | Kill Application         |
+| `Super + Arrow`         | Move Focus               |
+| `Super + Shift + Arrow` | Move Window              |
+| `Super + Ctrl + Arrow`  | Resize Window            |
+| `Super + 1-9`           | Switch Workspace         |
+| `Super + Shift + 1-9`   | Move to Workspace        |
+| `Super + F`             | Fullscreen               |
+| `Super + V`             | Toggle Floating          |
+| `Super + Shift + O`     | Pop Window (Float & Pin) |
 
 </details>
 
 <details>
 <summary><b>System</b></summary>
 
-| Key | Action |
-|-----|--------|
-| `Super + Shift + L` | Lock Screen |
-| `Super + Escape` | Power Menu |
-| `Super + N` | Notifications |
-| `Super + Backspace` | Toggle Transparency |
+| Key                        | Action                 |
+| -------------------------- | ---------------------- |
+| `Super + Shift + L`        | Lock Screen            |
+| `Super + Escape`           | Power Menu             |
+| `Super + N`                | Notifications          |
+| `Super + Backspace`        | Toggle Transparency    |
 | `Super + Ctrl + Backspace` | Toggle Focus/Vibe Mode |
 
 </details>
@@ -260,22 +254,22 @@ Or press `Super + Ctrl + Shift + Space` for the theme picker.
 <details>
 <summary><b>Screenshots & Recording</b></summary>
 
-| Key | Action |
-|-----|--------|
-| `Super + P` | Screenshot |
-| `Super + R` | Screen Record |
+| Key                 | Action          |
+| ------------------- | --------------- |
+| `Super + P`         | Screenshot      |
+| `Super + R`         | Screen Record   |
 | `Super + Shift + R` | Record with Mic |
-| `Super + Shift + P` | Color Picker |
+| `Super + Shift + P` | Color Picker    |
 
 </details>
 
 <details>
 <summary><b>Wallpapers</b></summary>
 
-| Key | Action |
-|-----|--------|
-| `Ctrl + Alt + Space` | Random Wallpaper + Colors |
-| `Super + Alt + Left/Right` | Cycle Wallpapers |
+| Key                        | Action                    |
+| -------------------------- | ------------------------- |
+| `Ctrl + Alt + Space`       | Random Wallpaper + Colors |
+| `Super + Alt + Left/Right` | Cycle Wallpapers          |
 
 </details>
 
@@ -285,19 +279,19 @@ See [.config/hypr/bindings.conf](.config/hypr/bindings.conf) for full list.
 
 ## Components
 
-| Component | Tool |
-|-----------|------|
-| Compositor | [Hyprland](https://hyprland.org/) |
-| Bar | [Waybar](https://github.com/Alexays/Waybar) |
-| Launcher | [Rofi](https://github.com/lbonn/rofi) |
-| Terminal | [Kitty](https://sw.kovidgoyal.net/kitty/) / [Ghostty](https://ghostty.org/) |
-| Notifications | [SwayNC](https://github.com/ErikReider/SwayNotificationCenter) |
-| Lock screen | [Hyprlock](https://github.com/hyprwm/hyprlock) |
-| Theme engine | [Matugen](https://github.com/InioX/matugen) |
-| Music | [MPD](https://musicpd.org/) + [RMPC](https://github.com/mierak/rmpc) |
-| Visualizer | [Cava](https://github.com/karlstav/cava) |
-| Editor | [Neovim](https://neovim.io/) |
-| Shell | [Fish](https://fishshell.com/) + [Starship](https://starship.rs/) |
+| Component     | Tool                                                                        |
+| ------------- | --------------------------------------------------------------------------- |
+| Compositor    | [Hyprland](https://hyprland.org/)                                           |
+| Bar           | [Waybar](https://github.com/Alexays/Waybar)                                 |
+| Launcher      | [Rofi](https://github.com/lbonn/rofi)                                       |
+| Terminal      | [Kitty](https://sw.kovidgoyal.net/kitty/) / [Ghostty](https://ghostty.org/) |
+| Notifications | [SwayNC](https://github.com/ErikReider/SwayNotificationCenter)              |
+| Lock screen   | [Hyprlock](https://github.com/hyprwm/hyprlock)                              |
+| Theme engine  | [Matugen](https://github.com/InioX/matugen)                                 |
+| Music         | [MPD](https://musicpd.org/) + [RMPC](https://github.com/mierak/rmpc)        |
+| Visualizer    | [Cava](https://github.com/karlstav/cava)                                    |
+| Editor        | [Neovim](https://neovim.io/)                                                |
+| Shell         | [Fish](https://fishshell.com/) + [Starship](https://starship.rs/)           |
 
 ---
 
@@ -334,7 +328,8 @@ See [.config/hypr/bindings.conf](.config/hypr/bindings.conf) for full list.
 
 ## Credits
 
-Learned a lot from these projects:
+Learned/Copied(😁) a lot from these projects:
+
 - [HyDE-Project/HyDE](https://github.com/HyDE-Project/HyDE)
 - [JaKooLit/Hyprland-Dots](https://github.com/JaKooLit/Hyprland-Dots)
 - [basecamp/omarchy](https://github.com/basecamp/omarchy)
@@ -344,6 +339,13 @@ Wallpapers: [vyrx-dev/wallpapers](https://github.com/vyrx-dev/wallpapers)
 
 ---
 
+<a href="https://www.star-history.com/#vyrx-dev/dotfiles&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=vyrx-dev/dotfiles&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=vyrx-dev/dotfiles&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=vyrx-dev/dotfiles&type=date&legend=top-left" />
+ </picture>
+</a>
 <div align="center">
 
 **[Report Bug](https://github.com/vyrx-dev/dotfiles/issues/new?template=bug_report.yml)** · **[Request Feature](https://github.com/vyrx-dev/dotfiles/issues/new?template=feature_request.yml)** · **[TODO](TODO.md)**
