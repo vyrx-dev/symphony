@@ -1,5 +1,5 @@
 {
-    "wallpaper": "/home/vyrx/dotfiles/themes/gruvbox-material/wallpaper",
+    "wallpaper": "$HOME/dotfiles/themes/gruvbox-material/wallpaper",
     "alpha": "100",
     "special": {
         "background": "#111313",

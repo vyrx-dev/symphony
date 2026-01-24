@@ -80,7 +80,7 @@ abbr -a regfont "setfont default8x16"
 
 # Some useful aliases
 abbr -a update 'sudo pacman -Syu'
-abbr -a pwreset 'faillock --reset --user vyrx'
+abbr -a pwreset "faillock --reset --user $USER"
 abbr -a pg 'ping -c 10 google.com'
 
 # Automatically do an ls after each cd, z, or zoxide
@@ -95,7 +95,7 @@ abbr -a folders 'du -h --max-depth=1'
 
 # Git aliases
 abbr -a gits 'git status'
-abbr -a ghs 'streaker vyrx-dev'
+abbr -a ghs "streaker $USER"
 abbr -a ghp 'gh repo create --public $(basename "$PWD") --source=. --description="desc" --push'
 
 # Grub Update

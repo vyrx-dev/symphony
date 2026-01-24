@@ -1,5 +1,5 @@
 {
-    "wallpaper": "/home/vyrx/dotfiles/themes/rose-pine/wallpaper",
+    "wallpaper": "$HOME/dotfiles/themes/rose-pine/wallpaper",
     "alpha": "100",
     "special": {
         "background": "#191724",

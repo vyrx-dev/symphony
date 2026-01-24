@@ -1,5 +1,5 @@
 {
-    "wallpaper": "/home/vyrx/Wallpapers/others/a_sculpture_of_a_man_with_a_face_on_his_head.png",
+    "wallpaper": "$HOME/dotfiles/themes/dynamic/wallpaper",
     "alpha": "100",
     "special": {
         "background": "#18130b",
