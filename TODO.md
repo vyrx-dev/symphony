@@ -29,6 +29,7 @@
 - [x] Dynamic webapp installer (CDN icons, no bundled files)
 - [x] Fixed first-run script and startup file generation
 - [x] Modularize symphony-import config generators into per-app files
+- [x] Remove hardcoded usernames and paths for portability
 - [ ] README cleanup and compress showcase GIFs
 - [ ] Optimize theme switching performance
 - [ ] Full cleanup pass
@@ -46,4 +47,3 @@
 ---
 
 _Last updated: January 7, 2026_
-

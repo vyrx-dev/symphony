@@ -5,7 +5,10 @@ MARKER="$HOME/.local/state/symphony/first-run-done"
 
 # Wait for Hyprland to initialize
 sleep 2
-
+# Fix UID placeholders in configs (config parsers don't support shell substitution)
+UID_CURRENT=$(id -u)
+sed -i "s/UID_PLACEHOLDER/$UID_CURRENT/g" "$HOME/.config/mpd/mpd.conf" 2>/dev/null
+sed -i "s/UID_PLACEHOLDER/$UID_CURRENT/g" "$HOME/.config/hypr/envs.conf" 2>/dev/null
 # Apply default theme
 ~/dotfiles/install/themes/symphony switch sakura
 

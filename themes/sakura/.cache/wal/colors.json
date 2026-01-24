@@ -1,5 +1,5 @@
 {
-    "wallpaper": "/home/vyrx/dotfiles/themes/sakura/wallpaper",
+    "wallpaper": "$HOME/dotfiles/themes/sakura/wallpaper",
     "alpha": "100",
     "special": {
         "background": "#0d0509",

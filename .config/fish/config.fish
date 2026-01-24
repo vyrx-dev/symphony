@@ -1,6 +1,6 @@
-source ~/.config/fish/aliases.fish
-source ~/.config/fish/env.fish
-# source ~/.config/fish/api.fish
+source $HOME/.config/fish/aliases.fish
+source $HOME/.config/fish/env.fish
+# source $HOME/.config/fish/api.fish
 
 ### EXPORT ###
 set -g fish_greeting ""
@@ -26,4 +26,4 @@ fish_add_path ~/.local/bin
 fish_add_path ~/.spicetify
 
 # Symphony
-set -gx PATH /home/vyrx/dotfiles/install/themes $PATH
+set -gx PATH $HOME/dotfiles/install/themes $PATH

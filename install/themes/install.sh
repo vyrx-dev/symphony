@@ -219,8 +219,8 @@ page_one() {
     spin "Checking shell config" 0.35
     if [[ -n "$rc" ]] && ! grep -q "symphony" "$rc" 2>/dev/null; then
         echo -e "\n# Symphony" >> "$rc"
-        [[ "$shell_name" == "fish" ]] && echo "set -gx PATH $SCRIPT_DIR \$PATH" >> "$rc" ||
-            echo "export PATH=\"$SCRIPT_DIR:\$PATH\"" >> "$rc"
+        [[ "$shell_name" == "fish" ]] && echo 'set -gx PATH $HOME/dotfiles/install/themes $PATH' >> "$rc" ||
+            echo 'export PATH="$HOME/dotfiles/install/themes:$PATH"' >> "$rc"
         check_mark "Added to $shell_name PATH"
     else
         check_mark "PATH already configured"
