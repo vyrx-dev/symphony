@@ -95,7 +95,7 @@ abbr -a folders 'du -h --max-depth=1'
 
 # Git aliases
 abbr -a gits 'git status'
-abbr -a ghs "streaker $USER"
+abbr -a ghs 'streaker (set -q GITHUB_USER; and printf %s $GITHUB_USER; or printf %s $USER)'
 abbr -a ghp 'gh repo create --public $(basename "$PWD") --source=. --description="desc" --push'
 
 # Grub Update
