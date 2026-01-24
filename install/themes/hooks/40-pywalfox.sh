@@ -6,7 +6,8 @@ dst="$HOME/.cache/wal"
 command -v pywalfox &>/dev/null || exit 0
 
 mkdir -p "$dst"
-cp "$src/colors.json" "$dst/colors.json" 2>/dev/null
+# Fix wallpaper path in JSON since JSON doesn't expand $HOME
+sed "s|\$HOME|$HOME|g" "$src/colors.json" > "$dst/colors.json" 2>/dev/null
 [[ -f "$src/colors" ]] && cp "$src/colors" "$dst/colors" 2>/dev/null
 pywalfox update &>/dev/null &
 exit 0
