@@ -12,7 +12,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
+DOTFILES="${DOTFILES:-$HOME/dotfiles}"
 THEMES_DIR="$DOTFILES/themes"
 HOOKS_DIR="$SCRIPT_DIR/hooks"
 SYMPHONY_DIR="$HOME/.config/symphony"
