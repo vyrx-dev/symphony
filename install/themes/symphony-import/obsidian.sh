@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_obsidian() {
-    cat > "$dest/.config/obsidian/theme.css" <<EOF
+    cat > "$dest/obsidian/theme.css" <<EOF
 /* ╭─ ♪ Symphony ─╮
    │  Generated   │
    ╰──────────────╯

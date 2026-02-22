@@ -1,33 +1,33 @@
 *.bak
 
 # Runtime symlinks created by symphony hooks
-.config/waybar/colors.css
-.config/rofi/colors.rasi
-.config/yazi/theme.toml
-.config/btop/themes/current.theme
-.config/rmpc/themes/current.ron
-.config/rmpc/themes/pywall16.ron
-.config/gtk-3.0/colors.css
-.config/gtk-4.0/colors.css
-.config/gtk-3.0/bookmarks
-.config/gtk-4.0/bookmarks
+config/waybar/colors.css
+config/rofi/colors.rasi
+config/yazi/theme.toml
+config/btop/themes/current.theme
+config/rmpc/themes/current.ron
+config/rmpc/themes/pywall16.ron
+config/gtk-3.0/colors.css
+config/gtk-4.0/colors.css
+config/gtk-3.0/bookmarks
+config/gtk-4.0/bookmarks
 
 # Dynamic theme generated files
-themes/dynamic/.config/spicetify/Themes/symphony/color.ini
+themes/dynamic/spicetify/Themes/symphony/color.ini
 
 # Theme wallpaper symlinks (user preference, changes frequently)
 themes/*/wallpaper
 
-.config/tmux/plugins
+config/tmux/plugins
 
 # Fish local config
-.config/fish/fish_variables
-.config/fish/install.log
-.config/fish/api.fish
+config/fish/fish_variables
+config/fish/install.log
+config/fish/api.fish
 
 # Typora - ignore everything except custom themes
-.config/Typora/*
-!.config/Typora/themes/
-.config/Typora/themes/*
-!.config/Typora/themes/ia_typora.css
-!.config/Typora/themes/ia_typora_night.css
+config/Typora/*
+!config/Typora/themes/
+config/Typora/themes/*
+!config/Typora/themes/ia_typora.css
+!config/Typora/themes/ia_typora_night.css

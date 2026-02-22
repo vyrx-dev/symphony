@@ -3,7 +3,7 @@
 gen_vesktop() {
     local accent_hover=$(darken "$accent" 50)
     local accent_click=$(darken "$accent" 25)
-    cat > "$dest/.config/vesktop/themes/symphony-discord.css" <<EOF
+    cat > "$dest/vesktop/themes/symphony-discord.css" <<EOF
 /* ╭─ ♪ Symphony ─╮
    │  Generated   │
    ╰──────────────╯

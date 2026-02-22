@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_gtk() {
-    local gtk_css="$dest/.config/gtk-3.0/colors.css"
+    local gtk_css="$dest/gtk-3.0/colors.css"
     cat > "$gtk_css" <<EOF
 /* ╭─ ♪ Symphony ─╮
    │  Generated   │
@@ -71,5 +71,5 @@ alertdialog box { background-color: @dialog_bg_color; }
 alertdialog label { color: @dialog_fg_color; }
 toast { background-color: @card_bg_color; color: @foreground; }
 EOF
-    cp "$gtk_css" "$dest/.config/gtk-4.0/colors.css"
+    cp "$gtk_css" "$dest/gtk-4.0/colors.css"
 }

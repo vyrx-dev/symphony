@@ -6,8 +6,8 @@
 
 set -e
 
-DOTFILES="$(cd "$(dirname "$0")" && pwd)"
-source "$DOTFILES/install/utils.sh"
+SYMPHONY_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SYMPHONY_DIR/install/utils.sh"
 
 # Banner
 clear
@@ -24,7 +24,7 @@ confirm "Continue?" || exit 0
 # Check core dependencies
 step "Checking dependencies"
 missing=()
-for dep in git stow; do
+for dep in git; do
     pkg_installed "$dep" && ok "$dep" || { err "$dep"; missing+=("$dep"); }
 done
 
@@ -36,30 +36,31 @@ if [[ ${#missing[@]} -gt 0 ]]; then
 fi
 
 # Install packages
-source "$DOTFILES/install/packages.sh"
+source "$SYMPHONY_DIR/install/packages.sh"
 
-# Symlink dotfiles
-source "$DOTFILES/install/stow.sh"
+# Deploy configs
+source "$SYMPHONY_DIR/install/deploy.sh"
 
 # Setup desktop entries
-source "$DOTFILES/install/desktop-entries.sh"
+source "$SYMPHONY_DIR/install/desktop-entries.sh"
 
 # Enable user services
-source "$DOTFILES/install/services.sh"
+source "$SYMPHONY_DIR/install/services.sh"
 
 # Choose default shell
 echo
-"$DOTFILES/scripts/choose-shell"
+"$SYMPHONY_DIR/bin/choose-shell"
 
-# Remove any stale first-run marker (fresh installs should run first-run)
+# Clear first-run markers (fresh installs should go through all stages)
+rm -f ~/.local/state/symphony/themes-installed
 rm -f ~/.local/state/symphony/first-run-done
 
-# Install themes (skip logo since we already showed banner)
-SYMPHONY_INSTALLING=1 "$DOTFILES/install/themes/install.sh"
+# Optional post-install setup
+source "$SYMPHONY_DIR/install/post-setup.sh"
 
 # Done
 echo
 ok "Installation complete"
-info "Log out and back in for changes to take effect"
+info "Log out and back in — themes will be set up on first login"
 info "Run 'symphony help' to get started"
 echo

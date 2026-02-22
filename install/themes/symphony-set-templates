@@ -1,0 +1,116 @@
+#!/bin/bash
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║   Symphony — Template Generator                                          ║
+# ║   Generates themed configs from templates + colors.toml                  ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+set -e
+
+SYMPHONY_DIR="${SYMPHONY_DIR:-$HOME/symphony}"
+TEMPLATES_DIR="$SYMPHONY_DIR/default/themed"
+
+# Template → output path mapping (relative to theme dir)
+declare -A TEMPLATE_MAP=(
+    ["alacritty.toml.tpl"]="alacritty/colors.toml"
+    ["kitty.conf.tpl"]="kitty/colors.conf"
+    ["ghostty.conf.tpl"]="ghostty/theme"
+    ["hyprland.conf.tpl"]="hypr/theme/colors.conf"
+    ["cava.conf.tpl"]="cava/config"
+    ["yazi.theme.toml.tpl"]="yazi/theme.toml"
+    ["rmpc.theme.ron.tpl"]="rmpc/themes/theme.ron"
+    ["vesktop.discord.css.tpl"]="vesktop/themes/symphony-discord.css"
+)
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RESET='\033[0m'
+
+ok()   { echo -e "  ${GREEN}✓${RESET} $1"; }
+warn() { echo -e "  ${YELLOW}⚠${RESET} $1"; }
+err()  { echo -e "  ${RED}✗${RESET} $1"; }
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Generate configs from templates for a single theme                    │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+generate_theme() {
+    local theme_dir="$1"
+    local theme_name="$(basename "$theme_dir")"
+    local colors_file="$theme_dir/colors.toml"
+
+    if [[ ! -f "$colors_file" ]]; then
+        warn "No colors.toml for $theme_name — skipping templates"
+        return 0
+    fi
+
+    # Build sed script from colors.toml
+    local sed_script
+    sed_script=$(mktemp)
+    trap "rm -f '$sed_script'" RETURN
+
+    while IFS= read -r line; do
+        # Skip comments and blank lines
+        [[ "$line" =~ ^[[:space:]]*# ]] && continue
+        [[ -z "${line// }" ]] && continue
+
+        # Parse key = "value"
+        local key value
+        key="$(echo "$line" | sed 's/[[:space:]]*=.*//' | tr -d '[:space:]')"
+        value="$(echo "$line" | sed 's/[^"]*"//' | sed 's/".*//')"
+
+        [[ -z "$key" || -z "$value" ]] && continue
+
+        # Standard substitution: {{ key }}
+        echo "s|{{ $key }}|$value|g" >> "$sed_script"
+
+        # Strip # for hex values: {{ key_strip }}
+        if [[ "$value" =~ ^# ]]; then
+            local stripped="${value#\#}"
+            echo "s|{{ ${key}_strip }}|$stripped|g" >> "$sed_script"
+
+            # RGB conversion: {{ key_rgb }}
+            local r=$((16#${stripped:0:2}))
+            local g=$((16#${stripped:2:2}))
+            local b=$((16#${stripped:4:2}))
+            echo "s|{{ ${key}_rgb }}|${r},${g},${b}|g" >> "$sed_script"
+        fi
+    done < "$colors_file"
+
+    # Process each template
+    local count=0
+    for tpl_file in "$TEMPLATES_DIR"/*.tpl; do
+        [[ -f "$tpl_file" ]] || continue
+
+        local tpl_name="$(basename "$tpl_file")"
+        local output_rel="${TEMPLATE_MAP[$tpl_name]}"
+
+        if [[ -z "$output_rel" ]]; then
+            warn "No mapping for template: $tpl_name"
+            continue
+        fi
+
+        local output_path="$theme_dir/$output_rel"
+        mkdir -p "$(dirname "$output_path")"
+        sed -f "$sed_script" "$tpl_file" > "$output_path"
+        ((count++))
+    done
+
+    ok "$theme_name — $count configs generated"
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Main                                                                  │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+if [[ $# -eq 1 ]]; then
+    # Generate for a single theme
+    generate_theme "$1"
+else
+    # Generate for all themes with colors.toml
+    echo -e "\n${GREEN}♫${RESET} Generating themed configs from templates...\n"
+    for theme_dir in "$SYMPHONY_DIR"/themes/*/; do
+        [[ -f "$theme_dir/colors.toml" ]] && generate_theme "$theme_dir"
+    done
+    echo ""
+fi

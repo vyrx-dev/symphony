@@ -29,18 +29,18 @@ cat << 'EOF'
 EOF
 echo -e "${RESET}"
 
-REPO="${SYMPHONY_REPO:-vyrx-dev/dotfiles}"
+REPO="${SYMPHONY_REPO:-vyrx-dev/symphony}"
 BRANCH="${SYMPHONY_BRANCH:-main}"
-DEST="${SYMPHONY_DEST:-$HOME/dotfiles}"
+DEST="${SYMPHONY_DEST:-$HOME/symphony}"
 
 # Bootstrap dependencies
 echo -e "\n${DIM}:: Preparing system${RESET}"
-sudo pacman -Syu --noconfirm --needed git stow gum
+sudo pacman -Syu --noconfirm --needed git gum
 
 # Clone or update
 echo
 if [[ -d "$DEST/.git" ]]; then
-    echo -e "${DIM}  Updating dotfiles...${RESET}"
+    echo -e "${DIM}  Updating symphony...${RESET}"
     git -C "$DEST" pull --ff-only || true
 else
     echo -e "${DIM}  Cloning from github.com/${REPO}...${RESET}"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # pywalfox - copy colors and update firefox
-src="$CURRENT_LINK/.cache/wal"
+src="$CURRENT_LINK/wal"
 dst="$HOME/.cache/wal"
 [[ -f "$src/colors.json" ]] || exit 0
 command -v pywalfox &>/dev/null || exit 0

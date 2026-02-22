@@ -1,0 +1,35 @@
+#!/bin/bash
+
+STATE_DIR="$HOME/.local/state/symphony"
+SYMPHONY_DIR="${SYMPHONY_DIR:-$HOME/symphony}"
+
+mkdir -p "$STATE_DIR"
+
+# Stage 1: Theme installer (first login after install.sh)
+if [[ ! -f "$STATE_DIR/themes-installed" ]]; then
+    sleep 2
+
+    if [[ -f "$SYMPHONY_DIR/install/themes/install.sh" ]]; then
+        kitty --hold -e bash -c "SYMPHONY_INSTALLING=1 '$SYMPHONY_DIR/install/themes/install.sh'" &
+        wait $!
+    fi
+
+    # Apply default theme
+    "$SYMPHONY_DIR/install/themes/symphony" switch sakura
+
+    touch "$STATE_DIR/themes-installed"
+    notify-send "Symphony" "Themes installed! Reboot to finish setup."
+    exit 0
+fi
+
+# Stage 2: Welcome notifications (second login after theme install)
+if [[ ! -f "$STATE_DIR/first-run-done" ]]; then
+    sleep 3
+
+    notify-send -u critical "Welcome to Symphony" "Run 'symphony help' to get started."
+    notify-send -u critical "App Launcher" "Press Super + Space to launch apps"
+    notify-send -u critical "Keybindings" "Press Super + K to view all keybindings"
+
+    touch "$STATE_DIR/first-run-done"
+    exit 0
+fi

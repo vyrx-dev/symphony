@@ -1,0 +1,139 @@
+#!/bin/bash
+#|---/ /+---------------------+---/ /|#
+#|--/ /-| Symphony Dotfiles   |--/ /-|#
+#|-/ /--| Deploy (cp-based)   |-/ /--|#
+#|/ /---+---------------------+/ /---|#
+
+SYMPHONY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TIMESTAMP="$(date +%Y-%m-%d_%H-%M)"
+BACKUP_DIR="$HOME/.config/symphony/backups/$TIMESTAMP"
+
+# Dirs inside symphony that should NOT be deployed to home
+IGNORE_DIRS=(
+    "themes"
+    "install"
+    "bin"
+    "config"
+    "local"
+    "assets"
+    "branding"
+    ".git"
+    ".github"
+    "default"
+)
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Helpers                                                               │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+should_ignore() {
+    local name="$1"
+    for ignored in "${IGNORE_DIRS[@]}"; do
+        [[ "$name" == "$ignored" ]] && return 0
+    done
+    return 1
+}
+
+backup_file() {
+    local src="$1"
+    local rel="${src#$HOME/}"
+    # Only backup real files, not our own symlinks
+    if [[ -e "$src" && ! -L "$src" ]]; then
+        mkdir -p "$(dirname "$BACKUP_DIR/$rel")"
+
+        cp -a "$src" "$BACKUP_DIR/$rel"
+    fi
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Deploy .config and .local/share                                       │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+deploy_dir() {
+    local src_base="$1"  # e.g. $SYMPHONY_DIR/config
+    local dst_base="$2"  # e.g. $HOME/.config
+
+    [[ -d "$src_base" ]] || return 0
+
+    for item in "$src_base"/*/; do
+        [[ -d "$item" ]] || continue
+        local name="$(basename "$item")"
+        local dst="$dst_base/$name"
+
+        # Backup existing
+        if [[ -d "$dst" && ! -L "$dst" ]]; then
+            backup_file "$dst"
+        fi
+
+        # Remove old symlinks (from stow migration)
+        [[ -L "$dst" ]] && rm "$dst"
+
+        # Copy recursively
+        cp -rf "$item" "$dst_base/"
+    done
+}
+
+deploy_files() {
+    local src_base="$1"
+    local dst_base="$2"
+
+    for item in "$src_base"/*; do
+        [[ -f "$item" ]] || continue
+        local name="$(basename "$item")"
+        local dst="$dst_base/$name"
+
+        backup_file "$dst"
+        cp -f "$item" "$dst"
+    done
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Deploy scripts to ~/.local/bin                                        │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+deploy_scripts() {
+    local bin_dir="$HOME/.local/bin"
+    mkdir -p "$bin_dir"
+
+    for script in "$SYMPHONY_DIR"/bin/*; do
+        [[ -f "$script" ]] || continue
+        cp -f "$script" "$bin_dir/"
+        chmod +x "$bin_dir/$(basename "$script")"
+    done
+}
+
+# ╭───────────────────────────────────────────────────────────────────────╮
+# │ Main                                                                  │
+# ╰───────────────────────────────────────────────────────────────────────╯
+
+step "Deploying configs"
+
+# Ensure directories exist
+mkdir -p "$HOME/.config" "$HOME/.local/share" "$HOME/.local/bin"
+mkdir -p "$HOME/Pictures/Screenshots" "$HOME/Wallpapers"
+
+# Clean stale stow symlinks from older installs
+for f in "$HOME"/.config/*; do
+    [[ -L "$f" ]] || continue
+    local_target="$(readlink "$f" 2>/dev/null)"
+    # Remove symlinks pointing into old dotfiles (stow artifacts)
+    [[ "$local_target" == *symphony* ]] && rm "$f" && info "Removed stow symlink: $(basename "$f")"
+done
+
+# Deploy config
+deploy_dir "$SYMPHONY_DIR/config" "$HOME/.config"
+deploy_files "$SYMPHONY_DIR/config" "$HOME/.config"  # standalone files like brave-flags.conf
+
+# Deploy local/share
+deploy_dir "$SYMPHONY_DIR/local/share" "$HOME/.local/share"
+
+# Deploy scripts
+deploy_scripts
+
+ok "Dotfiles deployed"
+
+# Report backup location
+if [[ -d "$BACKUP_DIR" && "$(ls -A "$BACKUP_DIR" 2>/dev/null)" ]]; then
+    info "Backed up existing configs: $BACKUP_DIR"
+    warn "To restore: symphony restore"
+fi

@@ -3,7 +3,7 @@
 
 command -v spicetify &>/dev/null || exit 0
 
-src="$CURRENT_LINK/.config/spicetify/Themes/symphony"
+src="$CURRENT_LINK/spicetify/Themes/symphony"
 dest="$HOME/.config/spicetify/Themes/symphony"
 
 [[ -d "$src" ]] || exit 0

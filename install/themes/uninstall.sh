@@ -7,10 +7,10 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-source "$DOTFILES_ROOT/install/utils.sh"
+SYMPHONY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+source "$SYMPHONY_ROOT/install/utils.sh"
 
-THEMES_DIR="$DOTFILES_ROOT/themes"
+THEMES_DIR="$SYMPHONY_ROOT/themes"
 SYMPHONY_DIR="$HOME/.config/symphony"
 
 # ╭───────────────────────────────────────────────────────────────────────╮

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_btop() {
-    cat > "$dest/.config/btop/themes/current.theme" <<EOF
+    cat > "$dest/btop/themes/current.theme" <<EOF
 ## ╭─ ♪ Symphony ─╮
 ## │  Generated   │
 ## ╰──────────────╯

@@ -62,7 +62,7 @@ catch_error() {
     echo -e "${BOLD}    Scan to DM me on Discord, happy to help!${RESET}"
     echo
     echo -e "${DIM}    Or open an issue:${RESET}"
-    echo -e "    https://github.com/vyrx-dev/dotfiles/issues"
+    echo -e "    https://github.com/vyrx-dev/symphony/issues"
     echo
     exit 1
 }
@@ -75,7 +75,7 @@ trap catch_error ERR INT
 
 HAS_GUM=$(command -v gum &>/dev/null && echo 1 || echo 0)
 HAS_TTE=$(command -v tte &>/dev/null && echo 1 || echo 0)
-DOTFILES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SYMPHONY_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Section Headers                                                       │
@@ -105,7 +105,7 @@ EOF
 
 # Animated logo (only used in themes/install.sh where tte is optional)
 show_logo() {
-    local logo="${1:-$DOTFILES_ROOT/branding/symphony.txt}"
+    local logo="${1:-$SYMPHONY_ROOT/branding/symphony.txt}"
     [[ ! -f "$logo" ]] && return
 
     echo
@@ -134,7 +134,7 @@ show_logo() {
 
 # Animated musical banner (only used in themes/install.sh)
 show_musical() {
-    local logo="${1:-$DOTFILES_ROOT/branding/musical.txt}"
+    local logo="${1:-$SYMPHONY_ROOT/branding/musical.txt}"
     [[ ! -f "$logo" ]] && return
 
     echo

@@ -7,9 +7,9 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
-THEMES_DIR="$DOTFILES/themes"
-BRANDING="$DOTFILES/branding"
+SYMPHONY_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")"
+THEMES_DIR="$SYMPHONY_DIR/themes"
+BRANDING="$SYMPHONY_DIR/branding"
 API="https://omarchythemes.com/api/themes/all"
 
 C_ACCENT="\033[38;5;218m"
@@ -147,7 +147,7 @@ omarchy_menu() {
 # │ Web Apps                                                              │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
-WEBAPP_DIR="$DOTFILES/.config/hypr/scripts"
+WEBAPP_DIR="$SYMPHONY_DIR/.config/hypr/scripts"
 
 webapp_menu() {
     clear
@@ -204,7 +204,7 @@ main() {
     case "$choice" in
         "Omarchy Themes") omarchy_menu; main ;;
         "Web Apps")       webapp_menu; main ;;
-        "Choose Shell")   "$DOTFILES/scripts/choose-shell"; main ;;
+        "Choose Shell")   "$SYMPHONY_DIR/scripts/choose-shell"; main ;;
         "Delete Themes")  delete_themes; main ;;
         *)                clear; exit 0 ;;
     esac

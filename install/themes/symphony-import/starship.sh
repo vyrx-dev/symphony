@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_starship() {
-    cat > "$dest/.config/starship.toml" <<EOF
+    cat > "$dest/starship.toml" <<EOF
 ## ╭─ ♪ Symphony ─╮
 ## │  Generated   │
 ## ╰──────────────╯

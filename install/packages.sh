@@ -4,13 +4,16 @@
 #|-/ /--| Package Installer   |-/ /--|#
 #|/ /---+---------------------+/ /---|#
 
+SYMPHONY_DIR="${SYMPHONY_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+[[ -z "$RESET" ]] && source "$SYMPHONY_DIR/install/utils.sh"
+
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Core Packages                                                         │
 # ╰───────────────────────────────────────────────────────────────────────╯
 
 packages=(
 	# Build
-	base-devel git stow
+	base-devel git
 
 	# Hyprland
 	hyprland hypridle hyprlock hyprpicker hyprsunset
@@ -90,13 +93,19 @@ applications=(
 # ╰───────────────────────────────────────────────────────────────────────╯
 
 setup_aur() {
-	aur_installed && return 0
-	info "Installing yay..."
+	aur_installed && { ok "AUR helper: $(get_aur_helper)"; return 0; }
+
+	local choice="yay"
+	if command -v gum &>/dev/null; then
+		choice=$(gum choose "yay" "paru" --header "Choose AUR helper:") || choice="yay"
+	fi
+
+	info "Installing $choice..."
 	local tmp=$(mktemp -d)
-	git clone https://aur.archlinux.org/yay-bin.git "$tmp/yay-bin" --depth 1 &>/dev/null
-	(cd "$tmp/yay-bin" && makepkg -si --noconfirm) &>/dev/null
+	git clone "https://aur.archlinux.org/${choice}-bin.git" "$tmp/${choice}-bin" --depth 1 &>/dev/null
+	(cd "$tmp/${choice}-bin" && makepkg -si --noconfirm) &>/dev/null
 	rm -rf "$tmp"
-	ok "yay"
+	ok "$choice"
 }
 
 do_install() {

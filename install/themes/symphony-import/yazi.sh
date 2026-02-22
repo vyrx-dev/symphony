@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_yazi() {
-    cat > "$dest/.config/yazi/theme.toml" <<EOF
+    cat > "$dest/yazi/theme.toml" <<EOF
 # ╭─ ♪ Symphony ─╮
 # │  Generated   │
 # ╰──────────────╯

@@ -7,14 +7,14 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
-THEMES_DIR="$DOTFILES/themes"
+SYMPHONY_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")"
+THEMES_DIR="$SYMPHONY_DIR/themes"
 SYMPHONY_DIR="$HOME/.config/symphony"
-BRANDING="$DOTFILES/branding"
+BRANDING="$SYMPHONY_DIR/branding"
 LOGO_FILE="$BRANDING/symphony.txt"
 MUSICAL_FILE="$BRANDING/musical.txt"
 
-source "$DOTFILES/install/utils.sh"
+source "$SYMPHONY_DIR/install/utils.sh"
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Fullscreen Re-launch                                                  │
@@ -160,7 +160,7 @@ page_one() {
     heading "Tuning the Instruments"
     
     local missing=()
-    for dep in stow hyprctl swww; do
+    for dep in hyprctl swww; do
         if command -v "$dep" &>/dev/null; then
             check_mark "$dep"
         else
@@ -313,7 +313,7 @@ page_two() {
     echo
     echo
 
-    center_text "https://github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
+    center_text "https://github.com/vyrx-dev/symphony/issues" "$C_DIMMER"
 
     echo
     echo

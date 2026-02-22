@@ -1,0 +1,35 @@
+# Symphony Theme Colors
+# Theme: Espresso
+
+# === Standard palette ===
+accent = "#e8b89a"
+cursor = "#e8b89a"
+foreground = "#f0e4dc"
+background = "#1a1513"
+selection_foreground = "#1a1513"
+selection_background = "#e8b89a"
+
+color0  = "#2e2520"
+color1  = "#e8a090"
+color2  = "#c8b888"
+color3  = "#e8c8a0"
+color4  = "#c8a898"
+color5  = "#d8a8a0"
+color6  = "#b8b098"
+color7  = "#d8ccc0"
+color8  = "#5c534a"
+color9  = "#f0b8a8"
+color10 = "#d8c8a0"
+color11 = "#f0d8b8"
+color12 = "#d8b8a8"
+color13 = "#e8b8b0"
+color14 = "#c8c0a8"
+color15 = "#f0e4dc"
+
+# === Extended semantic ===
+surface = "#2e2520"
+muted   = "#5c534a"
+subtle  = "#8a7968"
+text    = "#d8ccc0"
+overlay = "#3a322c"
+warn    = "#d8a078"

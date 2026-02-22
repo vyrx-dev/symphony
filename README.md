@@ -4,11 +4,9 @@
 
 **A minimal, productivity-focused Arch + Hyprland setup**
 
-<a href="#installation"><img src="https://img.shields.io/badge/Install-c4a7e7?style=for-the-badge&logoColor=1a1b26" alt="Install"/></a>&ensp;
+<a href="#install"><img src="https://img.shields.io/badge/Install-c4a7e7?style=for-the-badge&logoColor=1a1b26" alt="Install"/></a>&ensp;
 <a href="#themes"><img src="https://img.shields.io/badge/Themes-f5a97f?style=for-the-badge&logoColor=1a1b26" alt="Themes"/></a>&ensp;
-<a href="install/themes/README.md"><img src="https://img.shields.io/badge/Symphony-f5c2e7?style=for-the-badge&logoColor=1a1b26" alt="Symphony"/></a>&ensp;
-<a href="#usage"><img src="https://img.shields.io/badge/Usage-7aa2f7?style=for-the-badge&logoColor=1a1b26" alt="Usage"/></a>&ensp;
-<a href="#keybindings"><img src="https://img.shields.io/badge/Keybindings-9ece6a?style=for-the-badge&logoColor=1a1b26" alt="Keybindings"/></a>
+<a href="#keybindings"><img src="https://img.shields.io/badge/Keys-9ece6a?style=for-the-badge&logoColor=1a1b26" alt="Keys"/></a>
 
 </div>
 
@@ -18,34 +16,18 @@
 
 ---
 
-## Features
+## What's in here
 
-- **One-command theming** — Switch entire desktop look with `symphony switch`
-- **Dynamic colors** — Matugen extracts palette from any wallpaper
-- **11 handcrafted themes** — Dark, cozy, and aesthetic
-- **Everything synced** — Terminal, bar, launcher, notifications, apps
-- **Rofi menus** — App launcher, emoji picker, clipboard, wallpaper selector, power profiles
-- **Dual mode** — Vibe (animations + blur) or Focus (minimal + fast)
-- **Music integration** — MPD + RMPC + Cava visualizer
-
-<details>
-<summary><b>Dual Mode System</b></summary>
-
-Sometimes you want your desktop to look good. Other times you just need to get work done.
-
-**Vibe Mode**
-
-The default look — animations, blur, transparency, gaps. Makes everything feel smooth and polished.
-
-**Focus Mode**
-
-Strips it all down. No animations, minimal borders, transparency off. Just you and your work.
-
-Toggle between them with `Super + Ctrl + Backspace`
-
-</details>
+- **One-command theming** — `symphony switch` changes your entire desktop. terminal, bar, launcher, notifications, lock screen, even discord and spotify. all of it, one command.
+- **Dynamic colors** — pick any wallpaper, matugen pulls a color palette from it and applies it everywhere.
+- **11 handcrafted themes** — all dark, all cozy. no blinding light themes here.
+- **Rofi menus for everything** — app launcher, emoji picker, clipboard history, wallpaper selector, power profiles.
+- **Vibe / Focus mode** — full eye candy (blur, animations, gaps) or stripped-down productivity mode. `Super + Ctrl + Backspace` to toggle.
+- **Music** — MPD + RMPC + Cava visualizer, all themed to match.
 
 ---
+
+<a id="themes"></a>
 
 ## Themes
 
@@ -84,268 +66,177 @@ _Colors generated from wallpaper using Matugen_
 
 ---
 
-## Rofi & Notifications
+<a id="install"></a>
 
-<div align="center">
-
-![Rofi and SwayNC](assets/rofi-swaync.gif)
-
-</div>
-
-<details>
-<summary><b>Rofi Menus</b></summary>
-
-<div align="center">
-
-**Wallpaper Selector**
-
-![Wallpaper Selector](assets/rofi-wall-selector.png)
-
-**Music**
-
-![Music](assets/rofi-music.png)
-
-|             App Launcher             |              Emoji Picker              |                Power Menu                 |
-| :----------------------------------: | :------------------------------------: | :---------------------------------------: |
-| ![App Launcher](assets/rofi-app.png) | ![Emoji Picker](assets/rofi-emoji.png) | ![Power Menu](assets/rofi-power-menu.png) |
-
-</div>
-
-</details>
-
----
-
-## Hyprlock
-
-<div align="center">
-
-![Hyprlock](assets/hyprlock.png)
-
-</div>
-
----
-
-## Neovim
-
-<div align="center">
-
-![Neovim](assets/neovim-showcase.gif)
-
-</div>
-
----
-
-## Music
-
-<div align="center">
-
-![Music](assets/music-showcase.gif)
-
-_RMPC + Cava visualizer_
-
-</div>
-
----
-
-## Installation
+## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vyrx-dev/dotfiles/main/boot.sh | bash
+curl -fsSL https://raw.githubusercontent.com/vyrx-dev/symphony/main/boot.sh | bash
 ```
 
-Or manually:
+that's it. `boot.sh` handles git, gum, cloning the repo, and kicks off the installer. it also works as an updater — run it again anytime to pull the latest.
+
+if you'd rather do it manually:
 
 ```bash
-git clone https://github.com/vyrx-dev/dotfiles ~/dotfiles
-cd ~/dotfiles && ./install.sh
+git clone https://github.com/vyrx-dev/symphony ~/symphony
+cd ~/symphony && ./install.sh
 ```
 
-### Themes Only
+your existing configs are backed up to `~/.config/symphony/backups/` before anything gets overwritten. themes get set up on your first login.
 
-Want just the themes without the full setup? See [install/themes/README.md](install/themes/README.md)
+> [!NOTE]
+> this is built for **arch linux**. it probably works on arch-based distros too, but no promises. a fresh install is the smoothest path — you'll have less conflicts to deal with.
 
 ---
 
 ## Usage
 
-### Theme Switching
-
 ```bash
-symphony switch          # interactive picker
-symphony switch sakura   # direct switch
-symphony switch --random # random theme
-symphony list            # show all themes
-symphony reload          # re-apply current
+symphony switch          # pick a theme
+symphony switch sakura   # switch directly
+symphony switch -r       # random
+symphony list            # see what's available
+symphony reload          # reapply current theme
+symphony update          # pull latest + redeploy
+symphony restore         # roll back from a backup
+symphony fresh-setup     # nuclear option — reclone + reinstall
+symphony help            # everything else
 ```
 
-Or press `Super + Ctrl + Shift + Space` for the theme picker.
+you can also press `Super + Ctrl + Shift + Space` for the theme picker GUI.
+
+---
 
 <a id="keybindings"></a>
 
-### Keybindings
+## Keybindings
+
+i tried to make these feel natural but tweak them however you want in `config/hypr/bindings.conf`.
+
+> 💡 press `Super + K` to see all keybindings anytime.
 
 <details>
-<summary><b>Applications</b></summary>
+<summary><b>Apps</b></summary>
 
-| Key              | Action       |
-| ---------------- | ------------ |
-| `Super + Return` | Terminal     |
-| `Super + B`      | Browser      |
-| `Super + E`      | File Manager |
-| `Super + M`      | Spotify      |
-| `Super + D`      | Discord      |
-| `Super + O`      | Obsidian     |
-| `Super + C`      | VS Code      |
-| `Alt + M`        | RMPC         |
-| `Alt + N`        | Neovim       |
-| `Alt + Q`        | Yazi         |
-| `Alt + /`        | Btop         |
+| Key | Action |
+|-----|--------|
+| `Super + Return` | Terminal |
+| `Super + Space` | App Launcher |
+| `Super + B` | Browser |
+| `Super + E` | File Manager |
+| `Super + M` | Spotify |
+| `Super + D` | Discord |
+| `Super + C` | VS Code |
+| `Alt + M` | RMPC |
+| `Alt + N` | Neovim |
+| `Alt + Q` | Yazi |
+| `Alt + /` | Btop |
 
 </details>
 
 <details>
-<summary><b>Rofi Menus</b></summary>
+<summary><b>Menus</b></summary>
 
-| Key                            | Action           |
-| ------------------------------ | ---------------- |
-| `Super + Space`                | App Launcher     |
-| `Alt + ,`                      | Clipboard        |
-| `Alt + .`                      | Emoji Picker     |
-| `Super + Ctrl + B`             | Power Profiles   |
-| `Super + Ctrl + Space`         | Matugen Theme    |
-| `Super + Alt + Space`          | Wallpaper Picker |
-| `Super + Ctrl + Shift + Space` | Theme Switcher   |
+| Key | Action |
+|-----|--------|
+| `Alt + ,` | Clipboard |
+| `Alt + .` | Emoji Picker |
+| `Super + Ctrl + B` | Power Profiles |
+| `Super + Ctrl + Space` | Matugen Theme |
+| `Super + Alt + Space` | Wallpaper Picker |
+| `Super + Ctrl + Shift + Space` | Theme Switcher |
 
 </details>
 
 <details>
-<summary><b>Window Management</b></summary>
+<summary><b>Windows</b></summary>
 
-| Key                     | Action                   |
-| ----------------------- | ------------------------ |
-| `Super + Q`             | Close Window             |
-| `Super + K`             | Kill Application         |
-| `Super + Arrow`         | Move Focus               |
-| `Super + Shift + Arrow` | Move Window              |
-| `Super + Ctrl + Arrow`  | Resize Window            |
-| `Super + 1-9`           | Switch Workspace         |
-| `Super + Shift + 1-9`   | Move to Workspace        |
-| `Super + F`             | Fullscreen               |
-| `Super + V`             | Toggle Floating          |
-| `Super + Shift + O`     | Pop Window (Float & Pin) |
+| Key | Action |
+|-----|--------|
+| `Super + Q` | Close |
+| `Super + K` | Kill |
+| `Super + Arrow` | Focus |
+| `Super + Shift + Arrow` | Move |
+| `Super + Ctrl + Arrow` | Resize |
+| `Super + 1-9` | Workspace |
+| `Super + Shift + 1-9` | Send to Workspace |
+| `Super + F` | Fullscreen |
+| `Super + V` | Float |
+| `Super + Shift + O` | Pop (Float & Pin) |
 
 </details>
 
 <details>
 <summary><b>System</b></summary>
 
-| Key                        | Action                 |
-| -------------------------- | ---------------------- |
-| `Super + Shift + L`        | Lock Screen            |
-| `Super + Escape`           | Power Menu             |
-| `Super + N`                | Notifications          |
-| `Super + Backspace`        | Toggle Transparency    |
-| `Super + Ctrl + Backspace` | Toggle Focus/Vibe Mode |
+| Key | Action |
+|-----|--------|
+| `Super + Shift + L` | Lock |
+| `Super + Escape` | Power Menu |
+| `Super + N` | Notifications |
+| `Super + P` | Screenshot |
+| `Super + R` | Record |
+| `Super + Shift + R` | Record + Mic |
+| `Super + Shift + P` | Color Picker |
+| `Super + Backspace` | Toggle Transparency |
+| `Super + Ctrl + Backspace` | Vibe / Focus Mode |
+| `Ctrl + Alt + Space` | Random Wallpaper |
+| `Super + Alt + ←/→` | Cycle Wallpapers |
 
 </details>
-
-<details>
-<summary><b>Screenshots & Recording</b></summary>
-
-| Key                 | Action          |
-| ------------------- | --------------- |
-| `Super + P`         | Screenshot      |
-| `Super + R`         | Screen Record   |
-| `Super + Shift + R` | Record with Mic |
-| `Super + Shift + P` | Color Picker    |
-
-</details>
-
-<details>
-<summary><b>Wallpapers</b></summary>
-
-| Key                        | Action                    |
-| -------------------------- | ------------------------- |
-| `Ctrl + Alt + Space`       | Random Wallpaper + Colors |
-| `Super + Alt + Left/Right` | Cycle Wallpapers          |
-
-</details>
-
-See [.config/hypr/bindings.conf](.config/hypr/bindings.conf) for full list.
 
 ---
 
-## Components
+## Troubleshooting
 
-| Component     | Tool                                                                        |
-| ------------- | --------------------------------------------------------------------------- |
-| Compositor    | [Hyprland](https://hyprland.org/)                                           |
-| Bar           | [Waybar](https://github.com/Alexays/Waybar)                                 |
-| Launcher      | [Rofi](https://github.com/lbonn/rofi)                                       |
-| Terminal      | [Kitty](https://sw.kovidgoyal.net/kitty/) / [Ghostty](https://ghostty.org/) |
-| Notifications | [SwayNC](https://github.com/ErikReider/SwayNotificationCenter)              |
-| Lock screen   | [Hyprlock](https://github.com/hyprwm/hyprlock)                              |
-| Theme engine  | [Matugen](https://github.com/InioX/matugen)                                 |
-| Music         | [MPD](https://musicpd.org/) + [RMPC](https://github.com/mierak/rmpc)        |
-| Visualizer    | [Cava](https://github.com/karlstav/cava)                                    |
-| Editor        | [Neovim](https://neovim.io/)                                                |
-| Shell         | [Fish](https://fishshell.com/) + [Starship](https://starship.rs/)           |
+> *"with great power comes great responsibility"* — you're running a rolling release distro. things will break sometimes. that's normal. before opening an issue, try asking an AI (chatgpt, gemini, etc.) with the error message — it's usually something device-specific that they can figure out instantly.
 
----
+I'm not going to build a unified settings menu or hand-hold you through editing config files — you'll just get lazy. the fastest way to get good at linux is to start using the terminal instead of digging through menus. that said, suggestions are always welcome, and if you hit a real bug please [open an issue](https://github.com/vyrx-dev/symphony/issues/new?template=bug_report.yml) so we can fix it and nobody else has to deal with the same thing.
 
-## Structure
+**install broke halfway?** each script is independent. just re-run the one that failed:
 
+```bash
+./install/packages.sh
+./install/deploy.sh
+./install/services.sh
 ```
-~/dotfiles/
-├── .config/
-│   ├── hypr/           # Hyprland (compositor, bindings, animations)
-│   ├── waybar/         # Status bar
-│   ├── rofi/           # Launcher & menus
-│   ├── swaync/         # Notifications
-│   ├── kitty/          # Terminal
-│   ├── ghostty/        # Terminal (alt)
-│   ├── alacritty/      # Terminal (alt)
-│   ├── nvim/           # Neovim
-│   ├── fish/           # Shell
-│   ├── tmux/           # Terminal multiplexer
-│   ├── yazi/           # File manager
-│   ├── btop/           # System monitor
-│   ├── rmpc/           # Music player
-│   ├── matugen/        # Theme generator templates
-│   └── lazygit/        # Git UI
-├── themes/             # Theme configs (colors, wallpapers)
-├── scripts/            # Utility scripts
-└── install/            # Installer
-    ├── packages.sh     # Package lists
-    ├── stow.sh         # Dotfile deployment
-    ├── services.sh     # Systemd services
-    └── themes/         # Symphony theme system
-```
+
+**theme looks broken?** `symphony fix` then `symphony reload`. still broken? `symphony switch sakura` to force a known-good theme.
+
+**waybar gone?** remove `xdg-desktop-portal-gnome` if you have it installed. keep `xdg-desktop-portal-gtk`. reboot.
+
+**sddm black screen?** `Ctrl+Alt+F3` to get a TTY, login, run `./install/post-setup.sh`.
+
+**want to start over?** `symphony fresh-setup` backs up everything, nukes the repo, reclones from github, and reinstalls. you'll need to type "fresh" to confirm.
+
+still stuck? scroll up — there's a link to open an issue.
 
 ---
 
 ## Credits
 
-Learned/Copied(😁) a lot from these projects:
+learned (and shamelessly copied 😁) a lot from these projects:
 
 - [HyDE-Project/HyDE](https://github.com/HyDE-Project/HyDE)
 - [JaKooLit/Hyprland-Dots](https://github.com/JaKooLit/Hyprland-Dots)
 - [basecamp/omarchy](https://github.com/basecamp/omarchy)
+- [uiriansan/SilentSDDM](https://github.com/uiriansan/SilentSDDM)
 - [bjarneo/aether.nvim](https://github.com/bjarneo/aether.nvim)
 
-Wallpapers: [vyrx-dev/wallpapers](https://github.com/vyrx-dev/wallpapers)
+wallpapers: [vyrx-dev/wallpapers](https://github.com/vyrx-dev/wallpapers)
 
 ---
 
-<a href="https://www.star-history.com/#vyrx-dev/dotfiles&type=date&legend=top-left">
+<a href="https://www.star-history.com/#vyrx-dev/symphony&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=vyrx-dev/dotfiles&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=vyrx-dev/dotfiles&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=vyrx-dev/dotfiles&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=vyrx-dev/symphony&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=vyrx-dev/symphony&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=vyrx-dev/symphony&type=date&legend=top-left" />
  </picture>
 </a>
 <div align="center">
 
-**[Report Bug](https://github.com/vyrx-dev/dotfiles/issues/new?template=bug_report.yml)** · **[Request Feature](https://github.com/vyrx-dev/dotfiles/issues/new?template=feature_request.yml)** · **[TODO](TODO.md)**
+**[report a bug](https://github.com/vyrx-dev/symphony/issues/new?template=bug_report.yml)** · **[request a feature](https://github.com/vyrx-dev/symphony/issues/new?template=feature_request.yml)**
 
 </div>

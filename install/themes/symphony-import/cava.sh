@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_cava() {
-    cat > "$dest/.config/cava/config" <<EOF
+    cat > "$dest/cava/config" <<EOF
 # ╭─ ♪ Symphony ─╮
 # │  Generated   │
 # ╰──────────────╯
