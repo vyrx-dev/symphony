@@ -277,14 +277,33 @@ cmd_restore() {
 
 	[[ -d "$selected" ]] || { err "Invalid selection"; exit 1; }
 
-	info "Restoring from: $(basename "$selected")"
+	local current current_theme backup_name count=0
+	current_theme=$(current_theme)
+	backup_name=$(basename "$selected")
+
+	info "Current theme: $current_theme"
+	info "Restoring from backup: $backup_name"
+
 	while IFS= read -r file; do
 		local dest="$HOME/${file#$selected/}"
 		mkdir -p "$(dirname "$dest")"
 		cp "$file" "$dest"
+		((count++))
 	done < <(find "$selected" -type f)
 
-	ok "Restored from $(basename "$selected")"
+	ok "Restored $count files from $backup_name"
+
+	# Show what was restored (max 5 files)
+	local shown=0
+	while IFS= read -r file && [[ $shown -lt 5 ]]; do
+		local rel_path="${file#$selected/}"
+		echo "  ${GREEN}→${RESET} ~/$rel_path"
+		((shown++))
+	done < <(find "$selected" -type f | head -5)
+
+	local total
+	total=$(find "$selected" -type f | wc -l)
+	[[ $total -gt 5 ]] && echo "  ${CYAN}…${RESET} and $((total - 5)) more"
 }
 
 cmd_fresh_setup() {

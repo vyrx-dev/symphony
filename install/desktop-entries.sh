@@ -41,9 +41,10 @@ fi
 # Web apps (optional)
 if command -v gum &>/dev/null; then
     echo
-    gum confirm "Install web apps?" || exit 0
-    source "$SYMPHONY_DIR/install/webapps.sh"
-    install_webapps
+    if gum confirm "Install web apps?"; then
+        source "$SYMPHONY_DIR/install/webapps.sh"
+        install_webapps || true
+    fi
 fi
 
 # Refresh desktop database
