@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_hyprland() {
-    cat > "$dest/.config/hypr/theme/colors.conf" <<EOF
+    cat > "$dest/hypr/theme/colors.conf" <<EOF
 # ╭─ ♪ Symphony ─╮
 # │  Generated   │
 # ╰──────────────╯

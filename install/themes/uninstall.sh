@@ -7,30 +7,11 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-source "$DOTFILES_ROOT/install/utils.sh"
+SYMPHONY_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+source "$SYMPHONY_ROOT/install/utils.sh"
 
-THEMES_DIR="$DOTFILES_ROOT/themes"
+THEMES_DIR="$SYMPHONY_ROOT/themes"
 SYMPHONY_DIR="$HOME/.config/symphony"
-
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Functions                                                             │
-# ╰───────────────────────────────────────────────────────────────────────╯
-
-show_menu() {
-    clear
-    echo
-    show_banner
-    echo
-    warn "Theme Uninstaller"
-    echo
-    echo "  1) Delete specific themes"
-    echo "  2) Complete removal"
-    echo "  3) Cancel"
-    echo
-    read -rp "  Select: " choice
-    echo "$choice"
-}
 
 delete_themes() {
     local themes=()
@@ -41,24 +22,9 @@ delete_themes() {
 
     [[ ${#themes[@]} -eq 0 ]] && { info "No themes found"; return 0; }
 
-    local selected=""
-    if [[ $HAS_GUM -eq 1 ]]; then
-        info "Space to select, Enter to confirm"
-        selected=$(printf '%s\n' "${themes[@]}" | gum choose --no-limit) || return 0
-    else
-        echo
-        info "Available themes:"
-        for i in "${!themes[@]}"; do
-            echo "    $((i+1))) ${themes[$i]}"
-        done
-        echo
-        read -rp "  Enter numbers (space-separated): " nums
-
-        for num in $nums; do
-            local idx=$((num-1))
-            [[ $idx -ge 0 && $idx -lt ${#themes[@]} ]] && selected+="${themes[$idx]}"$'\n'
-        done
-    fi
+    info "Space to select, Enter to confirm"
+    local selected
+    selected=$(printf '%s\n' "${themes[@]}" | gum choose --no-limit) || return 0
 
     [[ -z "$selected" ]] && { info "Nothing selected"; return 0; }
 
@@ -67,7 +33,7 @@ delete_themes() {
     echo "$selected" | while read -r t; do [[ -n "$t" ]] && echo "    $t"; done
     echo
 
-    confirm "Continue?" || return 0
+    gum confirm "Continue?" || return 0
 
     while IFS= read -r theme; do
         [[ -z "$theme" ]] && continue
@@ -82,41 +48,53 @@ nuke_everything() {
     echo
     warn "COMPLETE REMOVAL"
     echo
-    echo "  This will remove:"
-    echo "    - Symphony config ($SYMPHONY_DIR)"
-    echo "    - Legacy theme file (~/.current-theme)"
-    echo "    - Pywal cache symlink"
+    echo "  The following will be removed:"
+    echo
+    echo "    Config:      $SYMPHONY_DIR"
+    echo "    Legacy file: ~/.current-theme"
+    echo "    Symlink:     ~/.cache/wal/colors.json"
     echo
     
-    confirm "Continue?" || return 0
+    gum confirm "Continue?" || return 0
     
     echo
     read -rp "  Type 'yes' to confirm: " answer
     [[ "$answer" != "yes" ]] && { info "Cancelled"; return 0; }
 
-    step "Removing"
+    step "Removing Symphony"
 
-    [[ -d "$SYMPHONY_DIR" ]] && rm -rf "$SYMPHONY_DIR" && ok "Symphony config"
-    [[ -f "$HOME/.current-theme" ]] && rm -f "$HOME/.current-theme" && ok "Legacy theme file"
-    [[ -L "$HOME/.cache/wal/colors.json" ]] && rm -f "$HOME/.cache/wal/colors.json" && ok "Pywal symlink"
+    [[ -d "$SYMPHONY_DIR" ]] && rm -rf "$SYMPHONY_DIR" && ok "Removed config directory"
+    [[ -f "$HOME/.current-theme" ]] && rm -f "$HOME/.current-theme" && ok "Removed legacy theme file"
+    [[ -L "$HOME/.cache/wal/colors.json" ]] && rm -f "$HOME/.cache/wal/colors.json" && ok "Removed pywal symlink"
 
+    ok "Uninstall complete"
     echo
-    ok "Complete removal done"
+    info "Manual cleanup required:"
+    info "  - Remove PATH entry from your shell config:"
+    info "      Fish:  ~/.config/fish/config.fish"
+    info "      Bash:  ~/.bashrc"
+    info "      Zsh:   ~/.zshrc"
     echo
-    info "Manual cleanup:"
-    info "  - Remove PATH entry from shell rc file"
-    info "  - Reload shell: source ~/.bashrc or ~/.zshrc"
+    info "  - Then reload your shell"
 
     return 0
 }
 
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Main                                                                  │
-# ╰───────────────────────────────────────────────────────────────────────╯
+# Main
+clear
+echo
+show_banner
+echo
+warn "Theme Uninstaller"
+echo
+echo "  1) Delete specific themes"
+echo "  2) Complete removal"
+echo "  3) Cancel"
+echo
 
-choice=$(show_menu)
+read -rp "  Select: " choice
 
-case $choice in
+case "$choice" in
     1) delete_themes ;;
     2) nuke_everything ;;
     3) info "Cancelled" ;;

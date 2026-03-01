@@ -7,8 +7,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")"
-THEMES_DIR="$DOTFILES/themes"
+SYMPHONY_DIR="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")"
+THEMES_DIR="$SYMPHONY_DIR/themes"
 
 source "$SCRIPT_DIR/init.sh"
 source "$SCRIPT_DIR/terminals.sh"
@@ -97,8 +97,8 @@ run_import() {
     local palette=("${C[@]:2}")
     
     info "creating $name..."
-    mkdir -p "$dest"/{backgrounds,.cache/wal}
-    mkdir -p "$dest/.config"/{alacritty,btop/themes,cava,ghostty,gtk-3.0,gtk-4.0,hypr/theme,kitty,nvim,obsidian,rmpc/themes,rofi,spicetify/Themes/symphony,vesktop/themes,waybar,yazi}
+    mkdir -p "$dest"/{backgrounds,wal,.cache/wal}
+    mkdir -p "$dest"/{alacritty,btop/themes,cava,ghostty,gtk-3.0,gtk-4.0,hypr/theme,kitty,nvim,obsidian,rmpc/themes,rofi,spicetify/Themes/symphony,vesktop/themes,waybar,yazi}
     
     # copy wallpapers
     [[ -d "$tmp/repo/backgrounds" ]] && cp "$tmp/repo/backgrounds"/* "$dest/backgrounds/" 2>/dev/null || true
@@ -113,8 +113,8 @@ run_import() {
     write_configs "$name" "$dest" "$bg" "$fg" "${palette[@]}"
     
     # use original theme configs if available
-    [[ -f "$tmp/repo/btop.theme" ]] && cp "$tmp/repo/btop.theme" "$dest/.config/btop/themes/current.theme"
-    [[ -f "$tmp/repo/neovim.lua" ]] && cp "$tmp/repo/neovim.lua" "$dest/.config/nvim/theme.lua"
+    [[ -f "$tmp/repo/btop.theme" ]] && cp "$tmp/repo/btop.theme" "$dest/btop/themes/current.theme"
+    [[ -f "$tmp/repo/neovim.lua" ]] && cp "$tmp/repo/neovim.lua" "$dest/nvim/theme.lua"
     
     ok "imported $name"
     local parent_script="$(dirname "$SCRIPT_DIR")/symphony"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # cava - symlink config and reload
-src="$CURRENT_LINK/.config/cava/config"
+src="$CURRENT_LINK/cava/config"
 dst="$HOME/.config/cava/config"
 
 [[ -f "$src" ]] || exit 0

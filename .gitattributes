@@ -1,0 +1,4 @@
+# Git LFS tracking for large files
+themes/**/backgrounds/* filter=lfs diff=lfs merge=lfs -text
+assets/** filter=lfs diff=lfs merge=lfs -text
+branding/** filter=lfs diff=lfs merge=lfs -text

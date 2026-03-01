@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_waybar() {
-    cat > "$dest/.config/waybar/colors.css" <<EOF
+    cat > "$dest/waybar/colors.css" <<EOF
 /* ╭─ ♪ Symphony ─╮
    │  Generated   │
    ╰──────────────╯

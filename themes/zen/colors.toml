@@ -1,0 +1,35 @@
+# Symphony Theme Colors
+# Theme: Zen
+
+# === Standard palette ===
+accent = "#7a7a7c"
+cursor = "#e8e8ed"
+foreground = "#e8e8ed"
+background = "#0f0f0f"
+selection_foreground = "#f5f5f7"
+selection_background = "#2c2c2e"
+
+color0  = "#1c1c1e"
+color1  = "#5c5c5e"
+color2  = "#98989a"
+color3  = "#7a7a7c"
+color4  = "#6c6c6e"
+color5  = "#86868a"
+color6  = "#a8a8ac"
+color7  = "#d1d1d6"
+color8  = "#48484a"
+color9  = "#6e6e70"
+color10 = "#aeaeb0"
+color11 = "#8e8e90"
+color12 = "#828284"
+color13 = "#9c9ca0"
+color14 = "#bebec2"
+color15 = "#f5f5f7"
+
+# === Extended semantic ===
+surface = "#1a1a1a"
+muted   = "#505050"
+subtle  = "#959595"
+text    = "#e8e8ed"
+overlay = "#2a2a2a"
+warn    = "#8e8e90"

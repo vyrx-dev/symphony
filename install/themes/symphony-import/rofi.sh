@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_rofi() {
-    cat > "$dest/.config/rofi/colors.rasi" <<EOF
+    cat > "$dest/rofi/colors.rasi" <<EOF
 /* ╭─ ♪ Symphony ─╮
    │  Generated   │
    ╰──────────────╯

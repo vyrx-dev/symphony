@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_spicetify() {
-    local spicetify_dir="$dest/.config/spicetify/Themes/symphony"
+    local spicetify_dir="$dest/spicetify/Themes/symphony"
     mkdir -p "$spicetify_dir"
 
     cat > "$spicetify_dir/color.ini" <<EOF

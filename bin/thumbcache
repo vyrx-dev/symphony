@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Thumbnail cache for rofi - source this file
+
+THUMB_DIR="${THUMB_DIR:-$HOME/.cache/rofi/thumbs}"
+[[ -d "$THUMB_DIR" ]] || mkdir -p "$THUMB_DIR"
+
+# Fast path: just return the expected thumb path (assumes pre-cached)
+# Falls back to original if thumb doesn't exist
+get_thumb() {
+    local src="$1"
+    local hash=$(md5sum <<< "$src" | cut -c1-32)
+    local thumb="$THUMB_DIR/$hash.jpg"
+    
+    if [[ -f "$thumb" ]]; then
+        echo "$thumb"
+    elif [[ -f "$src" ]]; then
+        # generate on-demand (first time only)
+        magick "$src"[0] -strip -thumbnail 500x500^ -gravity center -extent 500x500 -quality 85 "$thumb" 2>/dev/null
+        [[ -f "$thumb" ]] && echo "$thumb" || echo "$src"
+    fi
+}
+
+# CLI: pre-cache directory
+[[ "$1" == "cache" && -d "$2" ]] && {
+    echo "Caching thumbnails in $2..."
+    find "$2" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.gif' \) | while read -r img; do
+        hash=$(md5sum <<< "$img" | cut -c1-32)
+        thumb="$THUMB_DIR/$hash.jpg"
+        [[ -f "$thumb" && ! "$img" -nt "$thumb" ]] && continue
+        magick "$img"[0] -strip -thumbnail 500x500^ -gravity center -extent 500x500 -quality 85 "$thumb" 2>/dev/null && echo "  $img"
+    done
+    echo "Done."
+    exit 0
+}
+
+# CLI: clear cache
+# Usage: thumbcache clear
+# Run this if thumbnails look wrong after changing wallpapers or preview.png
+[[ "$1" == "clear" ]] && {
+    rm -rf "$THUMB_DIR"/*
+    echo "Thumbnail cache cleared."
+    exit 0
+}

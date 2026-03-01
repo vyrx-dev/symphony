@@ -4,16 +4,16 @@
 #|-/ /--| Desktop Entries     |-/ /--|#
 #|/ /---+---------------------+/ /---|#
 
-DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-APPS_DIR="$DOTFILES/.local/share/applications"
+SYMPHONY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+[[ -z "$RESET" ]] && source "$SYMPHONY_DIR/install/utils.sh"
+APPS_DIR="$SYMPHONY_DIR/local/share/applications"
 TARGET_DIR="$HOME/.local/share/applications"
 
 step "Setting up desktop entries"
 
-# If stow symlinked the whole directory, remove it
+# Remove stale symlink if present
 if [[ -L "$TARGET_DIR" ]]; then
     rm "$TARGET_DIR"
-    info "Removed stale symlink"
 fi
 
 mkdir -p "$TARGET_DIR"
@@ -31,8 +31,8 @@ if command -v chromium &>/dev/null && [[ -f "$APPS_DIR/chromium.desktop" ]]; the
 fi
 
 # Hide system clutter (LSP plugins, electron, etc)
-if [[ -x "$DOTFILES/scripts/hide-apps" ]]; then
-    count=$("$DOTFILES/scripts/hide-apps" 2>/dev/null | grep -oP '\d+' || echo 0)
+if [[ -x "$SYMPHONY_DIR/bin/hide-apps" ]]; then
+    count=$("$SYMPHONY_DIR/bin/hide-apps" 2>/dev/null | grep -oP '\d+' || echo 0)
     if [[ $count -gt 0 ]]; then
         ok "Hidden $count system apps"
     fi
@@ -42,8 +42,8 @@ fi
 if command -v gum &>/dev/null; then
     echo
     if gum confirm "Install web apps?"; then
-        source "$DOTFILES/install/webapps.sh"
-        install_webapps
+        source "$SYMPHONY_DIR/install/webapps.sh"
+        install_webapps || true
     fi
 fi
 

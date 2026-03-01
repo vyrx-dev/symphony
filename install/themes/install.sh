@@ -7,14 +7,14 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES="$(dirname "$(dirname "$SCRIPT_DIR")")"
-THEMES_DIR="$DOTFILES/themes"
-SYMPHONY_DIR="$HOME/.config/symphony"
-BRANDING="$DOTFILES/branding"
+SYMPHONY_DIR="${SYMPHONY_REPO:-$(dirname "$(dirname "$SCRIPT_DIR")")}"
+THEMES_DIR="$SYMPHONY_DIR/themes"
+SYMPHONY_CONFIG="$HOME/.config/symphony"
+BRANDING="$SYMPHONY_DIR/branding"
 LOGO_FILE="$BRANDING/symphony.txt"
 MUSICAL_FILE="$BRANDING/musical.txt"
 
-source "$DOTFILES/install/utils.sh"
+source "$SYMPHONY_DIR/install/utils.sh"
 
 # ╭───────────────────────────────────────────────────────────────────────╮
 # │ Fullscreen Re-launch                                                  │
@@ -160,7 +160,7 @@ page_one() {
     heading "Tuning the Instruments"
     
     local missing=()
-    for dep in stow hyprctl swww; do
+    for dep in hyprctl swww; do
         if command -v "$dep" &>/dev/null; then
             check_mark "$dep"
         else
@@ -202,7 +202,7 @@ page_one() {
     heading "Setting the Stage"
     
     spin "Arranging the seats" 0.4
-    mkdir -p "$SYMPHONY_DIR" "$HOME/.config/rmpc/themes" "$HOME/.cache/wal"
+    mkdir -p "$SYMPHONY_CONFIG" "$HOME/.config/rmpc/themes" "$HOME/.cache/wal"
     spin "Adjusting the lights" 0.35
     chmod +x "$SCRIPT_DIR/symphony" "$SCRIPT_DIR/hooks"/*.sh 2>/dev/null || true
     spin "Testing the acoustics" 0.35
@@ -313,7 +313,7 @@ page_two() {
     echo
     echo
 
-    center_text "https://github.com/vyrx-dev/dotfiles/issues" "$C_DIMMER"
+    center_text "https://github.com/vyrx-dev/symphony/issues" "$C_DIMMER"
 
     echo
     echo

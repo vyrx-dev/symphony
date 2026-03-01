@@ -2,7 +2,7 @@
 # kitty, alacritty, ghostty
 
 gen_terminals() {
-    cat > "$dest/.config/kitty/colors.conf" <<EOF
+    cat > "$dest/kitty/colors.conf" <<EOF
 # ╭─ ♪ Symphony ─╮
 # │  Generated   │
 # ╰──────────────╯
@@ -38,7 +38,7 @@ color14 $bcyan
 color15 $bwhite
 EOF
 
-    cat > "$dest/.config/alacritty/colors.toml" <<EOF
+    cat > "$dest/alacritty/colors.toml" <<EOF
 # ╭─ ♪ Symphony ─╮
 # │  Generated   │
 # ╰──────────────╯
@@ -69,7 +69,7 @@ cyan = '$bcyan'
 white = '$bwhite'
 EOF
 
-    cat > "$dest/.config/ghostty/theme" <<EOF
+    cat > "$dest/ghostty/theme" <<EOF
 # ╭─ ♪ Symphony ─╮
 # │  Generated   │
 # ╰──────────────╯

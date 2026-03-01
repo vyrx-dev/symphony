@@ -4,6 +4,9 @@
 #|-/ /--| User Services       |-/ /--|#
 #|/ /---+---------------------+/ /---|#
 
+SYMPHONY_DIR="${SYMPHONY_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+[[ -z "$RESET" ]] && source "$SYMPHONY_DIR/install/utils.sh"
+
 step "Setting up services"
 
 # ── Power Profile ─────────────────────────────────────────────────────────────
@@ -41,8 +44,8 @@ if pkg_installed mpd; then
 	mkdir -p ~/.config/systemd/user/mpd.service.d
 	echo -e "[Service]\nRuntimeDirectory=mpd" >~/.config/systemd/user/mpd.service.d/override.conf
 	systemctl --user daemon-reload
-	systemctl --user enable --now mpd && ok "mpd" || warn "mpd failed"
-    systemctl --user --now enable mpd-mpris
+	systemctl --user enable --now mpd --quiet && ok "mpd" || warn "mpd failed"
+	systemctl --user enable --now mpd-mpris --quiet
 fi
 
 # ── mpdscribble ───────────────────────────────────────────────────────────────
@@ -51,7 +54,7 @@ if pkg_installed mpdscribble; then
 	if grep -q "YOUR_USERNAME" ~/.config/mpdscribble/mpdscribble.conf 2>/dev/null; then
 		warn "mpdscribble: Edit ~/.config/mpdscribble/mpdscribble.conf with your Last.fm credentials"
 	else
-		systemctl --user enable --now mpdscribble && ok "mpdscribble" || warn "mpdscribble failed"
+		systemctl --user enable --now mpdscribble --quiet && ok "mpdscribble" || warn "mpdscribble failed"
 	fi
 fi
 
@@ -85,28 +88,8 @@ EOF
 	fi
 fi
 
-# ── keyd ──────────────────────────────────────────────────────────────────────
-# if pkg_installed keyd; then
-# 	echo
-# 	if gum confirm "Remap Caps Lock to act as Escape (tap) and Control (hold)?
-# You will thank me later 😉" --default=false; then
-# 		sudo mkdir -p /etc/keyd
-# 		cat >"/etc/keyd/default.conf" <<'EOF'
-# [ids]
-# *
-#
-# [main]
-# capslock = overload(control, esc)
-# esc = capslock
-# EOF
-#
-# 		sudo systemctl enable --now keyd
-# 		sudo keyd reload && ok "keyd configured" || warn "keyd failed"
-# 	fi
-# fi
-
 # ── Git ───────────────────────────────────────────────────────────────────────────
-if pkg_installed -v git; then
+if command -v git &>/dev/null; then
 	echo
 	if gum confirm "Set up Git user name and email (used for commits)?" --default=false; then
 
@@ -181,8 +164,16 @@ if pkg_installed spicetify-cli; then
 		spicetify config current_theme symphony color_scheme base &>/dev/null
 		spicetify config inject_css 1 replace_colors 1 &>/dev/null
 
-		#setup marketplace
-        # curl -fsSL https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.sh | sh
+		# Install marketplace (fail-safe — won't break install if download fails)
+		if command -v curl &>/dev/null; then
+			if curl -fsSL --connect-timeout 10 --max-time 30 \
+				https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.sh 2>/dev/null | sh 2>/dev/null; then
+				ok "spicetify marketplace"
+			else
+				warn "spicetify marketplace: download failed (can install manually later)"
+			fi
+		fi
+
 		if spicetify backup apply &>/dev/null; then
 			ok "spicetify"
 		else

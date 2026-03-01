@@ -1,0 +1,35 @@
+# Symphony Theme Colors
+# Theme: Gruvbox Material
+
+# === Standard palette ===
+accent = "#7daea3"
+cursor = "#ddc7a1"
+foreground = "#ddc7a1"
+background = "#111313"
+selection_foreground = "#111313"
+selection_background = "#ddc7a1"
+
+color0  = "#111313"
+color1  = "#ea6962"
+color2  = "#a9b665"
+color3  = "#d8a657"
+color4  = "#7daea3"
+color5  = "#d3869b"
+color6  = "#89b482"
+color7  = "#d4be98"
+color8  = "#32302f"
+color9  = "#ea6962"
+color10 = "#a9b665"
+color11 = "#d8a657"
+color12 = "#7daea3"
+color13 = "#d3869b"
+color14 = "#89b482"
+color15 = "#ddc7a1"
+
+# === Extended semantic ===
+surface = "#2f3131"
+muted   = "#7c6f64"
+subtle  = "#a89984"
+text    = "#ddc7a1"
+overlay = "#3e4040"
+warn    = "#d8a657"

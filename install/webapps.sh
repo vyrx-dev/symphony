@@ -12,11 +12,15 @@ WEBAPPS=(
 	"Reddit|https://www.reddit.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/reddit.png"
 	"WhatsApp|https://web.whatsapp.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/whatsapp.png"
 	"ChatGPT|https://chatgpt.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/chatgpt.png"
+	"Perplexity|https://perplexity.ai/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/perplexity.png"
 	"Gmail|https://mail.google.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gmail.png"
 	"Google Photos|https://photos.google.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google-photos.png"
 	"Google Meet|https://meet.google.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google-meet.png"
+	"Google Drive|https://drive.google.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-drive.png"
+	"Todoist|https://todoist.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/todoist.png"
+	"Calendar|https://calendar.google.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-calendar.png"
 	"LinkedIn|https://www.linkedin.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/linkedin.png"
-	"Pinterest|https://www.pinterest.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pinterest.png"
+	"Pinterest|https://www.pinterest.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pinterest.png"
 	"Figma|https://figma.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/figma.png"
 	"Notion|https://notion.so/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/notion.png"
 	"Twitter|https://x.com/|https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/twitter.png"
@@ -28,26 +32,20 @@ WEBAPPS=(
 	"Discord|https://discord.com/channels/@me|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/discord.png"
 	"Spotify|https://open.spotify.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/spotify.png"
 	"Hotstar|https://www.hotstar.com/in/home|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jiohotstar.png"
-	"Google Drive|https://drive.google.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-drive.png"
 	"Netflix|https://www.netflix.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/netflix.png"
-	"Chess|https://www.chess.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/chess.png"
+	"AUR|https://aur.archlinux.org/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/arch-linux.png"
+	"YouTube Music|https://music.youtube.com/|https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/youtube-music.png"
 )
 
-WEBAPP_INSTALL="$HOME/.config/hypr/scripts/webapp-install"
+WEBAPP_INSTALL="$HOME/.local/bin/webapp-install"
 APPS_DIR="$HOME/.local/share/applications"
 
-# Check what's already installed
 is_installed() {
 	local name="$1"
 	[[ -f "$APPS_DIR/$name.desktop" ]]
 }
 
 install_webapps() {
-	command -v gum &>/dev/null || {
-		echo "gum required"
-		exit 1
-	}
-
 	# Build selection list with install status
 	local options=()
 	local names=()
@@ -76,10 +74,8 @@ install_webapps() {
 	}
 
 	while IFS= read -r choice; do
-		# Remove " (installed)" suffix if present
 		name="${choice% (installed)}"
 
-		# Find the entry
 		for entry in "${WEBAPPS[@]}"; do
 			IFS='|' read -r n url icon <<<"$entry"
 			if [[ "$n" == "$name" ]]; then
@@ -98,5 +94,4 @@ install_webapps() {
 	echo -e "\nDone! Apps available in launcher (Super + Space)"
 }
 
-# Run if executed directly
 [[ "${BASH_SOURCE[0]}" == "${0}" ]] && install_webapps || true

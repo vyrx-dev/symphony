@@ -6,12 +6,12 @@
 
 set -e
 
-DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$DOTFILES/install/utils.sh"
+SYMPHONY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SYMPHONY_DIR/install/utils.sh"
 
 # Core stuff - don't offer to uninstall
 skip=(
-    base-devel git stow fish tmux neovim nautilus
+    base-devel git fish tmux neovim nautilus
     pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber
     networkmanager bluez bluez-utils polkit-gnome power-profiles-daemon
     xdg-utils xdg-user-dirs libnotify wl-clipboard ffmpeg jq wget curl unzip
@@ -33,26 +33,51 @@ is_skipped() {
 
 get_packages() {
     # Grab package names from packages.sh
-    sed -n '/^packages=(/,/^)/p' "$DOTFILES/install/packages.sh" | grep -oP '^\s+\K[a-z][a-z0-9_-]*'
-    sed -n '/^applications=(/,/^)/p' "$DOTFILES/install/packages.sh" | grep -oP '^\s+\K[a-z][a-z0-9_-]*'
+    sed -n '/^packages=(/,/^)/p' "$SYMPHONY_DIR/install/packages.sh" | grep -oP '^\s+\K[a-z][a-z0-9_-]*'
+    sed -n '/^applications=(/,/^)/p' "$SYMPHONY_DIR/install/packages.sh" | grep -oP '^\s+\K[a-z][a-z0-9_-]*'
 }
 
-do_unstow() {
-    step "Removing symlinks"
-    cd "$DOTFILES"
-    stow -D . 2>/dev/null && ok "Removed" || warn "Some failed"
+do_undeploy() {
+    step "Removing deployed configs"
+    local symphony_config="$SYMPHONY_DIR/config"
+    [[ -d "$symphony_config" ]] || return 0
+
+    for item in "$symphony_config"/*/; do
+        [[ -d "$item" ]] || continue
+        local name="$(basename "$item")"
+        local target="$HOME/.config/$name"
+        [[ -d "$target" || -L "$target" ]] && rm -rf "$target" && ok "Removed $name"
+    done
+
+    # Remove deployed scripts from ~/.local/bin
+    for script in "$SYMPHONY_DIR"/bin/*; do
+        [[ -f "$script" ]] || continue
+        local name="$(basename "$script")"
+        rm -f "$HOME/.local/bin/$name"
+    done
+    ok "Deployed scripts removed"
 }
 
 restore_backups() {
     step "Restoring backups"
 
-    # Find most recent backup directory (dotfiles-backup, dotfiles-backup-2, etc.)
-    local latest=$(ls -d "$HOME"/dotfiles-backup* 2>/dev/null | sort -V | tail -1)
+    # Check new backup location first, fall back to old
+    local backup_base="$HOME/.config/symphony/backups"
+    local latest
+
+    if [[ -d "$backup_base" ]]; then
+        latest=$(ls -d "$backup_base"/*/ 2>/dev/null | sort -V | tail -1)
+    fi
+
+    # Fall back to legacy backup location
+    if [[ -z "$latest" ]]; then
+        latest=$(ls -d "$HOME"/symphony-backup* 2>/dev/null | sort -V | tail -1)
+    fi
+
     [[ -z "$latest" || ! -d "$latest" ]] && { info "No backups found"; return 0; }
 
     info "Restoring from: $latest"
 
-    # Restore preserving directory structure
     while IFS= read -r file; do
         local dest="$HOME/${file#$latest/}"
         mkdir -p "$(dirname "$dest")"
@@ -106,14 +131,14 @@ clean_shell() {
 clean_desktop_entries() {
     step "Cleaning desktop entries"
     local target_dir="$HOME/.local/share/applications"
-    local apps_dir="$DOTFILES/.local/share/applications"
+    local apps_dir="$SYMPHONY_DIR/local/share/applications"
     
     [[ -d "$target_dir" ]] || return 0
     
     # Collect entries installed by Symphony
     local entries=()
     
-    # Web apps from dotfiles
+    # Web apps from symphony
     for file in "$apps_dir"/*.desktop; do
         [[ -f "$file" ]] || continue
         local name=$(basename "$file")
@@ -193,7 +218,7 @@ else
 fi
 
 echo
-do_unstow
+do_undeploy
 restore_backups
 clean_desktop_entries
 ask_packages

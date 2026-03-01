@@ -7,7 +7,7 @@ for dir in "$HOME/Documents/Notes" "$HOME/Documents/Obsidian" "$HOME/obsidian" "
 done
 [[ -z "$vault" ]] && exit 0
 
-src="$CURRENT_LINK/.config/obsidian/theme.css"
+src="$CURRENT_LINK/obsidian/theme.css"
 [[ -f "$src" ]] || exit 0
 
 # create symphony theme dir and symlink

@@ -1,7 +1,7 @@
 #!/bin/bash
 # rmpc - symlink theme and hot-reload
-src="$CURRENT_LINK/.config/rmpc/themes/current.ron"
-[[ ! -f "$src" ]] && src="$CURRENT_LINK/.config/rmpc/themes/theme.ron"
+src="$CURRENT_LINK/rmpc/themes/current.ron"
+[[ ! -f "$src" ]] && src="$CURRENT_LINK/rmpc/themes/theme.ron"
 [[ -f "$src" ]] || exit 0
 
 mkdir -p "$HOME/.config/rmpc/themes"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # btop - symlink theme and reload
-src="$CURRENT_LINK/.config/btop/themes/current.theme"
+src="$CURRENT_LINK/btop/themes/current.theme"
 [[ -f "$src" ]] || exit 0
 
 mkdir -p "$HOME/.config/btop/themes"

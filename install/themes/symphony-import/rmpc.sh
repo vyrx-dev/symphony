@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gen_rmpc() {
-    cat > "$dest/.config/rmpc/themes/current.ron" <<EOF
+    cat > "$dest/rmpc/themes/current.ron" <<EOF
 // ╭─ ♪ Symphony ─╮
 // │  Generated   │
 // ╰──────────────╯
