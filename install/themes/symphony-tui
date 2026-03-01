@@ -57,7 +57,7 @@ EOF
     chmod +x "$preview_script"
     
     local sel
-    sel=$(echo "$data" | jq -r '.[] | select(.url | startswith("https://github.com")) | [.name, .url, .preview_img] | @tsv' | sort | \
+    sel=$(echo "$data" | jq -r '.[] | select(.url and (.url | startswith("https://github.com"))) | [.name, .url, .preview_img] | @tsv' | sort | \
         fzf --delimiter=$'\t' --with-nth=1 \
             --preview="$preview_script {3}" \
             --preview-window=right:50% \
@@ -204,7 +204,7 @@ main() {
     case "$choice" in
         "Omarchy Themes") omarchy_menu; main ;;
         "Web Apps")       webapp_menu; main ;;
-        "Choose Shell")   "$SYMPHONY_DIR/scripts/choose-shell"; main ;;
+        "Choose Shell")   "$SYMPHONY_DIR/bin/choose-shell"; main ;;
         "Delete Themes")  delete_themes; main ;;
         *)                clear; exit 0 ;;
     esac

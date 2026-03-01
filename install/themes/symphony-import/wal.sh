@@ -1,6 +1,7 @@
 #!/bin/bash
 
 gen_wal() {
+    mkdir -p "$dest/.cache/wal"
     cat > "$dest/.cache/wal/colors.json" <<EOF
 {
     "_comment": "Symphony Generated - Omarchy $name",

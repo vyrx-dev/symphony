@@ -2,9 +2,9 @@
 # theme picker with image previews
 source "$(dirname "$0")/thumbcache"
 
-themes_dir="$HOME/symphony/themes"
+themes_dir="$HOME/.config/symphony/themes"
 symphony="$HOME/symphony/install/themes/symphony"
-current_theme=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
+current_theme=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "sakura")
 
 # calculate optimal columns based on screen width
 if command -v hyprctl &>/dev/null; then
@@ -36,7 +36,7 @@ menu() {
 	for dir in "$themes_dir"/*/; do
 		name=$(basename "$dir")
 		[[ "$name" == "Wallpapers" || "$name" == ".git" ]] && continue
-		[[ ! -d "$dir/.config" ]] && continue
+		[[ ! -d "$dir/kitty" && ! -d "$dir/hypr" ]] && continue
 
 		preview=$(get_preview "$dir")
 		[[ -z "$preview" ]] && continue

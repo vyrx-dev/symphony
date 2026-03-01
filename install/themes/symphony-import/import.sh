@@ -97,7 +97,7 @@ run_import() {
     local palette=("${C[@]:2}")
     
     info "creating $name..."
-    mkdir -p "$dest"/{backgrounds,wal}
+    mkdir -p "$dest"/{backgrounds,wal,.cache/wal}
     mkdir -p "$dest"/{alacritty,btop/themes,cava,ghostty,gtk-3.0,gtk-4.0,hypr/theme,kitty,nvim,obsidian,rmpc/themes,rofi,spicetify/Themes/symphony,vesktop/themes,waybar,yazi}
     
     # copy wallpapers
