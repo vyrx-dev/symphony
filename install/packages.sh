@@ -7,79 +7,34 @@
 SYMPHONY_DIR="${SYMPHONY_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 [[ -z "$RESET" ]] && source "$SYMPHONY_DIR/install/utils.sh"
 
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Core Packages                                                         │
-# ╰───────────────────────────────────────────────────────────────────────╯
-
 packages=(
-	# Build
 	base-devel git
-
-	# Hyprland
 	hyprland hypridle hyprlock hyprpicker hyprsunset
 	xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
 	qt5-wayland qt6-wayland uwsm
-
-	# Desktop
 	waybar rofi swaync swayosd swww wlogout brave-bin
-
-	# Terminal & Shell
 	kitty alacritty fish starship tmux
-
-	# CLI Tools
 	eza bat fd ripgrep fzf zoxide jq
-
-	# Files
 	yazi nautilus 
-
-	# Editor
 	neovim lazygit
-
-	# Screenshot & Recording
 	grim slurp satty wl-clipboard gpu-screen-recorder ffmpeg v4l-utils
-
-	# Clipboard
 	cliphist wl-clip-persist
-
-	# Audio
 	pipewire pipewire-alsa pipewire-pulse wireplumber
 	pamixer wiremix
-
-	# Music
 	mpd mpc rmpc cava playerctl mpdscribble
 	spotify-launcher spicetify-cli mpd-mpris
-
-	# Network & Bluetooth
 	networkmanager nmgui-bin kdeconnect
 	bluez bluez-utils blueman
-
-	# System
 	polkit-gnome brightnessctl ddcutil power-profiles-daemon upower
 	libnotify xdg-utils xdg-user-dirs inotify-tools
 	gnome-keyring libsecret xorg-xhost libappindicator
-
-	# Theming
 	matugen nwg-look adw-gtk-theme bibata-cursor-theme-bin imagemagick
-
-	# Rofi Extras
 	rofimoji wtype
-
-	# Monitoring
 	btop fastfetch chafa
-
-	# Fonts
 	ttf-jetbrains-mono-nerd ttf-cascadia-mono-nerd noto-fonts-emoji
-
-	# Display Manager
 	sddm qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects
-
-	# Utilities
 	python-terminaltexteffects gum wget curl unzip localsend deno npm keyd tree-sitter-cli
 )
-
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Optional Applications                                                 │
-# ╰───────────────────────────────────────────────────────────────────────╯
 
 applications=(
 	zen-browser-bin firefox chromium
@@ -88,29 +43,35 @@ applications=(
 	mpv yt-dlp steam lutris gamemode mangohud typora sddm-silent-theme nautilus-dropbox
 )
 
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Functions                                                             │
-# ╰───────────────────────────────────────────────────────────────────────╯
-
-setup_aur() {
-	aur_installed && { ok "AUR helper: $(get_aur_helper)"; return 0; }
-
-	local choice="yay"
-	if command -v gum &>/dev/null; then
-		choice=$(gum choose "yay" "paru" --header "Choose AUR helper:") || choice="yay"
-	fi
-
-	info "Installing $choice..."
+install_paru() {
+	command -v paru &>/dev/null && return 0
+	
+	info "Installing paru..."
+	
 	local tmp=$(mktemp -d)
-	git clone "https://aur.archlinux.org/${choice}-bin.git" "$tmp/${choice}-bin" --depth 1 &>/dev/null
-	(cd "$tmp/${choice}-bin" && makepkg -si --noconfirm) &>/dev/null
+	trap "rm -rf '$tmp'" EXIT
+	
+	git clone https://aur.archlinux.org/paru-bin.git "$tmp/paru" --depth 1 || {
+		err "Failed to clone paru"
+		trap - EXIT
+		return 1
+	}
+	
+	(cd "$tmp/paru" && makepkg -si --noconfirm) || {
+		err "Failed to build paru"
+		trap - EXIT
+		return 1
+	}
+	
+	trap - EXIT
 	rm -rf "$tmp"
-	ok "$choice"
+	
+	command -v paru &>/dev/null || { err "paru not found after install"; return 1; }
+	ok "paru installed"
 }
 
 do_install() {
-	local aur=$(get_aur_helper)
-	local official=() from_aur=()
+	local official=() aur=()
 
 	for pkg in "$@"; do
 		[[ -z "$pkg" ]] && continue
@@ -118,8 +79,8 @@ do_install() {
 			ok "$pkg"
 		elif pacman -Si "$pkg" &>/dev/null; then
 			official+=("$pkg")
-		elif [[ -n "$aur" ]] && $aur -Si "$pkg" &>/dev/null 2>&1; then
-			from_aur+=("$pkg")
+		elif paru -Si "$pkg" &>/dev/null 2>&1; then
+			aur+=("$pkg")
 		else
 			warn "$pkg not found"
 		fi
@@ -127,19 +88,15 @@ do_install() {
 
 	if [[ ${#official[@]} -gt 0 ]]; then
 		echo
-		info "Installing ${#official[@]} packages from official repos..."
-		echo
+		info "Installing ${#official[@]} official packages..."
 		sudo pacman -S --needed --noconfirm "${official[@]}"
 	fi
 
-	if [[ ${#from_aur[@]} -gt 0 ]]; then
+	if [[ ${#aur[@]} -gt 0 ]]; then
 		echo
-		info "Installing ${#from_aur[@]} packages from AUR..."
-		echo
-		$aur -S --needed --noconfirm "${from_aur[@]}"
+		info "Installing ${#aur[@]} AUR packages..."
+		paru -S --needed --noconfirm "${aur[@]}"
 	fi
-
-	return 0
 }
 
 ask_applications() {
@@ -152,22 +109,16 @@ ask_applications() {
 	[[ -z "$selected" ]] && return 0
 
 	step "Installing applications"
-	do_install $selected
-	return 0
+	do_install "$selected"
 }
 
-# ╭───────────────────────────────────────────────────────────────────────╮
-# │ Run                                                                   │
-# ╰───────────────────────────────────────────────────────────────────────╯
-
 step "Installing packages"
-setup_aur
+
+install_paru || exit 1
 do_install "${packages[@]}"
 ask_applications
 
-# live-server is required by nvim's live preview plugin
-# runs non-interactively after npm is available — skips if it fails
 if command -v npm &>/dev/null; then
-    info "Installing live-server (required for nvim live preview)"
-    sudo npm install -g live-server &>/dev/null && ok "live-server" || warn "live-server install failed (non-fatal)"
+	info "Installing live-server..."
+	sudo npm install -g live-server &>/dev/null && ok "live-server" || warn "live-server failed (non-fatal)"
 fi
