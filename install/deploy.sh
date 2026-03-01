@@ -138,6 +138,13 @@ deploy_dir "$SYMPHONY_DIR/local/share" "$HOME/.local/share"
 # Deploy scripts
 deploy_scripts
 
+# Ensure default theme is linked for first boot
+SYMPHONY_CONFIG="$HOME/.config/symphony"
+if [[ ! -L "$SYMPHONY_CONFIG/current" && -d "$SYMPHONY_CONFIG/themes/sakura" ]]; then
+    ln -sfn "$SYMPHONY_CONFIG/themes/sakura" "$SYMPHONY_CONFIG/current"
+    echo "$SYMPHONY_CONFIG/themes/sakura" > "$SYMPHONY_CONFIG/.current-theme"
+fi
+
 ok "Dotfiles deployed"
 
 # Report backup location

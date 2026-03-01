@@ -10,15 +10,16 @@ if [[ ! -f "$STATE_DIR/themes-installed" ]]; then
     sleep 2
 
     if [[ -f "$SYMPHONY_REPO/install/themes/install.sh" ]]; then
-        kitty --hold -e bash -c "SYMPHONY_INSTALLING=1 SYMPHONY_REPO='$SYMPHONY_REPO' '$SYMPHONY_REPO/install/themes/install.sh'" &
-        wait $!
+        kitty --hold -e bash -c "SYMPHONY_INSTALLING=1 SYMPHONY_REPO='$SYMPHONY_REPO' '$SYMPHONY_REPO/install/themes/install.sh'" 
     fi
 
-    # Apply default theme
-    "$SYMPHONY_REPO/install/themes/symphony" switch sakura
+    # Apply default theme using full path
+    if [[ -x "$SYMPHONY_REPO/install/themes/symphony" ]]; then
+        "$SYMPHONY_REPO/install/themes/symphony" switch sakura
+    fi
 
     touch "$STATE_DIR/themes-installed"
-    notify-send "Symphony" "Themes installed! Reboot to finish setup."
+    notify-send "Symphony" "Theme setup complete! Enjoy your desktop."
     exit 0
 fi
 
