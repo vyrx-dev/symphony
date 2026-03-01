@@ -8,7 +8,7 @@ SYMPHONY_DIR="${SYMPHONY_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 [[ -z "$RESET" ]] && source "$SYMPHONY_DIR/install/utils.sh"
 
 packages=(
-	base-devel git
+	base-devel git git-lfs
 	hyprland hypridle hyprlock hyprpicker hyprsunset
 	xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
 	qt5-wayland qt6-wayland uwsm
