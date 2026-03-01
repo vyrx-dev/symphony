@@ -48,6 +48,10 @@ install_paru() {
 	
 	info "Installing paru..."
 	
+	# Disable debug packages to avoid debugedit dependency
+	mkdir -p ~/.config/pacman
+	echo 'OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug !lto)' > ~/.config/pacman/makepkg.conf
+	
 	local tmp=$(mktemp -d)
 	trap "rm -rf '$tmp'" EXIT
 	
