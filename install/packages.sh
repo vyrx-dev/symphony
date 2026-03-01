@@ -82,7 +82,7 @@ do_install() {
 			ok "$pkg"
 		elif pacman -Si "$pkg" &>/dev/null; then
 			official+=("$pkg")
-		elif paru -Ssq "^$pkg$" &>/dev/null; then
+		elif paru -Si "$pkg" &>/dev/null 2>&1; then
 			aur+=("$pkg")
 		else
 			warn "$pkg not found"
@@ -98,7 +98,7 @@ do_install() {
 	if [[ ${#aur[@]} -gt 0 ]]; then
 		echo
 		info "Installing ${#aur[@]} AUR packages..."
-		paru -S --needed --noconfirm "${aur[@]}"
+		yes | paru --skipreview --needed -S "${aur[@]}" 2>/dev/null || paru --skipreview --needed -S "${aur[@]}"
 	fi
 }
 
