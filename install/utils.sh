@@ -166,12 +166,7 @@ step() { echo -e "\n${MAGENTA}::${RESET} ${BOLD}$1${RESET}"; }
 spin() {
     local msg="$1"
     shift
-    if [[ $HAS_GUM -eq 1 ]]; then
-        gum spin --spinner dot --title "  $msg" -- "$@" || true
-    else
-        info "$msg"
-        "$@" >/dev/null 2>&1 || true
-    fi
+    gum spin --spinner dot --title "  $msg" -- "$@" || true
 }
 
 confirm() {

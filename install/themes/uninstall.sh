@@ -48,10 +48,11 @@ nuke_everything() {
     echo
     warn "COMPLETE REMOVAL"
     echo
-    echo "  This will remove:"
-    echo "    - Symphony config ($SYMPHONY_DIR)"
-    echo "    - Legacy theme file (~/.current-theme)"
-    echo "    - Pywal cache symlink"
+    echo "  The following will be removed:"
+    echo
+    echo "    Config:      $SYMPHONY_DIR"
+    echo "    Legacy file: ~/.current-theme"
+    echo "    Symlink:     ~/.cache/wal/colors.json"
     echo
     
     gum confirm "Continue?" || return 0
@@ -60,18 +61,21 @@ nuke_everything() {
     read -rp "  Type 'yes' to confirm: " answer
     [[ "$answer" != "yes" ]] && { info "Cancelled"; return 0; }
 
-    step "Removing"
+    step "Removing Symphony"
 
-    [[ -d "$SYMPHONY_DIR" ]] && rm -rf "$SYMPHONY_DIR" && ok "Symphony config"
-    [[ -f "$HOME/.current-theme" ]] && rm -f "$HOME/.current-theme" && ok "Legacy theme file"
-    [[ -L "$HOME/.cache/wal/colors.json" ]] && rm -f "$HOME/.cache/wal/colors.json" && ok "Pywal symlink"
+    [[ -d "$SYMPHONY_DIR" ]] && rm -rf "$SYMPHONY_DIR" && ok "Removed config directory"
+    [[ -f "$HOME/.current-theme" ]] && rm -f "$HOME/.current-theme" && ok "Removed legacy theme file"
+    [[ -L "$HOME/.cache/wal/colors.json" ]] && rm -f "$HOME/.cache/wal/colors.json" && ok "Removed pywal symlink"
 
+    ok "Uninstall complete"
     echo
-    ok "Complete removal done"
+    info "Manual cleanup required:"
+    info "  - Remove PATH entry from your shell config:"
+    info "      Fish:  ~/.config/fish/config.fish"
+    info "      Bash:  ~/.bashrc"
+    info "      Zsh:   ~/.zshrc"
     echo
-    info "Manual cleanup:"
-    info "  - Remove PATH entry from shell rc file"
-    info "  - Reload shell: source ~/.bashrc or ~/.zshrc"
+    info "  - Then reload your shell"
 
     return 0
 }
