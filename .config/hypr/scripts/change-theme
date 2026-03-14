@@ -50,7 +50,7 @@ if [ -n "$DISPLAYED_WALLPAPER" ]; then
 fi
 
 # SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
-matugen image "$CURRENT_WALLPAPER" -m dark
+matugen image "$CURRENT_WALLPAPER" -m dark --source-color-index 0
 
 # Update Symphony apps that need special handling
 "$HOME/dotfiles/install/themes/symphony" reload

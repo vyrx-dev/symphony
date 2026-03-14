@@ -34,7 +34,7 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 for wp in "${wallpapers[@]}"; do
 	if [[ "$(basename "$wp")" == "$choice" ]]; then
 		swww img "$wp" $swww_params
-		matugen image "$wp" -m dark
+		matugen image "$wp" -m dark --source-color-index 0
 
 		# update wallpaper symlink for hyprlock
 		mkdir -p "$HOME/.config/symphony/current"
