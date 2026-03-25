@@ -1,6 +1,15 @@
 #!/bin/bash
 # Wallpaper picker - swww only (no theme changes)
 
+if command -v swww >/dev/null 2>&1; then
+    wallbin=swww
+elif command -v awww >/dev/null 2>&1; then
+    wallbin=awww
+else
+    noitfy-send "No wallpaper daemon found" "Please install awww or swww and try again"
+    exit 1 
+fi
+
 WALLPAPER_DIR="$HOME/Wallpapers/"
 SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 
@@ -24,7 +33,7 @@ menu() {
 }
 
 # Start swww if needed
-swww query &>/dev/null || swww-daemon --format xrgb
+"$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb
 
 # Show menu
 choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
@@ -34,7 +43,7 @@ choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpap
 for wallpaper in "${wallpapers[@]}"; do
   [[ "$(basename "$wallpaper")" == "$choice" ]] || continue
   
-  swww img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
+  "$wallbin" img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
   notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
   break
 done

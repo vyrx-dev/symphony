@@ -1,6 +1,15 @@
 #!/bin/bash
 # wallpaper picker - swww only, no theme changes
 
+if command -v swww >/dev/null 2>&1; then
+    wallbin=swww
+elif command -v awww >/dev/null 2>&1; then
+    wallbin=awww
+else
+    noitfy-send "No wallpaper daemon found" "Please install awww or swww and try again"
+    exit 1 
+fi
+
 wallpaper_dir="$HOME/Wallpapers"
 swww_params="--transition-fps 120 --transition-type center --transition-pos bottom --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0"
 
@@ -17,7 +26,7 @@ menu() {
 	done | sort
 }
 
-swww query &>/dev/null || swww-daemon --format xrgb
+"$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb
 
 choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
 [[ -z "$choice" ]] && exit 0
@@ -25,7 +34,7 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 for wp in "${wallpapers[@]}"; do
 	[[ "$(basename "$wp")" == "$choice" ]] || continue
 
-	swww img "$wp" $swww_params
+	"$wallbin" img "$wp" $swww_params
 
 	# update wallpaper symlink for hyprlock
 	mkdir -p "$HOME/.config/symphony/current"

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if command -v swww >/dev/null 2>&1; then
+    wallbin=swww
+elif command -v awww >/dev/null 2>&1; then
+    wallbin=awww
+else
+    noitfy-send "No wallpaper daemon found" "Please install awww or swww and try again"
+    exit 1 
+fi
+
 # Random wallpaper selector with smooth animations
 WALLPAPER_DIR="$HOME/Wallpapers/"
 
@@ -15,7 +24,7 @@ if [[ ${#wallpapers[@]} -eq 0 ]]; then
 fi
 
 # Start swww daemon if not running
-swww query &>/dev/null || swww-daemon --format xrgb &
+"$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb &
 
 # Wait for daemon to initialize
 sleep 0.5
@@ -25,7 +34,7 @@ random_index=$((RANDOM % ${#wallpapers[@]}))
 selected_wallpaper="${wallpapers[$random_index]}"
 
 # Apply wallpaper with top-right corner grow animation
-swww img "$selected_wallpaper" \
+"$wallbin" img "$selected_wallpaper" \
   --transition-type grow \
   --transition-pos top-right \
   --transition-fps 120 \
