@@ -1,6 +1,16 @@
 #!/bin/bash
 # wallpaper picker with dynamic color generation
 
+if command -v swww >/dev/null 2>&1; then
+    wallbin=swww
+elif command -v awww >/dev/null 2>&1; then
+    wallbin=awww
+else
+    noitfy-send "No wallpaper daemon found" "Please install awww or swww and try again"
+    exit 1 
+fi
+
+
 current_theme=$(cat ~/.config/symphony/.current-theme 2>/dev/null || echo "dynamic")
 if [[ "$current_theme" != "dynamic" ]]; then
 	notify-send "Theme Locked" "Switch to Dynamic first"
@@ -8,7 +18,7 @@ if [[ "$current_theme" != "dynamic" ]]; then
 fi
 
 wallpaper_dir="$HOME/Wallpapers"
-swww_params="--transition-fps 120 --transition-type grow --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right"
+wallpaper_params="--transition-fps 120 --transition-type grow --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right"
 
 mapfile -d '' wallpapers < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
@@ -25,7 +35,7 @@ menu() {
 	done | sort
 }
 
-swww query &>/dev/null || swww-daemon --format xrgb
+"$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb
 
 choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
 [[ -z "$choice" ]] && exit 0
@@ -33,7 +43,7 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 # find and apply selected wallpaper
 for wp in "${wallpapers[@]}"; do
 	if [[ "$(basename "$wp")" == "$choice" ]]; then
-		swww img "$wp" $swww_params
+		"$wallbin" img "$wp" $wallpaper_params
 		matugen image "$wp" -m dark --source-color-index 0
 
 		# update wallpaper symlink for hyprlock

@@ -67,7 +67,18 @@ run_hooks() {
 }
 
 set_wallpaper() {
-	local theme="$1"
+
+    # Check for wallpaper daemon
+    if command -v swww >/dev/null 2>&1; then
+        local wallbin=swww
+    elif command -v awww >/dev/null 2>&1; then
+        local wallbin=awww
+    else
+        noitfy-send "No wallpaper daemon found" "Please install awww or swww and try again"
+        exit 1 
+    fi
+
+        local theme="$1"
 	
 	# Dynamic theme uses ~/Wallpapers with matugen
 	if [[ "$theme" == "dynamic" ]]; then
@@ -79,11 +90,11 @@ set_wallpaper() {
 	wall=$(find "$THEMES_DIR/$theme/backgrounds" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) 2>/dev/null | sort -V | head -1)
 	[[ -z "$wall" ]] && return
 
-	swww query &>/dev/null || {
-		swww-daemon --format xrgb &
+	"$wallbin" query &>/dev/null || {
+		"$wallbin"-daemon --format xrgb &
 		sleep 0.3
 	}
-	swww img "$wall" --transition-type center --transition-fps 120 --transition-duration 0.8
+	"$wallbin" img "$wall" --transition-type center --transition-fps 120 --transition-duration 0.8
 	ln -sfn "backgrounds/$(basename "$wall")" "$THEMES_DIR/$theme/wallpaper"
 }
 
