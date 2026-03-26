@@ -1,5 +1,5 @@
 #!/bin/bash
-# wallpaper picker - swww only, no theme changes
+# wallpaper picker only, no theme changes
 
 if command -v swww >/dev/null 2>&1; then
     wallbin=swww
