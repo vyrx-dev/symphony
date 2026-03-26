@@ -41,10 +41,9 @@ echo "$INDEX" >"$STATE_FILE"
 
 CURRENT_WALLPAPER="${WALLPAPERS[$INDEX]}"
 
-# Start swww daemon if needed
+# Start wallpaper daemon if needed
 "$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb
 
-# swww img "$CURRENT_WALLPAPER" --transition-type=right --transition-fps 60 --transition-duration=1
 "$wallbin" img "$CURRENT_WALLPAPER" \
 	--transition-type center \
 	--transition-pos top-right \
@@ -58,7 +57,6 @@ if [ -n "$DISPLAYED_WALLPAPER" ]; then
 	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/dotfiles/themes/dynamic/wallpaper"
 fi
 
-# SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 matugen image "$CURRENT_WALLPAPER" -m dark --source-color-index 0
 
 # Update Symphony apps that need special handling

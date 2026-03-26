@@ -11,7 +11,7 @@ else
 fi
 
 WALLPAPER_DIR="$HOME/Wallpapers/"
-SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
+ WALLPAPER_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 
 # Get focused monitor
 focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
@@ -32,7 +32,7 @@ menu() {
   done | sort
 }
 
-# Start swww if needed
+# Start wallpaper daemon if needed
 "$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb
 
 # Show menu
@@ -43,7 +43,7 @@ choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpap
 for wallpaper in "${wallpapers[@]}"; do
   [[ "$(basename "$wallpaper")" == "$choice" ]] || continue
   
-  "$wallbin" img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
+  "$wallbin" img -o "$focused_monitor" "$wallpaper" $WALLPAPER_PARAMS
   notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
   break
 done

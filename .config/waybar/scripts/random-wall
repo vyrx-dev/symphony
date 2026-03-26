@@ -23,7 +23,7 @@ if [[ ${#wallpapers[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# Start swww daemon if not running
+# Start wallpaper daemon if not running
 "$wallbin" query &>/dev/null || "$wallbin"-daemon --format xrgb &
 
 # Wait for daemon to initialize
