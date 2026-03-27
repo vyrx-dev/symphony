@@ -18,9 +18,6 @@ if [[ ! -f "$STATE_DIR/themes-installed" ]]; then
         "$SYMPHONY_REPO/install/themes/symphony" switch sakura
     fi
 
-    touch "$STATE_DIR/themes-installed"
-    notify-send "Symphony" "Theme setup complete! Enjoy your desktop."
-    exit 0
 fi
 
 # Stage 2: Welcome notifications (second login after theme install)
