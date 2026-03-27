@@ -3,7 +3,7 @@
 #|--/ /-| Symphony Dotfiles   |--/ /-|#
 #|-/ /--| Web Apps Installer  |-/ /--|#
 #|/ /---+---------------------+/ /---|#
-
+set -e
 # Predefined webapps: "Name|URL|Icon"
 # Icons from https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/
 WEBAPPS=(

@@ -3,7 +3,7 @@
 #|--/ /-| Symphony Dotfiles   |--/ /-|#
 #|-/ /--| Deploy (cp-based)   |-/ /--|#
 #|/ /---+---------------------+/ /---|#
-
+set -e
 SYMPHONY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TIMESTAMP="$(date +%Y-%m-%d_%H-%M)"
 BACKUP_DIR="$HOME/.config/symphony/backups/$TIMESTAMP"

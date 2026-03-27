@@ -3,7 +3,7 @@
 #|--/ /-| Symphony Dotfiles   |--/ /-|#
 #|-/ /--| Shared Utilities    |-/ /--|#
 #|/ /---+---------------------+/ /---|#
-
+set -e
 # Bail if not running in bash
 if [ -z "$BASH_VERSION" ]; then
     echo "Error: Run the installer with: ./install.sh"

@@ -3,7 +3,7 @@
 #|--/ /-| Symphony Dotfiles   |--/ /-|#
 #|-/ /--| Post-Install Setup  |-/ /--|#
 #|/ /---+---------------------+/ /---|#
-
+set -e
 SYMPHONY_DIR="${SYMPHONY_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 source "$SYMPHONY_DIR/install/utils.sh"
 
