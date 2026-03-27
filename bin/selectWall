@@ -8,7 +8,7 @@ if [[ "$current_theme" != "dynamic" ]]; then
 fi
 
 wallpaper_dir="$HOME/Wallpapers"
-swww_params="--transition-fps 120 --transition-type grow --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right"
+awww_params="--transition-fps 120 --transition-type grow --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0 --transition-pos top-right"
 
 mapfile -d '' wallpapers < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
@@ -25,7 +25,7 @@ menu() {
 	done | sort
 }
 
-swww query &>/dev/null || swww-daemon --format xrgb
+awww query &>/dev/null || awww-daemon --format xrgb
 
 choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
 [[ -z "$choice" ]] && exit 0
@@ -33,7 +33,7 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 # find and apply selected wallpaper
 for wp in "${wallpapers[@]}"; do
 	if [[ "$(basename "$wp")" == "$choice" ]]; then
-		swww img "$wp" $swww_params
+		awww img "$wp" $awww_params
 		matugen image "$wp" -m dark
 
 		# update wallpaper symlink for hyprlock

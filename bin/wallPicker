@@ -1,8 +1,8 @@
 #!/bin/bash
-# wallpaper picker - swww only, no theme changes
+# wallpaper picker - awww only, no theme changes
 
 wallpaper_dir="$HOME/Wallpapers"
-swww_params="--transition-fps 120 --transition-type center --transition-pos bottom --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0"
+awww_params="--transition-fps 120 --transition-type center --transition-pos bottom --transition-duration 1 --transition-bezier 0.25,0.1,0.25,1.0"
 
 mapfile -d '' wallpapers < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
 
@@ -17,7 +17,7 @@ menu() {
 	done | sort
 }
 
-swww query &>/dev/null || swww-daemon --format xrgb
+awww query &>/dev/null || awww-daemon --format xrgb
 
 choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
 [[ -z "$choice" ]] && exit 0
@@ -25,7 +25,7 @@ choice=$(menu | rofi -i -dmenu -p "" -config ~/.config/rofi/custom-rofi/config-w
 for wp in "${wallpapers[@]}"; do
 	[[ "$(basename "$wp")" == "$choice" ]] || continue
 
-	swww img "$wp" $swww_params
+	awww img "$wp" $awww_params
 
 	# update wallpaper symlink for hyprlock
 	mkdir -p "$HOME/.config/symphony/current"

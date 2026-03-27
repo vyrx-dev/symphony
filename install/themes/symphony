@@ -79,11 +79,11 @@ set_wallpaper() {
 	wall=$(find "$THEMES_DIR/$theme/backgrounds" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) 2>/dev/null | sort -V | head -1)
 	[[ -z "$wall" ]] && return
 
-	swww query &>/dev/null || {
-		swww-daemon --format xrgb &
+	awww query &>/dev/null || {
+		awww-daemon --format xrgb &
 		sleep 0.3
 	}
-	swww img "$wall" --transition-type center --transition-fps 120 --transition-duration 0.8
+	awww img "$wall" --transition-type center --transition-fps 120 --transition-duration 0.8
 	ln -sfn "backgrounds/$(basename "$wall")" "$THEMES_DIR/$theme/wallpaper"
 }
 

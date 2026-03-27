@@ -12,7 +12,7 @@ packages=(
 	hyprland hypridle hyprlock hyprpicker hyprsunset
 	xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
 	qt5-wayland qt6-wayland uwsm
-	waybar rofi swaync swayosd swww brave-bin
+	waybar rofi swaync swayosd awww brave-bin
 	kitty alacritty fish starship tmux
 	eza bat fd ripgrep fzf zoxide jq
 	yazi nautilus 

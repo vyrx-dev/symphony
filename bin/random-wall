@@ -14,8 +14,8 @@ if [[ ${#wallpapers[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# Start swww daemon if not running
-swww query &>/dev/null || swww-daemon --format xrgb &
+# Start awww daemon if not running
+awww query &>/dev/null || awww-daemon --format xrgb &
 
 # Wait for daemon to initialize
 sleep 0.5
@@ -25,7 +25,7 @@ random_index=$((RANDOM % ${#wallpapers[@]}))
 selected_wallpaper="${wallpapers[$random_index]}"
 
 # Apply wallpaper with top-right corner grow animation
-swww img "$selected_wallpaper" \
+awww img "$selected_wallpaper" \
   --transition-type grow \
   --transition-pos top-right \
   --transition-fps 120 \

@@ -161,7 +161,7 @@ page_one() {
     heading "Tuning the Instruments"
     
     local missing=()
-    for dep in hyprctl swww; do
+    for dep in hyprctl awww; do
         if command -v "$dep" &>/dev/null; then
             check_mark "$dep"
         else

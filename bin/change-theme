@@ -32,11 +32,11 @@ echo "$INDEX" >"$STATE_FILE"
 
 CURRENT_WALLPAPER="${WALLPAPERS[$INDEX]}"
 
-# Start swww daemon if needed
-swww query &>/dev/null || swww-daemon --format xrgb
+# Start awww daemon if needed
+awww query &>/dev/null || awww-daemon --format xrgb
 
-# swww img "$CURRENT_WALLPAPER" --transition-type=right --transition-fps 60 --transition-duration=1
-swww img "$CURRENT_WALLPAPER" \
+# awww img "$CURRENT_WALLPAPER" --transition-type=right --transition-fps 60 --transition-duration=1
+awww img "$CURRENT_WALLPAPER" \
 	--transition-type center \
 	--transition-pos top-right \
 	--transition-fps 120 \
@@ -44,12 +44,12 @@ swww img "$CURRENT_WALLPAPER" \
 	--transition-bezier 0.25,0.1,0.25,1.0
 
 # Update wallpaper symlink to track current wallpaper
-DISPLAYED_WALLPAPER=$(swww query | grep "currently displaying" | head -1 | sed 's/.*image: //')
+DISPLAYED_WALLPAPER=$(awww query | grep "currently displaying" | head -1 | sed 's/.*image: //')
 if [ -n "$DISPLAYED_WALLPAPER" ]; then
 	ln -sf "$DISPLAYED_WALLPAPER" "$HOME/symphony/themes/dynamic/wallpaper"
 fi
 
-# SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
+# AWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 matugen image "$CURRENT_WALLPAPER" -m dark
 
 # Update Symphony apps that need special handling

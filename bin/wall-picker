@@ -1,8 +1,8 @@
 #!/bin/bash
-# Wallpaper picker - swww only (no theme changes)
+# Wallpaper picker - awww only (no theme changes)
 
 WALLPAPER_DIR="$HOME/Wallpapers/"
-SWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
+AWWW_PARAMS="--transition-fps 60 --transition-type=any --transition-duration=1"
 
 # Get focused monitor
 focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true).name')
@@ -23,8 +23,8 @@ menu() {
   done | sort
 }
 
-# Start swww if needed
-swww query &>/dev/null || swww-daemon --format xrgb
+# Start awww if needed
+awww query &>/dev/null || awww-daemon --format xrgb
 
 # Show menu
 choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpaper.rasi)
@@ -34,7 +34,7 @@ choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/custom-rofi/config-wallpap
 for wallpaper in "${wallpapers[@]}"; do
   [[ "$(basename "$wallpaper")" == "$choice" ]] || continue
   
-  swww img -o "$focused_monitor" "$wallpaper" $SWWW_PARAMS
+  awww img -o "$focused_monitor" "$wallpaper" $AWWW_PARAMS
   notify-send -i "$wallpaper" "Wallpaper Changed" "$(basename "$wallpaper")"
   break
 done
