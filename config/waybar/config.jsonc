@@ -110,7 +110,7 @@
     "tooltip": false
   },
   "network": {
-    "interface": "wlan*",
+    "interface": "wl*",
     "format-icons": [
       "󰤯",
       "󰤟",
