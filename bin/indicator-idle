@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Wait for hypridle to start 
+if [[ ! -e "/tmp/idler.wait" ]]; then
+  sleep 1
+  touch "/tmp/idler.wait"
+fi
+
 if pgrep -x hypridle >/dev/null; then
   echo '{"text": ""}'
 else
