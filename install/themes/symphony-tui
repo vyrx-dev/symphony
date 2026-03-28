@@ -52,7 +52,7 @@ browse_inner() {
     cat > "$preview_script" <<'EOF'
 #!/bin/bash
 [[ -z "$1" || "$1" == "null" ]] && exit 0
-command -v chafa &>/dev/null && curl -sL "$1" 2>/dev/null | chafa -s "${FZF_PREVIEW_COLUMNS:-60}x${FZF_PREVIEW_LINES:-30}" -
+curl -sL "$1" 2>/dev/null | kitten icat --clear --transfer-mode=memory --unicode-placeholder --place="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0"
 EOF
     chmod +x "$preview_script"
     
