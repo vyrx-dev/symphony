@@ -111,7 +111,7 @@ get_random_theme() {
 
 cmd_switch() {
 	local theme="$1"
-    [[ "$theme" == "--random" ]] && theme=$(get_random_theme)
+    [[ "$theme" == "--random" ]] || [[ "$theme" == "-r" ]] && theme=$(get_random_theme)
 
 	if [[ -z "$theme" ]]; then
 		command -v rofi &>/dev/null || { err "rofi is required"; exit 1; }
