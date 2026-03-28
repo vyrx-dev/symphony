@@ -35,7 +35,7 @@ DEST="${SYMPHONY_DEST:-$HOME/symphony}"
 
 # Bootstrap dependencies
 echo -e "\n${DIM}:: Preparing system${RESET}"
-sudo pacman -Syu --noconfirm --needed git gum
+sudo pacman -Syu --noconfirm --needed git gum stow
 
 # Clone or update
 echo
