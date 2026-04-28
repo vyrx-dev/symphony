@@ -150,7 +150,7 @@ _RMPC + Cava visualizer_
 ## Installation
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vyrx-dev/dotfiles/main/boot.sh | bash
+curl -fsSL https://raw.githubusercontent.com/vyrx-dev/symphony/main/boot.sh | bash
 ```
 
 Or manually:
